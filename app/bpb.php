@@ -17,4 +17,10 @@ class bpb extends Model
     {
         return $this->belongsTo('App\npp');
     }
+
+    public function perbaikans()
+    {
+        return $this->hasMany('App\Perbaikan','bpb_id');
+    }
+
 }

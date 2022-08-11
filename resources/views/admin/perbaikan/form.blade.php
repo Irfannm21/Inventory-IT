@@ -31,6 +31,7 @@
     </p>
 </div>
 
+
 <div class="form-group {{ $errors->has('keterangan') ? 'has-error' : '' }}">
     <label for="keteragan">Keterangan</label>
     <input id="keterangan" name="keterangan" class="form-control" value="{{ old('keterangan', isset($perbaikan) ? $perbaikan->keterangan : '') }}">

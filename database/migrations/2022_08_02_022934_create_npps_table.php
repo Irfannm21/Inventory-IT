@@ -22,7 +22,7 @@ class CreateNppsTable extends Migration
             $table->timestamps();
 
             $table->foreign('departemen_id')->references('id')->on('departemens');
-            $table->foreign('bagian_id')->references('id')->on('departemens');
+            $table->foreign('bagian_id')->references('id')->on('bagian_depts');
         });
     }
 

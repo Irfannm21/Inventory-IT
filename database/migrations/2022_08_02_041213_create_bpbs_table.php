@@ -15,7 +15,7 @@ class CreateBpbsTable extends Migration
     {
         Schema::create('bpbs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('kode')->unique();
+            $table->string('kode');
             $table->unsignedBigInteger('detail_id')->constrained()->onDelete('cascade');
             $table->date('tanggal');
             $table->integer('jumlah');

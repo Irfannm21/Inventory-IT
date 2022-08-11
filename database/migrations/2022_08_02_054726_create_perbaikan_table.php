@@ -16,17 +16,17 @@ class CreatePerbaikanTable extends Migration
         Schema::create('perbaikans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('tanggal');
+            $table->unsignedBigInteger('bpb_id')->constrained()->onDelete('cascade')->nullable();
             $table->string('keterangan');
             $table->morphs('hardwareable');
             $table->timestamps();
+
+
+            $table->foreign('bpb_id')->references('id')->on('bpbs');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         Schema::dropIfExists('perbaikans');

@@ -146,7 +146,7 @@
                         <i class="fas fa-calendar-check-o nav-icon">
 
                         </i>
-                        Karyawan Managenen
+                        Kelola NPP
                     </a>
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
@@ -154,7 +154,7 @@
                                 <i class="fas fa-calendar nav-icon">
 
                                 </i>
-                                Data Departement
+                               Buat NPP
                             </a>
                         </li>
 

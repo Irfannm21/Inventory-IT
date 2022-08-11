@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\npp;
 use App\detail_npp;
 use App\bpb;
+use App\perbaikan;
 class NppController extends Controller
 {
     public function index()
@@ -74,43 +75,56 @@ class NppController extends Controller
 
         // Meampilkan NPP //
 
-        $npp = npp::find(1);
-        echo "Data NPP <br><br>";
-        echo "Departemen   : " . $npp->departemen->nama. "<br>";
-        echo "Kode NPP : " . $npp->kode . "<br>";
-        echo "Tanggal  : " . $npp->tanggal . "<br>";
-        echo "<hr>";
-        echo "Daftar Barang <br><br>";
-        foreach($npp->details as $value){
-            echo $value->nama . " | " . $value->stock . " | " . $value->jumlah . " " . $value->satuan . " | " . $value->keterangan .  "<br>";
-        }
-        echo "<hr>";
-        echo "Data BPB / Barang Sudah Datang <br><br>";
-        echo "Kode NPP : " . $npp->kode . "<br>";
-        $bpb = bpb::has('detail')->get();
-        foreach($bpb as $value){
-            echo $value->kode . " | " . $value->detail->nama . " | " . $value->tanggal . " | " . ($value->jumlah) ." " . $value->satuan . " | " . $value->harga . " | " . $value->supplier .  "|<br>";
-        }
-        echo "<hr>";
+        // $npp = npp::find(1);
+        // echo "Data NPP <br><br>";
+        // echo "Departemen   : " . $npp->departemen->nama. "<br>";
+        // echo "Kode NPP : " . $npp->kode . "<br>";
+        // echo "Tanggal  : " . $npp->tanggal . "<br>";
+        // echo "<hr>";
+        // echo "Daftar Barang <br><br>";
+        // foreach($npp->details as $value){
+        //     echo $value->nama . " | " . $value->stock . " | " . $value->jumlah . " " . $value->satuan . " | " . $value->keterangan .  "<br>";
+        // }
+        // echo "<hr>";
+        // echo "Data BPB / Barang Sudah Datang <br><br>";
+        // echo "Kode NPP : " . $npp->kode . "<br>";
+        // $bpb = bpb::has('detail')->get();
+        // foreach($bpb as $value){
+        //     echo $value->kode . " | " . $value->detail->nama . " | " . $value->tanggal . " | " . ($value->jumlah) ." " . $value->satuan . " | " . $value->harga . " | " . $value->supplier .  "|<br>";
+        // }
+        // echo "<hr>";
 
-        echo "Sisa Barang belum datang <br><br>";
+        // echo "Sisa Barang belum datang <br><br>";
 
-        $detail = detail_npp::with('bpbs')->get();
+        // $detail = detail_npp::with('bpbs')->get();
 
         // dd($detail);
-        foreach($detail as $value){
-            $jumlah = $value->bpbs->sum('jumlah');
-            if ($jumlah < $value->jumlah) {
-                echo $value->jumlah .' | '. $jumlah .'<br>';
-                echo $value->npp->kode. " | " . $value->nama . " | " . $value->stock . " | " . ($value->jumlah - $jumlah) . " " . $value->satuan . '<br><br>';
-            }
-        }
+    //     foreach($detail as $value){
+    //         $jumlah = $value->bpbs->sum('jumlah');
+    //         if ($jumlah < $value->jumlah) {
+    //             echo $value->jumlah .' | '. $jumlah .'<br>';
+    //             echo $value->npp->kode. " | " . $value->nama . " | " . $value->stock . " | " . ($value->jumlah - $jumlah) . " " . $value->satuan . '<br><br>';
+    //         }
+    //     }
 
-        echo "<hr>";
-        echo "TESSSSSSSSSSSSSSSSSSSSSSSSSSSST <br>";
+    //     echo "<hr>";
+    //     echo "TESSSSSSSSSSSSSSSSSSSSSSSSSSSST <br>";
 
-        $bpb = bpb::all();
+    //     $bpb = bpb::all();
 
-        echo $bpb->pluck('jumlah')->sum();
+    //     echo $bpb->pluck('jumlah')->sum();
+    // }
+
+    $result = bpb::find(1);
+    dd($result);
+    $result->perbaikans()->createMany([
+        [
+            'tanggal' => '2022-07-21',
+            'keterangan' => 'Refill',
+            'hardwareable_type' => 'App\printer',
+            'hardwareable_id' => 1
+        ]
+        ]);
     }
+
 }
