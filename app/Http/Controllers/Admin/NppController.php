@@ -9,10 +9,15 @@ use App\npp;
 use App\detail_npp;
 use App\bpb;
 use App\perbaikan;
+use App\departemen;
+use App\bagian_dept ;
 class NppController extends Controller
 {
     public function index()
     {
+        $results = npp::all();
+        return view('admin.npp.index', compact('results'));
+
         // $npp = new npp;
         // $npp->kode = "173/ED.EL/VII/2022";
         // $npp->tanggal = '2022-08-01';
@@ -115,16 +120,25 @@ class NppController extends Controller
     //     echo $bpb->pluck('jumlah')->sum();
     // }
 
-    $result = bpb::find(1);
-    dd($result);
-    $result->perbaikans()->createMany([
-        [
-            'tanggal' => '2022-07-21',
-            'keterangan' => 'Refill',
-            'hardwareable_type' => 'App\printer',
-            'hardwareable_id' => 1
-        ]
-        ]);
+    // $result = bpb::find(1);
+    // dd($result);
+    // $result->perbaikans()->createMany([
+    //     [
+    //         'tanggal' => '2022-07-21',
+    //         'keterangan' => 'Refill',
+    //         'hardwareable_type' => 'App\printer',
+    //         'hardwareable_id' => 1
+    //     ]
+    //     ]);
+
+
+    }
+
+    public function create()
+    {
+        $dept = departemen::all()->pluck('nama');
+        $bagian = bagian_dept::all()->pluck('nama');
+        return view('admin.npp.create',compact('dept','bagian'));
     }
 
 }
