@@ -143,29 +143,58 @@
 
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link  nav-dropdown-toggle">
-                        <i class="fas fa-calendar-check-o nav-icon">
+                        <i class="fas fa-list nav-icon">
 
                         </i>
                         Kelola NPP
                     </a>
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a href="{{ route("admin.departemens.index") }}" class="nav-link {{ request()->is('admin/departemens') || request()->is('admin/departemens/*') ? 'active' : '' }}">
-                                <i class="fas fa-calendar nav-icon">
+                            <a href="{{ route("admin.npps.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
+                                <i class="fas fa-file    nav-icon">
 
                                 </i>
-                               Buat NPP
+                               Data NPP
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route("admin.npps.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
-                                <i class="fas fa-calendar nav-icon">
+                            <a href="{{ route("admin.npps.detail") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
+                                <i class="fas fa-list nav-icon">
 
                                 </i>
-                                Buat Npp
+                                Detail NPP
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="{{ route("admin.npps.proses") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
+                                <i class="fas fa-circle nav-icon">
+
+                                </i>
+                                NPP Diproses
+                            </a>
+                        </li>
+
+
+                        <li class="nav-item">
+                            <a href="{{ route("admin.npps.terima") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
+                                <i class="fas fa-check nav-icon">
+
+                                </i>
+                                NPP Diterima
+                            </a>
+                        </li>
+
+{{--
+                        <li class="nav-item">
+                            <a href="{{ route("admin.npps.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
+                                <i class="fas fa-times nav-icon">
+
+                                </i>
+                                Barang Belum Datang
+                            </a>
+                        </li> --}}
 
 
                         {{-- <li class="nav-item">

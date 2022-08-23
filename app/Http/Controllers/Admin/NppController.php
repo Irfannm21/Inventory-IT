@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreNppRequest;
 use App\npp;
 use App\detail_npp;
 use App\bpb;
@@ -38,18 +39,17 @@ class NppController extends Controller
         // $detail->save();
 
 
-        // $npp = detail_npp::find(2);
-        // dd($npp);
-        // $npp->bpbs()->createMany([
+        // $npp = npp::find(2);
+        // dd(json_decode($npp->details));
+        // $npp->details()->createMany([
         //     [
-
-        //         'kode' => "BPB/01",
-        //         'tanggal' => '2022-08-01',
-        //         'jumlah' => 1,
+        //         "npp_id" => 2,
+        //         'nama' => "Aerok",
+        //         'jumlah' => 3,
         //         'satuan' => 'unit',
-        //         'harga' => 1000000,
-        //         'supplier' => 'Noer Electronic'
-        //     ]
+        //         'stok' => 0,
+        //         'keterangan' => 'u/ insan',
+        //     ],
 
         // ]);
 
@@ -136,9 +136,51 @@ class NppController extends Controller
 
     public function create()
     {
-        $dept = departemen::all()->pluck('nama');
-        $bagian = bagian_dept::all()->pluck('nama');
+        $dept = departemen::all()->pluck('nama','id');
+        $bagian = bagian_dept::all()->pluck('nama','id');
         return view('admin.npp.create',compact('dept','bagian'));
     }
 
+    public function store(StoreNppRequest $request)
+    {
+        abort_unless(\Gate::allows('npp_create'), 403);
+
+        $npp = new NPP;
+        $npp->kode = $request->kode;
+        $npp->tanggal = $request->tanggal;
+        $npp->departemen_id = $request->departemen;
+        $npp->bagian_id = $request->bagian;
+        $npp->save();
+
+        $detail = [];
+        foreach($request->nama as $i => $nama){
+            $detail[] = [
+                'nama'  =>$nama ?? '',
+                'jumlah'=>$request->jumlah[$i]?? 1,
+                'satuan'=>$request->satuan[$i]?? '',
+                'stok'  =>$request->stok[$i]?? 0,
+                'keterangan'=>$request->keterangan[$i]??'',
+            ];
+        }
+        $npp->details()->createMany($detail);
+        $npp->load('details');
+
+        return redirect()->route('admin.npps.index');
+    }
+
+    public function Detail(){
+        $results = detail_npp::all();
+        return view('admin.npp.detail-npp', compact('results'));
+    }
+
+    public function diProses(){
+        $results = detail_npp::with('bpbs')->get();
+        return view('admin.npp.npp-di-proses', compact('results'));
+    }
+
+    public function diTerima()
+    {
+        $results = bpb::all();
+        return view('admin.npp.npp-diterima', compact('results'));
+    }
 }
