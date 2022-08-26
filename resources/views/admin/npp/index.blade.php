@@ -59,18 +59,18 @@
                                 {{ $value->bagian->nama ?? '' }}
                             </td>
                             <td>
-                                @can('komputer_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.komputers.show', $value->id) }}">
-                                        {{ trans('global.view') }}
+                                @can('npp_create')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.npps.print', $value->id) }}">
+                                        Print
                                     </a>
                                 @endcan
                                 @can('komputer_edit')
-                                <a class="btn btn-xs btn-info" href="{{ route("admin.komputers.edit", $value->id)  }}">
+                                <a class="btn btn-xs btn-info" href="{{ route("admin.npps.edit", $value->id)  }}">
                                     {{ trans('global.edit') }}
                                 </a>
                                 @endcan
-                                @can('komputer_delete')
-                                    <form action="{{ route('admin.komputers.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('npp_delete')
+                                    <form action="{{ route('admin.npps.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">

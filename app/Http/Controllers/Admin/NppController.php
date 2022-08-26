@@ -6,12 +6,16 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNppRequest;
+use App\Http\Requests\UpdateNppRequest;
 use App\npp;
 use App\detail_npp;
 use App\bpb;
 use App\perbaikan;
 use App\departemen;
-use App\bagian_dept ;
+use App\bagian_dept;
+use Barryvdh\DomPDF\Facade\Pdf;
+
+
 class NppController extends Controller
 {
     public function index()
@@ -168,6 +172,32 @@ class NppController extends Controller
         return redirect()->route('admin.npps.index');
     }
 
+    public function edit(npp $npp)
+    {
+        $dept = departemen::all()->pluck('nama','id');
+        $bagian = bagian_dept::all()->pluck('nama','id');
+        return view('admin.npp.edit-npp',compact('npp','dept','bagian'));
+    }
+
+    public function update(UpdateNppRequest $request, npp $npp)
+    {
+
+        $npp->update([
+            'kode' => $request->kode,
+            'tanggal' => $request->tanggal,
+            'departemen_id' => $request->departemen,
+            'bagian_id' => $request->bagian
+        ]);
+        return redirect()->route('admin.npps.index');
+    }
+
+    public function destroy(npp $npp)
+    {
+        $npp->details()->delete();
+        $npp->delete();
+        return redirect()->route('admin.npps.index');
+    }
+
     public function Detail(){
         $results = detail_npp::all();
         return view('admin.npp.detail-npp', compact('results'));
@@ -175,12 +205,22 @@ class NppController extends Controller
 
     public function diProses(){
         $results = detail_npp::with('bpbs')->get();
-        return view('admin.npp.npp-di-proses', compact('results'));
+        return view('admin.npp.npp-diProses', compact('results'));
     }
 
     public function diTerima()
     {
         $results = bpb::all();
-        return view('admin.npp.npp-diterima', compact('results'));
+        return view('admin.npp.npp-diTerima', compact('results'));
+    }
+
+    public function Print(npp $id)
+    {
+        dd($id);
+       $result = npp::find($id);
+        dd($result);
+        $size = array(0,0,560,824);
+        $pdf = PDF::loadView('admin.npp.print-npp', $result)->setPaper($size);
+        return $pdf->stream();
     }
 }

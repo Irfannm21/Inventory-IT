@@ -44,6 +44,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('npps/proses','NppController@diProses')->name('npps.proses');
     Route::get('npps/detail','NppController@Detail')->name('npps.detail');
     Route::get('npps/terima','NppController@diTerima')->name('npps.terima');
+    Route::get('npps/print','NppController@Print')->name('npps.print');
     Route::resource('npps','NppController');
 
     Route::resource('details','DetailNppController');

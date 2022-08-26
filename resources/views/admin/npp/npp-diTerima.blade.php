@@ -1,5 +1,15 @@
 @extends('layouts.admin')
 @section('content')
+@can('product_create')
+    <div style="margin-bottom: 10px;" class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-success" href="{{ route("admin.npps.create") }}">
+                Buat BPB
+            </a>
+        </div>
+    </div>
+@endcan
+
 <div class="card">
     <div class="card-header">
         {{ trans('global.product.title_singular') }} {{ trans('global.list') }}
@@ -14,56 +24,50 @@
 
                         </th>
                         <th>
+                            Kode BPB
+                        </th>
+                        <th>
                             Kode NPP
                         </th>
                         <th>
                             Nama Barang
                         </th>
                         <th>
-                            Total NPP
-                        </th>
-                        <th>
                             Diterima
                         </th>
                         <th>
-                            Sisa Barang
+                            Harga
                         </th>
                         <th>
-                            Keterangan
+                            Supplier
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($results as $value)
-                        @php
-                            $jumlah = $value->bpbs->sum('jumlah');
-                        @endphp
-                            @if ($jumlah < $value->jumlah)
-
                             <tr data-entry-id="{{ $value->id }}">
                                 <td>
 
                                 </td>
                                 <td>
-                                    {{ $value->npp->kode ?? '' }}
+                                    {{ $value->kode ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $value->nama ?? '' }}
+                                    {{ $value->detail->npp->kode ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $value->jumlah ?? '' }}
+                                    {{ $value->detail->nama ?? '' }}
                                 </td>
                                 <td>
-                                    {{$jumlah ?? ''}}
+                                    {{ $value->jumlah ." " .$value->satuan ?? '' }}
                                 </td>
                                 <td>
-                                    {{ ($value->jumlah - $jumlah) ?? '' }}
+                                    {{ "Rp." . number_format($value->harga,0,',','.') ?? ''}}
                                 </td>
                                 <td>
-                                    {{$value->keterangan ?? ''}}
+                                    {{ $value->supplier ?? '' }}
                                 </td>
                             </tr>
-                            @endif
                     @endforeach
                 </tbody>
             </table>
