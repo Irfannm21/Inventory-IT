@@ -4,7 +4,7 @@
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
             <a class="btn btn-success" href="{{ route("admin.npps.create") }}">
-                {{ trans('global.add') }} {{ trans('global.product.title_singular') }}
+                {{ trans('global.add') }} Buat NPP
             </a>
         </div>
     </div>
@@ -60,17 +60,17 @@
                             </td>
                             <td>
                                 @can('npp_create')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.npps.print', $value->id) }}">
+                                    <a href="{{route('admin.npps.print',['npp' => $value->id])}}" class="fa fa-print" style="color:black">
                                         Print
                                     </a>
                                 @endcan
                                 @can('komputer_edit')
-                                <a class="btn btn-xs btn-info" href="{{ route("admin.npps.edit", $value->id)  }}">
+                                <a class="fa fa-pencil" style="color:black" href="{{ route("admin.npps.edit", $value->id)  }}">
                                     {{ trans('global.edit') }}
                                 </a>
                                 @endcan
                                 @can('npp_delete')
-                                    <form action="{{ route('admin.npps.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <form  action="{{ route('admin.npps.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">

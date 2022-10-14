@@ -24,4 +24,9 @@ class npp extends Model
         return $this->belongsTo('App\bagian_dept');
     }
 
+    public function bpbs()
+    {
+        return $this->hasMany('App\bpb');
+    }
+
 }

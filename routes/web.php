@@ -41,16 +41,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('departemens','DepartemenController');
 
+    Route::get('npps/options','NppController@options')->name('npps.options');
     Route::get('npps/proses','NppController@diProses')->name('npps.proses');
     Route::get('npps/detail','NppController@Detail')->name('npps.detail');
-    Route::get('npps/terima','NppController@diTerima')->name('npps.terima');
     Route::get('npps/print','NppController@Print')->name('npps.print');
     Route::resource('npps','NppController');
 
     Route::resource('details','DetailNppController');
+    Route::get('bpbs/print',"BpbController@Print")->name('bpbs.print');
     Route::resource('bpbs','BpbController');
 
-
+    Route::resource('suppliers','SupplierController');
+    Route::get('pembayarans/options','PembayaranController@options')->name('pembayarans.options');
+    Route::resource('pembayarans','PembayaranController');
 });
 
 Route::get('json', function(){

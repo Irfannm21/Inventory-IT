@@ -2,11 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\supplier;
 use Illuminate\Foundation\Http\FormRequest;
-use Gate;
-use App\Bpb;
 
-class StoreKlienRequest extends FormRequest
+class StoreSupplierRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +14,7 @@ class StoreKlienRequest extends FormRequest
      */
     public function authorize()
     {
-        return \Gate::allows('bpb_create');
+        return \Gate::allows('supplier_create');
     }
 
     /**
@@ -26,9 +25,8 @@ class StoreKlienRequest extends FormRequest
     public function rules()
     {
         return [
-            'karyawan_id' =>   'required',
-            'printer_id' =>   'required',
-            'komputer_id' => 'required',
+            'nama' => 'required',
+            'kota' => 'required',
         ];
     }
 }

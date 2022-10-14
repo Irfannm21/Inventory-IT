@@ -4,12 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Gate;
-use App\Bpb;
-
-class StoreKlienRequest extends FormRequest
+use App\bpb;
+class StoreBpbRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determine if the user is autkhorized to make this request.
      *
      * @return bool
      */
@@ -26,9 +25,13 @@ class StoreKlienRequest extends FormRequest
     public function rules()
     {
         return [
-            'karyawan_id' =>   'required',
-            'printer_id' =>   'required',
-            'komputer_id' => 'required',
+            'kode' =>   'required',
+            'tanggal' =>   'required',
+            "npp_id" => "required",
+            "detail_id" => "required",
+            "jumlah" => "required",
+            "satuan" => "required",
+            "supplier" => "required",
         ];
     }
 }

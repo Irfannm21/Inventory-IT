@@ -123,5 +123,6 @@
             $tmp.fadeOut(function(){$tmp.remove(); })
         })
     })
+
 </script>
 @endsection
