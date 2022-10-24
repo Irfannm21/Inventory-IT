@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdatePembayaranRequest;
 use Illuminate\Http\Request;
 use App\pembayaran;
 use App\bpb;
@@ -59,21 +60,26 @@ class PembayaranController extends Controller
         //
     }
 
-    public function edit(Request $request, pembayaran $pembayaran)
+    public function edit(Request $request, $id)
     {
-        $result = pembayaran::where("bpb_id",$pembayaran->bpb_id)->first();
-        return view("admin.transaksi.edit",compact("result"));
+        $result = pembayaran::with('bpb')->find($id);
+        $bpb = bpb::select("id","detail_id")->where("kode",$result->bpb->kode)->get();
+        return view("admin.transaksi.edit",compact("result","bpb"));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdatePembayaranRequest $request,pembayaran $pembayaran)
     {
-        //
+        $pembayaran->update($request->all());
+        return redirect()->route('admin.pembayarans.index');
     }
 
 
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $pem = pembayaran::findOrFail($id);
+        $pem->delete();
+
+        return back();
     }
 
     public function options(Request $request)

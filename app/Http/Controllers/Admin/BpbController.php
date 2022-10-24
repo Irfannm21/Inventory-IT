@@ -29,7 +29,7 @@ class BpbController extends Controller
         return view('admin.bpb.create',compact('detail','npp'));
     }
 
-    public function store(Request $request){
+    public function store(StoreBpbRequest $request){
 
         $results = npp::where("id",$request->npp_id)->first();
 
@@ -66,8 +66,10 @@ class BpbController extends Controller
         return redirect()->route("admin.bpbs.index");
     }
 
-    public function destroy(bpb $bpb) {
-        $bpb->delete();
+    public function destroy(Request $bpb, $id) {
+
+        $result = bpb::findOrFail($id);
+        $result->delete();
         return back();
     }
 

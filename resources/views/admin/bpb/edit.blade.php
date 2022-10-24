@@ -63,7 +63,7 @@
                     <div class="form-group col-md-4 {{ $errors->has('detail_id') ? 'has-error' : '' }}">
                         <label id="hasil">Nama Barang</label>
                         <select name="detail_id" id="detail_id" class="form-control detail_id">
-                            @foreach ($detail as $i => $item)
+                            @foreach ($bpb as $i => $item)
                                 <option value="{{ $i }}">{{ $item }}</option>
                             @endforeach
                             <option value=""></option>
@@ -144,28 +144,6 @@
         </div>
     </div>
     <script>
-        $(document).ready(function() {
-            $(document)
-                .on('change', '#kode_npp', function() {
-                    $.ajax({
-                        method: 'GET',
-                        url: '{{ url('admin/npps/options') }}',
-                        data: {
-                            npp_id: $(this).val()
-                        },
-                        success: function(response) {
-                            console.log(204, response);
-                            let options = '';
-                            for (let item of response) {
-                                options += `<option value='${item.id}'>${item.nama}</option>`;
-                            }
-                            $('.detail_id').html(options);
-                        }
-                    })
-                })
-        })
-
-
 
         let namaBarang = document.getElementById("kode_npp");
 
