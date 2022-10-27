@@ -15,12 +15,17 @@ class CreateSuppliersTable extends Migration
     {
         Schema::create('suppliers', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('bpb_id')->constrained()->onDelete('cascade');
             $table->string('nama');
-            $table->string('telepon');
-            $table->string('email');
+            $table->string('type')->nullable();
+            $table->string('telepon')->nullable();
+            $table->string('email')->nullable();
             $table->string('kota');
-            $table->string('alamat');
+            $table->string('alamat')->nullable();
             $table->timestamps();
+
+
+            $table->foreign('bpb_id')->references('id')->on('bpbs');
         });
     }
 

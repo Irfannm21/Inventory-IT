@@ -18,4 +18,8 @@ class detail_npp extends Model
    {
     return $this->hasMany('App\bpb','detail_id');
    }
+
+   public function daftar_bpbs(){
+    return $this->hasMany("App\Detail_bpb");
+   }
 }

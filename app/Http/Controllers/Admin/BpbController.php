@@ -8,9 +8,11 @@ use App\Http\Requests\UpdateBpbRequest;
 
 use Illuminate\Http\Request;
 
-use App\bpb;
-use App\detail_npp;
 use App\npp;
+use App\detail_npp;
+use App\bpb;
+use App\Detail_bpb;
+
 
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -33,21 +35,25 @@ class BpbController extends Controller
 
         $results = npp::where("id",$request->npp_id)->first();
 
-        $bpb = [];
+        $bpb = new bpb;
+        $bpb->kode = $request->kode;
+        $bpb->tanggal = $request->tanggal;
+        $bpb->kelompok = $request->kelompok;
+
+        $results->bpbs()->save($bpb);
+
+        $detail = [];
         foreach ($request->detail_id as $i => $nama) {
-            $bpb[] = [
-                "kode"  => $request->kode,
-                "npp_id"  => $request->npp_id,
+            $detail[] = [
                 "detail_id" => $request->detail_id{$i} ?? '',
-                "tanggal" => $request->tanggal,
                 "jumlah" => $request->jumlah{$i} ?? '1',
                 "satuan" => $request->satuan{$i} ?? 'pcs',
-                "supplier" => $request->supplier{$i} ?? '',
             ];
         }
 
-        $results->bpbs()->createMany($bpb);
+        $bpb = bpb::where("kode",$request->kode)->first();
 
+        $bpb->daftar_bpbs()->createMany($detail);
         return redirect()->route("admin.bpbs.index");
     }
 

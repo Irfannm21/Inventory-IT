@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    @can('product_create')
+    @can('product_`')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
                 <a class="btn btn-success" href="{{ route('admin.bpbs.create') }}">
@@ -30,13 +30,10 @@
                                 Kode NPP
                             </th>
                             <th>
-                                Nama Barang
+                                Tanggal
                             </th>
                             <th>
-                                Jumlah NPP
-                            </th>
-                            <th>
-                                Diterima
+                                Kelompok
                             </th>
                             <th>
                                 Supplier
@@ -56,26 +53,30 @@
                                     {{ $value->kode ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $value->detail->npp->kode ?? '' }}
+                                    {{ $value->npp->kode ?? '' }}
+                                </td>
                                 </td>
                                 <td>
-                                    {{ $value->detail->nama ?? '' }}
+                                    {{ $value->tanggal ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $value->detail->jumlah . ' ' . $value->detail->satuan }}
+                                    {{ $value->kelompok ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $value->jumlah . ' ' . $value->satuan ?? '' }}
+                                    @if (!isset($value->sipplier->nama))
+                                        <button type="button" class="btn btn-xs btn-primary" data-toggle="modal"
+                                            data-target="#buatSupplier--{{ $value->id }}">Buat Supplier</button>
+                                    @else
+                                        {{ $value->sipplier->nama ?? '' }}
+                                    @endif
                                 </td>
                                 <td>
-                                    {{ $value->supplier ?? '' }}
-                                </td>
-                                <td>
-                                 @can('bpb_create')
-                                 <a href="{{route('admin.bpbs.print',['bpb' => $value->kode])}}" class="fa fa-print" style="color:black">
-                                    Print
-                                </a>
-                                 @endcan
+                                    @can('bpb_create')
+                                        <a href="{{ route('admin.bpbs.print', ['bpb' => $value->kode]) }}" class="fa fa-print"
+                                            style="color:black">
+                                            Print
+                                        </a>
+                                    @endcan
                                     @can('bpb_edit')
                                         <a class="fa fa-pencil" style="color:black"
                                             href="{{ route('admin.bpbs.edit', $value->id) }}">
@@ -97,6 +98,120 @@
                         @endforeach
                     </tbody>
                 </table>
+
+                <div class="modal fade" id="buatSupplier--{{ $value->id }}" tabindex="-1">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Buat Supplier</h5>
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('admin.bpbs.store') }}" method="POST"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="form-row">
+                                        <div class="form-group {{ $errors->has('kode_bpb') ? 'has-error' : '' }}">
+                                            <label for="">Kode BPB</label>
+                                            <input type="text" class="form-control" value="{{ $value->kelompok }}"
+                                                readonly>
+                                            @if ($errors->has('kode_bpb'))
+                                                <em class="invalid-feedback">
+                                                    {{ $errors->first('kode_bpb') }}
+                                                </em>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group {{ $errors->has('nama') ? 'has-error' : '' }}">
+                                        <label for="">Nama Supplier</label>
+                                        <input type="text" class="form-control" name="nama">
+                                        @if ($errors->has('nama'))
+                                        <em class="invalid-feedback">
+                                                {{ $errors->first('nama') }}
+                                            </em>
+                                        @endif
+                                    </div>
+                                </div>
+
+
+                                    <div class="form-row">
+                                        <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
+                                            <label for="">Type Perusahaan</label>
+                                            <select name="type" id="type" name="type" class="form-control">
+                                                <option value="" selected>-- Pilih --</option>
+                                                <option value="PT">PT</option>
+                                                <option value="">CV</option>
+                                                <option value="">Firma</option>
+                                            </select>
+                                            @if ($errors->has('type'))
+                                                <em class="invalid-feedback">
+                                                    {{ $errors->first('type') }}
+                                                </em>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group {{ $errors->has('telepon') ? 'has-error' : '' }}">
+                                        <label for="">Telepon</label>
+                                        <input type="text" class="form-control" name="telepon">
+                                        @if ($errors->has('telepon'))
+                                        <em class="invalid-feedback">
+                                                {{ $errors->first('telepon') }}
+                                            </em>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group {{ $errors->has('Email') ? 'has-error' : '' }}">
+                                    <label for="">Email</label>
+                                    <input type="email" class="form-control" name="email">
+                                    @if ($errors->has('Email'))
+                                    <em class="invalid-feedback">
+                                            {{ $errors->first('Email') }}
+                                        </em>
+                                    @endif
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group {{ $errors->has('kota') ? 'has-error' : '' }}">
+                                <label for="">Ko Supplier</label>
+                                <input type="text" class="form-control" name="kota">
+                                @if ($errors->has('kota'))
+                                <em class="invalid-feedback">
+                                        {{ $errors->first('kota') }}
+                                    </em>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group {{ $errors->has('alamat') ? 'has-error' : '' }}">
+                            <label for="">Alamat Supplier</label>
+                            <input type="text" class="form-control" name="alamat">
+                            @if ($errors->has('alamat'))
+                            <em class="invalid-feedback">
+                                    {{ $errors->first('alamat') }}
+                                </em>
+                            @endif
+                        </div>
+                    </div>
+
+
+                                    <div>
+                                        <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

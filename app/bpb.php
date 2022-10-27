@@ -18,9 +18,9 @@ class bpb extends Model
         return $this->belongsTo('App\npp');
     }
 
-    public function perbaikans()
+    public function daftar_bpbs()
     {
-        return $this->hasMany('App\Perbaikan','bpb_id');
+        return $this->hasMany('App\Detail_bpb');
     }
 
     public function pembayaran()

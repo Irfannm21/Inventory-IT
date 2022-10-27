@@ -14,6 +14,27 @@
     </div>
 </div>
 
+<div class="form-row">
+    <div class="form-group col-md-4 {{ $errors->has('kode') ? 'has-error' : '' }}">
+        <label for="">Kelompok BPB</label>
+        <select name="kelompok" id="kelompok" class="form-control">
+            <option value="" selected>-- Pilih --   </option>
+            <option value="Sparepart">Sparepart</option>
+            <option value="Administrasi">Administrasi</option>
+            <option value="Elektrik">Elektrik</option>
+            <option value="Mobil">Mobil</option>
+        </select>
+        @if ($errors->has('kode'))
+            <em class="invalid-feedback">
+                {{ $errors->first('kode') }}
+            </em>
+        @endif
+        <p class="helper-block">
+            {{ trans('*Masukan Kode BPB') }}
+        </p>
+    </div>
+</div>
+
 
 <div class="form-row">
     <div class="form-group col-md-4 {{ $errors->has('tanggal') ? 'has-error' : '' }}">
@@ -68,7 +89,7 @@
                 @endif
             </div>
         </td>
-        <td style="width: 100px">
+        <td style="width: 200px">
             <div class="form-group {{ $errors->has('jumlah') ? 'has-error' : '' }}">
                 <label for="">Jumlah</label>
                 <input type="number" name="jumlah[]" class="form-control"
@@ -100,18 +121,6 @@
                 @endif
             </div>
         </td>
-        <td style="width: 400px">
-            <div class="form-group{{ $errors->has('supplier') ? 'has-error' : '' }}">
-                <label for="">Supplier</label>
-                <input type="text" name="supplier[]" class="form-control"
-                    value="{{ old('supplier', isset($bpb) ? $bpb->supplier : '') }}">
-                @if ($errors->has('supplier'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('supplier') }}
-                    </em>
-                @endif
-            </div>
-        </td>
     </tr>
 </table>
 
@@ -129,7 +138,7 @@
                 @endif
             </div>
         </td>
-        <td style="width: 100px">
+        <td style="width: 200px">
             <div class="form-group {{ $errors->has('jumlah') ? 'has-error' : '' }}">
                 <input type="number" name="jumlah[]" class="form-control"
                     value="{{ old('jumlah', isset($bpb) ? $bpb->jumlah : '') }}">
@@ -155,17 +164,6 @@
                 @if ($errors->has('satuan'))
                     <em class="invalid-feedback">
                         {{ $errors->first('satuan') }}
-                    </em>
-                @endif
-            </div>
-        </td>
-        <td style="width: 400px">
-            <div class="form-group{{ $errors->has('supplier') ? 'has-error' : '' }}">
-                <input type="text" name="supplier[]" class="form-control"
-                    value="{{ old('supplier', isset($bpb) ? $bpb->supplier : '') }}">
-                @if ($errors->has('supplier'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('supplier') }}
                     </em>
                 @endif
             </div>

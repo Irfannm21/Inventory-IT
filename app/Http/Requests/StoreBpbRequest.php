@@ -27,11 +27,11 @@ class StoreBpbRequest extends FormRequest
         return [
             'kode' =>   'required',
             'tanggal' =>   'required',
+            'kelompok' =>   'required',
             "npp_id" => "required",
             "detail_id" => "required",
             "jumlah" => "required",
             "satuan" => "required",
-            "supplier" => "required",
         ];
     }
 }
