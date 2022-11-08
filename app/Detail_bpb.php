@@ -12,7 +12,7 @@ class Detail_bpb extends Model
         return $this->belongsTo('App\bpb');
     }
 
-    public function detail() {
-        return $this->belongsTo('App\detail_npp');
+    public function detail_npp() {
+        return $this->belongsTo('App\detail_npp','detail_id');
     }
 }

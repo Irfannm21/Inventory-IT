@@ -12,7 +12,7 @@ use App\npp;
 use App\detail_npp;
 use App\bpb;
 use App\Detail_bpb;
-
+use App\supplier;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -20,40 +20,56 @@ class BpbController extends Controller
 {
     public function index()
     {
+        $suppliers = supplier::all();
         $results = bpb::all();
             return view('admin.bpb.index', compact('results'));
     }
 
     public function create()
     {
+        $suppliers = supplier::all()->pluck('nama','id');
         $detail = detail_npp::all()->pluck('nama','id');
         $npp = npp::all()->pluck('kode','id');
-        return view('admin.bpb.create',compact('detail','npp'));
+        return view('admin.bpb.create',compact('detail','npp','suppliers'));
     }
 
     public function store(StoreBpbRequest $request){
 
-        $results = npp::where("id",$request->npp_id)->first();
+        if($request->supplierId == true) {
+            $supplier = supplier::find($request->supplierId);
+        } else {
+            $supplier = new supplier;
+            $supplier->nama = $request->nama;
+            $supplier->kota = $request->kota;
+            $supplier->email = $request->email;
+            $supplier->telepon = $request->telepon;
+            $supplier->type = $request->type;
+            $supplier->alamat = $request->alamat;
+            $supplier->save();
+
+            $supplier = supplier::where('nama',$request->nama)->first();
+        }
+
+        $npp = npp::find($request->npp_id);
 
         $bpb = new bpb;
         $bpb->kode = $request->kode;
         $bpb->tanggal = $request->tanggal;
         $bpb->kelompok = $request->kelompok;
-
-        $results->bpbs()->save($bpb);
+        $bpb->npp()->associate($npp);
+        $bpb->supplier()->associate($supplier);
+        $bpb->save();
 
         $detail = [];
         foreach ($request->detail_id as $i => $nama) {
             $detail[] = [
                 "detail_id" => $request->detail_id{$i} ?? '',
                 "jumlah" => $request->jumlah{$i} ?? '1',
-                "satuan" => $request->satuan{$i} ?? 'pcs',
+                "satuan" => $request->satuan{$i} ?? 'pcs'
             ];
         }
 
-        $bpb = bpb::where("kode",$request->kode)->first();
-
-        $bpb->daftar_bpbs()->createMany($detail);
+        $bpb->detail_bpbs()->createMany($detail);
         return redirect()->route("admin.bpbs.index");
     }
 

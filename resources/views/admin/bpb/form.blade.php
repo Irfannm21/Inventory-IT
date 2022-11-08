@@ -1,74 +1,193 @@
-<div class="form-row">
-    <div class="form-group col-md-4 {{ $errors->has('kode') ? 'has-error' : '' }}">
-        <label for="">Kode BPB</label>
-        <input type="text" name="kode" class="form-control" value="{{ old('kode', isset($bpb) ? $bpb->kode : '') }}"
-            placeholder="Cth: 001/ENG/22">
-        @if ($errors->has('kode'))
-            <em class="invalid-feedback">
-                {{ $errors->first('kode') }}
-            </em>
-        @endif
-        <p class="helper-block">
-            {{ trans('*Masukan Kode BPB') }}
-        </p>
+<div class="row">
+    <div class="col">
+
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Masukan Data BPB</h5>
+                <hr>
+                <div class="form-group row">
+                    <label for="kodeBpb" class="col-sm-3 col-form-label {{ $errors->has('kode') ? 'has-error' : '' }}">Kode Bpb</label>
+                    <div class="col-sm-9">
+                        <input type="text" name="kode" class="form-control" value="{{ old('kode', isset($bpb) ? $bpb->kode : '') }}"
+                            placeholder="Cth: 001/ENG/22">
+                        @if ($errors->has('kode'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('kode') }}
+                            </em>
+                        @endif
+                        <p class="helper-block">
+                            {{ trans('*Wajib isi kode BPB') }}
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="kelompok" class="col-sm-3 col-form-label {{ $errors->has('kelompok') ? 'has-error' : '' }}">Kelompok</label>
+                    <div class="col-sm-9">
+                        <select name="kelompok" id="kelompok" class="form-control">
+                            <option value="" selected>-- Pilih --   </option>
+                            <option value="Sparepart">Sparepart</option>
+                            <option value="Administrasi">Administrasi</option>
+                            <option value="Elektrik">Elektrik</option>
+                            <option value="Mobil">Mobil</option>
+                        </select>
+                        @if ($errors->has('kelompok'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('kelompok') }}
+                            </em>
+                        @endif
+                        <p class="helper-block">
+                            {{ trans('*Wajib pilih kelompok') }}
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="tanggal" class="col-sm-3 col-form-label {{ $errors->has('tanggal') ? 'has-error' : '' }}">Tanggal</label>
+                    <div class="col-sm-9">
+                        <input type="date" name="tanggal" class="form-control"
+                            value="{{ old('tanggal', isset($bpb) ? $bpb->tanggal : '') }}">
+                        @if ($errors->has('tanggal'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('tanggal') }}
+                            </em>
+                        @endif
+                        <p class="helper-block">
+                            {{ trans('*Wajib isi tanggal pembuatan BPB') }}
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="kode_npp" class="col-sm-3 col-form-label {{ $errors->has('kode_npp') ? 'has-error' : '' }}">Kode NPP</label>
+                    <div class="col-sm-9">
+                        <select name="npp_id" id="npp_id" class="form-control select2">
+                            <option value="" selected>-- Pilih --</option>
+                            @foreach ($npp as $i => $item)
+                            <option value="{{$item}}">{{$item}}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('npp_id'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('npp_id') }}
+                            </em>
+                        @endif
+                        <p class="helper-block">
+                            {{ trans('*Pilih BPB untuk mengisi barang yang sudah datang') }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
-</div>
+    <div class="col">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Cari Supplier yang sudah ada</h5>
+                <hr>
+                <div class="form-group row">
+                    <label for="namaSupplier" class="col-sm-3 col-form-label">Nama Supplier</label>
+                    <div class="col-sm-9">
+                        <select name="supplierId" id="supplierId" class="form-control select2">
+                            <option value="" selected>-- Pilih --</option>
+                            @foreach ($suppliers as $i => $item)
+                            <option value="{{$i}}">{{$item}}</option>
+                            @endforeach
+                        </select>
+                        @if ($errors->has('supplierId'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('supplierId') }}
+                            </em>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title text-center">Buat Supplier Baru</h5>
+                <hr>
+                <div class="form-row">
+                    <div class="form-group col-md-8 {{ $errors->has('nama') ? 'has-error' : '' }}">
+                        <label for="">Nama Supplier</label>
+                        <input type="text" name="nama" class="form-control" value="{{ old('nama') }}"
+                            placeholder="Cth: PT.Insansandang Internusa">
+                        @if ($errors->has('nama'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('nama') }}
+                            </em>
+                        @endif
+                        <p class="helper-block">
+                            {{ trans('*Wajib isi nama supplier') }}
+                        </p>
+                    </div>
+                    <div class="form-group col-md-4 {{ $errors->has('kota') ? 'has-error' : '' }}">
+                        <label for="">Kota Asal</label>
+                        <input type="text" name="kota" class="form-control" value="{{ old('kota') }}"
+                            placeholder="Cth: Bandung">
+                        @if ($errors->has('kota'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('kota') }}
+                            </em>
+                        @endif
+                        <p class="helper-block">
+                            {{ trans('*Wajib isi asal kota supplier') }}
+                        </p>
+                    </div>
 
-<div class="form-row">
-    <div class="form-group col-md-4 {{ $errors->has('kode') ? 'has-error' : '' }}">
-        <label for="">Kelompok BPB</label>
-        <select name="kelompok" id="kelompok" class="form-control">
-            <option value="" selected>-- Pilih --   </option>
-            <option value="Sparepart">Sparepart</option>
-            <option value="Administrasi">Administrasi</option>
-            <option value="Elektrik">Elektrik</option>
-            <option value="Mobil">Mobil</option>
-        </select>
-        @if ($errors->has('kode'))
-            <em class="invalid-feedback">
-                {{ $errors->first('kode') }}
-            </em>
-        @endif
-        <p class="helper-block">
-            {{ trans('*Masukan Kode BPB') }}
-        </p>
-    </div>
-</div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4 {{ $errors->has('email') ? 'has-error' : '' }}">
+                        <label for="">Alamat Email</label>
+                        <input type="text" name="email" class="form-control" value="{{ old('email') }}"
+                            placeholder="Cth: info@insansandang.com">
+                        @if ($errors->has('email'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('email') }}
+                            </em>
+                        @endif
+                    </div>
+                    <div class="form-group col-md-4 {{ $errors->has('telepon') ? 'has-error' : '' }}">
+                        <label for="">Nomor Telepon</label>
+                        <input type="text" name="telepon" class="form-control" value="{{ old('telepon') }}"
+                            placeholder="Cth: 089681558231">
+                        @if ($errors->has('telepon'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('telepon') }}
+                            </em>
+                        @endif
+                    </div>
+                    <div class="form-group col-md-4 {{ $errors->has('type') ? 'has-error' : '' }}">
+                        <label for="">Tipe Perusahaan</label>
+                        <select name="type" id="type" class="form-control">
+                            <option value="" selected>-- Pilih --</option>
+                            <option value="Perseorangan">Perseorangan</option>
+                            <option value="CV">CV</option>
+                            <option value="PT">PT</option>
+                            <option value="Koperasi">Koperasi</option>
+                            <option value="Firma">Firma</option>
+                            <option value="Persero">Persero</option>
+                        </select>
+                        @if ($errors->has('type'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('type') }}
+                            </em>
+                        @endif
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12 {{ $errors->has('alamat') ? 'has-error' : '' }}">
+                        <label for="">Alamat Lengkap</label>
+                        <input type="text" name="alamat" class="form-control" value="{{ old('alamat') }}"
+                            placeholder="Cth: Jl. Rancaekek No.KM 22, RW.5, Cinta Mulya, Kec. Jatinangor, Kabupaten Sumedang, Jawa Barat 45363">
+                        @if ($errors->has('alamat'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('alamat') }}
+                            </em>
+                        @endif
+                    </div>
+                </div>
 
-
-<div class="form-row">
-    <div class="form-group col-md-4 {{ $errors->has('tanggal') ? 'has-error' : '' }}">
-        <label for="">Tanggal</label>
-        <input type="date" name="tanggal" class="form-control"
-            value="{{ old('tanggal', isset($bpb) ? $bpb->tanggal : '') }}">
-        @if ($errors->has('tanggal'))
-            <em class="invalid-feedback">
-                {{ $errors->first('tanggal') }}
-            </em>
-        @endif
-        <p class="helper-block">
-            {{ trans('*Masukan Kode BPB') }}
-        </p>
-    </div>
-</div>
-
-<div class="form-row">
-    <div class="form-group col-md-4 {{ $errors->has('npp_id') ? 'has-error' : '' }}">
-        <label for="">Kode NPP</label>
-        <select name="npp_id" id="npp_id" class="form-control select2">
-            <option value="" selected>-- Pilih --</option>
-            @foreach ($npp as $i => $item)
-            <option value="{{$i}}">{{$item}}</option>
-            @endforeach
-        </select>
-        @if ($errors->has('npp_id'))
-            <em class="invalid-feedback">
-                {{ $errors->first('npp_id') }}
-            </em>
-        @endif
-        <p class="helper-block">
-            {{ trans('*Pilih Kode NPP') }}
-        </p>
+            </div>
+        </div>
     </div>
 </div>
 

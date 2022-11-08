@@ -17,11 +17,9 @@ class CreateNppsTable extends Migration
             $table->bigIncrements('id');
             $table->string('kode')->unique();
             $table->date('tanggal');
-            $table->unsignedBigInteger('departemen_id');
-            $table->unsignedBigInteger('bagian_id');
+            $table->unsignedBigInteger('bagian_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 
-            $table->foreign('departemen_id')->references('id')->on('departemens');
             $table->foreign('bagian_id')->references('id')->on('bagian_depts');
         });
     }

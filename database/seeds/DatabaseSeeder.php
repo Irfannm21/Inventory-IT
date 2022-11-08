@@ -12,6 +12,13 @@ class DatabaseSeeder extends Seeder
             PermissionRoleTableSeeder::class,
             UsersTableSeeder::class,
             RoleUserTableSeeder::class,
+            SupplierTableSeeder::class,
+            DepartementTableSeeder::class,
+            BagianTableSeeder::class,
+            NppTableSeeder::class,
+            DetailNppTableSeeder::class,
+            BpbTableSeeder::class,
+
         ]);
     }
 }

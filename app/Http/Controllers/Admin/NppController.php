@@ -91,7 +91,7 @@ class NppController extends Controller
     }
 
     public function diProses(){
-        $results = detail_npp::with('bpbs')->get();
+        $results = detail_npp::with('detail_bpbs')->get();
         return view('admin.npp.npp-diProses', compact('results'));
     }
 

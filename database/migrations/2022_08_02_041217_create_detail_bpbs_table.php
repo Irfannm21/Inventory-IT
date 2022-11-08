@@ -15,7 +15,7 @@ class CreateDetailBpbsTable extends Migration
     {
         Schema::create('detail_bpbs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('bpb_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('bpb_id')->constrained()->onDelete('bpb_id');
             $table->unsignedBigInteger('detail_id')->constrained()->onDelete('detail_id');
             $table->integer('jumlah');
             $table->string('satuan');

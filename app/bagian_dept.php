@@ -15,6 +15,6 @@ class bagian_dept extends Model
 
     public function npps()
     {
-        return $this->hasMany('App\npp');
+        return $this->hasMany('App\npp','bagian_id');
     }
 }

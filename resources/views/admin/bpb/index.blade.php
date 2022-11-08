@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    @can('product_`')
+    @can('bpb_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
                 <a class="btn btn-success" href="{{ route('admin.bpbs.create') }}">
@@ -63,12 +63,7 @@
                                     {{ $value->kelompok ?? '' }}
                                 </td>
                                 <td>
-                                    @if (!isset($value->sipplier->nama))
-                                        <button type="button" class="btn btn-xs btn-primary" data-toggle="modal"
-                                            data-target="#buatSupplier--{{ $value->id }}">Buat Supplier</button>
-                                    @else
-                                        {{ $value->sipplier->nama ?? '' }}
-                                    @endif
+                                   {{$value->supplier->nama}}
                                 </td>
                                 <td>
                                     @can('bpb_create')
@@ -99,7 +94,7 @@
                     </tbody>
                 </table>
 
-                <div class="modal fade" id="buatSupplier--{{ $value->id }}" tabindex="-1">
+                <div class="modal fade add_supplier" id="add_supplier" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -115,8 +110,7 @@
                                     <div class="form-row">
                                         <div class="form-group {{ $errors->has('kode_bpb') ? 'has-error' : '' }}">
                                             <label for="">Kode BPB</label>
-                                            <input type="text" class="form-control" value="{{ $value->kelompok }}"
-                                                readonly>
+                                            <input type="text" class="form-control bpb_id" id="bpb_id" readonly>
                                             @if ($errors->has('kode_bpb'))
                                                 <em class="invalid-feedback">
                                                     {{ $errors->first('kode_bpb') }}
@@ -124,84 +118,6 @@
                                             @endif
                                         </div>
                                     </div>
-
-                                    <div class="form-row">
-                                        <div class="form-group {{ $errors->has('nama') ? 'has-error' : '' }}">
-                                        <label for="">Nama Supplier</label>
-                                        <input type="text" class="form-control" name="nama">
-                                        @if ($errors->has('nama'))
-                                        <em class="invalid-feedback">
-                                                {{ $errors->first('nama') }}
-                                            </em>
-                                        @endif
-                                    </div>
-                                </div>
-
-
-                                    <div class="form-row">
-                                        <div class="form-group {{ $errors->has('type') ? 'has-error' : '' }}">
-                                            <label for="">Type Perusahaan</label>
-                                            <select name="type" id="type" name="type" class="form-control">
-                                                <option value="" selected>-- Pilih --</option>
-                                                <option value="PT">PT</option>
-                                                <option value="">CV</option>
-                                                <option value="">Firma</option>
-                                            </select>
-                                            @if ($errors->has('type'))
-                                                <em class="invalid-feedback">
-                                                    {{ $errors->first('type') }}
-                                                </em>
-                                            @endif
-                                        </div>
-                                    </div>
-
-                                    <div class="form-row">
-                                        <div class="form-group {{ $errors->has('telepon') ? 'has-error' : '' }}">
-                                        <label for="">Telepon</label>
-                                        <input type="text" class="form-control" name="telepon">
-                                        @if ($errors->has('telepon'))
-                                        <em class="invalid-feedback">
-                                                {{ $errors->first('telepon') }}
-                                            </em>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group {{ $errors->has('Email') ? 'has-error' : '' }}">
-                                    <label for="">Email</label>
-                                    <input type="email" class="form-control" name="email">
-                                    @if ($errors->has('Email'))
-                                    <em class="invalid-feedback">
-                                            {{ $errors->first('Email') }}
-                                        </em>
-                                    @endif
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group {{ $errors->has('kota') ? 'has-error' : '' }}">
-                                <label for="">Ko Supplier</label>
-                                <input type="text" class="form-control" name="kota">
-                                @if ($errors->has('kota'))
-                                <em class="invalid-feedback">
-                                        {{ $errors->first('kota') }}
-                                    </em>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group {{ $errors->has('alamat') ? 'has-error' : '' }}">
-                            <label for="">Alamat Supplier</label>
-                            <input type="text" class="form-control" name="alamat">
-                            @if ($errors->has('alamat'))
-                            <em class="invalid-feedback">
-                                    {{ $errors->first('alamat') }}
-                                </em>
-                            @endif
-                        </div>
-                    </div>
 
 
                                     <div>
@@ -218,6 +134,13 @@
 @section('scripts')
     @parent
     <script>
+        function modalSupplier(el) {
+            var link = $(el) //refer `a` tag which is clicked
+            var modal = $("#modalSupplier") //your modal
+            var code = link.data('code')
+            modal.find('#bpb_id').val(code);
+        }
+
         $(function() {
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
             let deleteButton = {
