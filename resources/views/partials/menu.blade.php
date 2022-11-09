@@ -187,11 +187,51 @@
                 </a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
+                        <a href="{{ route("admin.bpbs.index") }}" class="nav-link {{ request()->is('admin/bpbs') || request()->is('admin/bpbs/*') ? 'active' : '' }}">
+                            <i class="fas fa-file    nav-icon">
+
+                            </i>
+                           Data BPB
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.bpbs.index") }}" class="nav-link {{ request()->is('admin/bpbs') || request()->is('admin/bpbs/*') ? 'active' : '' }}">
+                            <i class="fas fa-file    nav-icon">
+
+                            </i>
+                           BPB Administrasi
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.bpbs.index") }}" class="nav-link {{ request()->is('admin/bpbs') || request()->is('admin/bpbs/*') ? 'active' : '' }}">
+                            <i class="fas fa-file    nav-icon">
+
+                            </i>
+                           BPB Elektrik
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.bpbs.index") }}" class="nav-link {{ request()->is('admin/bpbs') || request()->is('admin/bpbs/*') ? 'active' : '' }}">
+                            <i class="fas fa-file    nav-icon">
+
+                            </i>
+                           BPB Mobil
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route("admin.bpbs.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
                             <i class="fas fa-file    nav-icon">
 
                             </i>
-                           Buat BPB
+                           BPB PT
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.bpbs.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
+                            <i class="fas fa-file    nav-icon">
+
+                            </i>
+                           BPB Spinning
                         </a>
                     </li>
 

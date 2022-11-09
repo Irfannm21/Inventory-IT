@@ -102,92 +102,98 @@
             </div>
         </div>
         <div class="card">
-            <div class="card-body">
-                <h5 class="card-title text-center">Buat Supplier Baru</h5>
-                <hr>
-                <div class="form-row">
-                    <div class="form-group col-md-8 {{ $errors->has('nama') ? 'has-error' : '' }}">
-                        <label for="">Nama Supplier</label>
-                        <input type="text" name="nama" class="form-control" value="{{ old('nama') }}"
-                            placeholder="Cth: PT.Insansandang Internusa">
-                        @if ($errors->has('nama'))
-                            <em class="invalid-feedback">
-                                {{ $errors->first('nama') }}
-                            </em>
-                        @endif
-                        <p class="helper-block">
-                            {{ trans('*Wajib isi nama supplier') }}
-                        </p>
-                    </div>
-                    <div class="form-group col-md-4 {{ $errors->has('kota') ? 'has-error' : '' }}">
-                        <label for="">Kota Asal</label>
-                        <input type="text" name="kota" class="form-control" value="{{ old('kota') }}"
-                            placeholder="Cth: Bandung">
-                        @if ($errors->has('kota'))
-                            <em class="invalid-feedback">
-                                {{ $errors->first('kota') }}
-                            </em>
-                        @endif
-                        <p class="helper-block">
-                            {{ trans('*Wajib isi asal kota supplier') }}
-                        </p>
-                    </div>
+            <div class="accordion" id="accordionSupplier">
+                <div class="card-body">
+                    <h5 class="card-title text-center"><button class="btn btn-xs btn-primary" type="button" data-toggle="collapse" data-target="#bukaSupplier">Buat Supplier Baru</button></h5>
+                    <hr>
+                    <div id="bukaSupplier" class="collapse" data-parent="#accordionSupplier">
+                        <div class="form-row">
+                            <div class="form-group col-md-8 {{ $errors->has('nama') ? 'has-error' : '' }}">
+                                <label for="">Nama Supplier</label>
+                                <input type="text" name="nama" class="form-control" value="{{ old('nama') }}"
+                                    placeholder="Cth: PT.Insansandang Internusa">
+                                @if ($errors->has('nama'))
+                                    <em class="invalid-feedback">
+                                        {{ $errors->first('nama') }}
+                                    </em>
+                                @endif
+                                <p class="helper-block">
+                                    {{ trans('*Wajib isi nama supplier') }}
+                                </p>
+                            </div>
+                            <div class="form-group col-md-4 {{ $errors->has('kota') ? 'has-error' : '' }}">
+                                <label for="">Kota Asal</label>
+                                <input type="text" name="kota" class="form-control" value="{{ old('kota') }}"
+                                    placeholder="Cth: Bandung">
+                                @if ($errors->has('kota'))
+                                    <em class="invalid-feedback">
+                                        {{ $errors->first('kota') }}
+                                    </em>
+                                @endif
+                                <p class="helper-block">
+                                    {{ trans('*Wajib isi asal kota supplier') }}
+                                </p>
+                            </div>
 
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4 {{ $errors->has('email') ? 'has-error' : '' }}">
+                                <label for="">Alamat Email</label>
+                                <input type="text" name="email" class="form-control" value="{{ old('email') }}"
+                                    placeholder="Cth: info@insansandang.com">
+                                @if ($errors->has('email'))
+                                    <em class="invalid-feedback">
+                                        {{ $errors->first('email') }}
+                                    </em>
+                                @endif
+                            </div>
+                            <div class="form-group col-md-4 {{ $errors->has('telepon') ? 'has-error' : '' }}">
+                                <label for="">Nomor Telepon</label>
+                                <input type="text" name="telepon" class="form-control" value="{{ old('telepon') }}"
+                                    placeholder="Cth: 089681558231">
+                                @if ($errors->has('telepon'))
+                                    <em class="invalid-feedback">
+                                        {{ $errors->first('telepon') }}
+                                    </em>
+                                @endif
+                            </div>
+                            <div class="form-group col-md-4 {{ $errors->has('type') ? 'has-error' : '' }}">
+                                <label for="">Tipe Perusahaan</label>
+                                <select name="type" id="type" class="form-control">
+                                    <option value="" selected>-- Pilih --</option>
+                                    <option value="Perseorangan">Perseorangan</option>
+                                    <option value="CV">CV</option>
+                                    <option value="PT">PT</option>
+                                    <option value="Koperasi">Koperasi</option>
+                                    <option value="Firma">Firma</option>
+                                    <option value="Persero">Persero</option>
+                                </select>
+                                @if ($errors->has('type'))
+                                    <em class="invalid-feedback">
+                                        {{ $errors->first('type') }}
+                                    </em>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12 {{ $errors->has('alamat') ? 'has-error' : '' }}">
+                                <label for="">Alamat Lengkap</label>
+                                <input type="text" name="alamat" class="form-control" value="{{ old('alamat') }}"
+                                    placeholder="Cth: Jl. Rancaekek No.KM 22, RW.5, Cinta Mulya, Kec. Jatinangor, Kabupaten Sumedang, Jawa Barat 45363">
+                                @if ($errors->has('alamat'))
+                                    <em class="invalid-feedback">
+                                        {{ $errors->first('alamat') }}
+                                    </em>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-row">
-                    <div class="form-group col-md-4 {{ $errors->has('email') ? 'has-error' : '' }}">
-                        <label for="">Alamat Email</label>
-                        <input type="text" name="email" class="form-control" value="{{ old('email') }}"
-                            placeholder="Cth: info@insansandang.com">
-                        @if ($errors->has('email'))
-                            <em class="invalid-feedback">
-                                {{ $errors->first('email') }}
-                            </em>
-                        @endif
-                    </div>
-                    <div class="form-group col-md-4 {{ $errors->has('telepon') ? 'has-error' : '' }}">
-                        <label for="">Nomor Telepon</label>
-                        <input type="text" name="telepon" class="form-control" value="{{ old('telepon') }}"
-                            placeholder="Cth: 089681558231">
-                        @if ($errors->has('telepon'))
-                            <em class="invalid-feedback">
-                                {{ $errors->first('telepon') }}
-                            </em>
-                        @endif
-                    </div>
-                    <div class="form-group col-md-4 {{ $errors->has('type') ? 'has-error' : '' }}">
-                        <label for="">Tipe Perusahaan</label>
-                        <select name="type" id="type" class="form-control">
-                            <option value="" selected>-- Pilih --</option>
-                            <option value="Perseorangan">Perseorangan</option>
-                            <option value="CV">CV</option>
-                            <option value="PT">PT</option>
-                            <option value="Koperasi">Koperasi</option>
-                            <option value="Firma">Firma</option>
-                            <option value="Persero">Persero</option>
-                        </select>
-                        @if ($errors->has('type'))
-                            <em class="invalid-feedback">
-                                {{ $errors->first('type') }}
-                            </em>
-                        @endif
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-12 {{ $errors->has('alamat') ? 'has-error' : '' }}">
-                        <label for="">Alamat Lengkap</label>
-                        <input type="text" name="alamat" class="form-control" value="{{ old('alamat') }}"
-                            placeholder="Cth: Jl. Rancaekek No.KM 22, RW.5, Cinta Mulya, Kec. Jatinangor, Kabupaten Sumedang, Jawa Barat 45363">
-                        @if ($errors->has('alamat'))
-                            <em class="invalid-feedback">
-                                {{ $errors->first('alamat') }}
-                            </em>
-                        @endif
-                    </div>
-                </div>
-
             </div>
-        </div>
+            </div>
+
+
+
     </div>
 </div>
 
