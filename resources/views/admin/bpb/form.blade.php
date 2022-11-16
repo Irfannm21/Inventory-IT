@@ -29,6 +29,9 @@
                             <option value="Administrasi">Administrasi</option>
                             <option value="Elektrik">Elektrik</option>
                             <option value="Mobil">Mobil</option>
+                            <option value="PT">PT</option>
+                            <option value="UM">UM</option>
+                            <option value="Spinning">Spinning</option>
                         </select>
                         @if ($errors->has('kelompok'))
                             <em class="invalid-feedback">
@@ -197,7 +200,7 @@
     </div>
 </div>
 
-<button class="btn btn-primary" id="addBtn" type="button">Tambah</button>
+<button class="btn btn-primary" id="addBtn" type="button">Tambah Baris Baru</button>
 
 <table class="table table-responsive table-borderless" id="detailTBody">
     <tr>
@@ -233,11 +236,12 @@
                     @if (!isset($bpb))
                         <option value="" selected>-- Pilih --</option>
                     @endif
-                    <option value="unit">Unit</option>
-                    <option value="pcs">Pcs</option>
-                    <option value="kg">Kg</option>
-                    <option value="meter">Meter</option>
-                    <option value="inch">Inch</option>
+                    <option value="Unit">Unit</option>
+                    <option value="Pcs">Pcs</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Meter">Meter</option>
+                    <option value="Inch">Inch</option>
+                    <option value="Dus">Dus</option>
                 </select>
                 @if ($errors->has('satuan'))
                     <em class="invalid-feedback">

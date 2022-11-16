@@ -187,15 +187,15 @@
                 </a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
-                        <a href="{{ route("admin.bpbs.index") }}" class="nav-link {{ request()->is('admin/bpbs') || request()->is('admin/bpbs/*') ? 'active' : '' }}">
-                            <i class="fas fa-file    nav-icon">
+                        <a href="{{ route("admin.detail_bpbs.index") }}" class="nav-link {{ request()->is('admin/bpbs') || request()->is('admin/bpbs/*') ? 'active' : '' }}">
+                            <i class="fas fa-file nav-icon">
 
                             </i>
-                           Data BPB
+                           Detail Data BPB
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route("admin.bpbs.index") }}" class="nav-link {{ request()->is('admin/bpbs') || request()->is('admin/bpbs/*') ? 'active' : '' }}">
+                        <a href="{{ route("admin.bpbs.administrasi") }}" class="nav-link {{ request()->is('admin/administrasi') || request()->is('admin/administrasi/*') ? 'active' : '' }}">
                             <i class="fas fa-file    nav-icon">
 
                             </i>
@@ -203,7 +203,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route("admin.bpbs.index") }}" class="nav-link {{ request()->is('admin/bpbs') || request()->is('admin/bpbs/*') ? 'active' : '' }}">
+                        <a href="{{ route("admin.bpbs.sparepart") }}" class="nav-link {{ request()->is('admin/sparepart') || request()->is('admin/sparepart/*') ? 'active' : '' }}">
+                            <i class="fas fa-file    nav-icon">
+
+                            </i>
+                           BPB Sparepart
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.bpbs.elektrik") }}" class="nav-link {{ request()->is('admin/sparepart') || request()->is('admin/sparepart/*') ? 'active' : '' }}">
                             <i class="fas fa-file    nav-icon">
 
                             </i>
@@ -211,15 +219,15 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route("admin.bpbs.index") }}" class="nav-link {{ request()->is('admin/bpbs') || request()->is('admin/bpbs/*') ? 'active' : '' }}">
-                            <i class="fas fa-file    nav-icon">
+                        <a href="{{ route("admin.bpbs.mobil") }}" class="nav-link {{ request()->is('admin/mobil') || request()->is('admin/mobil/*') ? 'active' : '' }}">
+                            <i class="fas fa-file nav-icon">
 
                             </i>
                            BPB Mobil
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route("admin.bpbs.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
+                        <a href="{{ route("admin.bpbs.pt") }}" class="nav-link {{ request()->is('admin/pt') || request()->is('admin/pt/*') ? 'active' : '' }}">
                             <i class="fas fa-file    nav-icon">
 
                             </i>
@@ -227,11 +235,19 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route("admin.bpbs.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
+                        <a href="{{ route("admin.bpbs.spinning") }}" class="nav-link {{ request()->is('admin/pt') || request()->is('admin/pt/*') ? 'active' : '' }}">
                             <i class="fas fa-file    nav-icon">
 
                             </i>
                            BPB Spinning
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.bpbs.um") }}" class="nav-link {{ request()->is('admin/pt') || request()->is('admin/pt/*') ? 'active' : '' }}">
+                            <i class="fas fa-file    nav-icon">
+
+                            </i>
+                           BPB UM
                         </a>
                     </li>
 

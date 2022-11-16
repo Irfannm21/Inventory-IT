@@ -15,7 +15,7 @@ class CreatePembayaransTable extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('bpb_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('bpb_detail_id')->constrained()->onDelete('cascade');
             $table->bigInteger('harga_satuan');
             $table->bigInteger('ppn');
             $table->bigInteger('total_harga');
@@ -23,15 +23,10 @@ class CreatePembayaransTable extends Migration
             $table->string('lama_kredit')->nullable();
             $table->timestamps();
 
-            $table->foreign('bpb_id')->references('id')->on('bpbs');
+            $table->foreign('bpb_detail_id')->references('id')->on('bpbs');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('pembayarans');

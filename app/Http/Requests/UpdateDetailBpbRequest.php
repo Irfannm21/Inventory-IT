@@ -2,23 +2,22 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Gate;
+use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateBpbRequest extends FormRequest
+class UpdateDetailBpbRequest extends FormRequest
 {
+
     public function authorize()
     {
         return \Gate::allows('bpb_edit');
     }
 
-
     public function rules()
     {
         return [
-            'kode' =>   'required',
-            'kelompok' => 'required',
-            'tanggal' => 'required',
+            "jumlah" => 'required',
+            'satuan' => 'required',
         ];
     }
 }

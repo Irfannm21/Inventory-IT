@@ -21,7 +21,7 @@ class BpbController extends Controller
     public function index()
     {
         $suppliers = supplier::all();
-        $results = bpb::all();
+        $results = bpb::has("Detail_bpbs")->get();
             return view('admin.bpb.index', compact('results'));
     }
 
@@ -70,7 +70,33 @@ class BpbController extends Controller
         }
 
         $bpb->detail_bpbs()->createMany($detail);
-        return redirect()->route("admin.bpbs.index");
+        if($bpb->kelompok == "Administrasi")
+        {
+            return redirect()->route("admin.bpbs.administrasi");
+        } elseif ($bpb->kelompok == "Sparepart")
+        {
+            return redirect()->route("admin.bpbs.sparepart");
+        }
+         elseif($bpb->kelompok == "Mobil")
+        {
+            return redirect()->route("admin.bpbs.mobil");
+        }
+        elseif($bpb->kelompok == "Elektrik")
+        {
+            return redirect()->route("admin.bpbs.eletrik");
+        }
+        elseif($bpb->kelompok == "PT")
+        {
+            return redirect()->route("admin.bpbs.pt");
+        }
+        elseif($bpb->kelompok == "Spinning")
+        {
+            return redirect()->route("admin.bpbs.spinning");
+        }
+        elseif($bpb->kelompok == "UM")
+        {
+            return redirect()->route("admin.bpbs.um");
+        }
     }
 
     public function show() {
@@ -79,13 +105,41 @@ class BpbController extends Controller
     }
 
     public function edit(bpb $bpb) {
-        $detail = detail_npp::all()->pluck("nama","id");
-        return view("admin.bpb.edit", compact("bpb","detail"));
+        $result = bpb::find($bpb->id);
+        $suppliers = supplier::all()->pluck('nama','id');
+        return view("admin.bpb.edit", compact("result",'suppliers'));
     }
 
     public function update(UpdateBpbRequest $request, bpb $bpb) {
         $bpb->update($request->all());
-        return redirect()->route("admin.bpbs.index");
+
+        if($bpb->kelompok == "Administrasi")
+        {
+            return redirect()->route("admin.bpbs.administrasi");
+        } elseif ($bpb->kelompok == "Sparepart")
+        {
+            return redirect()->route("admin.bpbs.sparepart");
+        }
+        elseif ($bpb->kelompok == "Elektrik")
+        {
+            return redirect()->route("admin.bpbs.elektrik");
+        }
+         elseif($bpb->kelompok == "Mobil")
+        {
+            return redirect()->route("admin.bpbs.mobil");
+        }
+        elseif($bpb->kelompok == "PT")
+        {
+            return redirect()->route("admin.bpbs.pt");
+        }
+        elseif($bpb->kelompok == "Spinning")
+        {
+            return redirect()->route("admin.bpbs.spinning");
+        }
+        elseif($bpb->kelompok == "UM")
+        {
+            return redirect()->route("admin.bpbs.um");
+        }
     }
 
     public function destroy(Request $bpb, $id) {
@@ -104,5 +158,48 @@ class BpbController extends Controller
         $result = bpb::where("kode",$request->bpb)->get();
         $pdf = PDF::loadView('admin.bpb.print',['result' => $result])->setPaper('a5'.'potrait');
         return $pdf->stream();
+    }
+
+
+    public function administrasi()
+    {
+        $results = bpb::where("kelompok","Administrasi")->get();
+        return view('admin.bpb.index', compact('results'));
+    }
+
+    public function sparepart()
+    {
+        $results = bpb::where("kelompok","sparepart")->get();
+        return view('admin.bpb.index', compact('results'));
+    }
+
+    public function elektrik()
+    {
+        $results = bpb::where("kelompok","Elektrik")->get();
+        return view('admin.bpb.index', compact('results'));
+    }
+
+    public function mobil()
+    {
+        $results = bpb::where("kelompok","Mobil")->get();
+        return view('admin.bpb.index', compact('results'));
+    }
+
+    public function pt()
+    {
+        $results = bpb::where("kelompok","pt")->get();
+        return view('admin.bpb.index', compact('results'));
+    }
+
+    public function spinning()
+    {
+        $results = bpb::where("kelompok","spinning")->get();
+        return view('admin.bpb.index', compact('results'));
+    }
+
+    public function um()
+    {
+        $results = bpb::where("kelompok","UM")->get();
+        return view('admin.bpb.index', compact('results'));
     }
 }

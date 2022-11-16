@@ -49,7 +49,15 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('details','DetailNppController');
     Route::get('bpbs/print',"BpbController@Print")->name('bpbs.print');
+    Route::get('/bpbs/administrasi','BpbController@administrasi')->name('bpbs.administrasi');
+    Route::get('/bpbs/elektrik','BpbController@elektrik')->name('bpbs.elektrik');
+    Route::get('/bpbs/sparepart','BpbController@sparepart')->name('bpbs.sparepart');
+    Route::get('/bpbs/mobil','BpbController@mobil')->name('bpbs.mobil');
+    Route::get('/bpbs/spinning','BpbController@spinning')->name('bpbs.spinning');
+    Route::get('/bpbs/pt','BpbController@pt')->name('bpbs.pt');
+    Route::get('/bpbs/um','BpbController@um')->name('bpbs.um');
     Route::resource('bpbs','BpbController');
+    Route::resource('/detail_bpbs','DetailBpbController');
 
     Route::resource('suppliers','SupplierController');
     Route::get('pembayarans/options','PembayaranController@options')->name('pembayarans.options');
