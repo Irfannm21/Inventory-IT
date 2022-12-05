@@ -120,23 +120,6 @@
                                     Daftar Perbaikan
                                 </a>
                             </li>
-
-                        {{-- <li class="nav-item">
-                            <a href="{{ route("admin.karyawans.index") }}" class="nav-link {{ request()->is('admin/karyawans') || request()->is('admin/karyawans/*') ? 'active' : '' }}">
-                                <i class="fas fa-calendar nav-icon">
-
-                                </i>
-                                {{ trans('Buat Absen') }}
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route("admin.karyawans.index") }}" class="nav-link {{ request()->is('admin/karyawans') || request()->is('admin/karyawans/*') ? 'active' : '' }}">
-                                <i class="fas fa-user nav-icon">
-
-                                </i>
-                                {{ trans('Buat cuti') }}
-                            </a>
-                        </li> --}}
                     </ul>
                 </li>
                 {{-- End Absen Management --}}
@@ -255,9 +238,29 @@
         </li>
 
 
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link  nav-dropdown-toggle">
+                <i class="fas fa-list-alt nav-icon">
+
+                </i>
+                Inventori Sparepart
+            </a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a href="{{ route("admin.daftar_barang_spareparts.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
+                        <i class="fas fa-sm fa-circle nav-icon">
+
+                        </i>
+                       Data Barang
+                    </a>
+                </li>
+        </ul>
+    </li>
+
+
             <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
-                    <i class="fas fa-dollar nav-icon">
+                    <i class="fas fa-wallet nav-icon">
 
                     </i>
                     Daftar Pembayaran
@@ -265,7 +268,7 @@
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
                         <a href="{{ route("admin.pembayarans.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
-                            <i class="fas fa-file    nav-icon">
+                            <i class="fas fa-sm fa-circle nav-icon">
 
                             </i>
                            Data Sparepart
@@ -273,7 +276,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route("admin.npps.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
-                            <i class="fas fa-file    nav-icon">
+                            <i class="fas fa-sm fa-circle nav-icon">
 
                             </i>
                            Data Kimia

@@ -16,8 +16,7 @@ class UpdateDetailBpbRequest extends FormRequest
     public function rules()
     {
         return [
-            "jumlah" => 'required',
-            'satuan' => 'required',
+            "bpb_id" => "required",
         ];
     }
 }

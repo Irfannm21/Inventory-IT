@@ -13,6 +13,8 @@ use App\detail_npp;
 use App\bpb;
 use App\Detail_bpb;
 use App\supplier;
+use App\DaftarBarang;
+use App\StockSparepart;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -20,6 +22,7 @@ class BpbController extends Controller
 {
     public function index()
     {
+
         $suppliers = supplier::all();
         $results = bpb::has("Detail_bpbs")->get();
             return view('admin.bpb.index', compact('results'));
@@ -30,11 +33,11 @@ class BpbController extends Controller
         $suppliers = supplier::all()->pluck('nama','id');
         $detail = detail_npp::all()->pluck('nama','id');
         $npp = npp::all()->pluck('kode','id');
-        return view('admin.bpb.create',compact('detail','npp','suppliers'));
+        $barang = DaftarBarang::all()->pluck('nama','id');
+        return view('admin.bpb.create',compact('detail','npp','suppliers','barang'));
     }
 
     public function store(StoreBpbRequest $request){
-
         if($request->supplierId == true) {
             $supplier = supplier::find($request->supplierId);
         } else {
@@ -60,16 +63,26 @@ class BpbController extends Controller
         $bpb->supplier()->associate($supplier);
         $bpb->save();
 
-        $detail = [];
+
         foreach ($request->detail_id as $i => $nama) {
             $detail[] = [
-                "detail_id" => $request->detail_id{$i} ?? '',
-                "jumlah" => $request->jumlah{$i} ?? '1',
-                "satuan" => $request->satuan{$i} ?? 'pcs'
+                "detail_id" => $request->detail_id[$i] ?? '',
             ];
         }
 
-        $bpb->detail_bpbs()->createMany($detail);
+
+        $data = $bpb->detail_bpbs()->createMany($detail);
+
+        foreach($request->barang_id as $i => $tt) {
+            // $barang = DaftarBarang::find($request->barang_id{$i});
+            $stok = new StockSparepart;
+            $stok->barang_id = $request->barang_id{$i} ?? '';
+            $stok->jumlah = $request->jumlah{$i} ?? '';
+            $stok->satuan = $request->satuan{$i} ?? '';
+            $data[$i]->stock()->save($stok);
+
+        }
+
         if($bpb->kelompok == "Administrasi")
         {
             return redirect()->route("admin.bpbs.administrasi");
@@ -143,7 +156,6 @@ class BpbController extends Controller
     }
 
     public function destroy(Request $bpb, $id) {
-
         $result = bpb::findOrFail($id);
         $result->delete();
         return back();
@@ -159,7 +171,6 @@ class BpbController extends Controller
         $pdf = PDF::loadView('admin.bpb.print',['result' => $result])->setPaper('a5'.'potrait');
         return $pdf->stream();
     }
-
 
     public function administrasi()
     {
@@ -201,5 +212,10 @@ class BpbController extends Controller
     {
         $results = bpb::where("kelompok","UM")->get();
         return view('admin.bpb.index', compact('results'));
+    }
+
+    public function options(Request $request)
+    {
+        return detail_npp::select("id","nama")->where('npp_id',"$request->npp_id")->get();
     }
 }

@@ -27,7 +27,6 @@ class UpdateNppRequest extends FormRequest
         return [
             'kode' => 'required',
             'tanggal' =>   'required',
-            'departemen' => 'required',
             'bagian' => 'required',
         ];
     }

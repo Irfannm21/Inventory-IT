@@ -35,11 +35,10 @@ class NppController extends Controller
     public function store(StoreNppRequest $request)
     {
         abort_unless(\Gate::allows('npp_create'), 403);
-
+        // dd($request);
         $npp = new NPP;
         $npp->kode = $request->kode;
         $npp->tanggal = $request->tanggal;
-        $npp->departemen_id = $request->departemen;
         $npp->bagian_id = $request->bagian;
         $npp->save();
 
@@ -72,7 +71,6 @@ class NppController extends Controller
         $npp->update([
             'kode' => $request->kode,
             'tanggal' => $request->tanggal,
-            'departemen_id' => $request->departemen,
             'bagian_id' => $request->bagian
         ]);
         return redirect()->route('admin.npps.index');
@@ -101,10 +99,5 @@ class NppController extends Controller
         $result = npp::find($request);
         $pdf = PDF::loadView('admin.npp.print-npp',['result' => $result])->setPaper('a5'.'potrait');
         return $pdf->stream();
-    }
-
-    public function options(Request $request)
-    {
-        return detail_npp::select("id","nama")->where('npp_id',"$request->npp_id")->get();
     }
 }

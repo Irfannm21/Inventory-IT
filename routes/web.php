@@ -41,7 +41,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('departemens','DepartemenController');
 
-    Route::get('npps/options','NppController@options')->name('npps.options');
     Route::get('npps/proses','NppController@diProses')->name('npps.proses');
     Route::get('npps/detail','NppController@Detail')->name('npps.detail');
     Route::get('npps/print','NppController@Print')->name('npps.print');
@@ -56,8 +55,14 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('/bpbs/spinning','BpbController@spinning')->name('bpbs.spinning');
     Route::get('/bpbs/pt','BpbController@pt')->name('bpbs.pt');
     Route::get('/bpbs/um','BpbController@um')->name('bpbs.um');
+    Route::get('/bpbs/options','BpbController@options')->name('bpbs.options');
     Route::resource('bpbs','BpbController');
     Route::resource('/detail_bpbs','DetailBpbController');
+    Route::resource('/daftar_barang_spareparts','DaftarBarangController');
+
+    Route::get('/stock_spareparts/cariNamaBarangs','StockSparepartController@cariNamaBarang')->name('stock_spareparts.cariNamaBarangs');
+    Route::get('/stock_spareparts/cariDataStocks','StockSparepartController@cariDataStock')->name('stock_spareparts.cariDataStocks');
+    Route::resource('/stock_spareparts','StockSparepartController');
 
     Route::resource('suppliers','SupplierController');
     Route::get('pembayarans/options','PembayaranController@options')->name('pembayarans.options');

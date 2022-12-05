@@ -62,9 +62,9 @@
                     <label for="kode_npp" class="col-sm-3 col-form-label {{ $errors->has('kode_npp') ? 'has-error' : '' }}">Kode NPP</label>
                     <div class="col-sm-9">
                         <select name="npp_id" id="npp_id" class="form-control select2">
-                            <option value="" selected>-- Pilih --</option>
+                            <option>-- Pilih --</option>
                             @foreach ($npp as $i => $item)
-                            <option value="{{$item}}">{{$item}}</option>
+                            <option value="{{$i}}">{{$item}}</option>
                             @endforeach
                         </select>
                         @if ($errors->has('npp_id'))
@@ -121,7 +121,7 @@
                                     </em>
                                 @endif
                                 <p class="helper-block">
-                                    {{ trans('*Wajib isi nama supplier') }}
+                                    {{ trans('*Wajib di isi') }}
                                 </p>
                             </div>
                             <div class="form-group col-md-4 {{ $errors->has('kota') ? 'has-error' : '' }}">
@@ -134,7 +134,7 @@
                                     </em>
                                 @endif
                                 <p class="helper-block">
-                                    {{ trans('*Wajib isi asal kota supplier') }}
+                                    {{ trans('*Wajib di isi') }}
                                 </p>
                             </div>
 
@@ -206,9 +206,25 @@
     <tr>
         <td style="width: 300px">
             <div class="form-group {{ $errors->has('detail_id') ? 'has-error' : '' }}">
-                <label id="hasil">Nama Barang</label>
+                <label id="hasil">Nama Pesanan Barang</label>
                 <select name="detail_id[]" id="detail_id" class="form-control detail_id">
 
+                </select>
+                @if ($errors->has('detail_id'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('detail_id') }}
+                    </em>
+                @endif
+            </div>
+        </td>
+        <td style="width: 300px">
+            <div class="form-group {{ $errors->has('detail_id') ? 'has-error' : '' }}">
+                <label id="hasil">Nama di Inventori</label>
+                <select name="barang_id[]" id="" class="form-control select2">
+                            <option value="" selected> -- Pilih --</option>
+                        @foreach ($barang as $id => $item)
+                            <option class="form-control" value="{{$id}}">{{$item}}</option>
+                        @endforeach
                 </select>
                 @if ($errors->has('detail_id'))
                     <em class="invalid-feedback">
@@ -267,6 +283,21 @@
                 @endif
             </div>
         </td>
+        <td style="width: 300px">
+            <div class="form-group {{ $errors->has('detail_id') ? 'has-error' : '' }}">
+                <select name="barang_id[]" id="" class="form-control select2">
+                            <option value="" selected> -- Pilih --</option>
+                        @foreach ($barang as $id => $item)
+                            <option class="form-control" value="{{$id}}">{{$item}}</option>
+                        @endforeach
+                </select>
+                @if ($errors->has('detail_id'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('detail_id') }}
+                    </em>
+                @endif
+            </div>
+        </td>
         <td style="width: 200px">
             <div class="form-group {{ $errors->has('jumlah') ? 'has-error' : '' }}">
                 <input type="number" name="jumlah[]" class="form-control"
@@ -314,7 +345,7 @@
                 .on('change', '#npp_id', function() {
                     $.ajax({
                         method: 'GET',
-                        url: '{{ url('admin/npps/options') }}',
+                        url: '{{ url('admin/bpbs/options') }}',
                         data: {
                             npp_id: $(this).val()
                         },

@@ -15,4 +15,9 @@ class Detail_bpb extends Model
     public function detail_npp() {
         return $this->belongsTo('App\detail_npp','detail_id');
     }
+
+    public function stock() {
+        return $this->morphOne('App\StockSparepart','stockable');
+    }
+
 }

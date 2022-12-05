@@ -64,7 +64,7 @@
                                         Print
                                     </a>
                                 @endcan
-                                @can('komputer_edit')
+                                @can('npp_edit')
                                 <a class="fa fa-pencil" style="color:black" href="{{ route("admin.npps.edit", $value->id)  }}">
                                     {{ trans('global.edit') }}
                                 </a>

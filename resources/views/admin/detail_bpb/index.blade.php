@@ -66,24 +66,24 @@
                                     {{ $value->detail_npp->nama  ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $value->jumlah ." ". $value->satuan ?? '' }}
+                                    {{ $value->stock->jumlah . " " . $value->stock->satuan  ?? '' }}
                                 </td>
 
                                 <td>
-                                    @can('bpb_create')
+                                    @can('detail_bpb_edit')
                                         <a href="{{ route('admin.bpbs.print', ['bpb' => $value->kode]) }}" class="fa fa-print"
                                             style="color:black">
                                             Print
                                         </a>
                                     @endcan
-                                    @can('bpb_edit')
+                                    @can('detail_bpb_edit')
                                         <a class="fa fa-pencil" style="color:black"
                                             href="{{ route('admin.detail_bpbs.edit', $value->id) }}">
                                             {{ trans('global.edit') }}
                                         </a>
                                     @endcan
-                                    @can('npp_delete')
-                                        <form action="{{ route('admin.bpbs.destroy', $value->id) }}" method="POST"
+                                    @can('detail_bpb_delete')
+                                        <form action="{{ route('admin.detail_bpbs.destroy', $value->id) }}" method="POST"
                                             onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
                                             style="display: inline-block;">
                                             <input type="hidden" name="_method" value="DELETE">
