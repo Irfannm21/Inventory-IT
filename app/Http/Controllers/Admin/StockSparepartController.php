@@ -85,11 +85,29 @@ class StockSparepartController extends Controller
      */
     public function destroy(StockSparepart $stockSparepart)
     {
-        //
+        // $.ajax({
+        //     method: "GET",
+        //     url: '{{ url('admin/stock_spareparts/cariNamaBarangs') }}',
+        //     data: {
+        //         nama: $(this).val()
+        //     },
+        //     success: function(response) {
+        //         console.log(204, response);
+        //         for (let item of response) {
+        //             $("#kode").val(item.kode);
+        //             $("#nama").val(item.nama);
+        //             $("#nomor_part").val(item.nomor_part);
+        //             $("#no_kartu").val(item.no_kartu);
+        //             $("#jenis").val(item.jenis);
+        //             $("#kelompok").val(item.kelompok);
+        //         }
+        //     }
+        // })
     }
 
     public function cariNamaBarang(Request $request) {
-        return  DaftarBarang::where('id',"$request->nama")->get();
+        $data = DaftarBarang::where("nama","LIKE","%$reques->nama%")->get();
+        return response()->json($data);
     }
 
     public function cariDataStock(Request $request) {

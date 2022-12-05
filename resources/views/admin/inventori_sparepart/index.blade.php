@@ -11,9 +11,7 @@
                     <label for="">Cari Data Barang</label>
                     <select name="" id="namaBarang" class="form-control select2 namaBarang">
                         <option value="" selected>-- Pilih --</option>
-                        @foreach ($results as $id => $item)
-                            <option value="{{$id}}">{{$item}}</option>
-                        @endforeach
+
                     </select>
                 </div>
             </div>
@@ -76,29 +74,26 @@
 @section('scripts')
     @parent
     <script>
-        namaNode = document.getElementById('nama');
+        $("#namaBarang").keyup(function() {
+            $.ajax({
+                method: "GET",
+                url: '{{ url('admin/stock_spareparts/cariDataStocks') }}',
+                data: {
+                    nama: $(this).val()
+                },
+                success: function(data) {
+                    console.log(204,response);
+                    let opt = '';
+                    for(let item of response){
+                        opt += `<option>${item.id}<option>`;
+                    }
+                    $("#namaBarang").html(opt);
+                }
+            });
+        })
 
         $(document).ready(function() {
             $(document).on('change', '#namaBarang', function() {
-                $.ajax({
-                    method: "GET",
-                    url: '{{ url('admin/stock_spareparts/cariNamaBarangs') }}',
-                    data: {
-                        nama: $(this).val()
-                    },
-                    success: function(response) {
-                        console.log(204, response);
-                        for (let item of response) {
-                            $("#kode").val(item.kode);
-                            $("#nama").val(item.nama);
-                            $("#nomor_part").val(item.nomor_part);
-                            $("#no_kartu").val(item.no_kartu);
-                            $("#jenis").val(item.jenis);
-                            $("#kelompok").val(item.kelompok);
-                        }
-                    }
-                })
-            }).on('change', '#namaBarang', function() {
                 $.ajax({
                     method: "GET",
                     url: '{{ url('admin/stock_spareparts/cariDataStocks') }}',
@@ -114,7 +109,8 @@
                             baris += `<td>${value.stockable.bpb.kode}</td>`;
                             baris += `<td>${value.stockable.bpb.tanggal}</td>`;
                             if (value.stockable_type == "App\\Detail_bpb") {
-                                baris += "<td>Masuk</td>";
+                                baris +=
+                                    "<td><span class='badge rounded-pill bg-success'>Saldo Masuk</td>";
                             } else {
                                 baris += "<td>Keluar</td>";
                             }
@@ -126,6 +122,8 @@
                 })
             })
         })
+
+
 
         $(function() {
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
