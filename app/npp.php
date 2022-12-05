@@ -11,7 +11,7 @@ class npp extends Model
 
     public function details()
     {
-        return $this->hasMany('App\detail_npp');
+        return $this->hasMany('App\detail_npp',"npp_id");
     }
 
     public function departemen()
@@ -21,7 +21,7 @@ class npp extends Model
 
     public function bagian()
     {
-        return $this->belongsTo('App\bagian_dept');
+        return $this->belongsTo('App\bagian_dept','bagian_id');
     }
 
     public function bpbs()

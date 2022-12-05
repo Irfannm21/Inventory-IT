@@ -14,18 +14,16 @@ class CreateBpbsTable extends Migration
     public function up()
     {
         Schema::create('bpbs', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('kode');
-            $table->unsignedBigInteger('detail_id')->constrained()->onDelete('cascade');
-            $table->date('tanggal');
-            $table->integer('jumlah');
-            $table->string('satuan');
-            $table->BigInteger('harga');
-            $table->string('supplier');
-            $table->timestamps();
+        $table->bigIncrements('id');
+        $table->unsignedBigInteger('npp_id')->constrained()->onDelete('cascade');
+        $table->unsignedBigInteger('supplier_id')->constrained()->onDelete('cascade');
+        $table->string('kode');
+        $table->string('kelompok');
+        $table->date('tanggal');
+        $table->timestamps();
 
-
-            $table->foreign('detail_id')->references('id')->on('detail_npps');
+        $table->foreign('npp_id')->references('id')->on('npps');
+        $table->foreign('supplier_id')->references('id')->on('suppliers');
         });
     }
 

@@ -51,8 +51,15 @@
 
         <div class="form-group col-md-4 {{ $errors->has('satuan') ? 'has-error' : '' }}">
             <label for="satuan">Satuan</label>
-            <input type="text" id="satuan" name="satuan" class="form-control" value="{{ old('satuan', isset($detail->satuan) ? $detail->satuan : '') }}"  >
-            @if($errors->has('satuan'))
+            <select name="satuan" class="form-control" id="" value="{{ old('satuan', isset($detail->satuan) ? $detail->satuan : '') }}" selected>
+                <option value="Unit" {{ $detail->satuan =="Unit"? 'selected' : '' }}>Unit</option>
+                <option value="Pcs" {{ $detail->satuan =="Pcs"? 'selected' : '' }}>Pcs</option>
+                <option value="Kg" {{ $detail->satuan =="Kg"? 'selected' : '' }}>Kg</option>
+                <option value="Meter" {{ $detail->satuan =="Meter"? 'selected' : '' }}>Meter</option>
+                <option value="Inch" {{ $detail->satuan =="Inch"? 'selected' : '' }}>Inch</option>
+                <option value="Dus" {{ $detail->satuan =="Dus"? 'selected' : '' }}>Dus</option>
+            </select>
+            @if ($errors->has('satuan'))
                 <em class="invalid-feedback">
                     {{ $errors->first('satuan') }}
                 </em>

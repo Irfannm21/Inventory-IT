@@ -29,17 +29,18 @@
                             <th>
                                 Kode NPP
                             </th>
+
                             <th>
                                 Tanggal
                             </th>
                             <th>
-                                Kelompok
+                                Nama Barang
                             </th>
                             <th>
-                                Supplier
+                                Jumlah dan Satuan
                             </th>
                             <th>
-                                Aksi
+                            Aksi
                             </th>
                         </tr>
                     </thead>
@@ -50,36 +51,39 @@
 
                                 </td>
                                 <td>
-                                    {{ $value->kode ?? '' }}
+                                    {{ $value->bpb->kode ?? '' }}
+                                </td>
+
+                                <td>
+                                    {{ $value->bpb->npp->kode ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $value->npp->kode ?? '' }}
+                                    {{ $value->bpb->tanggal ?? '' }}
                                 </td>
-                                </td>
-                                <td>
-                                    {{ $value->tanggal ?? '' }}
+
                                 </td>
                                 <td>
-                                    {{ $value->kelompok ?? '' }}
+                                    {{ $value->detail_npp->nama  ?? '' }}
                                 </td>
                                 <td>
-                                   {{$value->supplier->nama}}
+                                    {{ $value->stock->jumlah . " " . $value->stock->satuan  ?? '' }}
                                 </td>
+
                                 <td>
-                                    @can('bpb_create')
+                                    @can('detail_bpb_edit')
                                         <a href="{{ route('admin.bpbs.print', ['bpb' => $value->kode]) }}" class="fa fa-print"
                                             style="color:black">
                                             Print
                                         </a>
                                     @endcan
-                                    @can('bpb_edit')
+                                    @can('detail_bpb_edit')
                                         <a class="fa fa-pencil" style="color:black"
-                                            href="{{ route('admin.bpbs.edit', $value->id) }}">
+                                            href="{{ route('admin.detail_bpbs.edit', $value->id) }}">
                                             {{ trans('global.edit') }}
                                         </a>
                                     @endcan
-                                    @can('npp_delete')
-                                        <form action="{{ route('admin.bpbs.destroy', $value->id) }}" method="POST"
+                                    @can('detail_bpb_delete')
+                                        <form action="{{ route('admin.detail_bpbs.destroy', $value->id) }}" method="POST"
                                             onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
                                             style="display: inline-block;">
                                             <input type="hidden" name="_method" value="DELETE">

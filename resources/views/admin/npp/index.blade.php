@@ -30,10 +30,10 @@
                             Tanggal
                         </th>
                         <th>
-                            Departemen
+                            Bagian
                         </th>
                         <th>
-                            Bagian
+                            Departemen
                         </th>
                         <th>
                             &nbsp;
@@ -53,10 +53,10 @@
                                 {{ $value->tanggal ?? '' }}
                             </td>
                             <td>
-                                {{ $value->departemen->nama ?? '' }}
+                                {{ $value->bagian->nama ?? '' }}
                             </td>
                             <td>
-                                {{ $value->bagian->nama ?? '' }}
+                                {{ $value->bagian->departemen->nama ?? '' }}
                             </td>
                             <td>
                                 @can('npp_create')
@@ -64,7 +64,7 @@
                                         Print
                                     </a>
                                 @endcan
-                                @can('komputer_edit')
+                                @can('npp_edit')
                                 <a class="fa fa-pencil" style="color:black" href="{{ route("admin.npps.edit", $value->id)  }}">
                                     {{ trans('global.edit') }}
                                 </a>
@@ -77,7 +77,6 @@
                                     </form>
                                 @endcan
                             </td>
-
                         </tr>
                     @endforeach
                 </tbody>

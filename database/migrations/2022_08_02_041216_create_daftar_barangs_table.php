@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTransaksiBcasTable extends Migration
+class CreateDaftarBarangsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,14 @@ class CreateTransaksiBcasTable extends Migration
      */
     public function up()
     {
-        Schema::create('transaksi_bcas', function (Blueprint $table) {
-            $table->string('id');
+        Schema::create('daftar_barangs', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('kode')->unique();
             $table->string('nama');
+            $table->string('nomor_part');
+            $table->string('no_kartu');
+            $table->string('jenis');
+            $table->string('kelompok');
             $table->timestamps();
         });
     }
@@ -27,6 +32,6 @@ class CreateTransaksiBcasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('transaksi_bcas');
+        Schema::dropIfExists('daftar_barangs');
     }
 }

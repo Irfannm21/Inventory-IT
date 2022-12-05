@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNppsTable extends Migration
+class CreateTableBarangJaringansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateNppsTable extends Migration
      */
     public function up()
     {
-        Schema::create('npps', function (Blueprint $table) {
+        Schema::create('table_barang_jaringans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('kode')->unique();
-            $table->date('tanggal');
-            $table->unsignedBigInteger('bagian_id')->constrained()->onDelete('cascade');
+            $table->string('tanggal');
+            $table->string('kelompok');
+            $table->string('nama');
             $table->timestamps();
-
-            $table->foreign('bagian_id')->references('id')->on('bagian_depts');
         });
     }
 
@@ -31,6 +30,6 @@ class CreateNppsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('npps');
+        Schema::dropIfExists('table_barang_jaringans');
     }
 }

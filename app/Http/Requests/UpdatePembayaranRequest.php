@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\npp;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Perbaikan;
 
-class UpdateNppRequest extends FormRequest
+class UpdatePembayaranRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,7 @@ class UpdateNppRequest extends FormRequest
      */
     public function authorize()
     {
-        return \Gate::allows('npp_edit');
+        return \Gate::allows('printer_edit');
     }
 
     /**
@@ -25,9 +25,9 @@ class UpdateNppRequest extends FormRequest
     public function rules()
     {
         return [
-            'kode' => 'required',
-            'tanggal' =>   'required',
-            'bagian' => 'required',
+            "bpb_id" => 'required',
+            "harga_satuan" => 'required',
+            'jenis_pembayaran' => 'required'
         ];
     }
 }

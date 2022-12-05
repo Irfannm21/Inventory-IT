@@ -120,23 +120,6 @@
                                     Daftar Perbaikan
                                 </a>
                             </li>
-
-                        {{-- <li class="nav-item">
-                            <a href="{{ route("admin.karyawans.index") }}" class="nav-link {{ request()->is('admin/karyawans') || request()->is('admin/karyawans/*') ? 'active' : '' }}">
-                                <i class="fas fa-calendar nav-icon">
-
-                                </i>
-                                {{ trans('Buat Absen') }}
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route("admin.karyawans.index") }}" class="nav-link {{ request()->is('admin/karyawans') || request()->is('admin/karyawans/*') ? 'active' : '' }}">
-                                <i class="fas fa-user nav-icon">
-
-                                </i>
-                                {{ trans('Buat cuti') }}
-                            </a>
-                        </li> --}}
                     </ul>
                 </li>
                 {{-- End Absen Management --}}
@@ -151,7 +134,7 @@
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
                             <a href="{{ route("admin.npps.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
-                                <i class="fas fa-file    nav-icon">
+                                <i class="fas fa-file nav-icon">
 
                                 </i>
                                Data NPP
@@ -160,7 +143,7 @@
 
                         <li class="nav-item">
                             <a href="{{ route("admin.details.index") }}" class="nav-link {{ request()->is('admin/details') || request()->is('admin/details/*') ? 'active' : '' }}">
-                                <i class="fas fa-list nav-icon">
+                                <i class="fas fa-file nav-icon">
 
                                 </i>
                                 Detail NPP
@@ -175,23 +158,109 @@
                                 NPP Diproses
                             </a>
                         </li>
-
-
-                        <li class="nav-item">
-                            <a href="{{ route("admin.bpbs.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
-                                <i class="fas fa-check nav-icon">
-
-                                </i>
-                                NPP Diterima
-                            </a>
-                        </li>
                 </ul>
             </li>
-
 
             <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                     <i class="fas fa-list nav-icon">
+
+                    </i>
+                    Daftar BPB
+                </a>
+                <ul class="nav-dropdown-items">
+                    <li class="nav-item">
+                        <a href="{{ route("admin.detail_bpbs.index") }}" class="nav-link {{ request()->is('admin/bpbs') || request()->is('admin/bpbs/*') ? 'active' : '' }}">
+                            <i class="fas fa-file nav-icon">
+
+                            </i>
+                           Detail Data BPB
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.bpbs.administrasi") }}" class="nav-link {{ request()->is('admin/administrasi') || request()->is('admin/administrasi/*') ? 'active' : '' }}">
+                            <i class="fas fa-file    nav-icon">
+
+                            </i>
+                           BPB Administrasi
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.bpbs.sparepart") }}" class="nav-link {{ request()->is('admin/sparepart') || request()->is('admin/sparepart/*') ? 'active' : '' }}">
+                            <i class="fas fa-file    nav-icon">
+
+                            </i>
+                           BPB Sparepart
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.bpbs.elektrik") }}" class="nav-link {{ request()->is('admin/sparepart') || request()->is('admin/sparepart/*') ? 'active' : '' }}">
+                            <i class="fas fa-file    nav-icon">
+
+                            </i>
+                           BPB Elektrik
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.bpbs.mobil") }}" class="nav-link {{ request()->is('admin/mobil') || request()->is('admin/mobil/*') ? 'active' : '' }}">
+                            <i class="fas fa-file nav-icon">
+
+                            </i>
+                           BPB Mobil
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.bpbs.pt") }}" class="nav-link {{ request()->is('admin/pt') || request()->is('admin/pt/*') ? 'active' : '' }}">
+                            <i class="fas fa-file    nav-icon">
+
+                            </i>
+                           BPB PT
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.bpbs.spinning") }}" class="nav-link {{ request()->is('admin/pt') || request()->is('admin/pt/*') ? 'active' : '' }}">
+                            <i class="fas fa-file    nav-icon">
+
+                            </i>
+                           BPB Spinning
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route("admin.bpbs.um") }}" class="nav-link {{ request()->is('admin/pt') || request()->is('admin/pt/*') ? 'active' : '' }}">
+                            <i class="fas fa-file    nav-icon">
+
+                            </i>
+                           BPB UM
+                        </a>
+                    </li>
+
+            </ul>
+        </li>
+
+
+        <li class="nav-item nav-dropdown">
+            <a class="nav-link  nav-dropdown-toggle">
+                <i class="fas fa-list-alt nav-icon">
+
+                </i>
+                Inventori Sparepart
+            </a>
+            <ul class="nav-dropdown-items">
+                <li class="nav-item">
+                    <a href="{{ route("admin.daftar_barang_spareparts.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
+                        <i class="fas fa-sm fa-circle nav-icon">
+
+                        </i>
+                       Data Barang
+                    </a>
+                </li>
+        </ul>
+    </li>
+
+
+            <li class="nav-item nav-dropdown">
+                <a class="nav-link  nav-dropdown-toggle">
+                    <i class="fas fa-wallet nav-icon">
 
                     </i>
                     Daftar Pembayaran
@@ -199,7 +268,7 @@
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">
                         <a href="{{ route("admin.pembayarans.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
-                            <i class="fas fa-file    nav-icon">
+                            <i class="fas fa-sm fa-circle nav-icon">
 
                             </i>
                            Data Sparepart
@@ -207,7 +276,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route("admin.npps.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
-                            <i class="fas fa-file    nav-icon">
+                            <i class="fas fa-sm fa-circle nav-icon">
 
                             </i>
                            Data Kimia

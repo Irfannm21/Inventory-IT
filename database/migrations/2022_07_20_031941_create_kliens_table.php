@@ -6,15 +6,22 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateKliensTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
+    // 001/MKT-PC/051
+    // 001/AKT-PC/051
+    // 001/LOG-PC/051
+    // 001/LOG-PC/051
+    // 001/KSR-PC/051
+    // 001/WVG-PC/051
+    // 001/PER-PC/051
+    // 001/UMU-PC/051
+    // 001/DFG-PC/051
+
     public function up()
     {
         Schema::create('kliens', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('kode')->unique();
             $table->unsignedBigInteger('karyawan_id')->unique();
             $table->unsignedBigInteger('printer_id')->unique();
             $table->unsignedBigInteger('komputer_id')->unique();

@@ -12,9 +12,29 @@
 
                 <div class="form-row">
                     <div class="form-group col-md-4 {{ $errors->has('bpb_id') ? 'has-error' : '' }}">
+                        <label for="">Kode Bpb</label>
+                        <input type="text" class="form-control"
+                            value="{{ old('bpb_id', isset($result) ? $result->bpb->kode: '') }}" disabled>
+
+                        @if ($errors->has('bpb_id'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('bpb_id') }}
+                            </em>
+                        @endif
+                        <p class="helper-block">
+                            {{ trans('*Masukan Nama Barang') }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4 {{ $errors->has('bpb_id') ? 'has-error' : '' }}">
                         <label for="">Nama Barang</label>
-                        <input type="text" name="bpb_id" class="form-control"
-                            value="{{ old('bpb_id', isset($result) ? $result->bpb->detail->nama : '') }}" placeholder="Cth: 001/ENG/22">
+                      <select name="bpb_id" id="bpb_id" class="form-control">
+                             @foreach ($bpb as $item)
+                                <option value="{{$item->id}}">{{$item->detail->nama}}</option>
+                             @endforeach
+                      </select>
 
                         @if ($errors->has('bpb_id'))
                             <em class="invalid-feedback">
@@ -64,11 +84,15 @@
                 <div class="form-row">
                     <div class="form-group col-md-4 {{ $errors->has('jenis_pembayaran') ? 'has-error' : '' }}">
                         <label for="">Jenis Pembayaran</label>
-                        <select name="jenis_pembayaran" id="" class="form-control">
-                            <option value="" selected>-- Pilih --</option>
-                            <option value="Cash">Cash</option>
+                       <select name="jenis_pembayaran" id="jenis_pembayaran" class="form-control">
+                        @if ($result->jenis_pembayaran == (old('jenis_pembayaran') ?? "Cash"))
+                            <option value="{{$result->jenis_pembayaran}}" selected>{{$result->jenis_pembayaran}}</option>
                             <option value="Kredit">Kredit</option>
-                        </select>
+                        @else
+                            <option value="{{$result->jenis_pembayaran}}">{{$result->jenis_pembayaran}}</option>
+                            <option value="Cash">Cash</option>
+                        @endif
+                       </select>
 
                         @if ($errors->has('jenis_pembayaran'))
                             <em class="invalid-feedback">
@@ -85,10 +109,10 @@
                     <div class="form-group col-md-4 {{ $errors->has('lama_kredit') ? 'has-error' : '' }}">
                         <label for="">Lama Kredit</label>
                         <select name="lama_kredit" id="" class="form-control">
-                            <option value="" selected>-- None --</option>
-                          @for ($i=1; $i < 36; $i++)
-                            <option value="$i"> {{$i}} </option>
-                          @endfor
+                            @for ($i=1; $i <= 36; $i++)
+                                <option value="{{$i}}" {{ $result->lama_kredit==$i?'selected':'' }}>{{$i}}</option>
+                            @endfor[]
+
                         </select>
 
                         @if ($errors->has('lama_kredit'))

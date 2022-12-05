@@ -36,7 +36,7 @@
                 <tbody>
                     @foreach($results as $value)
                         @php
-                            $jumlah = $value->bpbs->sum('jumlah');
+                            $jumlah = $value->detail_bpbs->sum('jumlah');
                         @endphp
                             @if ($jumlah < $value->jumlah)
 

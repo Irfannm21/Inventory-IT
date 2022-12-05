@@ -10,7 +10,7 @@ class UpdateDetailRequest extends FormRequest
 
     public function authorize()
     {
-        return \Gate::allows('detail_edit');
+        return \Gate::allows('detail_npp_edit');
     }
 
 
@@ -18,7 +18,7 @@ class UpdateDetailRequest extends FormRequest
     {
         return [
             'nama' =>   'required',
-            'jumlah' =>   'required',
+            'jumlah' => 'required',
             'satuan' => 'required',
             'stok' => 'required',
             'keterangan' => 'required',
