@@ -271,6 +271,36 @@ class PermissionsTableSeeder extends Seeder
                 'title'      => 'supplier_delete',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+                'id'         => '40',
+                'title'      => 'perbaikan_access',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+                'id'         => '41',
+                'title'      => 'perbaikan_create',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+                'id'         => '42',
+                'title'      => 'perbaikan_edit',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+                'id'         => '43',
+                'title'      => 'perbaikan_show',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+                'id'         => '44',
+                'title'      => 'perbaikan_delete',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
             ]
         ];
 

@@ -66,7 +66,7 @@
                                     {{ $value->detail_npp->nama  ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $value->stock->jumlah . " " . $value->stock->satuan  ?? '' }}
+                                    {{ $value->stock->jumlah ?? '' . " " . $value->stock->satuan  ?? '' }}
                                 </td>
 
                                 <td>

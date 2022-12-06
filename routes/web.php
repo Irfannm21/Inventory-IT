@@ -32,6 +32,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('printers','PrinterController');
 
     Route::delete('perbaikans/destroy', 'PerbaikanController@massDestroy')->name('perbaikans.massDestroy');
+    Route::get('perbaikans/cariItem','PerbaikanController@cariItem')->name("perbaikans.cariItem");
     Route::resource('perbaikans','PerbaikanController');
 
     Route::delete('komputers/destroy', 'KomputerController@massDestroy')->name('komputers.massDestroy');

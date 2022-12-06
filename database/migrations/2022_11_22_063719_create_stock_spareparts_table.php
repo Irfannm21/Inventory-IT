@@ -23,7 +23,6 @@ class CreateStockSparepartsTable extends Migration
 
 
             $table->foreign('barang_id')->references('id')->on('daftar_barangs');
-            $table->unique(['stockable_id','stockable_type']);
         });
     }
 

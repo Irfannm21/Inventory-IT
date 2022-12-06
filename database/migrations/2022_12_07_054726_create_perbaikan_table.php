@@ -16,13 +16,17 @@ class CreatePerbaikanTable extends Migration
         Schema::create('perbaikans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('tanggal');
-            $table->unsignedBigInteger('bpb_id')->constrained()->onDelete('cascade')->nullable();
-            $table->string('keterangan');
             $table->morphs('hardwareable');
+            $table->string("tindakan");
+            $table->string("perbaikan");
+            $table->time("stop");
+            $table->time("mulai");
+            $table->time("total");
+            $table->unsignedBigInteger('bon_id')->constrained()->onDelete('cascade')->nullable();
+            $table->string('petugas');
             $table->timestamps();
 
-
-            $table->foreign('bpb_id')->references('id')->on('bpbs');
+            $table->foreign('bon_id')->references('id')->on('bon_pengambilans');
         });
     }
 

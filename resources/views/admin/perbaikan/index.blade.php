@@ -1,5 +1,14 @@
 @extends('layouts.admin')
 @section('content')
+@can('perbaikan_create')
+    <div style="margin-bottom: 10px;" class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-success" href="{{ route("admin.perbaikans.create") }}">
+                Buat Data Perbaikan
+            </a>
+        </div>
+    </div>
+@endcan
 
 <div class="card">
     <div class="card-header">

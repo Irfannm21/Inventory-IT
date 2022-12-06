@@ -26,9 +26,7 @@ class StorePerbaikanRequest extends FormRequest
     public function rules()
     {
         return [
-            'hardware' => 'required',
             'tanggal' => 'required',
-            'keterangan' => 'required',
         ];
     }
 }

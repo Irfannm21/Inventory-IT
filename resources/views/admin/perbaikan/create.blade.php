@@ -3,11 +3,12 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.create') }} {{ trans('global.product.title_singular') }}
+        Buat Data BPB
     </div>
 
     <div class="card-body">
         <form action="{{ route("admin.perbaikans.store") }}" method="POST" enctype="multipart/form-data">
+            @csrf
             @include('admin.perbaikan.form')
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">

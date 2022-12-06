@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use App\Perbaikan;
 use App\printer;
 use App\komputer;
+use App\Klien;
+use App\TableBarangJaringan;
 
 class PerbaikanController extends Controller
 {
@@ -22,20 +24,14 @@ class PerbaikanController extends Controller
 
     public function create(Request $request)
     {
-        $type = $request->type;
-        if ($request->type == 'printer') {
-            $perbaikan = Printer::find($request->id);
-        } elseif($request->type == 'komputer') {
-            $perbaikan = komputer::find($request->id);
-        }
+
         abort_unless(\Gate::allows('perbaikan_create'), 403);
-        return view('admin.perbaikan.create', compact('perbaikan','type'));
+        return view('admin.perbaikan.create');
     }
 
-    public function store(StorePerbaikanRequest $request)
+    public function store(request $request)
     {
-
-        abort_unless(\Gate::allows('perbaikan_create'), 403);
+        dd($request->all());
 
         $type = $request->type;
         if ($type == 'printer') {
@@ -80,11 +76,18 @@ class PerbaikanController extends Controller
         return response(null, 204);
     }
 
-    public function post()
+    public function cariItem(Request $request)
     {
-        return "THis";
+        if($request->nama == 'komputer') {
+            return komputer::select('id','kode')->get();
+        } elseif ($request->nama == 'printer') {
+            return printer::select('id','kode')->get();
+        } elseif ($request->nama == 'TableBarangJaringan') {
+            return TableBarangJaringan::select('id','kode')->get();
+        } elseif ($request->nama == 'pengguna') {
+            return pengguna::select('id','kode')->get();
+        } else {
+            return $request->nama;
+        }
     }
-
-
-
 }

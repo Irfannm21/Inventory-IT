@@ -9,6 +9,7 @@ use App\StockSparepart;
 use App\DaftarBarang;
 use App\bpb;
 use App\detail_npp;
+use App\BonPengambilan;
 
 class StockSparepartController extends Controller
 {
@@ -106,8 +107,8 @@ class StockSparepartController extends Controller
     }
 
     public function cariNamaBarang(Request $request) {
-        $data = DaftarBarang::where("nama","LIKE","%$reques->nama%")->get();
-        return response()->json($data);
+        return DaftarBarang::where("id",$request->nama)->get();
+
     }
 
     public function cariDataStock(Request $request) {
