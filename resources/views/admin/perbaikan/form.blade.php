@@ -14,8 +14,7 @@
 <div class="col-md-4 {{ $errors->has('type') ? 'has-error' : '' }}">
     <label for="type">Type Barang</label>
     <select name="type" id="type" class="form-control">
-        <option value="" selected>-- Pilih --</option>
-        <option value="komputer">Komputer</option>
+        <option value="komputer" {{ old('type', isset($perbaikan) ? $perbaikan->hardwareable_type : '') }}>Komputer</option>
         <option value="printer">Printer</option>
         <option value="TableBarangJaringan">Jaringan</option>
         <option value="pengguna">Software</option>
@@ -30,7 +29,7 @@
 <div class="col-md-4 {{ $errors->has('nama') ? 'has-error' : '' }}">
     <label for="nama">Nama Barang</label>
     <select name="nama" id="nama" class="form-control namaBarang">
-
+            <option value="" alue="{{ old('nama', isset($perbaikan) ? $perbaikan->nama : '') }}" selected>-- Pilih --</option>
     </select>
     @if($errors->has('nama'))
         <em class="invalid-feedback">
@@ -79,7 +78,7 @@
 
 <div class="col-md-4 {{ $errors->has('stop') ? 'has-error' : '' }}">
     <label for="stop">Mulai Perbaikan</label>
-    <input type="time" id="stop" name="stop" class="form-control" value="{{ old('stop', isset($perbaikan) ? $perbaikan->stop : '') }}" placeholder="Cth: 001/MKT/065">
+    <input type="time" id="stop" name="stop" class="form-control" value="{{ old('stop', isset($perbaikan) ? $perbaikan->stop : '') }}">
     @if($errors->has('stop'))
         <em class="invalid-feedback">
             {{ $errors->first('stop') }}
@@ -91,8 +90,8 @@
 </div>
 
 <div class="col-md-4 {{ $errors->has('Selesai') ? 'has-error' : '' }}">
-    <label for="Selesai">Selesai Perbaikan</label>
-    <input type="time" id="Selesai" name="Selesai" class="form-control" value="{{ old('Selesai', isset($perbaikan) ? $perbaikan->Selesai : '') }}" placeholder="Cth: 001/MKT/065">
+    <label for="selesai">Selesai Perbaikan</label>
+    <input type="time" id="Selesai" name="selesai" class="form-control" value="{{ old('selesai', isset($perbaikan) ? $perbaikan->selesai : '') }}" placeholder="Cth: 001/MKT/065">
     @if($errors->has('Selesai'))
         <em class="invalid-feedback">
             {{ $errors->first('Selesai') }}
@@ -106,9 +105,8 @@
 <div class="col-md-4 {{ $errors->has('petugas') ? 'has-error' : '' }}">
     <label for="petugas">Nama Petugas</label>
     <select name="petugas" id="petugas" class="form-control">
-        <option value="" selected>-- Pilih --</option>
-        <option value="Irfan Nur Muhammad">Irfan Nur Muhammad</option>
-        <option value="Yudi Hadiandi">Yudi Hadiandi</option>
+        <option value="Irfan Nur Muhammad" {{ old('petugas', isset($perbaikan) ? $perbaikan->petugas=="Irfan Nur Muhammad" : '') }} selected>Irfan Nur Muhammad</option>
+        <option value="Yudi Hadiandi" {{ old('petugas', isset($perbaikan) ? $perbaikan->petugas=="Yudi Hadiandi" : '') }} selected>Yudi Hadiandi</option>
     </select>
     @if($errors->has('petugas'))
         <em class="invalid-feedback">

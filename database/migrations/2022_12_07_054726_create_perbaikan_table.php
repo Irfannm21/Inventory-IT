@@ -17,8 +17,8 @@ class CreatePerbaikanTable extends Migration
             $table->bigIncrements('id');
             $table->date('tanggal');
             $table->morphs('hardwareable');
+            $table->string("kerusakan");
             $table->string("tindakan");
-            $table->string("perbaikan");
             $table->time("stop");
             $table->time("mulai");
             $table->time("total");

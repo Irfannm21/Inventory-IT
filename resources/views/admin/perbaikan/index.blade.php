@@ -24,13 +24,19 @@
 
                         </th>
                         <th>
-                            Hardware ID
-                        </th>
-                        <th>
                             Tanggal
                         </th>
                         <th>
-                            Keterangan
+                            Hardware ID
+                        </th>
+                        <th>
+                            Kerusakan
+                        </th>
+                        <th>
+                            Tindakan
+                        </th>
+                        <th>
+                            Petugas
                         </th>
                         <th>
                             &nbsp;
@@ -44,21 +50,27 @@
 
                             </td>
                             <td>
-                               {{$value->hardwareable->kode ?? ''}}
-                            </td>
-                            <td>
                                 {{ $value->tanggal ?? '' }}
                             </td>
                             <td>
-                                {{ $value->keterangan ?? '' }}
+                               {{$value->hardwareable->kode ?? ''}}
+                            </td>
+                            <td>
+                                {{ $value->kerusakan ?? '' }}
+                            </td>
+                            <td>
+                                {{ $value->tindakan ?? '' }}
+                            </td>
+                            <td>
+                                {{ $value->petugas ?? '' }}
                             </td>
 
                             <td>
-                                @can('perbaikan_show')
+                                {{-- @can('perbaikan_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.perbaikan.show', $value->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
-                                @endcan
+                                @endcan --}}
                                 @can('perbaikan_edit')
                                 <a class="btn btn-xs btn-info" href="{{ route("admin.perbaikans.edit", $value->id)  }}">
                                     {{ trans('global.edit') }}

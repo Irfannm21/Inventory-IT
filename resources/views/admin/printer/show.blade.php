@@ -46,9 +46,10 @@
         </table>
 
         <div class="card-body">
-            <div class="align-center h3 text-muted">
+            <div class="text-center h3">
                 Daftar Perbaikan {{$printer->kode}}
             </div>
+            <hr width="50">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover datatable">
                     <thead>
@@ -57,13 +58,25 @@
 
                             </th>
                             <th>
-                                Kode
-                            </th>
-                            <th>
                                 Tanggal
                             </th>
                             <th>
-                                Deskripsi
+                                Kerusakan
+                            </th>
+                            <th>
+                                Tindakan
+                            </th>
+                            <th>
+                                Mulai
+                            </th>
+                            <th>
+                                Selesai
+                            </th>
+                            <th>
+                                Total
+                            </th>
+                            <th>
+                                Petugas
                             </th>
                             <th>
                                 &nbsp;
@@ -77,21 +90,28 @@
 
                                 </td>
                                 <td>
-                                    {{ $printer->kode ?? '' }}
+                                    {{ $printer->tanggal ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $value->tanggal ?? '' }}
+                                    {{ $value->kerusakan ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $value->keterangan ?? '' }}
+                                    {{ $value->tindakan ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $value->stop ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $value->mulai ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $value->total ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $value->petugas ?? '' }}
                                 </td>
 
                                 <td>
-                                    @can('perbaikan_show')
-                                        <a class="btn btn-xs btn-primary" href="{{ route('admin.printers.show', $value->id) }}">
-                                            {{ trans('global.view') }}
-                                        </a>
-                                    @endcan
                                     @can('perbaikan_create')
                                     <a class="btn btn-xs btn-info" href="{{ route("admin.printers.edit", $value->id)  }}">
                                         {{ trans('global.edit') }}

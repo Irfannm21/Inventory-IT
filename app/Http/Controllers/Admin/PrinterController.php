@@ -8,6 +8,7 @@ use App\Http\Requests\UpdatePrinterRequest;
 use App\Http\Requests\MassDestroyPrinterRequest;
 use Illuminate\Http\Request;
 use App\printer;
+use App\Perbaikan;
 
 class PrinterController extends Controller
 {
