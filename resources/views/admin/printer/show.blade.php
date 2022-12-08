@@ -90,7 +90,7 @@
 
                                 </td>
                                 <td>
-                                    {{ $printer->tanggal ?? '' }}
+                                    {{ $value->tanggal ?? '' }}
                                 </td>
                                 <td>
                                     {{ $value->kerusakan ?? '' }}
@@ -130,6 +130,8 @@
                         @endforeach
                     </tbody>
                 </table>
+
+
             </div>
         </div>
 

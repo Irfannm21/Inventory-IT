@@ -118,6 +118,94 @@
                 </tr>
             </tbody>
         </table>
+
+        <div class="card-body">
+            <div class="text-center h3">
+                Daftar Perbaikan {{$komputer->kode}}
+            </div>
+            <hr width="50">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover datatable">
+                    <thead>
+                        <tr>
+                            <th width="10">
+
+                            </th>
+                            <th>
+                                Tanggal
+                            </th>
+                            <th>
+                                Kerusakan
+                            </th>
+                            <th>
+                                Tindakan
+                            </th>
+                            <th>
+                                Mulai
+                            </th>
+                            <th>
+                                Selesai
+                            </th>
+                            <th>
+                                Total
+                            </th>
+                            <th>
+                                Petugas
+                            </th>
+                            <th>
+                                &nbsp;
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($komputer->perbaikans as $key => $value)
+                            <tr data-entry-id="{{ $value->id }}">
+                                <td>
+
+                                </td>
+                                <td>
+                                    {{ $value->tanggal ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $value->kerusakan ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $value->tindakan ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $value->stop ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $value->mulai ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $value->total ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $value->petugas ?? '' }}
+                                </td>
+
+                                <td>
+                                    @can('perbaikan_create')
+                                    <a class="btn btn-xs btn-info" href="{{ route("admin.komputers.edit", $value->id)  }}">
+                                        {{ trans('global.edit') }}
+                                    </a>
+                                    @endcan
+                                    @can('perbaikan_delete')
+                                        <form action="{{ route('admin.komputers.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        </form>
+                                    @endcan
+                                </td>
+
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 

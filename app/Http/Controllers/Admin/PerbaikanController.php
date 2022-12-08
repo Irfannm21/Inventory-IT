@@ -73,7 +73,12 @@ class PerbaikanController extends Controller
     public function edit(Perbaikan $perbaikan)
     {
         abort_unless(\Gate::allows('perbaikan_edit'), 403);
-        return view('admin.perbaikan.edit', compact('perbaikan'));
+        if($perbaikan->hardwareable_type == "App\printer") {
+            $result = printer::select("id","nama")->get();
+        } else {
+            $result = komputer::find($perbaikan->hardwareable_id);
+        }
+        return view('admin.perbaikan.edit', compact('perbaikan','result'));
     }
 
     public function update(UpdatePerbaikanRequest $request, perbaikan $perbaikan)

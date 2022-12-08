@@ -19,7 +19,7 @@ class KomputerController extends Controller
 
     public function show(komputer $komputer)
     {
-        return view('admin.cpu.show', compact('komputer '));
+        return view('admin.cpu.show', compact('komputer'));
     }
 
     public function create()
