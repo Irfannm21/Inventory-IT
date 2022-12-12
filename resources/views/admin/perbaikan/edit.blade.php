@@ -48,10 +48,14 @@
             <div class="col-md-4 {{ $errors->has('nama') ? 'has-error' : '' }}">
                 <label for="nama">Nama Barang</label>
                 <select name="nama" id="nama" class="form-control namaBarang">
-                    <option value="{{$perbaikan->hardwareable_id}}" selected>{{$perbaikan->hardwareable->nama}}</option>
-                      @foreach ($result as $id => $item)
-                        <option value="{{$item->id}}">{{$item->nama}}</option>
-                      @endforeach
+                    @if ($perbaikan->hardwareable_type == "App\printer") {
+                        <option value="{{$perbaikan->id}}" selected>{{$perbaikan->hardwareable->nama}}</option>
+                    @else
+                        <option value="{{$perbaikan->id}}" selected>{{$perbaikan->hardwareable->kode}}</option>
+                    @endif
+                        @foreach ($results as $id => $item)
+                            <option value="{{$id}}">{{$item}}</option>
+                        @endforeach
                 </select>
                 @if($errors->has('nama'))
                     <em class="invalid-feedback">

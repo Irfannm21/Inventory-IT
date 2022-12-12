@@ -1,7 +1,7 @@
 
 <div class="col-md-4 {{ $errors->has('tanggal') ? 'has-error' : '' }}">
     <label for="tanggal">Tanggal</label>
-    <input type="date" id="tanggal" name="tanggal" class="form-control" value="{{ old('tanggal') ?? $perbaikan->tanggal ?? '' }}">
+    <input type="date" id="tanggal" name="tanggal" class="form-control">
     @if($errors->has('tanggal'))
         <em class="invalid-feedback">
             {{ $errors->first('tanggal') }}
@@ -15,7 +15,8 @@
 <div class="col-md-4 {{ $errors->has('type') ? 'has-error' : '' }}">
     <label for="type">Type Barang</label>
    <select name="type" id="type" class="form-control">
-        <option value="komputer" {{ old('type', isset($perbaikan) ? $perbaikan->hardwareable_type : '') }}>Komputer</option>
+        <option value="" selected>-- Pilih --</option>
+        <option value="komputer">Komputer</option>
         <option value="printer">Printer</option>
         <option value="TableBarangJaringan">Jaringan</option>
         <option value="pengguna">Software</option>

@@ -16,4 +16,5 @@ class Perbaikan extends Model
     {
         return $this->belongsTo('App\bpb','bpb_id');
     }
+
 }

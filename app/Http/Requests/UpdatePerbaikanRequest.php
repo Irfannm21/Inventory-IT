@@ -25,9 +25,13 @@ class UpdatePerbaikanRequest extends FormRequest
     public function rules()
     {
         return [
-            'printer_id' =>   'required',
             'tanggal' => 'required',
-            'keterangan' => 'required',
+            'kerusakan' => 'required',
+            'tindakan' => 'required',
+            'stop' => 'required',
+            'mulai' => 'required',
+            'total' => 'required',
+            'petugas' => 'required',
         ];
     }
 }
