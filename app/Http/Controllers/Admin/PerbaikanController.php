@@ -65,15 +65,11 @@ class PerbaikanController extends Controller
 
         $result->perbaikans()->save($perbaikan);
 
-
-
         return redirect()->route('admin.perbaikans.index');
     }
 
     public function edit(Perbaikan $perbaikan)
     {
-        // dd($perbaikan->hardwareable_id);
-
         if($perbaikan->hardwareable_type == "App\printer") {
             $results = printer::all()->pluck('nama','id');
         } else {
@@ -86,9 +82,36 @@ class PerbaikanController extends Controller
 
     public function update(UpdatePerbaikanRequest $request, perbaikan $perbaikan)
     {
-        // dd($request->all());
-        abort_unless(\Gate::allows('product_edit'), 403);
-        $perbaikan->update($request->all());
+        $type = $request->type;
+        if ($type == 'printer') {
+            $result = Printer::find($request->nama);
+        } elseif($type == 'komputer') {
+            $result = komputer::find($request->nama);
+        }
+
+        $stop = carbon::createFromFormat('H:i', $request->stop);
+        $selesai = carbon::createFromFormat('H:i', $request->selesai);
+
+        $detik = $selesai->diffInSeconds($stop);
+
+        $day = $selesai->diffInDays($selesai->copy()->addSeconds($detik));
+        $jam = $selesai->diffInHours($selesai->copy()->addSeconds($detik)->subDays($day));
+        $menit = $selesai->diffInMinutes($selesai->copy()->addSeconds($detik)->subDays($day)->subHours($jam));
+
+        $a = CarbonInterval::hours($jam)->minutes($menit);
+
+        $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
+
+        $result->perbaikans()->update([
+           "tanggal" => $request->tanggal,
+           "kerusakan" => $request->kerusakan,
+           "tindakan" => $request->tindakan,
+           "stop" => $request->stop,
+           "mulai" => $request->selesai,
+           "total" => $totall,
+           "petugas" => $request->petugas,
+        ]);
+
         return redirect()->route('admin.perbaikans.index');
     }
 

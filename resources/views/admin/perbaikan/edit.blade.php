@@ -8,6 +8,7 @@
 
     <div class="card-body">
         <form action="{{ route("admin.perbaikans.update", [$perbaikan->id]) }}" method="POST" enctype="multipart/form-data">
+            @csrf
             @method('PUT')
             @include('admin.perbaikan.form')
             {{-- <div class="col-md-4 {{ $errors->has('tanggal') ? 'has-error' : '' }}">

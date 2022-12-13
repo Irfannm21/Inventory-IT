@@ -7,30 +7,34 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class UpdatePerbaikanRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
+
     public function authorize()
     {
-        return \Gate::allows('printer_edit');
+        return \Gate::allows('perbaikan_edit');
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
     public function rules()
     {
+        // $stop = carbon::createFromFormat('H:i', $request->stop);
+        // $selesai = carbon::createFromFormat('H:i', $request->selesai);
+
+        // $detik = $selesai->diffInSeconds($stop);
+
+        // $day = $selesai->diffInDays($selesai->copy()->addSeconds($detik));
+        // $jam = $selesai->diffInHours($selesai->copy()->addSeconds($detik)->subDays($day));
+        // $menit = $selesai->diffInMinutes($selesai->copy()->addSeconds($detik)->subDays($day)->subHours($jam));
+
+        // $a = CarbonInterval::hours($jam)->minutes($menit);
+
+        // $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
+
         return [
             'tanggal' => 'required',
             'kerusakan' => 'required',
             'tindakan' => 'required',
             'stop' => 'required',
-            'mulai' => 'required',
-            'total' => 'required',
+            'selesai' => 'required',
+            // "total" => $totall,
             'petugas' => 'required',
         ];
     }
