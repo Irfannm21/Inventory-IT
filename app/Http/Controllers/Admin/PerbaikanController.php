@@ -72,7 +72,7 @@ class PerbaikanController extends Controller
 
     public function edit(Perbaikan $perbaikan)
     {
-        // dd($perbaikan);
+        // dd($perbaikan->hardwareable_id);
 
         if($perbaikan->hardwareable_type == "App\printer") {
             $results = printer::all()->pluck('nama','id');

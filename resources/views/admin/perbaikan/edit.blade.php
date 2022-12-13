@@ -8,9 +8,9 @@
 
     <div class="card-body">
         <form action="{{ route("admin.perbaikans.update", [$perbaikan->id]) }}" method="POST" enctype="multipart/form-data">
-            @csrf
             @method('PUT')
-            <div class="col-md-4 {{ $errors->has('tanggal') ? 'has-error' : '' }}">
+            @include('admin.perbaikan.form')
+            {{-- <div class="col-md-4 {{ $errors->has('tanggal') ? 'has-error' : '' }}">
                 <label for="tanggal">Tanggal</label>
                 <input type="date" id="tanggal" name="tanggal" class="form-control" value="{{ old('tanggal') ?? $perbaikan->tanggal ?? '' }}" placeholder="Cth: 001/MKT/065">
                 @if($errors->has('tanggal'))
@@ -142,30 +142,8 @@
                 <p class="helper-block text-muted">
                     *Masukan petugas IT
                 </p>
-            </div>
-            @section('scripts')
-                <script>
-                    $(document).ready(function() {
-                        $(document).on('change',"#type", function() {
-                            $.ajax({
-                                    method: 'GET',
-                                    url: '{{ url('admin/perbaikans/cariItem') }}',
-                                    data: {
-                                        nama: $(this).val()
-                                    },
-                                    success: function(response) {
-                                        console.log(204, response);
-                                        let options = '';
-                                        for (let item of response) {
-                                            options += `<option value='${item.id}'>${item.kode}</option>`;
-                                        }
-                                        $('.namaBarang').html(options);
-                                    }
-                                })
-                        });
-                    })
-                </script>
-            @endsection
+            </div> --}}
+
 
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
@@ -173,5 +151,29 @@
         </form>
     </div>
 </div>
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $(document).on('change',"#type", function() {
+            $.ajax({
+                    method: 'GET',
+                    url: '{{ url('admin/perbaikans/cariItem') }}',
+                    data: {
+                        nama: $(this).val()
+                    },
+                    success: function(response) {
+                        console.log(204, response);
+                        let options = '';
+                        for (let item of response) {
+                            options += `<option value='${item.id}'>${item.kode}</option>`;
+                        }
+                        $('.namaBarang').html(options);
+                    }
+                })
+        });
+    })
+</script>
+@endsection
 
 @endsection
