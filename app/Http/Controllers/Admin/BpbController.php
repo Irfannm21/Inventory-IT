@@ -22,7 +22,6 @@ class BpbController extends Controller
 {
     public function index()
     {
-
         $suppliers = supplier::all();
         $results = bpb::has("Detail_bpbs")->get();
             return view('admin.bpb.index', compact('results'));
@@ -165,9 +164,10 @@ class BpbController extends Controller
 
     }
 
-    public function Print(request $request,npp $id)
+    public function Print(request $request)
     {
-        $result = bpb::where("kode",$request->bpb)->get();
+        $result = bpb::with('detail_bpbs','supplier')->where("kode",$request->bpb)->get();
+        // dd($result);
         $pdf = PDF::loadView('admin.bpb.print',['result' => $result])->setPaper('a5'.'potrait');
         return $pdf->stream();
     }

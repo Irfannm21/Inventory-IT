@@ -59,13 +59,13 @@
                                 {{ $value->bagian->departemen->nama ?? '' }}
                             </td>
                             <td>
-                                @can('npp_create')
-                                    <a href="{{route('admin.npps.print',['npp' => $value->id])}}" class="fa fa-print" style="color:black">
+                                @can('npp_show')
+                                    <a href="{{route('admin.npps.print',['npp' => $value->id])}}" class="btn btn-xs btn-dark" style="color:white">
                                         Print
                                     </a>
                                 @endcan
                                 @can('npp_edit')
-                                <a class="fa fa-pencil" style="color:black" href="{{ route("admin.npps.edit", $value->id)  }}">
+                                <a class="btn btn-xs btn-primary" style="color:black" href="{{ route("admin.npps.edit", $value->id)  }}">
                                     {{ trans('global.edit') }}
                                 </a>
                                 @endcan

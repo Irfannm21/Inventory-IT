@@ -71,13 +71,13 @@
 
                                 <td>
                                     @can('detail_bpb_edit')
-                                        <a href="{{ route('admin.bpbs.print', ['bpb' => $value->kode]) }}" class="fa fa-print"
-                                            style="color:black">
+                                        <a href="{{ route('admin.bpbs.print', ['bpb' => $value->kode]) }}" class="btn btn-xs btn-dark"
+                                            style="color:white">
                                             Print
                                         </a>
                                     @endcan
                                     @can('detail_bpb_edit')
-                                        <a class="fa fa-pencil" style="color:black"
+                                        <a class="btn btn-xs btn-primary" style="color:black"
                                             href="{{ route('admin.detail_bpbs.edit', $value->id) }}">
                                             {{ trans('global.edit') }}
                                         </a>

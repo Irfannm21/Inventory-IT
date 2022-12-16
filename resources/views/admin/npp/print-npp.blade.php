@@ -1,4 +1,10 @@
-
+<?php
+    // dd($result->bagian->departemen->nama);
+    // foreach ($result->details as $value) {
+    //     echo $value;
+    // }
+    // die();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -9,19 +15,19 @@
 </head>
   <body>
     <table>
-        @foreach ($result as $val)
+        {{-- @foreach ($result as $val) --}}
         <tr>
-            <td>{{$val->departemen->nama}}</td>
+            <td>{{$result->bagian->departemen->nama}}</td>
         </tr>
         <tr>
-            <td>{{$val->kode}}</td>
+            <td>{{$result->kode}}</td>
         </tr>
         <tr>
-            <td>{{$val->tanggal}}</td>
+            <td>{{$result->tanggal}}</td>
         </tr>
         <br>
         <br>
-        @foreach ($val->details as $item)
+        @foreach ($result->details as $item)
             <tr>
                 <td>
                     {{$loop->iteration}}.  {{$item->nama}}
@@ -36,7 +42,6 @@
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$item->keterangan}}
                 </td>
             </tr>
-        @endforeach
         @endforeach
     </table>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>

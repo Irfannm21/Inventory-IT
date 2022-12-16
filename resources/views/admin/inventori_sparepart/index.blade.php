@@ -109,14 +109,17 @@
                         console.log(204, response);
                         let baris = '';
                         for (let value of response) {
+                            console.log(value);
                             baris += `<tr data-entry-id=${value.id}>`;
                             baris += `<td></td>`;
-                            baris += `<td>${value.stockable.bpb.kode}</td>`;
-                            baris += `<td>${value.stockable.bpb.tanggal}</td>`;
                             if (value.stockable_type == "App\\Detail_bpb") {
+                                baris += `<td>${value.stockable.bpb.kode}</td>`;
+                                baris += `<td>${value.stockable.bpb.tanggal}</td>`;
                                 baris +=
                                     "<td><span class='badge rounded-pill bg-success'>Saldo Masuk</td>";
                             } else {
+                                baris += `<td>${value.stockable.kode}</td>`;
+                                baris += `<td>${value.stockable.tanggal}</td>`;
                                 baris += "<td><span class='badge rounded-pill bg-danger'>Saldo Keluar</td>";
                             }
                             baris += `<td>${value.jumlah}</td>`;

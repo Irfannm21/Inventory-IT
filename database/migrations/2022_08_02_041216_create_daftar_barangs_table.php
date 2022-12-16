@@ -21,6 +21,7 @@ class CreateDaftarBarangsTable extends Migration
             $table->string('no_kartu');
             $table->string('jenis');
             $table->string('kelompok');
+            $table->string('satuan');
             $table->timestamps();
         });
     }

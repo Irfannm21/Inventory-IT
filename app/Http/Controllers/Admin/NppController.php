@@ -94,9 +94,11 @@ class NppController extends Controller
     }
 
 
-    public function Print(request $request,npp $id)
+    public function Print(request $request)
     {
-        $result = npp::find($request);
+        // dd($request->npp);
+        $result = npp::with('bagian')->where('id',$request->npp)->first();
+        // dd($result);
         $pdf = PDF::loadView('admin.npp.print-npp',['result' => $result])->setPaper('a5'.'potrait');
         return $pdf->stream();
     }
