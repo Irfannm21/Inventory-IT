@@ -14,31 +14,31 @@ class DaftarBarangJaringanTableSeeder extends Seeder
     {
         $daftar = [
             [
-                "kode" => "001/JRGN.KOMP/MKTG",
+                "kode" => "001/JRGN.SWIT/MKTG",
                 "tanggal" => "2016-10-08",
                 'kelompok' => 'Jaringan Komputer',
                 "nama" => "Switch Dlink 8 Hub",
             ],
             [
-                "kode" => "002/JRGN.KOMP/MKTG",
+                "kode" => "002/JRGN.SWIT/MKTG",
                 "tanggal" => "2017-11-28",
                 'kelompok' => 'Jaringan Komputer',
                 "nama" => "Switch Dlink 8 Hub",
             ],
             [
-                "kode" => "003/JRGN.TElE/MKTG",
+                "kode" => "104/JRGN.TElE/MKTG",
                 "tanggal" => "2017-11-28",
                 'kelompok' => 'Jaringan Telepon',
                 "nama" => "Pesawat Telepon Hybrid",
             ],
             [
-                "kode" => "004/JRGN.TELE/MKTG",
+                "kode" => "004/JRGN.FAXX/MKTG",
                 "tanggal" => "2012-03-28",
                 'kelompok' => 'Jaringan Telepon',
                 "nama" => "FAX",
             ],
             [
-                "kode" => "005/JRGN.KOMP/DIRE",
+                "kode" => "005/JRGN.ROUT/DIRE",
                 "tanggal" => "2016-10-08",
                 'kelompok' => 'Jaringan Komputer',
                 "nama" => "Router D-Link",
@@ -46,7 +46,7 @@ class DaftarBarangJaringanTableSeeder extends Seeder
             [
                 "kode" => "006/JRGN.TELE/DIRE",
                 "tanggal" => "2014-01-08",
-                'kelompok' => 'Jaringan Telepom',
+                'kelompok' => 'Jaringan Telepon',
                 "nama" => "Pewat Telepon Hybrid",
             ],
             [
