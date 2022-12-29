@@ -23,7 +23,7 @@
             <td>{{$result->kode}}</td>
         </tr>
         <tr>
-            <td>{{$result->tanggal}}</td>
+            <td>{{date('d-m-Y',strtotime($result->tanggal))}}</td>
         </tr>
         <br>
         <br>

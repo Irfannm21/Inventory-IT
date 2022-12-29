@@ -3,13 +3,13 @@
 
 <div class="card">
     <div class="card-header">
-        Buat Data Printer
+        Buat Data Komputer
     </div>
 
     <div class="card-body">
-        <form action="{{ route("admin.printers.store") }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route("admin.daftar_barang_spareparts.store") }}" method="POST" enctype="multipart/form-data">
             @csrf
-                @include('admin.printer.form')
+            @include('admin.inventori_sparepart.form')
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
             </div>

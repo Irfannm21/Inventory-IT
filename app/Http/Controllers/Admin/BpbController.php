@@ -95,7 +95,7 @@ class BpbController extends Controller
         }
         elseif($bpb->kelompok == "Elektrik")
         {
-            return redirect()->route("admin.bpbs.eletrik");
+            return redirect()->route("admin.bpbs.elektrik");
         }
         elseif($bpb->kelompok == "PT")
         {

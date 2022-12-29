@@ -17,11 +17,11 @@ class CreateDaftarBarangsTable extends Migration
             $table->bigIncrements('id');
             $table->string('kode')->unique();
             $table->string('nama');
-            $table->string('nomor_part');
-            $table->string('no_kartu');
-            $table->string('jenis');
-            $table->string('kelompok');
-            $table->string('satuan');
+            $table->string('nomor_part')->nullable();
+            $table->string('no_kartu')->nullable();
+            $table->string('kelompok')->nullable();
+            $table->string('jenis')->nullable();
+            $table->string('satuan')->nullable();
             $table->timestamps();
         });
     }

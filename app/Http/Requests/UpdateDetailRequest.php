@@ -21,7 +21,6 @@ class UpdateDetailRequest extends FormRequest
             'jumlah' => 'required',
             'satuan' => 'required',
             'stok' => 'required',
-            'keterangan' => 'required',
         ];
     }
 }

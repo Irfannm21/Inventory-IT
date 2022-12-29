@@ -303,53 +303,80 @@ class PermissionsTableSeeder extends Seeder
         //         'created_at' => '2019-04-15 19:14:42',
         //         'updated_at' => '2019-04-15 19:14:42',
         //     ],
+            // [
+            //     'title'      => 'printer_access',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'printer_create',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'printer_edit',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'printer_show',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'printer_delete',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'komputer_access',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'komputer_create',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'komputer_edit',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'komputer_show',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'komputer_delete',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ]
+
+
             [
-                'title'      => 'printer_access',
+                'title'      => 'barang_access',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ],
             [
-                'title'      => 'printer_create',
+                'title'      => 'barang_create',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ],
             [
-                'title'      => 'printer_edit',
+                'title'      => 'barang_edit',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ],
             [
-                'title'      => 'printer_show',
+                'title'      => 'barang_show',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ],
             [
-                'title'      => 'printer_delete',
-                'created_at' => '2019-04-15 19:14:42',
-                'updated_at' => '2019-04-15 19:14:42',
-            ],
-            [
-                'title'      => 'komputer_access',
-                'created_at' => '2019-04-15 19:14:42',
-                'updated_at' => '2019-04-15 19:14:42',
-            ],
-            [
-                'title'      => 'komputer_create',
-                'created_at' => '2019-04-15 19:14:42',
-                'updated_at' => '2019-04-15 19:14:42',
-            ],
-            [
-                'title'      => 'komputer_edit',
-                'created_at' => '2019-04-15 19:14:42',
-                'updated_at' => '2019-04-15 19:14:42',
-            ],
-            [
-                'title'      => 'komputer_show',
-                'created_at' => '2019-04-15 19:14:42',
-                'updated_at' => '2019-04-15 19:14:42',
-            ],
-            [
-                'title'      => 'komputer_delete',
+                'title'      => 'barang_delete',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ]

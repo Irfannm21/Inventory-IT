@@ -1,184 +1,141 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="card">
-        <div class="card-header">
-            {{ trans('global.product.title_singular') }} {{ trans('global.list') }}
+@can('product_create')
+    <div style="margin-bottom: 10px;" class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-success" href="{{ route("admin.daftar_barang_spareparts.create") }}">
+                {{ trans('global.add') }} {{ trans('global.product.title_singular') }}
+            </a>
         </div>
+    </div>
+@endcan
 
-        <div class="card-body bg-black">
-            <div class="form-group row">
-                <div class="col-md-6">
-                    <label for="">Cari Data Barang</label>
-                    <select name="" id="namaBarang" class="form-control select2"
-                        data-url="{{ url('admin/stock_spareparts/cariNamaBarangs') }}">
-                            <option value="" selected>-- Pilih --</option>
-                        @foreach ($results as $id => $item)
-                            <option value="{{$id}}">{{$item}}</option>
-                        @endforeach
+<div class="card">
+    <div class="card-header">
+        {{ trans('global.product.title_singular') }} {{ trans('global.list') }}
+    </div>
 
-                    </select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-md-2">
-                    <label for="">Kode Barang</label>
-                    <input type="kode" class="form-control" id="kode">
-                </div>
-                <div class="col-md-4">
-                    <label for="">Nama Barang</label>
-                    <input type="nama" class="form-control" id="nama">
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-md-3">
-                    <label for="">Part Nomor</label>
-                    <input type="nomor_part" class="form-control" id="nomor_part">
-                </div>
-                <div class="col-md-3">
-                    <label for="">Nomor Kartu</label>
-                    <input type="no_kartu" class="form-control" id="no_kartu">
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-md-3">
-                    <label for="">Jenis Barang</label>
-                    <input type="jenis" class="form-control" id="jenis">
-                </div>
-                <div class="col-md-3    ">
-                    <label for="">Kelompok Barang</label>
-                    <input type="kelompok" class="form-control" id="kelompok">
-                </div>
-            </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-hover datatable">
+                <thead>
+                    <tr>
+                        <th width="10">
 
-        </div>
+                        </th>
+                        <th>
+                            Kode
+                        </th>
+                        <th>
+                            Nama
+                        </th>
+                        <th>
+                            Part Nomor
+                        </th>
+                        <th>
+                            Nomor Karu
+                        </th>
+                        <th>
+                            Kelompok
+                        </th>
+                        <th>
+                            Jenis
+                        </th>
+                        <th>
+                            Satuan
+                        </th>
+                        <th>
+                            &nbsp;
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($results as $value)
+                        <tr data-entry-id="{{ $value->id }}">
+                            <td>
 
-        <div class="card-body">
-            <h3 class="text-center">Data Transaksi </h3>
-            <hr class="w-25">
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped table-hover datatable">
-                    <thead>
-                        <tr>
-                            <th width="10"> </th>
-                            <th>Kode BPB</th>
-                            <th>Tanggal</th>
-                            <th>Status</th>
-                            <th>Jumlah</th>
+                            </td>
+                            <td>
+                                {{ $value->kode ?? '' }}
+                            </td>
+                            <td>
+                                {{ $value->nama ?? '' }}
+                            </td>
+                            <td>
+                                {{ $value->nomor_part ?? '' }}
+                            </td>
+                            <td>
+                                {{ $value->no_kartu ?? '' }}
+                            </td>
+                            <td>
+                                {{ $value->kelompok ?? '' }}
+                            </td>
+                            <td>
+                                {{ $value->jenis ?? '' }}
+                            </td>
+                            <td>
+                                {{ $value->satuan ?? '' }}
+                            </td>
+                            <td>
+                               @can('barang_edit')
+                                <a class="btn btn-xs btn-info" href="{{ route("admin.daftar_barang_spareparts.edit", $value->id)  }}">
+                                    {{ trans('global.edit') }}
+                                </a>
+                                @endcan
+                                @can('barang_delete')
+                                    <form action="{{ route('admin.daftar_barang_spareparts.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                    </form>
+                                @endcan
+                            </td>
+
                         </tr>
-                    </thead>
-                    <tbody id="content">
-
-                    </tbody>
-                </table>
-            </div>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
-    </div>
-
+</div>
 @section('scripts')
-    @parent
-    <script>
-        $(document).ready(function() {
-            $(document).on('change', '#namaBarang', function() {
-                $.ajax({
-                    method: "GET",
-                    url: '{{ url('admin/stock_spareparts/cariNamaBarangs') }}',
-                    data: {
-                        nama: $(this).val()
-                    },
-                    success: function(response) {
-                        console.log(204, response);
-                        for (let item of response) {
-                            $("#kode").val(item.kode);
-                            $("#nama").val(item.nama);
-                            $("#nomor_part").val(item.nomor_part);
-                            $("#no_kartu").val(item.no_kartu);
-                            $("#jenis").val(item.jenis);
-                            $("#kelompok").val(item.kelompok);
-                        }
-                    }
-                })
-            }).on('change', '#namaBarang', function() {
-                $.ajax({
-                    method: "GET",
-                    url: '{{ url('admin/stock_spareparts/cariDataStocks') }}',
-                    data: {
-                        id: $(this).val()
-                    },
-                    success: function(response) {
-                        console.log(204, response);
-                        let baris = '';
-                        for (let value of response) {
-                            console.log(value);
-                            baris += `<tr data-entry-id=${value.id}>`;
-                            baris += `<td></td>`;
-                            if (value.stockable_type == "App\\Detail_bpb") {
-                                baris += `<td>${value.stockable.bpb.kode}</td>`;
-                                baris += `<td>${value.stockable.bpb.tanggal}</td>`;
-                                baris +=
-                                    "<td><span class='badge rounded-pill bg-success'>Saldo Masuk</td>";
-                            } else {
-                                baris += `<td>${value.stockable.kode}</td>`;
-                                baris += `<td>${value.stockable.tanggal}</td>`;
-                                baris += "<td><span class='badge rounded-pill bg-danger'>Saldo Keluar</td>";
-                            }
-                            baris += `<td>${value.jumlah}</td>`;
-                            baris += `</tr  >`;
-                        }
-                        $('#content').html(baris);
-                    }
-                })
-            })
-        })
+@parent
+<script>
+    $(function () {
+  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
+  let deleteButton = {
+    text: deleteButtonTrans,
+    url: "{{ route('admin.komputers.massDestroy') }}",
+    className: 'btn-danger',
+    action: function (e, dt, node, config) {
+      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
+          return $(entry).data('entry-id')
+      });
 
+      if (ids.length === 0) {
+        alert('{{ trans('global.datatables.zero_selected') }}')
 
+        return
+      }
 
-        $(function() {
-            let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
-            let deleteButton = {
-                text: deleteButtonTrans,
-                url: "{{ route('admin.komputers.massDestroy') }}",
-                className: 'btn-danger',
-                action: function(e, dt, node, config) {
-                    var ids = $.map(dt.rows({
-                        selected: true
-                    }).nodes(), function(entry) {
-                        return $(entry).data('entry-id')
-                    });
+      if (confirm('{{ trans('global.areYouSure') }}')) {
+        $.ajax({
+          headers: {'x-csrf-token': _token},
+          method: 'POST',
+          url: config.url,
+          data: { ids: ids, _method: 'DELETE' }})
+          .done(function () { location.reload() })
+      }
+    }
+  }
+  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+@can('komputer_delete')
+  dtButtons.push(deleteButton)
+@endcan
 
-                    if (ids.length === 0) {
-                        alert('{{ trans('global.datatables.zero_selected') }}')
+  $('.datatable:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+})
 
-                        return
-                    }
-
-                    if (confirm('{{ trans('global.areYouSure') }}')) {
-                        $.ajax({
-                                headers: {
-                                    'x-csrf-token': _token
-                                },
-                                method: 'POST',
-                                url: config.url,
-                                data: {
-                                    ids: ids,
-                                    _method: 'DELETE'
-                                }
-                            })
-                            .done(function() {
-                                location.reload()
-                            })
-                    }
-                }
-            }
-            let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-            @can('komputer_delete')
-                dtButtons.push(deleteButton)
-            @endcan
-
-            $('.datatable:not(.ajaxTable)').DataTable({
-                buttons: dtButtons
-            })
-        })
-    </script>
+</script>
 @endsection
 @endsection

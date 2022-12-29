@@ -247,11 +247,19 @@
             </a>
             <ul class="nav-dropdown-items">
                 <li class="nav-item">
+                    <a href="{{ route("admin.daftar_barang_spareparts.flow") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
+                        <i class="fas fa-sm fa-circle nav-icon">
+
+                        </i>
+                       Data Flow
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route("admin.daftar_barang_spareparts.index") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
                         <i class="fas fa-sm fa-circle nav-icon">
 
                         </i>
-                       Data Barang
+                       Daftar Barang
                     </a>
                 </li>
         </ul>

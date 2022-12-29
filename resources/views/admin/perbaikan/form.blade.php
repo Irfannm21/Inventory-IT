@@ -138,8 +138,9 @@
 <div class="col-md-4 {{ $errors->has('petugas') ? 'has-error' : '' }}">
     <label for="petugas">Nama Petugas</label>
     <select name="petugas" id="petugas" class="form-control">
-        <option value="Irfan Nur Muhammad">Irfan Nur Muhammad</option>
-        <option value="Yudi Hadiandi">Yudi Hadiandi</option>
+        <option value="" selected>-- Pilih --</option>
+        <option value="Irfan Nur Muhammad" {{ old('petugas', isset($perbaikan) && $perbaikan->petugas == "Irfan Nur Muhammad" ? 'selected' : '') }}>Irfan Nur Muhammad</option>
+        <option value="Yudi Hadiandi" {{ old('petugas', isset($perbaikan) && $perbaikan->petugas == "Yudi Hadiandi" ? 'selected' : '') }}>Yudi Hadiandi</option>
     </select>
     @if ($errors->has('petugas'))
         <em class="invalid-feedback">
