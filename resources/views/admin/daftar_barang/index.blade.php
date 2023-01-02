@@ -3,7 +3,7 @@
 @can('product_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.daftar_barang_spareparts.create") }}">
+            <a class="btn btn-success" href="{{ route("admin.daftar_barangs.create") }}">
                 {{ trans('global.add') }} {{ trans('global.product.title_singular') }}
             </a>
         </div>
@@ -30,10 +30,10 @@
                             Nama
                         </th>
                         <th>
-                            Part Nomor
+                            Nomor Part
                         </th>
                         <th>
-                            Nomor Karu
+                            Nomor Kartu
                         </th>
                         <th>
                             Kelompok
@@ -42,7 +42,7 @@
                             Jenis
                         </th>
                         <th>
-                            Satuan
+                            satuan
                         </th>
                         <th>
                             &nbsp;
@@ -50,7 +50,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($results as $value)
+                    @foreach($results as $key => $value)
                         <tr data-entry-id="{{ $value->id }}">
                             <td>
 
@@ -65,25 +65,30 @@
                                 {{ $value->nomor_part ?? '' }}
                             </td>
                             <td>
-                                {{ $value->no_kartu ?? '' }}
+                                {{ $value->no_kartu}}
                             </td>
                             <td>
-                                {{ $value->kelompok ?? '' }}
+                                {{$value->kelompok}}
                             </td>
                             <td>
-                                {{ $value->jenis ?? '' }}
+                                {{$value->jenis}}
                             </td>
                             <td>
-                                {{ $value->satuan ?? '' }}
+                                {{$value->satuan}}
                             </td>
                             <td>
-                               @can('barang_edit')
-                                <a class="btn btn-xs btn-info" href="{{ route("admin.daftar_barang_spareparts.edit", $value->id)  }}">
+                                {{-- @can('product_edit')
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.daftar_barangs.show', $value->id) }}">
+                                        {{ trans('global.view') }}
+                                    </a>
+                                @endcan --}}
+                                @can('barang_edit')
+                                <a class="btn btn-xs btn-info" href="{{ route("admin.daftar_barangs.edit",$value->id)}}">
                                     {{ trans('global.edit') }}
                                 </a>
                                 @endcan
                                 @can('barang_delete')
-                                    <form action="{{ route('admin.daftar_barang_spareparts.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <form action="{{ route('admin.daftar_barangs.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -105,7 +110,7 @@
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.komputers.massDestroy') }}",
+    url: "{{ route('admin.printers.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -129,7 +134,7 @@
     }
   }
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('komputer_delete')
+@can('printer_delete')
   dtButtons.push(deleteButton)
 @endcan
 

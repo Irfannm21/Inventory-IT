@@ -22,7 +22,6 @@ class NppController extends Controller
     {
         $results = npp::all();
         return view('admin.npp.index', compact('results'));
-
     }
 
     public function create()
@@ -60,6 +59,7 @@ class NppController extends Controller
 
     public function edit(npp $npp)
     {
+        dd($npp);
         $dept = departemen::all()->pluck('nama','id');
         $bagian = bagian_dept::all()->pluck('nama','id');
         return view('admin.npp.edit-npp',compact('npp','dept','bagian'));
