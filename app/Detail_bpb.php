@@ -17,7 +17,10 @@ class Detail_bpb extends Model
     }
 
     public function stock() {
-        return $this->morphOne('App\StockSparepart','stockable');
+        return $this->morphOne('App\StockSparepart');
     }
 
+    public function barang() {
+      return $this->belongsTo('App\DaftarBarang');
+    }
 }

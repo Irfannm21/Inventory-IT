@@ -18,6 +18,7 @@ use App\StockSparepart;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 
+use Faker\Factory as Faker;
 class BpbController extends Controller
 {
     public function index()
@@ -72,13 +73,32 @@ class BpbController extends Controller
 
         $data = $bpb->detail_bpbs()->createMany($detail);
 
+
         foreach($request->barang_id as $i => $tt) {
-            // $barang = DaftarBarang::find($request->barang_id{$i});
-            $stok = new StockSparepart;
-            $stok->barang_id = $request->barang_id{$i} ?? '';
-            $stok->jumlah = $request->jumlah{$i} ?? '';
-            $stok->satuan = $request->satuan{$i} ?? '';
-            $data[$i]->stock()->save($stok);
+
+            if($request->barang_id[$i] == null) {
+                // dd($request->detail_id[$i]);
+                $namaBarang = detail_npp::select('nama')->where('id',$request->detail_id[$i])->first();
+                $barang = new DaftarBarang;
+                $barang->kode = "KB01";
+                $barang->nama = $namaBarang->nama;
+                $barang->save();
+
+                $stok = new StockSparepart;
+                $stok->barang_id = $barang->id  ?? '';
+                $stok->jumlah = $request->jumlah{$i} ?? '';
+                $stok->satuan = $request->satuan{$i} ?? '';
+                $request->detail_id[$i]->stock()->save($stok);
+
+            } else {
+                $barang = DaftarBarang::find($request->barang_id[$i]);
+
+                $stok = new StockSparepart;
+                $stok->barang_id = $request->barang ?? '';
+                $stok->jumlah = $request->jumlah{$i} ?? '';
+                $stok->satuan = $request->satuan{$i} ?? '';
+                $barang->stocks()->save($stok);
+            }
 
         }
 

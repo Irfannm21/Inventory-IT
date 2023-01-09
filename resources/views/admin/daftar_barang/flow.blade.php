@@ -5,15 +5,6 @@
             {{ trans('global.product.title_singular') }} {{ trans('global.list') }}
         </div>
         <div class="card-body bg-black">
-            @can('product_create')
-    <div style="margin-bottom: 10px;" class="row">
-        <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.daftar_barang_spareparts.create") }}">
-                Tambah Barang
-            </a>
-        </div>
-    </div>
-@endcan
             <div class="form-group row">
                 <div class="col-md-6">
                     <label for="">Cari Data Barang</label>
@@ -161,7 +152,6 @@
                             baris += `<tr data-entry-id=${value.id}>`;
                                 baris += `<td></td>`;
                                 if (value.stockable_type == "App\\Detail_bpb") {
-                                console.log(sum([value.jumla]));
                                 baris += `<td>${value.stockable.bpb.kode}</td>`;
                                 baris += `<td>${value.stockable.bpb.tanggal}</td>`;
                                 baris +=

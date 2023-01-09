@@ -1,3 +1,6 @@
+@php
+    dd($results->stockable);
+@endphp
 @extends('layouts.admin')
 @section('content')
     @can('bpb_create')
@@ -66,7 +69,7 @@
                                     {{ $value->detail_npp->nama  ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $value->stock->jumlah ?? '' . " " . $value->stock->satuan  ?? '' }}
+                                    {{ $value->id ?? '' . " " . $value->id  ?? '' }}
                                 </td>
 
                                 <td>

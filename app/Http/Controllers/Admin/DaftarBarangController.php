@@ -10,6 +10,7 @@ use App\bpb;
 use App\printer;
 use App\detail_npp;
 use App\DaftarBarang;
+use App\StockSparepart;
 
 class DaftarBarangController extends Controller
 {
@@ -53,12 +54,10 @@ class DaftarBarangController extends Controller
         return back();
     }
 
-
     public function flow(){
-        dd("FLOw");
         $results = DaftarBarang::limit(10)->pluck('nama','id');
         $stocks = StockSparepart::all();
-        return view('admin.inventori_sparepart.flow',compact('results','stocks'));
+        return view('admin.daftar_barang.flow',compact('results','stocks'));
     }
 
 }

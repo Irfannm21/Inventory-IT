@@ -11,5 +11,8 @@ class DaftarBarang extends Model
         return $this->hasMany('App\StockSparepart','barang_id');
     }
 
+    public function detail_bpbs(){
+        return $this->hasMany('App\Detail_bpb');
+    }
 
 }
