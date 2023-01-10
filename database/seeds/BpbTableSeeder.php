@@ -21,7 +21,5 @@ class BpbTableSeeder extends Seeder
         $bpb->npp()->associate($npp);
         $bpb->supplier()->associate($supplier);
         $bpb->save();
-
-
     }
 }

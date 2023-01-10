@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-<div class="card">
+    <div class="card">
         <div class="card-header">
             {{ trans('global.product.title_singular') }} {{ trans('global.list') }}
         </div>
@@ -10,9 +10,9 @@
                     <label for="">Cari Data Barang</label>
                     <select name="" id="namaBarang" class="form-control select2"
                         data-url="{{ url('admin/stock_spareparts/cariNamaBarangs') }}">
-                            <option value="" selected>-- Pilih --</option>
+                        <option value="" selected>-- Pilih --</option>
                         @foreach ($results as $id => $item)
-                            <option value="{{$id}}">{{$item}}</option>
+                            <option value="{{ $id }}">{{ $item }}</option>
                         @endforeach
 
                     </select>
@@ -148,23 +148,44 @@
                     success: function(response) {
                         console.log(204, response);
                         let baris = '';
+                        let masuk = 0;
+                        let keluar = 0;
+
                         for (let value of response) {
                             baris += `<tr data-entry-id=${value.id}>`;
                                 baris += `<td></td>`;
-                                if (value.stockable_type == "App\\Detail_bpb") {
+                            if (value.stockable_type == "App\\Detail_bpb") {
                                 baris += `<td>${value.stockable.bpb.kode}</td>`;
                                 baris += `<td>${value.stockable.bpb.tanggal}</td>`;
                                 baris +=
                                     "<td><span class='badge rounded-pill bg-success'>Saldo Masuk</td>";
+                                let total = value.jumlah;
+                                if ($.isNumeric(total)) {
+                                    masuk += parseFloat(total);
+                                }
                             } else {
                                 baris += `<td>${value.stockable.kode}</td>`;
                                 baris += `<td>${value.stockable.tanggal}</td>`;
                                 baris += "<td><span class='badge rounded-pill bg-danger'>Saldo Keluar</td>";
+                                    let total = value.jumlah;
+                                if ($.isNumeric(total)) {
+                                    keluar += parseFloat(total);
+                                }
                             }
                             baris += `<td>${value.jumlah}</td>`;
                             baris += `</tr>`;
                         }
+                        let hasil = masuk - keluar;
+                        baris += "<tr>";
+                        baris += "<td></td>";
+                        baris += "<td></td>";
+                        baris += "<td> </td>";
+                        baris += "<td>Saldo </td>";
+                        baris += `<td>${masuk}</td>`;
+                        baris += "</tr>";
+
                         $('#content').html(baris);
+
                     }
                 })
             })

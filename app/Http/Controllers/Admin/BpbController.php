@@ -83,6 +83,7 @@ class BpbController extends Controller
                 $barang = new DaftarBarang;
                 $barang->kode = $faker->numerify("####");
                 $barang->nama = $namaBarang->nama;
+                $barang->satuan = $request->satuan{$i} ?? '';
                 $barang->save();
 
                 $stok = new StockSparepart;

@@ -12,8 +12,8 @@ class BonPengambilanTableSeeder extends Seeder
 {
     public function run()
     {
-        $detail = Detail_bpb::find(39);
-        $barang = DaftarBarang::find(1);
+        $detail = Detail_bpb::find(50);
+        $barang = DaftarBarang::find(35);
 
         $bon = new BonPengambilan;
         $bon->kode = "01/BON";
