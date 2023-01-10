@@ -14,7 +14,7 @@ class DetailBpbTableSeeder extends Seeder
     public function run()
     {
         $barang = DaftarBarang::find(1);
-        $detail = Detail_bpb::find(25);
+        $detail = Detail_bpb::where('id',26)->first();
 
         $val = new StockSparepart;
         $val->barang_id = $barang->id;

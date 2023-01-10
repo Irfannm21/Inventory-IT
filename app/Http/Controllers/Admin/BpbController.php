@@ -73,6 +73,7 @@ class BpbController extends Controller
 
         $data = $bpb->detail_bpbs()->createMany($detail);
 
+        $faker = Faker::Create('id_ID');
 
         foreach($request->barang_id as $i => $tt) {
 
@@ -80,7 +81,7 @@ class BpbController extends Controller
                 // dd($request->detail_id[$i]);
                 $namaBarang = detail_npp::select('nama')->where('id',$request->detail_id[$i])->first();
                 $barang = new DaftarBarang;
-                $barang->kode = "KB01";
+                $barang->kode = $faker->numerify("####");
                 $barang->nama = $namaBarang->nama;
                 $barang->save();
 
@@ -88,16 +89,17 @@ class BpbController extends Controller
                 $stok->barang_id = $barang->id  ?? '';
                 $stok->jumlah = $request->jumlah{$i} ?? '';
                 $stok->satuan = $request->satuan{$i} ?? '';
-                $request->detail_id[$i]->stock()->save($stok);
+
+                $data[$i]->stock()->save($stok);
 
             } else {
                 $barang = DaftarBarang::find($request->barang_id[$i]);
 
                 $stok = new StockSparepart;
-                $stok->barang_id = $request->barang ?? '';
+                $stok->barang_id = $barang->id ?? '';
                 $stok->jumlah = $request->jumlah{$i} ?? '';
                 $stok->satuan = $request->satuan{$i} ?? '';
-                $barang->stocks()->save($stok);
+                $data[$i]->stock()->save($stok);
             }
 
         }
