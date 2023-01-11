@@ -62,9 +62,11 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('/bpbs/options','BpbController@options')->name('bpbs.options');
     Route::resource('bpbs','BpbController');
     Route::resource('/detail_bpbs','DetailBpbController');
+
+    Route::get('/daftar_barangs/print','DaftarBarangController@print')->name('daftar_barangs.print');
+    Route::get('/daftar_barangs/laporan','DaftarBarangController@laporan')->name('daftar_barangs.laporan');
     Route::get('/daftar_barangs/flows','DaftarBarangController@flow')->name('daftar_barangs.flow');
     Route::resource('/daftar_barangs','DaftarBarangController');
-
     Route::get('/stock_spareparts/cariNamaBarangs','StockSparepartController@cariNamaBarang')->name('stock_spareparts.cariNamaBarangs');
     Route::get('/stock_spareparts/cariDataStocks','StockSparepartController@cariDataStock')->name('stock_spareparts.cariDataStocks');
     Route::resource('/stock_spareparts','StockSparepartController');

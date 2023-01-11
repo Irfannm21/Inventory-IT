@@ -262,6 +262,14 @@
                        Daftar Barang
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route("admin.daftar_barangs.laporan") }}" class="nav-link {{ request()->is('admin/npps') || request()->is('admin/npps/*') ? 'active' : '' }}">
+                        <i class="fas fa-sm fa-circle nav-icon">
+
+                        </i>
+                       Buat Laporan
+                    </a>
+                </li>
         </ul>
     </li>
 

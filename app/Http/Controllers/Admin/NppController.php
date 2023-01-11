@@ -36,7 +36,7 @@ class NppController extends Controller
         abort_unless(\Gate::allows('npp_create'), 403);
         // dd($request);
         $npp = new NPP;
-        $npp->kode = $request->kode;
+        $npp->kode = trim(ucwords($request->kode));
         $npp->tanggal = $request->tanggal;
         $npp->bagian_id = $request->bagian;
         $npp->save();
@@ -44,11 +44,11 @@ class NppController extends Controller
         $detail = [];
         foreach($request->nama as $i => $nama){
             $detail[] = [
-                'nama'  =>$nama ?? '',
+                'nama'  => trim(ucwords($nama)) ?? '',
                 'jumlah'=>$request->jumlah[$i]?? 1,
                 'satuan'=>$request->satuan[$i]?? '',
                 'stok'  =>$request->stok[$i]?? 0,
-                'keterangan'=>$request->keterangan[$i]??'',
+                'keterangan'=> trim(ucwords($request->keterangan[$i])) ??'',
             ];
         }
         $npp->details()->createMany($detail);
