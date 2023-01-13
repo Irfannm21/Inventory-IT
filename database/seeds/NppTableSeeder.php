@@ -10,6 +10,10 @@ class NppTableSeeder extends Seeder
 {
     public function run()
     {
+        //  13 Januari 2023
+        //  1. Report belum dijadikan table
+        //  2.
+
         $bagian = bagian_dept::where("nama","IT")->first();
 
         $bagian->npps()->createMany([

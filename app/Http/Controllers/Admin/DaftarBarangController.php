@@ -61,8 +61,23 @@ class DaftarBarangController extends Controller
     }
 
     public function laporan(){
-        $results = StockSparepart::with('barang','stockable.bpb')->get();
-        echo "<table>";
+        // 1. pisahkan dahulu yang masuk dan keluar
+        // 2. kemudian hitung semua data yang masuk dan keluar
+        $results =  StockSparepart::with('barang','stockable.bpb')->where('barang_id',35)->get();
+        $barangs = DaftarBarang::all();
+        dd($results->stockable_type);
+        dd($results->sum('jumlah'));
+            if($item->stockable_type == "App\Detail_bpb"){
+                $masuk = $item->sum('jumlah');
+                echo $item->jumlah;
+                echo $masuk . "<br>";
+            } else {
+                echo "Bon";
+            }
+
+
+        die();
+        echo "<table border='2'>";
         echo "<thead>";
         echo "<th>Kode</th>";
         echo "<th>Kelompok</th>";
@@ -76,18 +91,20 @@ class DaftarBarangController extends Controller
         echo "<th>Satuan</th>";
         echo "</thead>";
         echo "<tbody>";
-        foreach($results as $item) {
+        $masuk = 0;
+        foreach($barangs as $item) {
+            // $masuk = $item->stocks("Detail_bpb")->count('jumlah');
             echo "<tr>";
-            echo "<td>" . $item->barang->kode . "</td>";
-            echo "<td>" . $item->barang->kelompok . "</td>";
-            echo "<td>" . $item->barang->nama . "</td>";
+            echo "<td>" . $item->kode . "</td>";
+            echo "<td>" . $item->kelompok . "</td>";
+            echo "<td>" . $item->nama . "</td>";
+            echo "<td>" . 0 . "</td>";
+            echo "<td>" . $item->stocks()->sum('jumlah') . "</td>";
             echo "<td>" . 0 . "</td>";
             echo "<td>" . 0 . "</td>";
             echo "<td>" . 0 . "</td>";
             echo "<td>" . 0 . "</td>";
-            echo "<td>" . 0 . "</td>";
-            echo "<td>" . 0 . "</td>";
-            echo "<td>" . 0 . "</td>";
+            echo "<td>" . $item->satuan . "</td>";
             echo "</tr>";
         }
         echo "</tbody>";

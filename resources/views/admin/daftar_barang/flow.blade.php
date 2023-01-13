@@ -159,7 +159,7 @@
                                 baris += `<td>${value.stockable.bpb.tanggal}</td>`;
                                 baris +=
                                     "<td><span class='badge rounded-pill bg-success'>Saldo Masuk</td>";
-                                let total = value.jumlah;
+                                ""
                                 if ($.isNumeric(total)) {
                                     masuk += parseFloat(total);
                                 }
