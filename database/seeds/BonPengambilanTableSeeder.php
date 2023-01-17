@@ -12,7 +12,7 @@ class BonPengambilanTableSeeder extends Seeder
 {
     public function run()
     {
-        $detail = Detail_bpb::find(50);
+        $detail = Detail_bpb::find(66);
         $barang = DaftarBarang::find(35);
 
         $bon = new BonPengambilan;
@@ -23,7 +23,8 @@ class BonPengambilanTableSeeder extends Seeder
 
         $stok = new StockSparepart;
         $stok->barang_id = $barang->id;
-        $stok->jumlah = 3;
+        $stok->jumlah = 1;
+        $stok->tanggal = "2022-10-10";
         $stok->satuan = "Unit";
         $bon->bon()->save($stok);
 

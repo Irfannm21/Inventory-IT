@@ -61,19 +61,20 @@ class DaftarBarangController extends Controller
     }
 
     public function laporan(){
-        // 1. pisahkan dahulu yang masuk dan keluar
-        // 2. kemudian hitung semua data yang masuk dan keluar
         $results =  StockSparepart::with('barang','stockable.bpb')->where('barang_id',35)->get();
         $barangs = DaftarBarang::all();
-        dd($results->stockable_type);
-        dd($results->sum('jumlah'));
-            if($item->stockable_type == "App\Detail_bpb"){
-                $masuk = $item->sum('jumlah');
-                echo $item->jumlah;
+        // dd($results->stockable_type);
+        // dd($results->sum('jumlah'));
+
+        foreach($results as $item) {
+            // if($item->stockable_type == "App\Detail_bpb"){
+                echo $item->jumlah . "<br>";
+                $masuk = $results->where('stockable_type', 'App\Detail_bpb')->sum('jumlah');
                 echo $masuk . "<br>";
-            } else {
-                echo "Bon";
-            }
+            // } else {
+            //     echo "Bon";
+            // }
+        }
 
 
         die();
@@ -112,7 +113,9 @@ class DaftarBarangController extends Controller
     }
 
     public function print (Request $request) {
-        $results = bpb::whereBetween('tanggal',["",])->get();
-        dd($results);
+        $dari = $request->dari;
+        $sampai = $request->sampai;
+        $results = StockSparepart::whereBetween('');
+        dd($request->all());
     }
 }

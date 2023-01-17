@@ -152,6 +152,7 @@
                         let keluar = 0;
 
                         for (let value of response) {
+                            let total = value.jumlah;
                             baris += `<tr data-entry-id=${value.id}>`;
                                 baris += `<td></td>`;
                             if (value.stockable_type == "App\\Detail_bpb") {
@@ -159,7 +160,6 @@
                                 baris += `<td>${value.stockable.bpb.tanggal}</td>`;
                                 baris +=
                                     "<td><span class='badge rounded-pill bg-success'>Saldo Masuk</td>";
-                                ""
                                 if ($.isNumeric(total)) {
                                     masuk += parseFloat(total);
                                 }
@@ -175,6 +175,7 @@
                             baris += `<td>${value.jumlah}</td>`;
                             baris += `</tr>`;
                         }
+                        console.log(masuk);
                         let hasil = masuk - keluar;
                         baris += "<tr>";
                         baris += "<td></td>";

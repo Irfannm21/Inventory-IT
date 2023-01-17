@@ -7,6 +7,9 @@
     </div>
 
     <div class="card-body">
+        <div class="card-title">
+            <h5 class="title">Buat Laporan Bulanan Mutasi Barang</h5>
+        </div>
         <form action="{{ route("admin.daftar_barangs.print") }}" method="GET" enctype="multipart/form-data">
             @csrf
             <div class="form-group">

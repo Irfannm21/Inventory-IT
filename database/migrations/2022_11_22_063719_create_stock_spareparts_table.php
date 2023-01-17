@@ -17,6 +17,7 @@ class CreateStockSparepartsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('barang_id')->constrained()->onDelete('barang_id');
             $table->morphs('stockable');
+            $table->date('tanggal');
             $table->integer('jumlah');
             $table->string('satuan');
             $table->timestamps();

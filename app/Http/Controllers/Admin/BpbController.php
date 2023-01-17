@@ -38,6 +38,7 @@ class BpbController extends Controller
     }
 
     public function store(StoreBpbRequest $request){
+
         if($request->supplierId == true) {
             $supplier = supplier::find($request->supplierId);
         } else {
@@ -69,12 +70,11 @@ class BpbController extends Controller
                 "detail_id" => $request->detail_id[$i] ?? '',
             ];
         }
-
-
         $data = $bpb->detail_bpbs()->createMany($detail);
 
         $faker = Faker::Create('id_ID');
 
+        $tanggal = $request->tanggal;
         foreach($request->barang_id as $i => $tt) {
 
             if($request->barang_id[$i] == null) {
@@ -89,6 +89,7 @@ class BpbController extends Controller
                 $stok = new StockSparepart;
                 $stok->barang_id = $barang->id  ?? '';
                 $stok->jumlah = $request->jumlah{$i} ?? '';
+                $stok->tanggal = $tanggal;
                 $stok->satuan = $request->satuan{$i} ?? '';
 
                 $data[$i]->stock()->save($stok);
@@ -99,6 +100,7 @@ class BpbController extends Controller
                 $stok = new StockSparepart;
                 $stok->barang_id = $barang->id ?? '';
                 $stok->jumlah = $request->jumlah{$i} ?? '';
+                $stok->tanggal = $request->tanggal;
                 $stok->satuan = $request->satuan{$i} ?? '';
                 $data[$i]->stock()->save($stok);
             }
@@ -179,6 +181,7 @@ class BpbController extends Controller
 
     public function destroy(Request $bpb, $id) {
         $result = bpb::findOrFail($id);
+        $result->detail_bpbs()->delete();
         $result->delete();
         return back();
     }
