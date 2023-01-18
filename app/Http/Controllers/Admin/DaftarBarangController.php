@@ -63,21 +63,20 @@ class DaftarBarangController extends Controller
     public function laporan(){
         $results =  StockSparepart::with('barang','stockable.bpb')->where('barang_id',35)->get();
         $barangs = DaftarBarang::all();
-        // dd($results->stockable_type);
+        // dd($barangs->stocks());
         // dd($results->sum('jumlah'));
 
         foreach($results as $item) {
             // if($item->stockable_type == "App\Detail_bpb"){
-                echo $item->jumlah . "<br>";
+                // echo $item->jumlah . "<br>";
                 $masuk = $results->where('stockable_type', 'App\Detail_bpb')->sum('jumlah');
-                echo $masuk . "<br>";
+                // echo $masuk . "<br>";
             // } else {
             //     echo "Bon";
             // }
         }
 
 
-        die();
         echo "<table border='2'>";
         echo "<thead>";
         echo "<th>Kode</th>";
@@ -94,17 +93,19 @@ class DaftarBarangController extends Controller
         echo "<tbody>";
         $masuk = 0;
         foreach($barangs as $item) {
-            // $masuk = $item->stocks("Detail_bpb")->count('jumlah');
-            echo "<tr>";
-            echo "<td>" . $item->kode . "</td>";
+             $masuk = $item->stocks()->where('stockable_type', 'App\Detail_bpb')->sum('jumlah');
+             $keluar = $item->stocks()->where('stockable_type', 'App\BonPengambilan')->sum('jumlah');
+            $total = $masuk - $keluar;
+             echo "<tr>";
+             echo "<td>" . $item->kode . "</td>";
             echo "<td>" . $item->kelompok . "</td>";
             echo "<td>" . $item->nama . "</td>";
             echo "<td>" . 0 . "</td>";
-            echo "<td>" . $item->stocks()->sum('jumlah') . "</td>";
-            echo "<td>" . 0 . "</td>";
-            echo "<td>" . 0 . "</td>";
-            echo "<td>" . 0 . "</td>";
-            echo "<td>" . 0 . "</td>";
+            echo "<td>" . $masuk . "</td>";
+            echo "<td>" . $keluar . "</td>";
+            echo "<td>" . $total . "</td>";
+            echo "<td>" . $total . "</td>";
+            echo "<td>" . 0  . "</td>";
             echo "<td>" . $item->satuan . "</td>";
             echo "</tr>";
         }
