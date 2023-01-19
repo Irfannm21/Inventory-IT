@@ -23,7 +23,7 @@ class CreateKliensTable extends Migration
             $table->bigIncrements('id');
             $table->string('kode')->unique();
             $table->unsignedBigInteger('karyawan_id')->unique();
-            $table->unsignedBigInteger('printer_id')->unique();
+            $table->unsignedBigInteger('printer_id')->nullable();
             $table->unsignedBigInteger('komputer_id')->unique();
             $table->timestamps();
 

@@ -352,31 +352,54 @@ class PermissionsTableSeeder extends Seeder
             //     'title'      => 'komputer_delete',
             //     'created_at' => '2019-04-15 19:14:42',
             //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'barang_access',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'barang_create',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'barang_edit',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'barang_show',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'barang_delete',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
             // ]
-
-
             [
-                'title'      => 'barang_access',
+                'title'      => 'klien_access',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ],
             [
-                'title'      => 'barang_create',
+                'title'      => 'klien_create',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ],
             [
-                'title'      => 'barang_edit',
+                'title'      => 'klien_edit',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ],
             [
-                'title'      => 'barang_show',
+                'title'      => 'klien_show',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ],
             [
-                'title'      => 'barang_delete',
+                'title'      => 'klien_delete',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ]

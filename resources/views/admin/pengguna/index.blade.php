@@ -24,7 +24,10 @@
 
                         </th>
                         <th>
-                            Nama
+                            Kode
+                        </th>
+                        <th>
+                            Nama Karyawan
                         </th>
                         <th>
                             Komputer ID
@@ -44,13 +47,16 @@
 
                             </td>
                             <td>
+                                {{$value->kode ?? ''}}
+                            </td>
+                            <td>
                                 {{ $value->karyawan->nama ?? '' }}
                             </td>
                             <td>
                                 <a href="{{route('admin.komputers.show', $value->komputer->id)}}"> {{ $value->komputer->kode ?? '' }}</a>
                             </td>
                             <td>
-                                <a href="{{route('admin.printers.show', $value->printer->id)}}"> {{ $value->printer->kode ?? '' }}</a>
+                                <a href="{{route('admin.printers.show', $value->printer->id ?? '')}}"> {{ $value->printer->kode ?? '' }}</a>
                             </td>
 
                             <td>

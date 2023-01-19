@@ -41,26 +41,26 @@ class PerbaikanController extends Controller
             $result = komputer::find($request->nama);
         }
 
-        $stop = carbon::createFromFormat('H:i', $request->stop);
-        $selesai = carbon::createFromFormat('H:i', $request->selesai);
+        // $stop = carbon::createFromFormat('H:i', $request->stop);
+        // $selesai = carbon::createFromFormat('H:i', $request->selesai);
 
-        $detik = $selesai->diffInSeconds($stop);
+        // $detik = $selesai->diffInSeconds($stop);
 
-        $day = $selesai->diffInDays($selesai->copy()->addSeconds($detik));
-        $jam = $selesai->diffInHours($selesai->copy()->addSeconds($detik)->subDays($day));
-        $menit = $selesai->diffInMinutes($selesai->copy()->addSeconds($detik)->subDays($day)->subHours($jam));
+        // $day = $selesai->diffInDays($selesai->copy()->addSeconds($detik));
+        // $jam = $selesai->diffInHours($selesai->copy()->addSeconds($detik)->subDays($day));
+        // $menit = $selesai->diffInMinutes($selesai->copy()->addSeconds($detik)->subDays($day)->subHours($jam));
 
-        $a = CarbonInterval::hours($jam)->minutes($menit);
+        // $a = CarbonInterval::hours($jam)->minutes($menit);
 
-        $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
+        // $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
 
         $perbaikan =  new Perbaikan;
         $perbaikan->tanggal = $request->tanggal;
         $perbaikan->kerusakan = $request->kerusakan;
         $perbaikan->tindakan = $request->tindakan;
-        $perbaikan->stop = $request->stop;
-        $perbaikan->mulai = $request->selesai;
-        $perbaikan->total = $totall;
+        // $perbaikan->stop = $request->stop;
+        // $perbaikan->mulai = $request->selesai;
+        // $perbaikan->total = $totall;
         $perbaikan->petugas = $request->petugas;
 
         $result->perbaikans()->save($perbaikan);
@@ -134,7 +134,7 @@ class PerbaikanController extends Controller
         if($request->nama == 'komputer') {
             return komputer::select('id','kode')->get();
         } elseif ($request->nama == 'printer') {
-            return printer::select('id','nama as kode')->get();
+            return printer::has('klien')->select('id','nama as kode')->get();
         } elseif ($request->nama == 'TableBarangJaringan') {
             return TableBarangJaringan::select('id','kode')->get();
         } elseif ($request->nama == 'pengguna') {

@@ -38,7 +38,6 @@ class PrinterController extends Controller
 
    public function edit(printer $printer)
    {
-    dd($printer);
         abort_unless(\Gate::allows('printer_edit'), 403);
         return view('admin.printer.edit', compact('printer'));
    }

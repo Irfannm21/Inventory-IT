@@ -1,6 +1,3 @@
-@php
-    dd($printer);
-@endphp
 @extends('layouts.admin')
 @section('content')
 

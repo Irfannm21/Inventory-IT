@@ -35,9 +35,9 @@
                         <th>
                             Tindakan
                         </th>
-                        <th>
+                        {{-- <th>
                             Petugas
-                        </th>
+                        </th> --}}
                         <th>
                             &nbsp;
                         </th>
@@ -61,9 +61,9 @@
                             <td>
                                 {{ $value->tindakan ?? '' }}
                             </td>
-                            <td>
+                            {{-- <td>
                                 {{ $value->petugas ?? '' }}
-                            </td>
+                            </td> --}}
 
                             <td>
                                 {{-- @can('perbaikan_show')

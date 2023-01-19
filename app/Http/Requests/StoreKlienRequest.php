@@ -27,7 +27,6 @@ class StoreKlienRequest extends FormRequest
     {
         return [
             'karyawan_id' =>   'required',
-            'printer_id' =>   'required',
             'komputer_id' => 'required',
         ];
     }

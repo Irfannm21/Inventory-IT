@@ -19,11 +19,11 @@ class CreatePerbaikanTable extends Migration
             $table->morphs('hardwareable');
             $table->string("kerusakan");
             $table->string("tindakan");
-            $table->time("stop");
-            $table->time("mulai");
-            $table->time("total");
+            $table->time("stop")->nullable(); // Opsional
+            $table->time("mulai")->nullable(); // Opsional
+            $table->time("total")->nullable(); // Opsional
             $table->unsignedBigInteger('bon_id')->constrained()->onDelete('cascade')->nullable();
-            $table->string('petugas');
+            $table->string('petugas')->nullable(); // Opsional
             $table->timestamps();
 
             $table->foreign('bon_id')->references('id')->on('bon_pengambilans');
