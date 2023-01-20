@@ -12,6 +12,8 @@ use App\detail_npp;
 use App\DaftarBarang;
 use App\StockSparepart;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+
 class DaftarBarangController extends Controller
 {
     public function index() {
@@ -61,16 +63,21 @@ class DaftarBarangController extends Controller
     }
 
     public function laporan(){
-         $masuk = $item->stocks()->where('stockable_type', 'App\Detail_bpb')->sum('jumlah');
-             $keluar = $item->stocks()->where('stockable_type', 'App\BonPengambilan')->sum('jumlah');
-            $total = $masuk - $keluar;
-
+        //  $masuk = $item->stocks()->where('stockable_type', 'App\Detail_bpb')->sum('jumlah');
+        //      $keluar = $item->stocks()->where('stockable_type', 'App\BonPengambilan')->sum('jumlah');
+        //     $total = $masuk - $keluar;
+            $results = DaftarBarang::with('stocks')->where('barang_id',35)->get();
+        dd($results);
+            return view('admin.daftar_barang.laporan');
     }
 
     public function print (Request $request) {
-        $dari = $request->dari;
-        $sampai = $request->sampai;
-        $results = StockSparepart::whereBetween('');
-        dd($request->all());
+        $from = $request->dari;
+        $to = $request->sampai;
+
+        $results = DaftarBarang::with('stocks')->whereBetween('id',[5,7])->get();
+        dd($results);
+        $pdf = PDF::loadView('admin.daftar_barang.print',['result' => $results])->setPaper('a4'.'potrait');
+        return $pdf->stream();
     }
 }
