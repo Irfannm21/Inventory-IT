@@ -182,7 +182,7 @@
                         baris += "<td></td>";
                         baris += "<td> </td>";
                         baris += "<td>Saldo </td>";
-                        baris += `<td>${masuk}</td>`;
+                        baris += `<td>${hasil}</td>`;
                         baris += "</tr>";
 
                         $('#content').html(baris);

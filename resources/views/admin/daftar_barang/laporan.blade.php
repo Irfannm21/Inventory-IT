@@ -21,7 +21,7 @@
                 <input type="date" class="form-control" name="sampai">
             </div>
 
-            <input class="btn btn-primary" type="submit" value="{{ trans('global.save') }}">
+            <input class="btn btn-primary" type="submit" value=" {{ trans('global.save') }}">
         </form>
     </div>
 </div>

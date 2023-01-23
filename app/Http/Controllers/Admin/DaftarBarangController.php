@@ -13,6 +13,9 @@ use App\DaftarBarang;
 use App\StockSparepart;
 
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
+
 
 class DaftarBarangController extends Controller
 {
@@ -66,18 +69,25 @@ class DaftarBarangController extends Controller
         //  $masuk = $item->stocks()->where('stockable_type', 'App\Detail_bpb')->sum('jumlah');
         //      $keluar = $item->stocks()->where('stockable_type', 'App\BonPengambilan')->sum('jumlah');
         //     $total = $masuk - $keluar;
-            $results = DaftarBarang::with('stocks')->where('barang_id',35)->get();
-        dd($results);
+
             return view('admin.daftar_barang.laporan');
     }
 
-    public function print (Request $request) {
+public function print (Request $request) {
         $from = $request->dari;
         $to = $request->sampai;
 
-        $results = DaftarBarang::with('stocks')->whereBetween('id',[5,7])->get();
-        dd($results);
-        $pdf = PDF::loadView('admin.daftar_barang.print',['result' => $results])->setPaper('a4'.'potrait');
+        $before_month = Carbon::create($from)->sub('1 month');
+        $before_from = $before_month->startOfMonth()->format('Y-m-d');
+        $before_last = $before_month->endOfMonth()->format('Y-m-d');;
+
+
+        $result = DaftarBarang::with(['stocks' => function ($q) {
+            $q->whereBetween('tanggal', ['2023-01-01','2023-01-01']);
+        }])->OrderBy('nama',"ASC")->get();
+
+
+        $pdf = PDF::loadView('admin.daftar_barang.print',compact('result','from','to','before_from','before_last'))->setPaper('a4'.'potrait');
         return $pdf->stream();
     }
 }

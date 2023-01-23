@@ -165,7 +165,7 @@
     <script>
         $(document).ready(function() {
             $(document)
-                .on('click', '#addBtn', function() {
+                .on('click', '#addBtn'  , function() {
                     $('#detailTBody').append($('#detailTmpl').html());
                 })
                 .on('change', '#kode_bpb', function() {
