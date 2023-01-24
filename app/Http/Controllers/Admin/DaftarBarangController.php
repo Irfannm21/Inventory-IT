@@ -79,7 +79,7 @@ public function print (Request $request) {
 
         $before_month = Carbon::create($from)->sub('1 month');
         $before_from = $before_month->startOfMonth()->format('Y-m-d');
-        $before_last = $before_month->endOfMonth()->format('Y-m-d');;
+        $before_to = $before_month->endOfMonth()->format('Y-m-d');;
 
 
         $result = DaftarBarang::with(['stocks' => function ($q) {
@@ -87,7 +87,7 @@ public function print (Request $request) {
         }])->OrderBy('nama',"ASC")->get();
 
 
-        $pdf = PDF::loadView('admin.daftar_barang.print',compact('result','from','to','before_from','before_last'))->setPaper('a4'.'potrait');
+        $pdf = PDF::loadView('admin.daftar_barang.print',compact('result','from','to','before_from','before_to'))->setPaper('a4'.'potrait');
         return $pdf->stream();
     }
 }

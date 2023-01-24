@@ -10,6 +10,8 @@
                     {{ trans('global.dashboard') }}
                 </a>
             </li>
+            @can('user_access')
+
             {{-- User Management --}}
             <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
@@ -46,9 +48,12 @@
                 </ul>
             </li>
             {{-- End User Management --}}
+            @endcan
+
+            @can('karyawan')
 
             {{-- Karyawan Management --}}
-                 <li class="nav-item nav-dropdown">
+            <li class="nav-item nav-dropdown">
                     <a class="nav-link  nav-dropdown-toggle">
                         <i class="fas fa-users nav-icon">
 
@@ -75,9 +80,12 @@
                     </ul>
                 </li>
                 {{-- End Karyawan Management --}}
+                @endcan
 
-                {{-- Absen Management --}}
-                    <li class="nav-item nav-dropdown">
+                @can('it_access')
+
+                {{-- IT Management --}}
+                <li class="nav-item nav-dropdown">
                         <a class="nav-link  nav-dropdown-toggle">
                             <i class="fas fa-calendar-check-o nav-icon">
 
@@ -120,10 +128,12 @@
                                     Daftar Perbaikan
                                 </a>
                             </li>
-                    </ul>
-                </li>
-                {{-- End Absen Management --}}
+                        </ul>
+                    </li>
+                    {{-- IT Management --}}
+                    @endcan
 
+                @can('npp_access')
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link  nav-dropdown-toggle">
                         <i class="fas fa-list nav-icon">
@@ -158,14 +168,18 @@
                                 NPP Diproses
                             </a>
                         </li>
-                </ul>
-            </li>
+                    </ul>
+                </li>
+                @endcan
 
-            <li class="nav-item nav-dropdown">
-                <a class="nav-link  nav-dropdown-toggle">
-                    <i class="fas fa-list nav-icon">
+                @can("bpb_access")
+                    {{-- BPB MANAGEMENT --}}
 
-                    </i>
+                    <li class="nav-item nav-dropdown">
+                        <a class="nav-link  nav-dropdown-toggle">
+                            <i class="fas fa-list nav-icon">
+
+                            </i>
                     Daftar BPB
                 </a>
                 <ul class="nav-dropdown-items">
@@ -182,7 +196,7 @@
                             <i class="fas fa-file    nav-icon">
 
                             </i>
-                           BPB Administrasi
+                            BPB Administrasi
                         </a>
                     </li>
                     <li class="nav-item">
@@ -214,7 +228,7 @@
                             <i class="fas fa-file    nav-icon">
 
                             </i>
-                           BPB PT
+                            BPB PT
                         </a>
                     </li>
                     <li class="nav-item">
@@ -233,9 +247,10 @@
                            BPB UM
                         </a>
                     </li>
-
             </ul>
         </li>
+        {{-- END BPB MANAGEMENT --}}
+    @endcan
 
 
         <li class="nav-item nav-dropdown">

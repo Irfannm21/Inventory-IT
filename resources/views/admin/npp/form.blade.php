@@ -125,7 +125,7 @@
                 <label for="">Satuan</label>
                 <select name="satuan[]" class="form-control" id="">
                     <option value="" selected>-- Pilih --</option>
-                    <option value="Pcs">Pcs</option>
+                    <option value="Pcs[]">Pcs</option>
                     <option value="Unit">Unit</option>
                     <option value="Pack">Pack</option>
                     <option value="Dus">Dus</option>
@@ -200,7 +200,7 @@
             <div class="form-group {{ $errors->has('satuan[]') ? 'has-error' : '' }}">
                 <select name="satuan[]" class="form-control" id="">
                     <option value="" selected>-- Pilih --</option>
-                    <option value="Pcs[]">Pcs</option>
+                    <option value="Pcs">Pcs</option>
                     <option value="Unit">Unit</option>
                     <option value="Pack">Pack</option>
                     <option value="Dus">Dus</option>

@@ -377,29 +377,54 @@ class PermissionsTableSeeder extends Seeder
             //     'title'      => 'barang_delete',
             //     'created_at' => '2019-04-15 19:14:42',
             //     'updated_at' => '2019-04-15 19:14:42',
-            // ]
+            // ],
+            // [
+            //     'title'      => 'klien_access',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'klien_create',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'klien_edit',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'klien_show',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
+            // [
+            //     'title'      => 'klien_delete',
+            //     'created_at' => '2019-04-15 19:14:42',
+            //     'updated_at' => '2019-04-15 19:14:42',
+            // ],
             [
-                'title'      => 'klien_access',
+                'title'      => 'karyawan_access',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ],
             [
-                'title'      => 'klien_create',
+                'title'      => 'karyawan_create',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ],
             [
-                'title'      => 'klien_edit',
+                'title'      => 'karyawan_edit',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ],
             [
-                'title'      => 'klien_show',
+                'title'      => 'karyawan_show',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ],
             [
-                'title'      => 'klien_delete',
+                'title'      => 'karyawan_delete',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
             ]

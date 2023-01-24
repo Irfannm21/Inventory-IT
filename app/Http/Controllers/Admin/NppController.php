@@ -10,6 +10,7 @@ use App\Http\Requests\UpdateNppRequest;
 use App\npp;
 use App\detail_npp;
 use App\bpb;
+use App\Detail_bpb;
 use App\perbaikan;
 use App\departemen;
 use App\bagian_dept;
@@ -20,7 +21,7 @@ class NppController extends Controller
 {
     public function index()
     {
-        $results = npp::all();
+        $results = npp::orderBy('tanggal','DESC')->get();
         return view('admin.npp.index', compact('results'));
     }
 
@@ -29,6 +30,17 @@ class NppController extends Controller
         $dept = departemen::all()->pluck('nama','id');
         $bagian = bagian_dept::all()->pluck('nama','id');
         return view('admin.npp.create',compact('dept','bagian'));
+    }
+
+    public function show(Request $request, npp $npp) {
+        // dd($request->all());
+        dd($npp);
+        $npp->update([
+            'kode' => $request->kode,
+            'tanggal' => $request->tanggal,
+            'bagian_id' => $request->bagian,
+        ]);
+        return redirect()->route('admin.npps.index');
     }
 
     public function store(StoreNppRequest $request)
@@ -59,7 +71,6 @@ class NppController extends Controller
 
     public function edit(npp $npp)
     {
-        dd($npp);
         $dept = departemen::all()->pluck('nama','id');
         $bagian = bagian_dept::all()->pluck('nama','id');
         return view('admin.npp.edit-npp',compact('npp','dept','bagian'));

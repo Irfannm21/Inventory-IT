@@ -69,14 +69,14 @@
                 $before_masuk = $item
                     ->stocks()
                     ->where('stockable_type', 'App\Detail_bpb')
-                    ->whereBetWeen('tanggal',[$from,$to])
+                    ->whereBetWeen('tanggal',[$before_from,$before_to])
                     ->sum('jumlah');
                 $before_keluar = $item
                     ->stocks()
                     ->where('stockable_type', 'App\BonPengambilan')
-                    ->whereBetWeen('tanggal',[$from,$to])
+                    ->whereBetWeen('tanggal',[$before_from,$before_to])
                     ->sum('jumlah');
-                    $total_before = $masuk - $keluar;
+                    $total_before = $before_masuk - $before_keluar;
 
             @endphp
             <tr>

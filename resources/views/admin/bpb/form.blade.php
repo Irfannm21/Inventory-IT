@@ -252,12 +252,13 @@
                     @if (!isset($bpb))
                         <option value="" selected>-- Pilih --</option>
                     @endif
-                    <option value="Unit">Unit</option>
                     <option value="Pcs">Pcs</option>
-                    <option value="Kg">Kg</option>
-                    <option value="Meter">Meter</option>
-                    <option value="Inch">Inch</option>
+                    <option value="Unit">Unit</option>
+                    <option value="Pack">Pack</option>
                     <option value="Dus">Dus</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Liter">Liter</option>
+                    <option value="Meter">Meter</option>
                 </select>
                 @if ($errors->has('satuan'))
                     <em class="invalid-feedback">
@@ -315,11 +316,13 @@
                     @if (!isset($bpb))
                         <option value="" selected>-- Pilih --</option>
                     @endif
-                    <option value="unit">Unit</option>
-                    <option value="pcs">Pcs</option>
-                    <option value="kg">Kg</option>
-                    <option value="meter">Meter</option>
-                    <option value="inch">Inch</option>
+                    <option value="Pcs">Pcs</option>
+                    <option value="Unit">Unit</option>
+                    <option value="Pack">Pack</option>
+                    <option value="Dus">Dus</option>
+                    <option value="Kg">Kg</option>
+                    <option value="Liter">Liter</option>
+                    <option value="Meter">Meter</option>
                 </select>
                 @if ($errors->has('satuan'))
                     <em class="invalid-feedback">

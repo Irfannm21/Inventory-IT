@@ -36,6 +36,9 @@
                             Departemen
                         </th>
                         <th>
+                            Status
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -50,7 +53,7 @@
                                 {{ $value->kode ?? '' }}
                             </td>
                             <td>
-                                {{ $value->tanggal ?? '' }}
+                                {{ date('d-m-Y', strtotime($value->tanggal)) ?? '' }}
                             </td>
                             <td>
                                 {{ $value->bagian->nama ?? '' }}
@@ -59,6 +62,17 @@
                                 {{ $value->bagian->departemen->nama ?? '' }}
                             </td>
                             <td>
+                                <span class="badge badge-warning badge-pill align-items-center">Pending</span>
+                            </td>
+                            <td>
+                                @can("npp_access")
+                                <a class="btn btn-xs btn-success" style="color:black" href="{{ route("admin.npps.show", $value->id, "Status->Terima")}}">
+                                    Terima
+                                </a>
+                                <a class="btn btn-xs btn-danger" style="color:black" href="{{ route("admin.npps.show", $value->id)  }}">
+                                    Tolak
+                                </a>
+                                @endcan
                                 @can('npp_show')
                                     <a href="{{route('admin.npps.print',['npp' => $value->id])}}" class="btn btn-xs btn-dark" style="color:white">
                                         Print
