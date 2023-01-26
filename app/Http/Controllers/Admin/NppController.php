@@ -21,7 +21,7 @@ class NppController extends Controller
 {
     public function index()
     {
-        $results = npp::orderBy('tanggal','DESC')->get();
+        $results = npp::orderBy('tanggal','DESC')->get( );
         return view('admin.npp.index', compact('results'));
     }
 
@@ -51,6 +51,7 @@ class NppController extends Controller
         $npp->kode = trim(ucwords($request->kode));
         $npp->tanggal = $request->tanggal;
         $npp->bagian_id = $request->bagian;
+        $npp->status    = NULL;
         $npp->save();
 
         $detail = [];
@@ -69,7 +70,7 @@ class NppController extends Controller
         return redirect()->route('admin.npps.index');
     }
 
-    public function edit(npp $npp)
+    public function edit(Request $request, npp $npp)
     {
         $dept = departemen::all()->pluck('nama','id');
         $bagian = bagian_dept::all()->pluck('nama','id');
@@ -78,16 +79,17 @@ class NppController extends Controller
 
     public function update(UpdateNppRequest $request, npp $npp)
     {
+         $npp->update([
+                'kode' => $request->kode,
+                'tanggal' => $request->tanggal,
+                'bagian_id' => $request->bagian,
+                "status"    => $request->status,
+            ]);
 
-        $npp->update([
-            'kode' => $request->kode,
-            'tanggal' => $request->tanggal,
-            'bagian_id' => $request->bagian
-        ]);
         return redirect()->route('admin.npps.index');
     }
 
-    public function destroy(npp $npp)
+    public function destroy(Request $request, npp $npp)
     {
         $npp->details()->delete();
         $npp->delete();
@@ -95,12 +97,12 @@ class NppController extends Controller
     }
 
     public function Detail(){
-        $results = detail_npp::all();
+        $results = detail_npp::orderBY('nama',"DESC")->get();
         return view('admin.npp.detail-npp', compact('results'));
     }
 
     public function diProses(){
-        $results = detail_npp::with('detail_bpbs')->get();
+        $results = detail_npp::with('detail_bpbs')->orderBY('created_at',"DESC")->get();
         return view('admin.npp.npp-diProses', compact('results'));
     }
 

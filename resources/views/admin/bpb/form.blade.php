@@ -332,7 +332,7 @@
             </div>
         </td>
         <td>
-            <button class="btn btn-danger removeBtn">
+            <button class="btn btn-danger removeBtn" href="#">
                 Del
             </button>
         </td>

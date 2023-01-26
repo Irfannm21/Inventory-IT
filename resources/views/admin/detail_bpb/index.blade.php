@@ -1,6 +1,3 @@
-@php
-    dd($results->stockable);
-@endphp
 @extends('layouts.admin')
 @section('content')
     @can('bpb_create')
@@ -61,7 +58,7 @@
                                     {{ $value->bpb->npp->kode ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $value->bpb->tanggal ?? '' }}
+                                    {{ date('d-m-Y', strtotime($value->bpb->tanggal)) }}
                                 </td>
 
                                 </td>
@@ -69,7 +66,7 @@
                                     {{ $value->detail_npp->nama  ?? '' }}
                                 </td>
                                 <td>
-                                    {{ $value->id ?? '' . " " . $value->id  ?? '' }}
+                                    {{ $value->stock->jumlah . "  " . $value->stock->satuan }}
                                 </td>
 
                                 <td>

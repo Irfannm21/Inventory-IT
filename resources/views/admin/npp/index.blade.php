@@ -62,23 +62,19 @@
                                 {{ $value->bagian->departemen->nama ?? '' }}
                             </td>
                             <td>
-                                <span class="badge badge-warning badge-pill align-items-center">Pending</span>
+                                @if ($value->status == NULL)
+                                    <span class="badge badge-warning badge-pill align-items-center">Pending</span>
+                                @elseif(($value->status == "Disetujui"))
+                                <span class="badge badge-success badge-pill align-items-center">{{$value->status}}</span>
+                                @else
+                                <span class="badge badge-danger badge-pill align-items-center">{{$value->status}}</span>
+                                @endif
                             </td>
                             <td>
-                                @can("npp_access")
-                                <a class="btn btn-xs btn-success" style="color:black" href="{{ route("admin.npps.show", $value->id, "Status->Terima")}}">
-                                    Terima
-                                </a>
-                                <a class="btn btn-xs btn-danger" style="color:black" href="{{ route("admin.npps.show", $value->id)  }}">
-                                    Tolak
-                                </a>
-                                @endcan
-                                @can('npp_show')
-                                    <a href="{{route('admin.npps.print',['npp' => $value->id])}}" class="btn btn-xs btn-dark" style="color:white">
+                                @can('npp_access')
+                                    <a href="{{route('admin.npps.print',['npp' => $value->id])}}" class="btn btn-xs btn-dark" style="color:white" target="_blank">
                                         Print
                                     </a>
-                                @endcan
-                                @can('npp_edit')
                                 <a class="btn btn-xs btn-primary" style="color:black" href="{{ route("admin.npps.edit", $value->id)  }}">
                                     {{ trans('global.edit') }}
                                 </a>
@@ -88,7 +84,7 @@
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
+                                       </form>
                                 @endcan
                             </td>
                         </tr>

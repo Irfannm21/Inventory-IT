@@ -98,6 +98,27 @@
                                 *Pilih Bagian
                         </td>
                     </tr>
+                    <tr>
+                        <td class="px-3 ">
+                            <label for="bagian">Status</label>
+                        </td>
+
+                        <td class="pt-3">
+                            <select name="status" id="status" class="form-control">
+                               <option value="">-- Pilih --</option>
+                               <option value="{{NULL}}">Pending</option>
+                               <option value="Disetujui">Disetujui</option>
+                               <option value="Ditolak">Ditolak</option>
+                            </select>
+                            @if ($errors->has('status'))
+                                <em class="invalid-feedback">
+                                    {{ $errors->first('status') }}
+                            @endif
+                            </em>
+                            <p class="helper-block text-muted">
+                                *Pilih Bagian
+                        </td>
+                    </tr>
                 </table>
 
                 <div>

@@ -188,7 +188,7 @@
                             <i class="fas fa-file nav-icon">
 
                             </i>
-                           Detail Data BPB
+                            Daftar Barang Datang
                         </a>
                     </li>
                     <li class="nav-item">

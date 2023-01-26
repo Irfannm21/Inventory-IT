@@ -68,6 +68,7 @@ class BpbController extends Controller
         foreach ($request->detail_id as $i => $nama) {
             $detail[] = [
                 "detail_id" => $request->detail_id[$i] ?? '',
+                "jumlah" => $request->jumlah[$i] ?? '',
             ];
         }
         $data = $bpb->detail_bpbs()->createMany($detail);

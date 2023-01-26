@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddStatusToKeterangan extends Migration
+class AddJumlahToDetailBpbs extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddStatusToKeterangan extends Migration
      */
     public function up()
     {
-        Schema::table('npps', function (Blueprint $table) {
-            $table->string('keterangan')->nullable()->after('status');
+        Schema::table('detail_bpbs', function (Blueprint $table) {
+            $table->integer('jumlah')->nullable()->after("detail_id");
         });
     }
 
@@ -25,8 +25,8 @@ class AddStatusToKeterangan extends Migration
      */
     public function down()
     {
-        Schema::table('npps', function (Blueprint $table) {
-            $table->dropColumn('keterangan');
+        Schema::table('detail_bpbs', function (Blueprint $table) {
+            $table->dropColumn('jumlah');
         });
     }
 }
