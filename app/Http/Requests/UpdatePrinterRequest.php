@@ -25,9 +25,8 @@ class UpdatePrinterRequest extends FormRequest
     public function rules()
     {
         return [
-            "nama" => [
-                'required',
-            ],
+            "tanggal" => "required",
+            "nama"  => "required|max:50|min:3",
         ];
     }
 }

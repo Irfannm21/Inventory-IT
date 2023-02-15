@@ -74,6 +74,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('pembayarans/options','PembayaranController@options')->name('pembayarans.options');
 
     Route::resource('pembayarans','PembayaranController');
+    Route::resource('/emails','EmailBroadcasterController');
 });
 
 Route::get('json', function(){

@@ -5,6 +5,8 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Gate;
 use App\bpb;
+use Illuminate\Http\Request;
+
 class StoreBpbRequest extends FormRequest
 {
     /**
@@ -24,14 +26,35 @@ class StoreBpbRequest extends FormRequest
      */
     public function rules()
     {
+
+        // dd($request->all());
         return [
             'kode' =>   'required',
-            'tanggal' =>   'required',
-            'kelompok' =>   'required',
-            "npp_id" => "required",
-            "detail_id" => "required",
-            "jumlah" => "required",
-            "satuan" => "required",
         ];
+        // if('supplierId' == NULL) {
+        //     return [
+        //         'kode' =>   'required',
+        //         'tanggal' =>   'required',
+        //         'kelompok' =>   'required',
+        //         "npp_id" => "required",
+        //         "detail_id" => "required",
+        //         "jumlah" => "required",
+        //         "satuan" => "required",
+        //         "nama" => 'required',
+        //         "kota" => 'required',
+        //     ];
+        // } else {
+        //     return [
+        //         'kode' =>   'required',
+        //         'tanggal' =>   'required',
+        //         'kelompok' =>   'required',
+        //         "npp_id" => "required",
+        //         "detail_id" => "required",
+        //         "jumlah" => "required",
+        //         "satuan" => "required",
+        //         "supplierId" => 'required',
+        //     ];
+        // }
+
     }
 }

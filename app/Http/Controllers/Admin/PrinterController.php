@@ -7,6 +7,8 @@ use App\Http\Requests\StorePrinterRequest;
 use App\Http\Requests\UpdatePrinterRequest;
 use App\Http\Requests\MassDestroyPrinterRequest;
 use Illuminate\Http\Request;
+
+
 use App\printer;
 use App\Perbaikan;
 
@@ -32,6 +34,8 @@ class PrinterController extends Controller
 
    public function store(StorePrinterRequest $request)
    {
+        // $valudateData = $request->validate();
+
         $result = Printer::create($request->all());
         return redirect()->route('admin.printers.index');
    }

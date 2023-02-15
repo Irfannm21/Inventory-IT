@@ -10,6 +10,15 @@
                     {{ trans('global.dashboard') }}
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a href="{{ route("admin.emails.index") }}" class="nav-link">
+                    <i class="nav-icon fas fa-tachometer-alt">
+
+                    </i>
+                    Send Email
+                </a>
+            </li>
             @can('user_access')
 
             {{-- User Management --}}

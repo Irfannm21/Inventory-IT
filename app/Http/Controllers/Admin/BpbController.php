@@ -39,6 +39,8 @@ class BpbController extends Controller
 
     public function store(StoreBpbRequest $request){
 
+        dd($request->all());
+
         if($request->supplierId == true) {
             $supplier = supplier::find($request->supplierId);
         } else {

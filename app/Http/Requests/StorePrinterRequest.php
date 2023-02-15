@@ -24,10 +24,12 @@ class StorePrinterRequest extends FormRequest
      */
     public function rules()
     {
+
+        // dd($request->all());
         return [
-            'kode' =>   'required',
+            'kode' =>   'required|max:30|min:5|unique:printers,kode',
             'tanggal' => 'required',
-            'nama' => 'required',
+            'deskripsi' => 'required',
         ];
     }
 }

@@ -1,3 +1,5 @@
+{{-- {{ dd($errors, $errors->first('kode')) }} --}}
+
 <div class="row">
     <div class="col">
 
@@ -6,10 +8,11 @@
                 <h5 class="card-title text-center">Masukan Data BPB</h5>
                 <hr>
                 <div class="form-group row">
-                    <label for="kodeBpb" class="col-sm-3 col-form-label {{ $errors->has('kode') ? 'has-error' : '' }}">Kode Bpb</label>
+                    <label for="kodeBpb"
+                        class="col-sm-3 col-form-label {{ $errors->has('kode') ? 'has-error' : '' }}">Kode Bpb</label>
                     <div class="col-sm-9">
-                        <input type="text" name="kode" class="form-control" value="{{ old('kode', isset($bpb) ? $bpb->kode : '') }}"
-                            placeholder="Cth: 001/ENG/22">
+                        <input type="text" name="kode" class="form-control"
+                            value="{{ old('kode', isset($bpb) ? $bpb->kode : '') }}" placeholder="Cth: 001/ENG/22">
                         @if ($errors->has('kode'))
                             <em class="invalid-feedback">
                                 {{ $errors->first('kode') }}
@@ -21,10 +24,11 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="kelompok" class="col-sm-3 col-form-label {{ $errors->has('kelompok') ? 'has-error' : '' }}">Kelompok</label>
+                    <label for="kelompok"
+                        class="col-sm-3 col-form-label {{ $errors->has('kelompok') ? 'has-error' : '' }}">Kelompok</label>
                     <div class="col-sm-9">
                         <select name="kelompok" id="kelompok" class="form-control">
-                            <option value="" selected>-- Pilih --   </option>
+                            <option value="" selected>-- Pilih -- </option>
                             <option value="Sparepart">Sparepart</option>
                             <option value="Administrasi">Administrasi</option>
                             <option value="Elektrik">Elektrik</option>
@@ -44,7 +48,8 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="tanggal" class="col-sm-3 col-form-label {{ $errors->has('tanggal') ? 'has-error' : '' }}">Tanggal</label>
+                    <label for="tanggal"
+                        class="col-sm-3 col-form-label {{ $errors->has('tanggal') ? 'has-error' : '' }}">Tanggal</label>
                     <div class="col-sm-9">
                         <input type="date" name="tanggal" class="form-control"
                             value="{{ old('tanggal', isset($bpb) ? $bpb->tanggal : '') }}">
@@ -59,12 +64,14 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="kode_npp" class="col-sm-3 col-form-label {{ $errors->has('kode_npp') ? 'has-error' : '' }}">Kode NPP</label>
+                    <label for="kode_npp"
+                        class="col-sm-3 col-form-label {{ $errors->has('kode_npp') ? 'has-error' : '' }}">Kode
+                        NPP</label>
                     <div class="col-sm-9">
                         <select name="npp_id" id="npp_id" class="form-control select2">
                             <option>-- Pilih --</option>
                             @foreach ($npp as $i => $item)
-                            <option value="{{$i}}">{{$item}}</option>
+                                <option value="{{ $i }}">{{ $item }}</option>
                             @endforeach
                         </select>
                         @if ($errors->has('npp_id'))
@@ -92,7 +99,7 @@
                         <select name="supplierId" id="supplierId" class="form-control select2">
                             <option value="" selected>-- Pilih --</option>
                             @foreach ($suppliers as $i => $item)
-                            <option value="{{$i}}">{{$item}}</option>
+                                <option value="{{ $i }}">{{ $item }}</option>
                             @endforeach
                         </select>
                         @if ($errors->has('supplierId'))
@@ -107,43 +114,44 @@
         <div class="card">
             <div class="accordion" id="accordionSupplier">
                 <div class="card-body">
-                    <h5 class="card-title text-center"><button class="btn btn-xs btn-primary" type="button" data-toggle="collapse" data-target="#bukaSupplier">Buat Supplier Baru</button></h5>
+                    <div class="form-row">
+                        <div class="form-group col-md-8 {{ $errors->has('nama') ? 'has-error' : '' }}">
+                            <label for="">Nama Supplier</label>
+                            <input type="text" name="nama" class="form-control" value="{{ old('nama') }}"
+                                placeholder="Cth: PT.Insansandang Internusa">
+                            @if ($errors->has('nama'))
+                                <em class="invalid-feedback">
+                                    {{ $errors->first('nama') }}
+                                </em>
+                            @endif
+                            <p class="helper-block">
+                                {{ trans('*Wajib di isi') }}
+                            </p>
+                        </div>
+                        <div class="form-group col-md-4 {{ $errors->has('kota') ? 'has-error' : '' }}">
+                            <label for="">Kota Asal</label>
+                            <input type="text" name="kota" class="form-control" value="{{ old('kota') }}"
+                                placeholder="Cth: Bandung">
+                            @if ($errors->has('kota'))
+                                <em class="invalid-feedback">
+                                    {{ $errors->first('kota') }}
+                                </em>
+                            @endif
+                            <p class="helper-block">
+                                {{ trans('*Wajib di isi') }}
+                            </p>
+                        </div>
+
+                    </div>
+                    <h5 class="card-title text-center"><button class="btn btn-xs btn-primary" type="button"
+                            data-toggle="collapse" data-target="#bukaSupplier">Detail</button></h5>
                     <hr>
                     <div id="bukaSupplier" class="collapse" data-parent="#accordionSupplier">
                         <div class="form-row">
-                            <div class="form-group col-md-8 {{ $errors->has('nama') ? 'has-error' : '' }}">
-                                <label for="">Nama Supplier</label>
-                                <input type="text" name="nama" class="form-control" value="{{ old('nama') }}"
-                                    placeholder="Cth: PT.Insansandang Internusa">
-                                @if ($errors->has('nama'))
-                                    <em class="invalid-feedback">
-                                        {{ $errors->first('nama') }}
-                                    </em>
-                                @endif
-                                <p class="helper-block">
-                                    {{ trans('*Wajib di isi') }}
-                                </p>
-                            </div>
-                            <div class="form-group col-md-4 {{ $errors->has('kota') ? 'has-error' : '' }}">
-                                <label for="">Kota Asal</label>
-                                <input type="text" name="kota" class="form-control" value="{{ old('kota') }}"
-                                    placeholder="Cth: Bandung">
-                                @if ($errors->has('kota'))
-                                    <em class="invalid-feedback">
-                                        {{ $errors->first('kota') }}
-                                    </em>
-                                @endif
-                                <p class="helper-block">
-                                    {{ trans('*Wajib di isi') }}
-                                </p>
-                            </div>
-
-                        </div>
-                        <div class="form-row">
                             <div class="form-group col-md-4 {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <label for="">Alamat Email</label>
-                                <input type="text" name="email" class="form-control" value="{{ old('email') }}"
-                                    placeholder="Cth: info@insansandang.com">
+                                <input type="text" name="email" class="form-control"
+                                    value="{{ old('email') }}" placeholder="Cth: info@insansandang.com">
                                 @if ($errors->has('email'))
                                     <em class="invalid-feedback">
                                         {{ $errors->first('email') }}
@@ -152,8 +160,8 @@
                             </div>
                             <div class="form-group col-md-4 {{ $errors->has('telepon') ? 'has-error' : '' }}">
                                 <label for="">Nomor Telepon</label>
-                                <input type="text" name="telepon" class="form-control" value="{{ old('telepon') }}"
-                                    placeholder="Cth: 089681558231">
+                                <input type="text" name="telepon" class="form-control"
+                                    value="{{ old('telepon') }}" placeholder="Cth: 089681558231">
                                 @if ($errors->has('telepon'))
                                     <em class="invalid-feedback">
                                         {{ $errors->first('telepon') }}
@@ -181,7 +189,8 @@
                         <div class="form-row">
                             <div class="form-group col-md-12 {{ $errors->has('alamat') ? 'has-error' : '' }}">
                                 <label for="">Alamat Lengkap</label>
-                                <input type="text" name="alamat" class="form-control" value="{{ old('alamat') }}"
+                                <input type="text" name="alamat" class="form-control"
+                                    value="{{ old('alamat') }}"
                                     placeholder="Cth: Jl. Rancaekek No.KM 22, RW.5, Cinta Mulya, Kec. Jatinangor, Kabupaten Sumedang, Jawa Barat 45363">
                                 @if ($errors->has('alamat'))
                                     <em class="invalid-feedback">
@@ -193,7 +202,7 @@
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
 
 
 
@@ -221,10 +230,10 @@
             <div class="form-group {{ $errors->has('detail_id') ? 'has-error' : '' }}">
                 <label id="hasil">Nama di Inventori</label>
                 <select name="barang_id[]" id="" class="form-control select2">
-                            <option value="" selected> -- Pilih --</option>
-                        @foreach ($barang as $id => $item)
-                            <option class="form-control" value="{{$id}}">{{$item}}</option>
-                        @endforeach
+                    <option value="" selected> -- Pilih --</option>
+                    @foreach ($barang as $id => $item)
+                        <option class="form-control" value="{{ $id }}">{{ $item }}</option>
+                    @endforeach
                 </select>
                 @if ($errors->has('detail_id'))
                     <em class="invalid-feedback">
@@ -236,8 +245,7 @@
         <td style="width: 200px">
             <div class="form-group {{ $errors->has('jumlah') ? 'has-error' : '' }}">
                 <label for="">Jumlah</label>
-                <input type="number" name="jumlah[]" class="form-control"
-                    value="{{ old('jumlah', isset($bpb) ? $bpb->jumlah : '') }}">
+                <input type="number" name="jumlah[]" class="form-control" value="{{ old('jumlah') }}">
                 @if ($errors->has('jumlah'))
                     <em class="invalid-feedback">
                         {{ $errors->first('jumlah') }}
@@ -287,10 +295,10 @@
         <td style="width: 300px">
             <div class="form-group {{ $errors->has('detail_id') ? 'has-error' : '' }}">
                 <select name="barang_id[]" id="" class="form-control select2">
-                            <option value="" selected> -- Pilih --</option>
-                        @foreach ($barang as $id => $item)
-                            <option class="form-control" value="{{$id}}">{{$item}}</option>
-                        @endforeach
+                    <option value="" selected> -- Pilih --</option>
+                    @foreach ($barang as $id => $item)
+                        <option class="form-control" value="{{ $id }}">{{ $item }}</option>
+                    @endforeach
                 </select>
                 @if ($errors->has('detail_id'))
                     <em class="invalid-feedback">
@@ -362,11 +370,10 @@
                         }
                     })
                 });
-                $("#detailTBody").on("click",".removeBtn", function() {
-                    $(this).closest('tr').remove();
-                })
+            $("#detailTBody").on("click", ".removeBtn", function() {
+                $(this).closest('tr').remove();
+            })
 
         })
-
     </script>
 @endsection
