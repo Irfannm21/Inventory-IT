@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Perbaikan;
 use App\printer;
 use App\komputer;
-use App\Klien;
+use App\klien;
 use App\TableBarangJaringan;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
@@ -39,6 +39,8 @@ class PerbaikanController extends Controller
             $result = Printer::find($request->nama);
         } elseif($type == 'komputer') {
             $result = komputer::find($request->nama);
+        } elseif($type == "TableBarangJaringan") {
+            $result = TableBarangJaringan::find($request->nama);
         }
 
         // $stop = carbon::createFromFormat('H:i', $request->stop);
@@ -68,47 +70,48 @@ class PerbaikanController extends Controller
         return redirect()->route('admin.perbaikans.index');
     }
 
-    public function edit(Perbaikan $perbaikan)
+    public function edit($id)
     {
-        if($perbaikan->hardwareable_type == "App\printer") {
-            $results = printer::all()->pluck('nama','id');
-        } else {
-            $results = komputer::all()->pluck('kode', "id");
-        }
-
+        $results = Perbaikan::find($id);
+        $printer = printer::get(['id',"kode"]);
+        $komputer = komputer::get(["id","kode"]);
+        $jaringan = TableBarangJaringan::get(["id","kode"]);
         abort_unless(\Gate::allows('perbaikan_edit'), 403);
-        return view('admin.perbaikan.edit', compact('perbaikan','results'));
+        return view('admin.perbaikan.edit', compact('results','printer','komputer','jaringan'));
     }
 
     public function update(UpdatePerbaikanRequest $request, perbaikan $perbaikan)
     {
+        dd($request->all());
         $type = $request->type;
         if ($type == 'printer') {
             $result = Printer::find($request->nama);
         } elseif($type == 'komputer') {
             $result = komputer::find($request->nama);
+        } elseif($type == "TableBarangJaringan") {
+            $result = TableBarangJaringan::find($request->nama);
         }
 
-        $stop = carbon::createFromFormat('H:i', $request->stop);
-        $selesai = carbon::createFromFormat('H:i', $request->selesai);
+        // $stop = carbon::createFromFormat('H:i', $request->stop);
+        // $selesai = carbon::createFromFormat('H:i', $request->selesai);
 
-        $detik = $selesai->diffInSeconds($stop);
+        // $detik = $selesai->diffInSeconds($stop);
 
-        $day = $selesai->diffInDays($selesai->copy()->addSeconds($detik));
-        $jam = $selesai->diffInHours($selesai->copy()->addSeconds($detik)->subDays($day));
-        $menit = $selesai->diffInMinutes($selesai->copy()->addSeconds($detik)->subDays($day)->subHours($jam));
+        // $day = $selesai->diffInDays($selesai->copy()->addSeconds($detik));
+        // $jam = $selesai->diffInHours($selesai->copy()->addSeconds($detik)->subDays($day));
+        // $menit = $selesai->diffInMinutes($selesai->copy()->addSeconds($detik)->subDays($day)->subHours($jam));
 
-        $a = CarbonInterval::hours($jam)->minutes($menit);
+        // $a = CarbonInterval::hours($jam)->minutes($menit);
 
-        $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
+        // $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
 
         $result->perbaikans()->update([
            "tanggal" => $request->tanggal,
            "kerusakan" => $request->kerusakan,
            "tindakan" => $request->tindakan,
-           "stop" => $request->stop,
-           "mulai" => $request->selesai,
-           "total" => $totall,
+        //    "stop" => $request->stop,
+        //    "mulai" => $request->selesai,
+        //    "total" => $totall,
            "petugas" => $request->petugas,
         ]);
 
@@ -131,16 +134,11 @@ class PerbaikanController extends Controller
 
     public function cariItem(Request $request)
     {
-        if($request->nama == 'komputer') {
-            return komputer::select('id','kode')->get();
-        } elseif ($request->nama == 'printer') {
-            return printer::has('klien')->select('id','nama as kode')->get();
-        } elseif ($request->nama == 'TableBarangJaringan') {
-            return TableBarangJaringan::select('id','kode')->get();
-        } elseif ($request->nama == 'pengguna') {
-            return pengguna::select('id','kode')->get();
+        if($request->nama === "TableBarangJaringan") {
+            return TableBarangJaringan::get(['id','kode']);
         } else {
-            return $request->nama;
+            $model = "App\\".$request->nama;
+            return $model::with('klien')->get(['id','kode']);
         }
     }
 }

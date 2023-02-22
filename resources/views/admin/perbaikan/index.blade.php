@@ -27,6 +27,9 @@
                             Tanggal
                         </th>
                         <th>
+                            Nama Klien
+                        </th>
+                        <th>
                             Hardware ID
                         </th>
                         <th>
@@ -52,6 +55,9 @@
                             <td>
                                 {{ $value->tanggal ?? '' }}
                             </td>
+                            <td>
+                                {{$value->hardwareable->klien->kode ?? ''}}
+                             </td>
                             <td>
                                {{$value->hardwareable->kode ?? ''}}
                             </td>

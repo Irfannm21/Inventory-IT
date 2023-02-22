@@ -26,13 +26,14 @@ class StoreKomputerRequest extends FormRequest
     public function rules()
     {
         return [
-            'kode' =>   'required',
+            'kode' =>   'required|min:12|max:12|unique:komputers,kode',
             'system' =>   'required',
             'nomor_ip' => 'required',
             'motherboard' =>   'required',
             'processor' => 'required',
             'powersupply' => 'required',
             'ram' =>   'required',
+            'vga' => 'required',
             'disk' => 'required',
             'split' => 'required',
             'monitor1' => 'required',
