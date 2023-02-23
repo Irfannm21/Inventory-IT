@@ -27,6 +27,13 @@ class StorePerbaikanRequest extends FormRequest
     {
         return [
             'tanggal' => 'required',
+            'kerusakan' => 'required|min:3|max:50',
+            'tindakan' => 'required|min:3|max:50',
+            // 'stop' => 'required',
+            // 'selesai' => 'required',
+            // 'petugas' => 'required',
         ];
+
+
     }
 }

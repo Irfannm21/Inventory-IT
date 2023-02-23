@@ -6,9 +6,9 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\klien;
-use App\printer;
-use App\komputer;
+use App\Models\it\klien;
+use App\Models\it\printer;
+use App\Models\it\komputer;
 use App\master_karyawans;
 use App\Http\Requests\StoreKlienRequest;
 use App\Http\Requests\UpdateKlienRequest;

@@ -1,3 +1,4 @@
+
 @extends('layouts.admin')
 @section('content')
 @can('perbaikan_create')
@@ -38,9 +39,9 @@
                         <th>
                             Tindakan
                         </th>
-                        {{-- <th>
+                        <th>
                             Petugas
-                        </th> --}}
+                        </th>
                         <th>
                             &nbsp;
                         </th>
@@ -56,7 +57,7 @@
                                 {{ $value->tanggal ?? '' }}
                             </td>
                             <td>
-                                {{$value->hardwareable->klien->kode ?? ''}}
+                                {{-- {{$value->hardwareable->klien->kode ?? ''}} --}}
                              </td>
                             <td>
                                {{$value->hardwareable->kode ?? ''}}
@@ -67,9 +68,9 @@
                             <td>
                                 {{ $value->tindakan ?? '' }}
                             </td>
-                            {{-- <td>
+                            <td>
                                 {{ $value->petugas ?? '' }}
-                            </td> --}}
+                            </td>
 
                             <td>
                                 {{-- @can('perbaikan_show')

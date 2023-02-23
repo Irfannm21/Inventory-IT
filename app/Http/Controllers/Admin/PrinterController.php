@@ -9,8 +9,8 @@ use App\Http\Requests\MassDestroyPrinterRequest;
 use Illuminate\Http\Request;
 
 
-use App\printer;
-use App\Perbaikan;
+use App\Models\it\printer;
+use App\Models\it\Perbaikan;
 
 class PrinterController extends Controller
 {

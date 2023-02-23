@@ -1,6 +1,7 @@
 <?php
 
-namespace App;
+namespace App\Models\it;
+
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,9 +13,6 @@ class Perbaikan extends Model
         return $this->morphTo();
     }
 
-    public function bpb()
-    {
-        return $this->belongsTo('App\bpb','bpb_id');
-    }
+
 
 }

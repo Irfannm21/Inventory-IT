@@ -10,7 +10,7 @@
     </div>
 
     <div class="card-body">
-        <form action="{{ route("admin.perbaikans.update", [$results->id]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route("admin.perbaikans.update", $results->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             @include('admin.perbaikan.form')

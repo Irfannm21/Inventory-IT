@@ -8,6 +8,6 @@ class master_karyawans extends Model
 {
     public function klien()
     {
-        return $this->hasOne('App\klien');
+        return $this->hasOne('App\Models\it\klien');
     }
 }

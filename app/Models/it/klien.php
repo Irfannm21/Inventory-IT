@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models\it;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,7 +10,7 @@ class klien extends Model
 
     public function printer()
     {
-        return $this->belongsTo('App\printer');
+        return $this->belongsTo('App\Models\it\printer');
     }
 
     public function karyawan()
@@ -20,7 +20,7 @@ class klien extends Model
 
     public function komputer()
     {
-        return $this->belongsTo('App\komputer');
+        return $this->belongsTo('App\Models\it\komputer');
     }
 
 }

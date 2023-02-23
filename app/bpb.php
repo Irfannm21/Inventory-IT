@@ -22,6 +22,12 @@ class bpb extends Model
        return $this->hasMany('App\Detail_bpb');
    }
 
+   public function perbaikans()
+   {
+       return $this->hasMany('App\Models\it\perbaikan');
+   }
+
+
    public function pembayaran()
    {
     return $this->hasOne('App\pembayaran','bpb_id');

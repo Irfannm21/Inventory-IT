@@ -8,11 +8,11 @@ use App\Http\Requests\UpdatePerbaikanRequest;
 use App\Http\Requests\MassDestroyPerbaikanRequest;
 
 use Illuminate\Http\Request;
-use App\Perbaikan;
-use App\printer;
-use App\komputer;
-use App\klien;
-use App\TableBarangJaringan;
+use App\Models\it\Perbaikan;
+use App\Models\it\Printer;
+use App\Models\it\komputer;
+use App\Models\it\klien;
+use App\Models\it\TableBarangJaringan;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 
@@ -21,6 +21,11 @@ class PerbaikanController extends Controller
     public function index()
     {
         $results = Perbaikan::all();
+        foreach($results as $value) {
+            echo $value->hardwareable->klien->kode ?? '';
+        }
+
+        die();
         return view('admin.perbaikan.index', compact('results'));
     }
 
@@ -31,9 +36,10 @@ class PerbaikanController extends Controller
         return view('admin.perbaikan.create');
     }
 
-    public function store(request $request)
+    public function store(StorePerbaikanRequest $request)
     {
         // dd($request->all());
+
         $type = $request->type;
         if ($type == 'printer') {
             $result = Printer::find($request->nama);
@@ -80,18 +86,20 @@ class PerbaikanController extends Controller
         return view('admin.perbaikan.edit', compact('results','printer','komputer','jaringan'));
     }
 
-    public function update(UpdatePerbaikanRequest $request, perbaikan $perbaikan)
+    public function update(Perbaikan $perbaikan, Request $request)
     {
-        dd($request->all());
+        // dd($perbaikan->hardwareable_id);
         $type = $request->type;
         if ($type == 'printer') {
-            $result = Printer::find($request->nama);
+            $result = Printer::find($perbaikan->hardwareable_id);
+            $result2 = Printer::find($request->nama);
         } elseif($type == 'komputer') {
             $result = komputer::find($request->nama);
         } elseif($type == "TableBarangJaringan") {
             $result = TableBarangJaringan::find($request->nama);
         }
 
+        // dd($result);
         // $stop = carbon::createFromFormat('H:i', $request->stop);
         // $selesai = carbon::createFromFormat('H:i', $request->selesai);
 
@@ -106,6 +114,7 @@ class PerbaikanController extends Controller
         // $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
 
         $result->perbaikans()->update([
+            'hardwareable_id' => $result2->id,
            "tanggal" => $request->tanggal,
            "kerusakan" => $request->kerusakan,
            "tindakan" => $request->tindakan,

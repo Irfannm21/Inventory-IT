@@ -43,20 +43,20 @@
         @isset($results)
             @if ($results->hardwareable_type == 'App\printer')
                 @foreach ($printer as $id => $item)
-                    <option value="{{ $id }}"
+                    <option value="{{$item->id}}"
                         {{ (old('nama') || isset($results) ? $results->hardwareable_id : '') === $item->id ? 'selected' : '' }}>
                         {{ $item->kode }}</option>
                 @endforeach
             @elseif ($results->hardwareable_type == 'App\komputer')
                 @foreach ($komputer as $id => $item)
-                    <option value="{{ $id }}"
-                        {{ (old('nama') || isset($results) ? $results->hardwareable_id : '') === $id ? 'selected' : '' }}>
+                    <option value="{{$item->id}}"
+                        {{ (old('nama') || isset($results) ? $results->hardwareable_id : '') === $item->id ? 'selected' : '' }}>
                         {{ $item->kode }}</option>
                 @endforeach
             @else
                 @foreach ($jaringan as $id => $item)
-                    <option value="{{ $id }}"
-                        {{ (old('nama') || isset($results) ? $results->hardwareable_id : '') === $id ? 'selected' : '' }}>
+                    <option value="{{$item->id}}"
+                        {{ (old('nama') || isset($results) ? $results->hardwareable_id : '') === $item->id ? 'selected' : '' }}>
                         {{ $item->kode }}</option>
                 @endforeach
             @endif
