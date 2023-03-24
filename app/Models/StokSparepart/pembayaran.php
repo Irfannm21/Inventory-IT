@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models\StokSparepart;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +10,6 @@ class pembayaran extends Model
 
     public function bpb()
     {
-        return $this->belongsTo('App\bpb');
+        return $this->belongsTo('App\Models\StokSparepart\bpb');
     }
 }

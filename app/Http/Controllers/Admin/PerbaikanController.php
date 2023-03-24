@@ -9,7 +9,7 @@ use App\Http\Requests\MassDestroyPerbaikanRequest;
 
 use Illuminate\Http\Request;
 use App\Models\it\Perbaikan;
-use App\Models\it\Printer;
+use App\Models\it\printer;
 use App\Models\it\komputer;
 use App\Models\it\klien;
 use App\Models\it\TableBarangJaringan;
@@ -21,11 +21,12 @@ class PerbaikanController extends Controller
     public function index()
     {
         $results = Perbaikan::all();
-        foreach($results as $value) {
-            echo $value->hardwareable->klien->kode ?? '';
-        }
-
-        die();
+        // foreach($results as $item) {
+        //     echo $item->id;
+        //     echo $item->hardwareable->kode;
+        //     echo "<br>";
+        // }
+        // die;
         return view('admin.perbaikan.index', compact('results'));
     }
 

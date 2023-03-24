@@ -59,7 +59,7 @@
             {{-- End User Management --}}
             @endcan
 
-            @can('karyawan')
+            {{-- @can('karyawan') --}}
 
             {{-- Karyawan Management --}}
             <li class="nav-item nav-dropdown">
@@ -71,7 +71,7 @@
                     </a>
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
-                            <a href="{{ route("admin.karyawans.index") }}" class="nav-link {{ request()->is('admin/karyawans') || request()->is('admin/karyawans/*') ? 'active' : '' }}">
+                            <a href="{{ route("admin.karyawans.test") }}" class="nav-link {{ request()->is('admin/karyawans') || request()->is('admin/karyawans/*') ? 'active' : '' }}">
                                 <i class="fas fa-group nav-icon">
 
                                 </i>
@@ -89,7 +89,7 @@
                     </ul>
                 </li>
                 {{-- End Karyawan Management --}}
-                @endcan
+                {{-- @endcan --}}
 
                 @can('it_access')
 

@@ -19,7 +19,6 @@
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {
-        "beyondcode/laravel-dump-server": "^1.0",
         "facade/ignition": "^1.4",
         "fzaninotto/faker": "^1.8.0|^1.9.1",
         "laravel/dusk": "^5.0",

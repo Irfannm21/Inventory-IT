@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\bpb;
-use App\Detail_bpb;
-use App\detail_npp;
-use App\DaftarBarang;
+use App\Models\StokSparepart\bpb;
+use App\Models\StokSparepart\Detail_bpb;
+use App\Models\StokSparepart\detail_npp;
+use App\Models\StokSparepart\DaftarBarang;
 
 use App\Http\Requests\UpdateDetailBpbRequest;
 

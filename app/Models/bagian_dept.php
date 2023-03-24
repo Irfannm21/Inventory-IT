@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,11 +10,11 @@ class bagian_dept extends Model
 
     public function departemen()
     {
-        return $this->belongsTo('App\departemen');
+        return $this->belongsTo('App\Models\departemen');
     }
 
     public function npps()
     {
-        return $this->hasMany('App\npp','bagian_id');
+        return $this->hasMany('App\StokSparepart','bagian_id');
     }
 }

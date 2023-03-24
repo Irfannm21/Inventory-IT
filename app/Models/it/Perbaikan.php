@@ -2,7 +2,6 @@
 
 namespace App\Models\it;
 
-
 use Illuminate\Database\Eloquent\Model;
 
 class Perbaikan extends Model
@@ -12,7 +11,6 @@ class Perbaikan extends Model
     public function hardwareable(){
         return $this->morphTo();
     }
-
 
 
 }

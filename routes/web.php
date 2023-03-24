@@ -28,6 +28,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('products', 'ProductsController');
 
+    Route::get('/karyawans/test','KaryawanController@test')->name('karyawans.test');
     Route::resource('karyawans','KaryawanController');
 
     Route::delete('printers/destroy', 'PrinterController@massDestroy')->name('printers.massDestroy');
@@ -47,6 +48,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::get('npps/proses','NppController@diProses')->name('npps.proses');
     Route::get('npps/print','NppController@Print')->name('npps.print');
+    Route::get('npps/bagian','NppController@Bagian')->name('npps.bagian');
     Route::resource('npps','NppController');
 
     Route::resource('details','DetailNppController');

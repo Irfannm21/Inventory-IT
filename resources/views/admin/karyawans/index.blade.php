@@ -59,7 +59,7 @@
                             </td>
                             <td>
                                 @can('product_show')
-                                    <a class="btn btn-xs btn-primary" href="{{route('admin.karyawans.show', $karyawan->id)}}">
+                                    <a class="btn btn-xs btn-primary" href="{{route('admin.karyawans.test', $karyawan->id)}}">
                                         View
                                     </a>
                                 @endcan

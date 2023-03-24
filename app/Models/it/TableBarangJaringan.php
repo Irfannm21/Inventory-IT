@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\it;
+namespace App;
 
 
 use Illuminate\Database\Eloquent\Model;
@@ -11,6 +11,6 @@ class TableBarangJaringan extends Model
 
     public function perbaikans()
     {
-        return $this->morphMany('App\Models\it\Perbaikan', 'hardwareable');
+        return $this->morphMany('App\Perbaikan', 'hardwareable');
     }
 }

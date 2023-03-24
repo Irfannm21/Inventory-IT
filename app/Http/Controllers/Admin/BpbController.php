@@ -8,13 +8,13 @@ use App\Http\Requests\UpdateBpbRequest;
 
 use Illuminate\Http\Request;
 
-use App\npp;
-use App\detail_npp;
-use App\bpb;
-use App\Detail_bpb;
-use App\supplier;
-use App\DaftarBarang;
-use App\StockSparepart;
+use App\Models\StokSparepart\npp;
+use App\Models\StokSparepart\detail_npp;
+use App\Models\StokSparepart\bpb;
+use App\Models\StokSparepart\Detail_bpb;
+use App\Models\StokSparepart\supplier;
+use App\Models\StokSparepart\DaftarBarang;
+use App\Models\StokSparepart\StockSparepart;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -39,7 +39,7 @@ class BpbController extends Controller
 
     public function store(StoreBpbRequest $request){
 
-        dd($request->all());
+
 
         if($request->supplierId == true) {
             $supplier = supplier::find($request->supplierId);

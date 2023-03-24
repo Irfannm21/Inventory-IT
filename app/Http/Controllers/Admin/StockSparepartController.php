@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\StockSparepart;
-use App\DaftarBarang;
-use App\bpb;
-use App\detail_npp;
-use App\BonPengambilan;
+use App\Models\StokSparepart\StockSparepart;
+use App\Models\StokSparepart\DaftarBarang;
+use App\Models\StokSparepart\bpb;
+use App\Models\StokSparepart\detail_npp;
+use App\Models\StokSparepart\BonPengambilan;
 
 class StockSparepartController extends Controller
 {

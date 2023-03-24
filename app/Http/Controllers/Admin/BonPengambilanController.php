@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\BonPengambilan;
+use App\Models\StokSparepart\BonPengambilan;
 use Illuminate\Http\Request;
 
 class BonPengambilanController extends Controller

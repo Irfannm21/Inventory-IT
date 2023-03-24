@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreSupplierRequest;
 
-use App\supplier;
+use App\Models\StokSparepart\supplier;
 
 class SupplierController extends Controller
 {

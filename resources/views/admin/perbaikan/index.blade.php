@@ -57,7 +57,7 @@
                                 {{ $value->tanggal ?? '' }}
                             </td>
                             <td>
-                                {{-- {{$value->hardwareable->klien->kode ?? ''}} --}}
+                                {{$value->hardwareable->klien->kode ?? ''}}
                              </td>
                             <td>
                                {{$value->hardwareable->kode ?? ''}}

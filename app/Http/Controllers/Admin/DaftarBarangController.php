@@ -1,16 +1,17 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\StoreBarangRequest;
 use App\Http\Requests\UpdateBarangRequest;
-use App\bpb;
-use App\printer;
-use App\detail_npp;
-use App\DaftarBarang;
-use App\StockSparepart;
+use App\Models\StokSparepart\bpb;
+use App\Models\StokSparepart\printer;
+use App\Models\StokSparepart\detail_npp;
+use App\Models\StokSparepart\DaftarBarang;
+use App\Models\StokSparepart\StockSparepart;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;

@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models\CmsSpBc;
 
 use Illuminate\Database\Eloquent\Model;
 
-class bpb extends Model
+class Bpb extends Model
 {
     protected $guarded = [];
 

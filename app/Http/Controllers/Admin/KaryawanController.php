@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 // use App\Http\Requests\MassDestroyProductRequest;
 // use App\Http\Requests\StoreProductRequest;
 // use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Http\Request;
 use App\Karyawan;
 use App\master_karyawans;
 use App\TransaksiBca;
@@ -16,32 +17,14 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 class KaryawanController extends Controller
 {
     public function index(){
-        $pers = master_karyawans::where('jabatan','=','operator')->orderBy('nama','ASC')->get();
-        $ksr = master_karyawans::whereNotIn('jabatan',['operator'])->get();
-
-        $kserrr = "KSR";
-        $year = date('my', strtotime(today()));
-
-        $hitung = count($pers);
-
-        $config =['table'=>'transaksi_bcas','length'=>15,'prefix'=>"ISI01$kserrr$year"];
-        $id = idGenerator::generate($config);
-
-        for($i=0; $i < $hitung; $i++) {
-
-            $id;
-            foreach($pers as $val) {
-                echo $id++. " " .$val->nama . " " . $val->jabatan . "<br>";
-            }
-        }
-
-
+        $karyawans = master_karyawans::all();
+        return view('admin.karyawans.index', compact('karyawans'));
     }
 
-    public function show(karyawan $karyawan){
-
+    public function test(Request $id){
+        dd($id->all());
         $karyawan = Karyawan::where('id',$karyawan->id)->first();
-
+        dd($karyawan);
         return view('admin.karyawans.show', compact('karyawan'));
     }
 

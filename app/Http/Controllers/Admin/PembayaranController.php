@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdatePembayaranRequest;
 use Illuminate\Http\Request;
-use App\pembayaran;
-use App\bpb;
-use App\npp;
-use App\detail_npp;
+use App\Models\StokSparepart\pembayaran;
+use App\Models\StokSparepart\bpb;
+use App\Models\StokSparepart\npp;
+use App\Models\StokSparepart\detail_npp;
 use App\Http\Requests\StoreTransaksiRequest;
 
 

@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreNppRequest;
 use App\Http\Requests\UpdateNppRequest;
-use App\npp;
-use App\detail_npp;
-use App\bpb;
-use App\Detail_bpb;
-use App\perbaikan;
-use App\departemen;
-use App\bagian_dept;
+use App\Models\StokSparepart\npp;
+use App\Models\StokSparepart\detail_npp;
+// use App\Models\StokSparepart\bpb;
+use App\Models\StokSparepart\Detail_bpb;
+// use App\Models\StokSparepart\perbaikan;
+use App\Models\departemen;
+use App\Models\bagian_dept;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 
@@ -21,7 +21,7 @@ class NppController extends Controller
 {
     public function index()
     {
-        $results = npp::orderBy('tanggal','DESC')->get( );
+            $results = npp::orderBy('tanggal','DESC')->get( );
         return view('admin.npp.index', compact('results'));
     }
 
@@ -45,6 +45,8 @@ class NppController extends Controller
 
     public function store(StoreNppRequest $request)
     {
+
+        dd($request->all());
         abort_unless(\Gate::allows('npp_create'), 403);
         $npp = new NPP;
         $npp->kode = trim(ucwords($request->kode));
@@ -105,6 +107,9 @@ class NppController extends Controller
         return view('admin.npp.npp-diProses', compact('results'));
     }
 
+    public function Bagian(Request $request) {
+        return bagian_dept::where('departemen_id',"$request->dept")->get();
+    }
 
     public function Print(request $request)
     {
@@ -114,4 +119,5 @@ class NppController extends Controller
         $pdf = PDF::loadView('admin.npp.print-npp',['result' => $result])->setPaper('a5'.'potrait');
         return $pdf->stream();
     }
+
 }

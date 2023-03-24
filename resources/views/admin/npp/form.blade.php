@@ -1,5 +1,5 @@
 <table>
-    <tr>
+    <tr class="{{ $errors->has('kode') ? 'has-error' : '' }}">
         <td class="px-3">
             <label for="kode">Kode NPP</label>
         </td>
@@ -17,7 +17,7 @@
             </p>
         </td>
     </tr>
-    <tr>
+    <tr class="{{ $errors->has('tanggal') ? 'has-error' : '' }}">
         <td class="px-3">
             <label for="tanggal">Tanggal</label>
         </td>
@@ -35,7 +35,7 @@
             </p>
         </td>
     </tr>
-    <tr>
+    <tr class="{{ $errors->has('departemen') ? 'has-error' : '' }}">
         <td class="px-3">
             <label for="departemen">Departemen</label>
         </td>
@@ -44,7 +44,7 @@
             <select name="departemen" id="departemen" class="form-control">
                 <option value="">-- Pilih --</option>
                 @foreach ($dept as $id => $value)
-                    <option value="{{ $id }}">{{ $value }}</option>
+                    <option value="{{$id}}" {{ old('departemen') == $id ? 'selected' : '' }}>{{ $value }}</option>
                 @endforeach
             </select>
             @if ($errors->has('departemen'))
@@ -53,11 +53,11 @@
             @endif
             </em>
             <p class="helper-block text-muted">
-                *Pilih depar
+                *Pilih departemen
         </td>
     </tr>
 
-    <tr>
+    <tr class="{{ $errors->has('bagian') ? 'has-error' : '' }}">
         <td class="px-3 ">
             <label for="bagian">Bagian</label>
         </td>
@@ -65,9 +65,7 @@
         <td class="pt-3">
             <select name="bagian" id="bagian" class="form-control">
                 <option value="">-- Pilih --</option>
-                @foreach ($bagian as $id => $value)
-                    <option value="{{ $id }}">{{ $value }}</option>
-                @endforeach
+
             </select>
             @if ($errors->has('bagian'))
                 <em class="invalid-feedback">
@@ -239,11 +237,28 @@
         $(document).ready(function() {
             $(document).on('click', '#addBtn', function() {
                 $('#detailTBody').append($('#detailTmpl').html());
-            });
+            }).on('change', '#departemen', function() {
+                    $.ajax({
+                        method: 'GET',
+                        url: '{{ url('admin/npps/bagian') }}',
+                        data: {
+                            dept: $(this).val()
+                        },
+                        success: function(response) {
+                            console.log(204, response);
+                            let options = '';
+                            for (let item of response) {
+                                options += `<option value='${item.id}'>${item.nama}</option>`;
+                            }
+                            $('#bagian').html(options);
+                        }
+                    })
+                });
         })
 
         $("#detailTBody").on('click','.removeBtn',function() {
                 $(this).closest('tr').remove();
         })
+
     </script>
 @endsection

@@ -6,8 +6,8 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateDetailRequest;
-use App\npp;
-use App\detail_npp;
+use App\Models\StokSparepart\npp;
+use App\Models\StokSparepart\detail_npp;
 
 
 class DetailNppController extends Controller

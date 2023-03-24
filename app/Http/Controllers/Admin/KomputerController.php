@@ -7,6 +7,7 @@ use App\Http\Requests\StoreKomputerRequest;
 use App\Http\Requests\UpdateKomputerRequest;
 use App\Http\Requests\MassDestroyKomputerRequest;
 use Illuminate\Http\Request;
+
 use App\Models\it\komputer;
 
 class KomputerController extends Controller

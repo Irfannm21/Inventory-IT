@@ -2,8 +2,8 @@
 
 namespace App\Models\it;
 
+use App\Models\it\Perbaikan;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\it\perbaikan;
 
 class printer extends Model
 {
