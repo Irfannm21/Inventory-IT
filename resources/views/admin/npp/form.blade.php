@@ -80,9 +80,9 @@
 
 <button class="btn btn-primary" id="addBtn" type="button">Tambah</button>
 <table class="table table-responsive table-borderless" id="detailTBody">
-    <tr>
+    <tr class=" {{ $errors->has('nama') ? 'has-error' : '' }}">
         <td style="width: 300px">
-            <div class="form-group {{ $errors->has('nama[]') ? 'has-error' : '' }}">
+            <div class="form-group">
                 <label for=""> Nama Barang</label>
                 <input type="text" id="" class="form-control" name="nama[]">
                 @if ($errors->has('nama'))

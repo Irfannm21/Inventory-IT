@@ -39,8 +39,7 @@ class BpbController extends Controller
 
     public function store(StoreBpbRequest $request){
 
-
-
+        dd($request->all());
         if($request->supplierId == true) {
             $supplier = supplier::find($request->supplierId);
         } else {
@@ -86,7 +85,7 @@ class BpbController extends Controller
                 $barang = new DaftarBarang;
                 $barang->kode = $faker->numerify("####");
                 $barang->nama = $namaBarang->nama;
-                $barang->satuan = $request->satuan{$i} ?? '';
+                $barang->satuan = $request->satuan{$i} ??  '';
                 $barang->save();
 
                 $stok = new StockSparepart;

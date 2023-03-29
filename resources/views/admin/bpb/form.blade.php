@@ -7,9 +7,9 @@
             <div class="card-body">
                 <h5 class="card-title text-center">Masukan Data BPB</h5>
                 <hr>
-                <div class="form-group row">
+                <div class="form-group row  {{ $errors->has('kode') ? 'has-error' : '' }}">
                     <label for="kodeBpb"
-                        class="col-sm-3 col-form-label {{ $errors->has('kode') ? 'has-error' : '' }}">Kode Bpb</label>
+                        class="col-sm-3 col-form-label">Kode Bpb</label>
                     <div class="col-sm-9">
                         <input type="text" name="kode" class="form-control"
                             value="{{ old('kode', isset($bpb) ? $bpb->kode : '') }}" placeholder="Cth: 001/ENG/22">
@@ -23,13 +23,13 @@
                         </p>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row  {{ $errors->has('kelompok') ? 'has-error' : '' }}">
                     <label for="kelompok"
-                        class="col-sm-3 col-form-label {{ $errors->has('kelompok') ? 'has-error' : '' }}">Kelompok</label>
+                        class="col-sm-3 col-form-label">Kelompok Bpb</label>
                     <div class="col-sm-9">
                         <select name="kelompok" id="kelompok" class="form-control">
-                            <option value="" selected>-- Pilih -- </option>
-                            <option value="Sparepart">Sparepart</option>
+                            <option value="">-- Pilih -- </option>
+                            <option value="Sparepart" {{old('kelompok')}}>Sparepart</option>
                             <option value="Administrasi">Administrasi</option>
                             <option value="Elektrik">Elektrik</option>
                             <option value="Mobil">Mobil</option>
@@ -43,13 +43,13 @@
                             </em>
                         @endif
                         <p class="helper-block">
-                            {{ trans('*Wajib pilih kelompok') }}
+                            {{ trans('*Wajib isi kelompok BPB') }}
                         </p>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row {{ $errors->has('tanggal') ? 'has-error' : '' }}">
                     <label for="tanggal"
-                        class="col-sm-3 col-form-label {{ $errors->has('tanggal') ? 'has-error' : '' }}">Tanggal</label>
+                        class="col-sm-3 col-form-label">Tanggal</label>
                     <div class="col-sm-9">
                         <input type="date" name="tanggal" class="form-control"
                             value="{{ old('tanggal', isset($bpb) ? $bpb->tanggal : '') }}">
@@ -93,7 +93,7 @@
             <div class="card-body">
                 <h5 class="card-title text-center">Cari Supplier yang sudah ada</h5>
                 <hr>
-                <div class="form-group row">
+                <div class="form-group row {{ $errors->has('supplierId') ? 'has-error' : '' }}">
                     <label for="namaSupplier" class="col-sm-3 col-form-label">Nama Supplier</label>
                     <div class="col-sm-9">
                         <select name="supplierId" id="supplierId" class="form-control select2">
@@ -111,17 +111,18 @@
                 </div>
             </div>
         </div>
+
         <div class="card">
             <div class="accordion" id="accordionSupplier">
                 <div class="card-body">
                     <div class="form-row">
-                        <div class="form-group col-md-8 {{ $errors->has('nama') ? 'has-error' : '' }}">
+                        <div class="form-group col-md-8 {{ $errors->has('supplierId') ? 'has-error' : '' }}">
                             <label for="">Nama Supplier</label>
-                            <input type="text" name="nama" class="form-control" value="{{ old('nama') }}"
+                            <input type="text" name="supplierId" class="form-control" value="{{ old('supplierId') }}"
                                 placeholder="Cth: PT.Insansandang Internusa">
-                            @if ($errors->has('nama'))
+                            @if ($errors->has('supplierId'))
                                 <em class="invalid-feedback">
-                                    {{ $errors->first('nama') }}
+                                    {{ $errors->first('supplierId') }}
                                 </em>
                             @endif
                             <p class="helper-block">
@@ -208,7 +209,7 @@
 
     </div>
 </div>
-
+{{--
 <button class="btn btn-primary" id="addBtn" type="button">Tambah Baris Baru</button>
 
 <table class="table table-responsive table-borderless" id="detailTBody">
@@ -345,7 +346,7 @@
             </button>
         </td>
     </tr>
-</template>
+</template> --}}
 @section('scripts')
     <script>
         $(document).ready(function() {

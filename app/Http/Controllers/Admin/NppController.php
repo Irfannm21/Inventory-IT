@@ -46,7 +46,6 @@ class NppController extends Controller
     public function store(StoreNppRequest $request)
     {
 
-        dd($request->all());
         abort_unless(\Gate::allows('npp_create'), 403);
         $npp = new NPP;
         $npp->kode = trim(ucwords($request->kode));

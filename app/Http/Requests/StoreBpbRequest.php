@@ -26,35 +26,13 @@ class StoreBpbRequest extends FormRequest
      */
     public function rules()
     {
-
-        // dd($request->all());
         return [
             'kode' =>   'required',
+            'kelompok' => 'required',
+            'tanggal' => 'required',
+            'supplierId' => 'required'
         ];
-        // if('supplierId' == NULL) {
-        //     return [
-        //         'kode' =>   'required',
-        //         'tanggal' =>   'required',
-        //         'kelompok' =>   'required',
-        //         "npp_id" => "required",
-        //         "detail_id" => "required",
-        //         "jumlah" => "required",
-        //         "satuan" => "required",
-        //         "nama" => 'required',
-        //         "kota" => 'required',
-        //     ];
-        // } else {
-        //     return [
-        //         'kode' =>   'required',
-        //         'tanggal' =>   'required',
-        //         'kelompok' =>   'required',
-        //         "npp_id" => "required",
-        //         "detail_id" => "required",
-        //         "jumlah" => "required",
-        //         "satuan" => "required",
-        //         "supplierId" => 'required',
-        //     ];
-        // }
+
 
     }
 }
