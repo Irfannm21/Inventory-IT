@@ -29,13 +29,13 @@
                     <div class="col-sm-9">
                         <select name="kelompok" id="kelompok" class="form-control">
                             <option value="">-- Pilih -- </option>
-                            <option value="Sparepart" {{old('kelompok')}}>Sparepart</option>
-                            <option value="Administrasi">Administrasi</option>
-                            <option value="Elektrik">Elektrik</option>
-                            <option value="Mobil">Mobil</option>
-                            <option value="PT">PT</option>
-                            <option value="UM">UM</option>
-                            <option value="Spinning">Spinning</option>
+                            <option value="Sparepart" {{"Sparepart" == (old('kelompok') ?? ($bpb->kelompok ?? '') ?? isset($bpb->kelompok)) ? 'selected' : '' }}>Sparepart</option>
+                            <option value="Administrasi" {{"Administrasi" == (old('kelompok') ?? ($bpb->kelompok ?? '') ?? isset($bpb->kelompok)) ? 'selected' : '' }}>Administrasi</option>
+                            <option value="Elektrik" {{"Elektrik" == (old('kelompok') ?? ($bpb->kelompok ?? '') ?? isset($bpb->kelompok)) ? 'selected' : '' }}>Elektrik</option>
+                            <option value="Mobil" {{"Mobil" == (old('kelompok') ?? ($bpb->kelompok ?? '') ?? isset($bpb->kelompok)) ? 'selected' : '' }}>Mobil</option>
+                            <option value="PT" {{"PT" == (old('kelompok') ?? ($bpb->kelompok ?? '') ?? isset($bpb->kelompok)) ? 'selected' : '' }}>PT</option>
+                            <option value="UM" {{"UM" == (old('kelompok') ?? ($bpb->kelompok ?? '') ?? isset($bpb->kelompok)) ? 'selected' : '' }}>UM</option>
+                            <option value="Spinning" {{"Spinning" == (old('kelompok') ?? ($bpb->kelompok ?? '') ?? isset($bpb->kelompok)) ? 'selected' : '' }}>Spinning</option>
                         </select>
                         @if ($errors->has('kelompok'))
                             <em class="invalid-feedback">
@@ -112,42 +112,41 @@
             </div>
         </div>
 
+        <h5 class="card-title text-center"><button class="btn btn-xs btn-primary" type="button"
+            data-toggle="collapse" data-target="#bukaSupplier">Buat Supplier Baru</button></h5>
         <div class="card">
             <div class="accordion" id="accordionSupplier">
+                <hr>
+                <div id="bukaSupplier" class="collapse" data-parent="#accordionSupplier">
                 <div class="card-body">
-                    <div class="form-row">
-                        <div class="form-group col-md-8 {{ $errors->has('supplierId') ? 'has-error' : '' }}">
-                            <label for="">Nama Supplier</label>
-                            <input type="text" name="supplierId" class="form-control" value="{{ old('supplierId') }}"
-                                placeholder="Cth: PT.Insansandang Internusa">
-                            @if ($errors->has('supplierId'))
-                                <em class="invalid-feedback">
-                                    {{ $errors->first('supplierId') }}
-                                </em>
-                            @endif
-                            <p class="helper-block">
-                                {{ trans('*Wajib di isi') }}
-                            </p>
+                        <div class="form-row">
+                            <div class="form-group col-md-8 {{ $errors->has('nama') ? 'has-error' : '' }}">
+                                <label for="">Nama Supplier</label>
+                                <input type="text" name="nama" class="form-control" value="{{ old('nama') }}"
+                                    placeholder="Cth: PT.Insansandang Internusa">
+                                @if ($errors->has('nama'))
+                                    <em class="invalid-feedback">
+                                        {{ $errors->first('nama') }}
+                                    </em>
+                                @endif
+                                <p class="helper-block">
+                                    {{ trans('*Wajib di isi') }}
+                                </p>
+                            </div>
+                            <div class="form-group col-md-4 {{ $errors->has('kota') ? 'has-error' : '' }}">
+                                <label for="">Kota Asal</label>
+                                <input type="text" name="kota" class="form-control" value="{{ old('kota') }}"
+                                    placeholder="Cth: Bandung">
+                                @if ($errors->has('kota'))
+                                    <em class="invalid-feedback">
+                                        {{ $errors->first('kota') }}
+                                    </em>
+                                @endif
+                                <p class="helper-block">
+                                    {{ trans('*Wajib di isi') }}
+                                </p>
+                            </div>
                         </div>
-                        <div class="form-group col-md-4 {{ $errors->has('kota') ? 'has-error' : '' }}">
-                            <label for="">Kota Asal</label>
-                            <input type="text" name="kota" class="form-control" value="{{ old('kota') }}"
-                                placeholder="Cth: Bandung">
-                            @if ($errors->has('kota'))
-                                <em class="invalid-feedback">
-                                    {{ $errors->first('kota') }}
-                                </em>
-                            @endif
-                            <p class="helper-block">
-                                {{ trans('*Wajib di isi') }}
-                            </p>
-                        </div>
-
-                    </div>
-                    <h5 class="card-title text-center"><button class="btn btn-xs btn-primary" type="button"
-                            data-toggle="collapse" data-target="#bukaSupplier">Detail</button></h5>
-                    <hr>
-                    <div id="bukaSupplier" class="collapse" data-parent="#accordionSupplier">
                         <div class="form-row">
                             <div class="form-group col-md-4 {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <label for="">Alamat Email</label>
@@ -209,7 +208,7 @@
 
     </div>
 </div>
-{{--
+
 <button class="btn btn-primary" id="addBtn" type="button">Tambah Baris Baru</button>
 
 <table class="table table-responsive table-borderless" id="detailTBody">
@@ -346,7 +345,7 @@
             </button>
         </td>
     </tr>
-</template> --}}
+</template>
 @section('scripts')
     <script>
         $(document).ready(function() {

@@ -30,7 +30,8 @@ class StoreBpbRequest extends FormRequest
             'kode' =>   'required',
             'kelompok' => 'required',
             'tanggal' => 'required',
-            'supplierId' => 'required'
+            'nama' => 'required_if:supplierId,null',
+            'kota' => 'required',
         ];
 
 

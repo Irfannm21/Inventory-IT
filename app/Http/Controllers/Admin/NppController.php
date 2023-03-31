@@ -86,6 +86,22 @@ class NppController extends Controller
                 "status"    => $request->status,
             ]);
 
+            // dd($request->all());
+
+            $npp->details->update([
+                [
+                    'nama'  => trim(ucwords($request->nama[$i])) ?? '',
+                    'jumlah'=>$request->jumlah[$i]?? 1,
+                    'satuan'=>$request->satuan[$i]?? '',
+                    'stok'  =>$request->stok[$i]?? 0,
+                    'keterangan'=> trim(ucwords($request->keterangan[$i])) ??'',
+                ]
+            ]);
+
+        foreach($request->nama as $i => $item) {
+
+        }
+
         return redirect()->route('admin.npps.index');
     }
 

@@ -1,3 +1,4 @@
+
 @extends('layouts.admin')
 @section('content')
     <div class="card">
@@ -9,7 +10,8 @@
             <form action="{{ route('admin.npps.update', [$npp->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <table>
+                @include('admin.npp.form')
+                {{-- <table>
                     <tr>
                         <td class="px-3">
                             <label for="kode">Kode NPP</label>
@@ -119,7 +121,7 @@
                                 *Pilih Bagian
                         </td>
                     </tr>
-                </table>
+                </table> --}}
 
                 <div>
                     <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
