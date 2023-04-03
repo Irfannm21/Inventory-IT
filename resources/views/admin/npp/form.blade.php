@@ -127,13 +127,13 @@
                 <label for="">Satuan</label>
                 <select name="satuan[]" class="form-control" id="">
                     <option value="" selected>-- Pilih --</option>
-                    <option value="Pcs">Pcs</option>
-                    <option value="Unit">Unit</option>
-                    <option value="Pack">Pack</option>
-                    <option value="Dus">Dus</option>
-                    <option value="Kg">Kg</option>
-                    <option value="Liter">Liter</option>
-                    <option value="Meter">Meter</option>
+                    <option value="Pcs" {{"Pcs" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pcs</option>
+                    <option value="Unit" {{"Unit" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Unit</option>
+                    <option value="Pack" {{"Pack" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pack</option>
+                    <option value="Dus" {{"Dus" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Dus</option>
+                    <option value="Kg" {{"Kg" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Kg</option>
+                    <option value="Liter" {{"Liter" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Liter</option>
+                    <option value="Meter" {{"Meter" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Meter</option>
                 </select>
                 @if ($errors->has('satuan'))
                     <em class="invalid-feedback">
@@ -200,13 +200,13 @@
                 <label for="">Satuan</label>
                 <select name="satuan[]" class="form-control" id="">
                     <option value="" selected>-- Pilih --</option>
-                    <option value="Pcs" {{"Pcs" == (old('satuan') ?? ($npp->satuan ?? '') ?? isset($npp->satuan)) ? 'selected' : '' }}>Pcs</option>
-                    <option value="Unit" {{"Unit" == (old('satuan') ?? ($npp->satuan ?? '') ?? isset($npp->satuan)) ? 'selected' : '' }}>Unit</option>
-                    <option value="Pack" {{"Pack" == (old('satuan') ?? ($npp->satuan ?? '') ?? isset($npp->satuan)) ? 'selected' : '' }}>Pack</option>
-                    <option value="Dus" {{"Dus" == (old('satuan') ?? ($npp->satuan ?? '') ?? isset($npp->satuan)) ? 'selected' : '' }}>Dus</option>
-                    <option value="Kg" {{"Kg" == (old('satuan') ?? ($npp->satuan ?? '') ?? isset($npp->satuan)) ? 'selected' : '' }}>Kg</option>
-                    <option value="Liter" {{"Liter" == (old('satuan') ?? ($npp->satuan ?? '') ?? isset($npp->satuan)) ? 'selected' : '' }}>Liter</option>
-                    <option value="Meter" {{"Meter" == (old('satuan') ?? ($npp->satuan ?? '') ?? isset($npp->satuan)) ? 'selected' : '' }}>Meter</option>
+                    <option value="Pcs" {{"Pcs" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pcs</option>
+                    <option value="Unit" {{"Unit" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Unit</option>
+                    <option value="Pack" {{"Pack" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pack</option>
+                    <option value="Dus" {{"Dus" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Dus</option>
+                    <option value="Kg" {{"Kg" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Kg</option>
+                    <option value="Liter" {{"Liter" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Liter</option>
+                    <option value="Meter" {{"Meter" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Meter</option>
                 </select>
                 @if ($errors->has('satuan'))
                     <em class="invalid-feedback">

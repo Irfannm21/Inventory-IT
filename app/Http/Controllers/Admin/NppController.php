@@ -45,7 +45,7 @@ class NppController extends Controller
 
     public function store(StoreNppRequest $request)
     {
-
+        // dd($request->all());
         abort_unless(\Gate::allows('npp_create'), 403);
         $npp = new NPP;
         $npp->kode = trim(ucwords($request->kode));
@@ -57,10 +57,10 @@ class NppController extends Controller
         $detail = [];
         foreach($request->nama as $i => $nama){
             $detail[] = [
-                'nama'  => trim(ucwords($nama)) ?? '',
-                'jumlah'=>$request->jumlah[$i]?? 1,
-                'satuan'=>$request->satuan[$i]?? '',
-                'stok'  =>$request->stok[$i]?? 0,
+                'nama'      => trim(ucwords($nama)) ?? '',
+                'jumlah'    =>$request->jumlah[$i]?? 1,
+                'satuan'    =>$request->satuan[$i]?? 'Pcs',
+                'stok'      =>$request->stok[$i]?? 0,
                 'keterangan'=> trim(ucwords($request->keterangan[$i])) ??'',
             ];
         }
@@ -79,28 +79,29 @@ class NppController extends Controller
 
     public function update(UpdateNppRequest $request, npp $npp)
     {
+        // dd($npp->id);
+
          $npp->update([
-                'kode' => $request->kode,
-                'tanggal' => $request->tanggal,
+                'kode'      => $request->kode,
+                'tanggal'   => $request->tanggal,
                 'bagian_id' => $request->bagian,
                 "status"    => $request->status,
             ]);
 
-            // dd($request->all());
 
-            $npp->details->update([
-                [
-                    'nama'  => trim(ucwords($request->nama[$i])) ?? '',
-                    'jumlah'=>$request->jumlah[$i]?? 1,
-                    'satuan'=>$request->satuan[$i]?? '',
-                    'stok'  =>$request->stok[$i]?? 0,
-                    'keterangan'=> trim(ucwords($request->keterangan[$i])) ??'',
-                ]
-            ]);
-
-        foreach($request->nama as $i => $item) {
-
-        }
+            foreach($request->nama as $i => $value) {
+                            detail_npp::updateOrCreate([
+                                ["npp_id" => $npp->id, "npp_id" => $request->nama[$i]],
+                                [
+                                'nama'      => trim(ucwords($request->nama[$i])) ?? '',
+                                'jumlah'    =>$request->jumlah[$i]?? 1,
+                                'satuan'    =>$request->satuan[$i]?? 'Pcs',
+                                'stok'      =>$request->stok[$i]?? 0,
+                                'keterangan'=> trim(ucwords($request->keterangan[$i])) ??'',
+                                ]
+                                ]
+                );
+            }
 
         return redirect()->route('admin.npps.index');
     }
