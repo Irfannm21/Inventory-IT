@@ -89,6 +89,8 @@ class NppController extends Controller
 
 
             foreach($request->nama as $i => $value) {
+                // echo $npp->id . " | ";
+                // echo $request->nama[$i] . "<br>";
                             detail_npp::UpdateOrCreate(
                                 ["npp_id" => $npp->id],
                                 [
@@ -100,6 +102,7 @@ class NppController extends Controller
                                 ]
                 );
             }
+            // die();
         return redirect()->route('admin.npps.index');
     }
 
