@@ -80,7 +80,6 @@ class NppController extends Controller
     public function update(UpdateNppRequest $request, npp $npp)
     {
         // dd($npp->id);
-
          $npp->update([
                 'kode'      => $request->kode,
                 'tanggal'   => $request->tanggal,
@@ -90,8 +89,8 @@ class NppController extends Controller
 
 
             foreach($request->nama as $i => $value) {
-                            detail_npp::updateOrCreate([
-                                ["npp_id" => $npp->id, "npp_id" => $request->nama[$i]],
+                            detail_npp::UpdateOrCreate(
+                                ["npp_id" => $npp->id],
                                 [
                                 'nama'      => trim(ucwords($request->nama[$i])) ?? '',
                                 'jumlah'    =>$request->jumlah[$i]?? 1,
@@ -99,10 +98,8 @@ class NppController extends Controller
                                 'stok'      =>$request->stok[$i]?? 0,
                                 'keterangan'=> trim(ucwords($request->keterangan[$i])) ??'',
                                 ]
-                                ]
                 );
             }
-
         return redirect()->route('admin.npps.index');
     }
 

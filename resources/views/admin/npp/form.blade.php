@@ -143,7 +143,7 @@
             </div>
         </td>
 
-        <td style="width: 350px">
+        <td style="width: 30    0px">
             <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
                 <label for="">Keterangan</label>
                 <input type="text" id="" class="form-control" name="keterangan[]" value="{{old('keterangan') ?? ($item->keterangan ?? '') ?? isset($item->keterangan)}}">
@@ -152,6 +152,11 @@
                         {{ $errors->first('keterangan') }}
                     </em>
                 @endif
+            </div>
+        </td>
+        <td style="width: 50px">
+            <div>
+                <button class="btn btn-danger removeBtn">Del</button>
             </div>
         </td>
     </tr>
