@@ -32,6 +32,7 @@ class DetailNppController extends Controller
 
     public function destroy(detail_npp $detail)
     {
+        dd($detail);
         $detail->delete();
         return back();
     }

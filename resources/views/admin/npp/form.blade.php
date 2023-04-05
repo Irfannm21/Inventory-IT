@@ -88,6 +88,7 @@
         <td style="width: 300px">
             <div class="form-group">
                 <label for=""> Nama Barang</label>
+                <input type="text" id="" class="form-control" name="id[]" value="{{$item->id}}" hidden>
                 <input type="text" id="" class="form-control" name="nama[]" value="{{old('nama') ?? ($item->nama ?? '') ?? isset($item->nama)}}">
                 @if ($errors->has('nama'))
                     <em class="invalid-feedback">
@@ -143,7 +144,7 @@
             </div>
         </td>
 
-        <td style="width: 30    0px">
+        <td style="width: 300px">
             <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
                 <label for="">Keterangan</label>
                 <input type="text" id="" class="form-control" name="keterangan[]" value="{{old('keterangan') ?? ($item->keterangan ?? '') ?? isset($item->keterangan)}}">
@@ -154,11 +155,14 @@
                 @endif
             </div>
         </td>
-        <td style="width: 50px">
-            <div>
+
+        <td style="width: 300px">
+            <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
+                <label for=""></label>
                 <button class="btn btn-danger removeBtn">Del</button>
             </div>
         </td>
+
     </tr>
     @endforeach
     @else
@@ -246,6 +250,7 @@
     <tr>
         <td style="width: 300px">
             <div class="form-group {{ $errors->has('nama[]') ? 'has-error' : '' }}">
+                <input type="text" id="" class="form-control" name="id[]" hidden>
                 <input type="text" id="" class="form-control" name="nama[]">
                 @if ($errors->has('nama'))
                     <em class="invalid-feedback">

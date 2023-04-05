@@ -77,9 +77,9 @@ class NppController extends Controller
         return view('admin.npp.edit-npp',compact('npp','dept','bagian'));
     }
 
-    public function update(UpdateNppRequest $request, npp $npp)
+    public function update(StoreNppRequest $request, npp $npp)
     {
-        // dd($npp->id);
+        // dd($request->all());
          $npp->update([
                 'kode'      => $request->kode,
                 'tanggal'   => $request->tanggal,
@@ -89,10 +89,8 @@ class NppController extends Controller
 
 
             foreach($request->nama as $i => $value) {
-                // echo $npp->id . " | ";
-                // echo $request->nama[$i] . "<br>";
                             detail_npp::UpdateOrCreate(
-                                ["npp_id" => $npp->id],
+                                ["id" => $request->id[$i], "npp_id" => $npp->id],
                                 [
                                 'nama'      => trim(ucwords($request->nama[$i])) ?? '',
                                 'jumlah'    =>$request->jumlah[$i]?? 1,
@@ -102,7 +100,6 @@ class NppController extends Controller
                                 ]
                 );
             }
-            // die();
         return redirect()->route('admin.npps.index');
     }
 
