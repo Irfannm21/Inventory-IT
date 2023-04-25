@@ -93,32 +93,34 @@
             <div class="card-body">
                 <h5 class="card-title text-center">Cari Supplier yang sudah ada</h5>
                 <hr>
-                <div class="form-group row {{ $errors->has('supplierId') ? 'has-error' : '' }}">
+                <div class="form-group row  {{ $errors->has('supplierID') ? 'has-error' : '' }}">
                     <label for="namaSupplier" class="col-sm-3 col-form-label">Nama Supplier</label>
                     <div class="col-sm-9">
-                        <select name="supplierId" id="supplierId" class="form-control select2">
+                        <select name="supplierID" id="supplierID" class="form-control select2">
                             <option value="" selected>-- Pilih --</option>
                             @foreach ($suppliers as $i => $item)
-                                <option value="{{ $i }}">{{ $item }}</option>
+                                <option value="{{$i}}" {{$i == (old('supplierID') ?? ($bpb->supplier->id ?? '') ?? isset($bpb->supplier->id)) ? 'selected' : '' }}>{{ $item }}</option>
                             @endforeach
                         </select>
-                        @if ($errors->has('supplierId'))
-                            <em class="invalid-feedback">
-                                {{ $errors->first('supplierId') }}
-                            </em>
-                        @endif
+                        @if ($errors->has('supplierID'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('supplierID') }}
+                        </em>
+                    @endif
+                    <p class="helper-block">
+
+                    </p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <h5 class="card-title text-center"><button class="btn btn-xs btn-primary" type="button"
-            data-toggle="collapse" data-target="#bukaSupplier">Buat Supplier Baru</button></h5>
+
         <div class="card">
             <div class="accordion" id="accordionSupplier">
-                <hr>
-                <div id="bukaSupplier" class="collapse" data-parent="#accordionSupplier">
                 <div class="card-body">
+                    <h5 class="card-title text-center">Buat Data Supplier Baru</h5>
+                    <hr>
                         <div class="form-row">
                             <div class="form-group col-md-8 {{ $errors->has('nama') ? 'has-error' : '' }}">
                                 <label for="">Nama Supplier</label>
@@ -147,6 +149,7 @@
                                 </p>
                             </div>
                         </div>
+                        <div id="bukaSupplier" class="collapse" data-parent="#accordionSupplier">
                         <div class="form-row">
                             <div class="form-group col-md-4 {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <label for="">Alamat Email</label>
@@ -200,6 +203,8 @@
                             </div>
                         </div>
                     </div>
+                    <h5 class="card-title text-center"><button class="btn btn-xs btn-primary" type="button"
+                        data-toggle="collapse" data-target="#bukaSupplier">Isi Detail Supplier</button></h5>
                 </div>
             </div>
         </div>
@@ -243,16 +248,17 @@
             </div>
         </td>
         <td style="width: 200px">
-            <div class="form-group {{ $errors->has('jumlah') ? 'has-error' : '' }}">
-                <label for="">Jumlah</label>
-                <input type="number" name="jumlah[]" class="form-control" value="{{ old('jumlah') }}">
+            <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
+                <label id="hasil">Jumlah</label>
+                <input type="number" id="" class="form-control" name="jumlah[]">
                 @if ($errors->has('jumlah'))
                     <em class="invalid-feedback">
                         {{ $errors->first('jumlah') }}
                     </em>
                 @endif
-            </div>
         </td>
+
+
         <td style="width: 200px">
             <div class="form-group{ $errors->has('satuan') ? 'has-error' : '' }}">
                 <label for="">Satuan</label>
@@ -308,15 +314,13 @@
             </div>
         </td>
         <td style="width: 200px">
-            <div class="form-group {{ $errors->has('jumlah') ? 'has-error' : '' }}">
-                <input type="number" name="jumlah[]" class="form-control"
-                    value="{{ old('jumlah', isset($bpb) ? $bpb->jumlah : '') }}">
+            <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
+                <input type="number" id="" class="form-control" name="jumlah[]">
                 @if ($errors->has('jumlah'))
                     <em class="invalid-feedback">
                         {{ $errors->first('jumlah') }}
                     </em>
                 @endif
-            </div>
         </td>
         <td style="width: 200px">
             <div class="form-group{ $errors->has('satuan') ? 'has-error' : '' }}">
@@ -341,7 +345,7 @@
         </td>
         <td>
             <button class="btn btn-danger removeBtn" href="#">
-                Del
+                Delete
             </button>
         </td>
     </tr>
