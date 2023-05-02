@@ -21,7 +21,8 @@ class DetailBpbController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $result = Detail_bpb::find($id);
+
+     $result = Detail_bpb::find($id);
         $barang = DaftarBarang::all()->pluck('nama','id');
         $npp = $result->bpb->npp->id;
         $bpb = detail_npp::where("npp_id",$npp)->get()->pluck('nama','id');

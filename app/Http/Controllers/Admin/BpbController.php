@@ -144,9 +144,12 @@ class BpbController extends Controller
     }
 
     public function edit(bpb $bpb) {
-        $result = bpb::find($bpb->id);
+        // dd($bpb->npp->kode);
         $suppliers = supplier::all()->pluck('nama','id');
-        return view("admin.bpb.edit", compact("result",'suppliers'));
+        $detail = detail_npp::all()->pluck('nama','id');
+        $npp = npp::all()->pluck('kode','id');
+        $barang = DaftarBarang::all()->pluck('nama','id');
+        return view("admin.bpb.edit",compact('bpb','detail','npp','suppliers','barang'));
     }
 
     public function update(UpdateBpbRequest $request, bpb $bpb) {

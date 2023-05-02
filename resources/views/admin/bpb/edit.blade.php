@@ -6,10 +6,12 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ route('admin.bpbs.update', [$result->id]) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.bpbs.update', [$bpb->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class="form-row">
+
+                @include('admin.bpb.form')
+                {{-- <div class="form-row">
                     <div class="form-group col-md-4 {{ $errors->has('npp_id') ? 'has-error' : '' }}">
                         <label for="">Kode NPP</label>
                         <input type="text" class="form-control"
@@ -96,7 +98,7 @@
                             </em>
                         @endif
                     </div>
-                </div>
+                </div> --}}
 
 
                 <div>

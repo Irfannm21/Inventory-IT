@@ -71,7 +71,7 @@
                         <select name="npp_id" id="npp_id" class="form-control select2">
                             <option>-- Pilih --</option>
                             @foreach ($npp as $i => $item)
-                                <option value="{{ $i }}">{{ $item }}</option>
+                                <option value="{{ $i }}" {{$item == (old('npp_id') ?? ($bpb->npp->kode ?? '') ?? isset($bpb->npp->kode)) ? 'selected' : '' }}>{{ $item }}</option>
                             @endforeach
                         </select>
                         @if ($errors->has('npp_id'))
@@ -217,12 +217,14 @@
 <button class="btn btn-primary" id="addBtn" type="button">Tambah Baris Baru</button>
 
 <table class="table table-responsive table-borderless" id="detailTBody">
+    @if (isset($bpb))
+    @foreach ($bpb->detail_bpbs as $item)
     <tr>
         <td style="width: 300px">
             <div class="form-group {{ $errors->has('detail_id') ? 'has-error' : '' }}">
                 <label id="hasil">Nama Pesanan Barang</label>
                 <select name="detail_id[]" id="detail_id" class="form-control detail_id">
-
+                    <option value="{{ $i }}" {{$item == (old('npp_id') ?? ($item->barang->nama ?? '') ?? isset($item->barang->nama)) ? 'selected' : '' }}>{{ $item }}</option>
                 </select>
                 @if ($errors->has('detail_id'))
                     <em class="invalid-feedback">
@@ -233,7 +235,7 @@
         </td>
         <td style="width: 300px">
             <div class="form-group {{ $errors->has('detail_id') ? 'has-error' : '' }}">
-                <label id="hasil">Nama di Inventori</label>
+                <label id="hasil">barang->Nama di Inventori</label>
                 <select name="barang_id[]" id="" class="form-control select2">
                     <option value="" selected> -- Pilih --</option>
                     @foreach ($barang as $id => $item)
@@ -247,7 +249,7 @@
                 @endif
             </div>
         </td>
-        <td style="width: 200px">
+        {{-- <td style="width: 200px">
             <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
                 <label id="hasil">Jumlah</label>
                 <input type="number" id="" class="form-control" name="jumlah[]">
@@ -281,7 +283,10 @@
                 @endif
             </div>
         </td>
-    </tr>
+    </tr> --}}
+    @endforeach
+    @endif
+
 </table>
 
 <template id="detailTmpl">
