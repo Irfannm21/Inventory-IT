@@ -341,7 +341,7 @@
                     <option value="Meter">Meter</option>
                 </select>
                 @if ($errors->has('satuan'))
-                    <em class="invalid-feedback">
+                    <em class="invalid-feedback"    >
                         {{ $errors->first('satuan') }}
                     </em>
                 @endif
