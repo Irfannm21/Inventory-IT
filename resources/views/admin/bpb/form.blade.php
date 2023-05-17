@@ -223,6 +223,7 @@
         <td style="width: 300px">
             <div class="form-group {{ $errors->has('detail_id') ? 'has-error' : '' }}">
                 <label id="hasil">Nama Pesanan Barang</label>
+                <input type="text" id="" class="form-control" name="id[]" value="{{$item->id}}" hidden>
                 <select name="detail_id[]" id="detail_id" class="form-control detail_id">
                     <option value="">-- Pilih --</option>
                     <option value="{{ $i }}" {{$item->stock->barang->nama == (old('npp_id') ?? ($item->stock->barang->nama ?? '') ?? isset($item->stock->barang->nama)) ? 'selected' : '' }}>{{ $item->stock->barang->nama }}</option>

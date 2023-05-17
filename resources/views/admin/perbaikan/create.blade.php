@@ -1,9 +1,12 @@
+@php
+    // dd($hardware->all());
+@endphp
 @extends('layouts.admin')
 @section('content')
 
 <div class="card">
     <div class="card-header">
-        Buat Data BPB
+        Buat Data Perbaikan
     </div>
 
     <div class="card-body">

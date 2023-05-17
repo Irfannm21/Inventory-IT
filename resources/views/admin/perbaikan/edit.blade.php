@@ -1,5 +1,5 @@
 @php
-    // dd($results->all());
+    // dd($results->hardwareable->kode);
 @endphp
 @extends('layouts.admin')
 @section('content')

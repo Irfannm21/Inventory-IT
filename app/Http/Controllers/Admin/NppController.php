@@ -90,7 +90,7 @@ class NppController extends Controller
 
             foreach($request->nama as $i => $value) {
                             detail_npp::UpdateOrCreate(
-                                ["id" => $request->id[$i], "npp_id" => $npp->id],
+                                ["id" => $request->id[$i],  ],
                                 [
                                 'nama'      => trim(ucwords($request->nama[$i])) ?? '',
                                 'jumlah'    =>$request->jumlah[$i]?? 1,

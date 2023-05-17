@@ -21,33 +21,40 @@ class PerbaikanController extends Controller
     public function index()
     {
         $results = Perbaikan::all();
-        // foreach($results as $item) {
-        //     echo $item->id;
-        //     echo $item->hardwareable->kode;
-        //     echo "<br>";
-        // }
-        // die;
         return view('admin.perbaikan.index', compact('results'));
     }
 
     public function create(Request $request)
     {
-
+        switch ($request->type) {
+            case 'printer':
+                $hardware = printer::find($request->id);
+                break;
+            case 'komputer':
+                $hardware = komputer::find($request->id);
+                break;
+            default:
+                # code...
+                break;
+        }
+        $tipe = $request->type;
+        // dd($hadrware);
         abort_unless(\Gate::allows('perbaikan_create'), 403);
-        return view('admin.perbaikan.create');
+        return view('admin.perbaikan.create',compact('hardware','tipe'));
     }
 
     public function store(StorePerbaikanRequest $request)
     {
-        // dd($request->all());
-
-        $type = $request->type;
-        if ($type == 'printer') {
-            $result = Printer::find($request->nama);
-        } elseif($type == 'komputer') {
-            $result = komputer::find($request->nama);
-        } elseif($type == "TableBarangJaringan") {
-            $result = TableBarangJaringan::find($request->nama);
+        switch ($request->tipe) {
+            case 'printer':
+                $result = printer::where("kode",$request->kode)->first();
+                break;
+            case 'komputer':
+                $result = komputer::where("kode",$request->kode)->first();
+                break;
+            default:
+                # code...
+                break;
         }
 
         // $stop = carbon::createFromFormat('H:i', $request->stop);

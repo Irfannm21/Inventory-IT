@@ -107,6 +107,8 @@ class BpbController extends Controller
                 $data[$i]->stock()->save($stok);
             }
 
+
+
         }
 
         if($bpb->kelompok == "Administrasi")
@@ -153,7 +155,40 @@ class BpbController extends Controller
     }
 
     public function update(UpdateBpbRequest $request, bpb $bpb) {
-        $bpb->update($request->all());
+
+        dd($request->all());
+        if($request->supplierID) {
+            $supplier = supplier::find($request->supplierID);
+        } else {
+            $supplier = new supplier;
+            $supplier->nama = $request->nama;
+            $supplier->kota = $request->kota;
+            $supplier->email = $request->email;
+            $supplier->telepon = $request->telepon;
+            $supplier->type = $request->type;
+            $supplier->alamat = $request->alamat;
+            $supplier->save();
+
+            $supplier = supplier::where('nama',$request->nama)->first();
+        }
+
+        $bpb->kode = $request->kode;
+        $bpb->tanggal = $request->tanggal;
+        $bpb->kelompok = $request->kelompok;
+        $bpb->npp()->associate($request->npp_id);
+        $bpb->supplier()->associate($supplier);
+        $bpb->save();
+
+        foreach($request->id as $i => $value) {
+            detail_bpb::UpdateOrCreate(
+                ["id" => $request->id[$i], "bpb_id" => $bpb->id],
+                [
+                'detail_id'      => trim(ucwords($request->detail_id[$i])) ?? '',
+                'barang_id'      => trim(ucwords($request->barang_id[$i])) ?? '',
+                'jumlah'    =>$request->jumlah[$i]?? 1,
+                ]
+        );
+        }
 
         if($bpb->kelompok == "Administrasi")
         {

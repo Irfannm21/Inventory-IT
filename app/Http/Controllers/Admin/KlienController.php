@@ -52,7 +52,7 @@ class KlienController extends Controller
         return view('admin.pengguna.edit', compact('klien','karyawans','printer','komputer'));
     }
 
-    public function update (UpdateKlienRequest $request, klien $klien)
+    public function update (StoreKlienRequest $request, klien $klien)
     {
         abort_unless(\Gate::allows('klien_edit'), 403);
         $klien->update($request->all());
