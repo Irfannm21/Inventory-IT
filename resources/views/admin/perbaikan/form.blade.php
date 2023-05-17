@@ -1,3 +1,17 @@
+<div class="col-md-4 {{ $errors->has('kode') ? 'has-error' : '' }}">
+    <label for="kode">Kode</label>
+    <input type="text" id="kode" name="kode" class="form-control"
+        value="{{ old('kode', isset($results->hardwareable->kode) isset($hadr): '') }}" readonly>
+
+
+        <input type="text" name="tipe" value="{{ old('kode') ?? ($results->hardwareable->kode ?? '') }}" >
+    @if ($errors->has('kode'))
+        <em class="invalid-feedback">
+            {{ $errors->first('kode') }}
+    @endif
+    </em>
+</div>
+
 <div class="col-md-4 {{ $errors->has('tanggal') ? 'has-error' : '' }}">
     <label for="tanggal">Tanggal</label>
     <input type="date" id="tanggal" name="tanggal" class="form-control"
@@ -12,7 +26,7 @@
     </p>
 </div>
 
-<div class="col-md-4 {{ $errors->has('type') ? 'has-error' : '' }}">
+{{-- <div class="col-md-4 {{ $errors->has('type') ? 'has-error' : '' }}">
     <label for="type">Tipe Perbaikan</label>
     <select name="type" id="type" class="form-control">
         <option value="" selected>-- Pilih --</option>
@@ -70,7 +84,7 @@
     <p class="helper-block text-muted">
         *Pilih nama
     </p>
-</div>
+</div> --}}
 
 <div class="col-md-4 {{ $errors->has('bp') ? 'has-error' : '' }}">
     <label for="bp">Nomor Bon Pengambilan</label>
