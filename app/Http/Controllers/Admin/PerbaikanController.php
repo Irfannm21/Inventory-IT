@@ -28,10 +28,10 @@ class PerbaikanController extends Controller
     {
         switch ($request->type) {
             case 'printer':
-                $hardware = printer::find($request->id);
+                $result = printer::find($request->id);
                 break;
             case 'komputer':
-                $hardware = komputer::find($request->id);
+                $result = komputer::find($request->id);
                 break;
             default:
                 # code...
@@ -40,23 +40,20 @@ class PerbaikanController extends Controller
         $tipe = $request->type;
         // dd($hadrware);
         abort_unless(\Gate::allows('perbaikan_create'), 403);
-        return view('admin.perbaikan.create',compact('hardware','tipe'));
+        return view('admin.perbaikan.create',compact('result','tipe'));
     }
 
     public function store(StorePerbaikanRequest $request)
     {
-        switch ($request->tipe) {
-            case 'printer':
-                $result = printer::where("kode",$request->kode)->first();
-                break;
-            case 'komputer':
-                $result = komputer::where("kode",$request->kode)->first();
-                break;
-            default:
-                # code...
-                break;
+        if (Printer::where("kode",$request->kode)->first() == true) {
+            $result = Printer::where("kode",$request->kode)->first();
+            $perbaikan = perbaikan::find($result->id);
+        } elseif(komputer::where("kode",$request->kode)->first() == true) {
+            $result = komputer::where("kode",$request->kode)->first();
+            $perbaikan = perbaikan::find($result->id);
+        } else {
+            dd("none");
         }
-
         // $stop = carbon::createFromFormat('H:i', $request->stop);
         // $selesai = carbon::createFromFormat('H:i', $request->selesai);
 
@@ -86,25 +83,27 @@ class PerbaikanController extends Controller
 
     public function edit($id)
     {
-        $results = Perbaikan::find($id);
-        $printer = printer::get(['id',"kode"]);
-        $komputer = komputer::get(["id","kode"]);
-        $jaringan = TableBarangJaringan::get(["id","kode"]);
+        // dd($id);
+        $result = perbaikan::find($id);
+        // $printer = printer::get(['id',"kode"]);
+        // $komputer = komputer::get(["id","kode"]);
+        // $jaringan = TableBarangJaringan::get(["id","kode"]);
         abort_unless(\Gate::allows('perbaikan_edit'), 403);
-        return view('admin.perbaikan.edit', compact('results','printer','komputer','jaringan'));
+        return view('admin.perbaikan.edit', compact('result'));
     }
 
-    public function update(Perbaikan $perbaikan, Request $request)
+    public function update(Request $request)
     {
-        // dd($perbaikan->hardwareable_id);
+        // dd($request->all());
         $type = $request->type;
-        if ($type == 'printer') {
-            $result = Printer::find($perbaikan->hardwareable_id);
-            $result2 = Printer::find($request->nama);
-        } elseif($type == 'komputer') {
-            $result = komputer::find($request->nama);
-        } elseif($type == "TableBarangJaringan") {
-            $result = TableBarangJaringan::find($request->nama);
+        if (Printer::where("kode",$request->kode)->first() == true) {
+            $result = Printer::where("kode",$request->kode)->first();
+            $perbaikan = perbaikan::find($result->id);
+        } elseif(komputer::where("kode",$request->kode)->first() == true) {
+            $result = komputer::where("kode",$request->kode)->first();
+            $perbaikan = perbaikan::find($result->id);
+        } else {
+            dd("none");
         }
 
         // dd($result);
@@ -122,7 +121,6 @@ class PerbaikanController extends Controller
         // $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
 
         $result->perbaikans()->update([
-            'hardwareable_id' => $result2->id,
            "tanggal" => $request->tanggal,
            "kerusakan" => $request->kerusakan,
            "tindakan" => $request->tindakan,
