@@ -1,5 +1,5 @@
 @php
-    // dd(isset($));
+    // dd($result->kode);
 @endphp
 @extends('layouts.admin')
 @section('content')

@@ -1,7 +1,10 @@
 <div class="col-md-4 {{ $errors->has('kode') ? 'has-error' : '' }}">
     <label for="kode">Kode</label>
-    <input type="text" id="kode" name="kode" class="form-control" value="{{ old('kode', isset($result->hardwareable->kode) ? $result->kode : $result->kode) }}" readonly>
-        {{-- <input type="text" name="tipe" value="{{ old('kode') ?? ($result->hardwareable->kode ?? '') }}" > --}}
+    @if (isset($hardware))
+    <input type="text" id="kode" name="kode" class="form-control" value="{{ old('kode', isset($hardware) ? $hardware->kode : "Tidak ada") }}" readonly>
+    @else
+    <input type="text" name="tipe" class="form-control" value="{{ old('kode') ?? ($result->hardwareable->kode ?? '') }}" readonly>
+    @endif
     @if ($errors->has('kode'))
         <em class="invalid-feedback">
             {{ $errors->first('kode') }}

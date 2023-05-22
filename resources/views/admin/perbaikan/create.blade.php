@@ -1,5 +1,5 @@
 @php
-    dd($result);
+    // dd($result);
 @endphp
 @extends('layouts.admin')
 @section('content')

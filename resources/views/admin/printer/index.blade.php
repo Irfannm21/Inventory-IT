@@ -1,3 +1,6 @@
+@php
+    // dd("TESTING00");
+@endphp
 @extends('layouts.admin')
 @section('content')
 @can('product_create')

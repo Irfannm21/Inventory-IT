@@ -28,10 +28,10 @@ class PerbaikanController extends Controller
     {
         switch ($request->type) {
             case 'printer':
-                $result = printer::find($request->id);
+                $hardware = printer::find($request->id);
                 break;
             case 'komputer':
-                $result = komputer::find($request->id);
+                $hardware = komputer::find($request->id);
                 break;
             default:
                 # code...
@@ -40,7 +40,7 @@ class PerbaikanController extends Controller
         $tipe = $request->type;
         // dd($hadrware);
         abort_unless(\Gate::allows('perbaikan_create'), 403);
-        return view('admin.perbaikan.create',compact('result','tipe'));
+        return view('admin.perbaikan.create',compact('hardware','tipe'));
     }
 
     public function store(StorePerbaikanRequest $request)
@@ -85,6 +85,7 @@ class PerbaikanController extends Controller
     {
         // dd($id);
         $result = perbaikan::find($id);
+        // $result = $result->hardwareable->kode;
         // $printer = printer::get(['id',"kode"]);
         // $komputer = komputer::get(["id","kode"]);
         // $jaringan = TableBarangJaringan::get(["id","kode"]);
@@ -92,19 +93,29 @@ class PerbaikanController extends Controller
         return view('admin.perbaikan.edit', compact('result'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         // dd($request->all());
-        $type = $request->type;
-        if (Printer::where("kode",$request->kode)->first() == true) {
-            $result = Printer::where("kode",$request->kode)->first();
-            $perbaikan = perbaikan::find($result->id);
-        } elseif(komputer::where("kode",$request->kode)->first() == true) {
-            $result = komputer::where("kode",$request->kode)->first();
-            $perbaikan = perbaikan::find($result->id);
-        } else {
-            dd("none");
-        }
+        $result = perbaikan::find($id);
+
+        $result->update([
+            "tanggal" => $request->tanggal,
+            "kerusakan" => $request->kerusakan,
+            "tindakan" => $request->tindakan,
+
+        ]);
+
+        // die();
+        // $type = $request->type;
+        // if (Printer::where("kode",$request->kode)->first() == true) {
+        //     $result = Printer::where("kode",$request->kode)->first();
+        //     $perbaikan = perbaikan::find($result->id);
+        // } elseif(komputer::where("kode",$request->kode)->first() == true) {
+        //     $result = komputer::where("kode",$request->kode)->first();
+        //     $perbaikan = perbaikan::find($result->id);
+        // } else {
+        //     dd("none");
+        // }
 
         // dd($result);
         // $stop = carbon::createFromFormat('H:i', $request->stop);
@@ -120,15 +131,7 @@ class PerbaikanController extends Controller
 
         // $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
 
-        $result->perbaikans()->update([
-           "tanggal" => $request->tanggal,
-           "kerusakan" => $request->kerusakan,
-           "tindakan" => $request->tindakan,
-        //    "stop" => $request->stop,
-        //    "mulai" => $request->selesai,
-        //    "total" => $totall,
-           "petugas" => $request->petugas,
-        ]);
+
 
         return redirect()->route('admin.perbaikans.index');
     }
