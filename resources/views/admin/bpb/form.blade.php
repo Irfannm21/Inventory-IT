@@ -208,9 +208,6 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
 </div>
 
@@ -226,7 +223,7 @@
                 <input type="text" id="" class="form-control" name="id[]" value="{{$item->id}}" hidden>
                 <select name="detail_id[]" id="detail_id" class="form-control detail_id">
                     <option value="">-- Pilih --</option>
-                    <option value="{{ $i }}" {{$item->stock->barang->nama == (old('npp_id') ?? ($item->stock->barang->nama ?? '') ?? isset($item->stock->barang->nama)) ? 'selected' : '' }}>{{ $item->stock->barang->nama }}</option>
+                    <option value="{{ $item->stock->barang->id }}" {{$item->stock->barang->nama == (old('npp_id') ?? ($item->stock->barang->nama ?? '') ?? isset($item->stock->barang->nama)) ? 'selected' : '' }}>{{ $item->stock->barang->nama }}</option>
                 </select>
                 @if ($errors->has('detail_id'))
                     <em class="invalid-feedback">
@@ -241,7 +238,7 @@
                 <label id="hasil">Nama di Inventori</label>
                 <select name="barang_id[]" id="" class="form-control select2">
                       <option value="">-- Pilih --</option>
-                    <option value="{{ $i }}" {{$item->stock->barang->nama == (old('npp_id') ?? ($item->stock->barang->nama ?? '') ?? isset($item->stock->barang->nama)) ? 'selected' : '' }}>{{ $item->stock->barang->nama }}</option>
+                    <option value="{{ $item->stock->barang->id }}" {{$item->stock->barang->id == (old('npp_id') ?? ($item->stock->barang->id ?? '') ?? isset($item->stock->barang->nama)) ? 'selected' : '' }}>{{ $item->stock->barang->nama }}</option>
                 </select>
                 @if ($errors->has('detail_id'))
                     <em class="invalid-feedback">

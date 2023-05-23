@@ -41,7 +41,7 @@ class DaftarBarangController extends Controller
     public function edit($id)
     {
         abort_unless(\Gate::allows('barang_edit'), 403);
-        $barang = DaftarBarang::findOrFail($id);
+        // $barang = DaftarBarang::findOrFail($id);ee
 
         return view('admin.daftar_barang.edit', compact('barang'));
     }

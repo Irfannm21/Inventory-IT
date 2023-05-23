@@ -156,7 +156,7 @@ class BpbController extends Controller
 
     public function update(UpdateBpbRequest $request, bpb $bpb) {
 
-        dd($request->all());
+        // dd($request->all());
         if($request->supplierID) {
             $supplier = supplier::find($request->supplierID);
         } else {
@@ -181,11 +181,11 @@ class BpbController extends Controller
 
         foreach($request->id as $i => $value) {
             detail_bpb::UpdateOrCreate(
-                ["id" => $request->id[$i], "bpb_id" => $bpb->id],
+                ["id" => $request->id[$i], ],
                 [
-                'detail_id'      => trim(ucwords($request->detail_id[$i])) ?? '',
-                'barang_id'      => trim(ucwords($request->barang_id[$i])) ?? '',
-                'jumlah'    =>$request->jumlah[$i]?? 1,
+                'bpb_id'      => $bpb->id,
+                'detail_id'      => $request->detail_id[$i],
+                'jumlah'    =>$request->jumlah[$i] ?? 1,
                 ]
         );
         }

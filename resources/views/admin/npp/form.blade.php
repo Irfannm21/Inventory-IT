@@ -241,11 +241,6 @@
 
 </table>
 
-
-
-
-
-
 <template id="detailTmpl">
     <tr>
         <td style="width: 300px">
