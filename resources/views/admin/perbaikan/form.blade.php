@@ -130,7 +130,7 @@
         *Masukan tindakan Perbaikan
     </p>
 </div>
-{{-- <div class="col-md-4 {{ $errors->has('stop') ? 'has-error' : '' }}">
+<div class="col-md-4 {{ $errors->has('stop') ? 'has-error' : '' }}">
     <label for="stop">Mulai Perbaikan</label>
     <input type="time" id="stop" name="stop" class="form-control"
         value="{{ old('stop', isset($result) ? date('H:i', strtotime($result->stop)) : '') }}">
@@ -157,9 +157,9 @@
     <p class="helper-block text-muted">
         *Masukan Selesai Perbaikan
     </p>
-</div> --}}
+</div>
 
-{{-- <div class="col-md-4 {{ $errors->has('petugas') ? 'has-error' : '' }}">
+<div class="col-md-4 {{ $errors->has('petugas') ? 'has-error' : '' }}">
     <label for="petugas">Nama Petugas</label>
     <select name="petugas" id="petugas" class="form-control">
         <option value="" selected>-- Pilih --</option>
@@ -174,7 +174,7 @@
     <p class="helper-block text-muted">
         *Masukan petugas IT
     </p>
-</div> --}}
+</div>
 @section('scripts')
     <script>
         $(document).ready(function() {

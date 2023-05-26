@@ -278,6 +278,11 @@
                 @endif
             </div>
         </td>
+        <td>
+            <button class="btn btn-danger removeBtn" href="#">
+                Delete
+            </button>
+        </td>
     </tr>
     @endforeach
     @else

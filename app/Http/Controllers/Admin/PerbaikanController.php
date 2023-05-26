@@ -54,26 +54,26 @@ class PerbaikanController extends Controller
         } else {
             dd("none");
         }
-        // $stop = carbon::createFromFormat('H:i', $request->stop);
-        // $selesai = carbon::createFromFormat('H:i', $request->selesai);
+        $stop = carbon::createFromFormat('H:i', $request->stop);
+        $selesai = carbon::createFromFormat('H:i', $request->selesai);
 
-        // $detik = $selesai->diffInSeconds($stop);
+        $detik = $selesai->diffInSeconds($stop);
 
-        // $day = $selesai->diffInDays($selesai->copy()->addSeconds($detik));
-        // $jam = $selesai->diffInHours($selesai->copy()->addSeconds($detik)->subDays($day));
-        // $menit = $selesai->diffInMinutes($selesai->copy()->addSeconds($detik)->subDays($day)->subHours($jam));
+        $day = $selesai->diffInDays($selesai->copy()->addSeconds($detik));
+        $jam = $selesai->diffInHours($selesai->copy()->addSeconds($detik)->subDays($day));
+        $menit = $selesai->diffInMinutes($selesai->copy()->addSeconds($detik)->subDays($day)->subHours($jam));
 
-        // $a = CarbonInterval::hours($jam)->minutes($menit);
+        $a = CarbonInterval::hours($jam)->minutes($menit);
 
-        // $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
+        $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
 
         $perbaikan =  new Perbaikan;
         $perbaikan->tanggal = $request->tanggal;
         $perbaikan->kerusakan = $request->kerusakan;
         $perbaikan->tindakan = $request->tindakan;
-        // $perbaikan->stop = $request->stop;
-        // $perbaikan->mulai = $request->selesai;
-        // $perbaikan->total = $totall;
+        $perbaikan->stop = $request->stop;
+        $perbaikan->mulai = $request->selesai;
+        $perbaikan->total = $totall;
         $perbaikan->petugas = $request->petugas;
 
         $result->perbaikans()->save($perbaikan);
@@ -98,12 +98,6 @@ class PerbaikanController extends Controller
         // dd($request->all());
         $result = perbaikan::find($id);
 
-        $result->update([
-            "tanggal" => $request->tanggal,
-            "kerusakan" => $request->kerusakan,
-            "tindakan" => $request->tindakan,
-
-        ]);
 
         // die();
         // $type = $request->type;
@@ -118,19 +112,29 @@ class PerbaikanController extends Controller
         // }
 
         // dd($result);
-        // $stop = carbon::createFromFormat('H:i', $request->stop);
-        // $selesai = carbon::createFromFormat('H:i', $request->selesai);
+        $stop = carbon::createFromFormat('H:i', $request->stop);
+        $selesai = carbon::createFromFormat('H:i', $request->selesai);
 
-        // $detik = $selesai->diffInSeconds($stop);
+        $detik = $selesai->diffInSeconds($stop);
 
-        // $day = $selesai->diffInDays($selesai->copy()->addSeconds($detik));
-        // $jam = $selesai->diffInHours($selesai->copy()->addSeconds($detik)->subDays($day));
-        // $menit = $selesai->diffInMinutes($selesai->copy()->addSeconds($detik)->subDays($day)->subHours($jam));
+        $day = $selesai->diffInDays($selesai->copy()->addSeconds($detik));
+        $jam = $selesai->diffInHours($selesai->copy()->addSeconds($detik)->subDays($day));
+        $menit = $selesai->diffInMinutes($selesai->copy()->addSeconds($detik)->subDays($day)->subHours($jam));
 
-        // $a = CarbonInterval::hours($jam)->minutes($menit);
+        $a = CarbonInterval::hours($jam)->minutes($menit);
 
-        // $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
+        $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
 
+        $result->update([
+            "tanggal" => $request->tanggal,
+            "kerusakan" => $request->kerusakan,
+            "tindakan" => $request->tindakan,
+            "stop" => $request->stop,
+            "mulai" => $request->selesai,
+            "total" => $totall,
+            "petugas" => $request->petugas,
+
+        ]);
 
 
         return redirect()->route('admin.perbaikans.index');
