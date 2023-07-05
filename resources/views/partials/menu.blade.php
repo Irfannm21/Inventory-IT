@@ -91,7 +91,7 @@
                 {{-- End Karyawan Management --}}
                 {{-- @endcan --}}
 
-                @can('it_access')
+                {{-- @can('it_access') --}}
 
                 {{-- IT Management --}}
                 <li class="nav-item nav-dropdown">
@@ -102,6 +102,16 @@
                             IT Management
                         </a>
                         <ul class="nav-dropdown-items">
+
+                            <li class="nav-item">
+                                <a href="{{ route("admin.kliens.index") }}" class="nav-link {{ request()->is('admin/products') || request()->is('admin/products/*') ? 'active' : '' }}">
+                                    <i class="fas fa-user nav-icon">
+
+                                    </i>
+                                    Data Klien
+                                </a>
+                            </li>
+
                             <li class="nav-item">
                                 <a href="{{ route("admin.printers.index") }}" class="nav-link {{ request()->is('admin/absensis') || request()->is('admin/absensis/*') ? 'active' : '' }}">
                                     <i class="fas fa-calendar nav-icon">
@@ -121,15 +131,6 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ route("admin.kliens.index") }}" class="nav-link {{ request()->is('admin/products') || request()->is('admin/products/*') ? 'active' : '' }}">
-                                    <i class="fas fa-user nav-icon">
-
-                                    </i>
-                                    Data Klien
-                                </a>
-                            </li>
-
-                            <li class="nav-item">
                                 <a href="{{ route("admin.perbaikans.index") }}" class="nav-link {{ request()->is('admin/perbaikans') || request()->is('admin/perbaikans/*') ? 'active' : '' }}">
                                     <i class="fas fa-cogs nav-icon">
 
@@ -140,7 +141,7 @@
                         </ul>
                     </li>
                     {{-- IT Management --}}
-                    @endcan
+                    {{-- @endcan --}}
 
                 @can('npp_access')
                 <li class="nav-item nav-dropdown">

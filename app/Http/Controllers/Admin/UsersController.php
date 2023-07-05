@@ -41,7 +41,6 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        abort_unless(\Gate::allows('user_edit'), 403);
 
         $roles = Role::all()->pluck('title', 'id');
 

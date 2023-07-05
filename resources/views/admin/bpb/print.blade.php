@@ -1,13 +1,9 @@
 <?php
-// dd($result->detail_bpbs());
-    // foreach ($result as $value) {
-    //   echo $value->kode . "<br>";
-    //   foreach ($value->detail_bpbs as $key) {
-    //     echo $key->detail_npp->nama . " | " . $key->stock->jumlah . "<br>";
-    //   }
-    // }
-    // echo "<hr>";
-    // die();
+// dd($result->all());
+//   foreach ($result as $key => $value) {
+//     echo $value->supplier->nama;
+//   }
+//   die();
 ?>
 <!doctype html>
 <html lang="en">

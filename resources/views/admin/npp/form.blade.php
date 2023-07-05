@@ -156,7 +156,7 @@
             </div>
         </td>
 
-        <td style="width: 300px">
+        <td style="width: 50px">
             <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
                 <label for=""></label>
                 <button class="btn btn-danger removeBtn">Del</button>

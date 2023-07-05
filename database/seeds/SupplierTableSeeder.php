@@ -1,6 +1,6 @@
 <?php
 
-use App\supplier;
+use App\Models\StokSparepart\supplier;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 

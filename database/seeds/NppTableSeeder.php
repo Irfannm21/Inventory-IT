@@ -1,7 +1,7 @@
 <?php
 
 use App\npp;
-use App\bagian_dept;
+use App\Models\hrd\bagian_dept;
 use App\detail_npp;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -20,27 +20,27 @@ class NppTableSeeder extends Seeder
             [
                 "kode" => "01/ED.EL/X/2022",
                 "tanggal" => "2022-10-01",
-                "status"    => NULL
+                "status"    => "Pending"
             ],
             [
                 "kode" => "02/ED.EL/X/2022",
                 "tanggal" => "2022-10-02",
-                "status"    => NULL
+                "status"    => "Pending"
             ],
             [
                 "kode" => "03/ED.EL/X/2022",
                 "tanggal" => "2022-10-03",
-                "status"    => NULL
+                "status"    => "Pending"
             ],
             [
                 "kode" => "04/ED.EL/X/2022",
                 "tanggal" => "2022-10-04",
-                "status"    => NULL
+                "status"    => "Pending"
             ],
             [
                 "kode" => "05/ED.EL/X/2022",
                 "tanggal" => "2022-10-05",
-                "status"    => NULL
+                "status"    => "Pending"
             ]
         ]
             );

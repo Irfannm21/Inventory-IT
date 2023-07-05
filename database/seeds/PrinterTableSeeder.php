@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\printer;
+use App\Models\it\printer;
 class PrinterTableSeeder extends Seeder
 {
     /**

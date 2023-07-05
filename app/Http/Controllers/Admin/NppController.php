@@ -12,8 +12,8 @@ use App\Models\StokSparepart\detail_npp;
 // use App\Models\StokSparepart\bpb;
 use App\Models\StokSparepart\Detail_bpb;
 // use App\Models\StokSparepart\perbaikan;
-use App\Models\departemen;
-use App\Models\bagian_dept;
+use App\Models\hrd\departemen;
+use App\Models\hrd\bagian_dept;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 

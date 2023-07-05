@@ -1,16 +1,12 @@
 <?php
 
-use App\departemen;
-use App\bagian;
+use App\Models\hrd\departemen;
+use App\Models\hrd\bagian_dept;
 use Illuminate\Database\Seeder;
 
 class BagianTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
+
     public function run()
     {
         $logistik = departemen::where('nama','Logistics')->first();

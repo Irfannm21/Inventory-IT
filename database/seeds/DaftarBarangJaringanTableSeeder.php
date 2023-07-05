@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\TableBarangJaringan;
+use App\Models\it\TableBarangJaringan;
 
 class DaftarBarangJaringanTableSeeder extends Seeder
 {

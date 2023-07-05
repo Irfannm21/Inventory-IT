@@ -27,7 +27,7 @@ class StoreBpbRequest extends FormRequest
     public function rules()
     {
         return [
-            'kode' =>   'required',
+            'kode' =>   'required|unique:bpbs,kode',
             'kelompok' => 'required',
             'tanggal' => 'required',
             'supplierID' => 'required_if:nama,null',

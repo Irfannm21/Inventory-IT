@@ -45,6 +45,7 @@ class PerbaikanController extends Controller
 
     public function store(StorePerbaikanRequest $request)
     {
+        // dd($request->all());
         if (Printer::where("kode",$request->kode)->first() == true) {
             $result = Printer::where("kode",$request->kode)->first();
             $perbaikan = perbaikan::find($result->id);
@@ -65,7 +66,12 @@ class PerbaikanController extends Controller
 
         $a = CarbonInterval::hours($jam)->minutes($menit);
 
-        $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
+        // Error jika kedua menit di angka 00
+        if($a->i == 0) {
+            $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i.$a->i);
+        } else {
+            $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
+        }
 
         $perbaikan =  new Perbaikan;
         $perbaikan->tanggal = $request->tanggal;
@@ -123,7 +129,11 @@ class PerbaikanController extends Controller
 
         $a = CarbonInterval::hours($jam)->minutes($menit);
 
-        $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
+        if($a->i == 0) {
+            $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i.$a->i);
+        } else {
+            $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
+        }
 
         $result->update([
             "tanggal" => $request->tanggal,

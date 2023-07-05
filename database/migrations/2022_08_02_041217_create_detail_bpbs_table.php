@@ -17,7 +17,7 @@ class CreateDetailBpbsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('bpb_id')->constrained()->onDelete('bpb_id');
             $table->unsignedBigInteger('detail_id')->constrained()->onDelete('detail_id');
-
+            $table->integer('jumlah');
             $table->timestamps();
 
             $table->foreign('bpb_id')->references('id')->on('bpbs');

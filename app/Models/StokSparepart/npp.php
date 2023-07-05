@@ -16,12 +16,12 @@ class npp extends Model
 
     public function departemen()
     {
-        return $this->belongsTo('App\Models\departemen');
+        return $this->belongsTo('App\Models\hrd\departemen');
     }
 
     public function bagian()
     {
-        return $this->belongsTo('App\Models\bagian_dept','bagian_id');
+        return $this->belongsTo('App\Models\hrd\bagian_dept','bagian_id');
     }
 
     public function bpbs()

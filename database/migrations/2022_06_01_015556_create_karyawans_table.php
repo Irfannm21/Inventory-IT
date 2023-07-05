@@ -15,42 +15,30 @@ class CreateKaryawansTable extends Migration
     {
         Schema::create('karyawans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->char('kode',4)->unique();
-            $table->string('id_finger');
-            $table->string('nik');
             $table->string('nama');
+            $table->char('nik',4)->unique();
             $table->string('ektp');
-            $table->string('no_kpj');
-            $table->string('no_npwp');
             $table->string('no_kk');
-            $table->string('tempat_lahir');
+            $table->string('npwp');
             $table->date('tanggal_lahir');
+            $table->string('tempat_lahir');
             $table->char('jenis_kelamin',2);
+            $table->string('agama');
             $table->string('status_perkawinan');
-            $table->string('alamat');
-            $table->string('alamat_baru');
-            $table->string('no_telepon');
+            $table->string('alamat_ktp');
+            $table->string('alamat_domisili');
             $table->string('no_hp');
             $table->string('email');
             $table->string('nama_bank');
             $table->string('no_rekening');
-            $table->string('pengupahan');
             $table->string('gol_darah');
-            $table->string('bagian');
-            $table->string('departemen');
-            $table->string('jabatan');
+            $table->string('##############');
+            $table->string('jabatan########');
             $table->string('tmk');
             $table->string('shift');
-            $table->string('agama');
-            $table->string('pendidikan');
             $table->string('serikat_pekerja');
-            $table->string('status_pegawai');
-            $table->string('catatan');
             $table->string('photo');
-            $table->date('tanggal_kontrak');
-            $table->date('habis_kontrak');
-            $table->string('no_vaklaring');
-            $table->string('alasan_keluar');
+
 
             $table->timestamps();
         });

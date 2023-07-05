@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\komputer;
+use App\Models\it\komputer;
 
 class KomputerTableSeeder extends Seeder
 {

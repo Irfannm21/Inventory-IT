@@ -29,7 +29,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('products', 'ProductsController');
 
     Route::get('/karyawans/test','KaryawanController@test')->name('karyawans.test');
-    Route::resource('karyawans','KaryawanController');
+    Route::resource('karyawans','MasterKaryawanController');
 
     Route::delete('printers/destroy', 'PrinterController@massDestroy')->name('printers.massDestroy');
 
