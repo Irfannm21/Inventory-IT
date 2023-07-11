@@ -223,9 +223,8 @@
                 {{-- <input type="text" id="" class="form-control" name="id[]" value="{{$item->id}}" hidden> --}}
                 <select name="detail_id[]" id="detail_id" class="form-control detail_id">
                     <option value="">-- Pilih --</option>
-                    @foreach ($bpb->npp->details as $i => $item)
-                    <option value="{{ $item->id }}" {{$item->nama == (old('npp_id') ?? ($item->nama ?? '') ?? isset($item->nama)) ? 'selected' : '' }}>{{ $item->nama }}</option>
-                    @endforeach
+
+                    <option value="{{$val->detail_npp->id}}" {{$val->detail_npp->id == (old('detail_id') ?? ($val->detail_npp->id ?? '') ?? isset($val->detail_npp->nama)) ? 'selected' : '' }}>{{ $val->detail_npp->nama }}</option>
                 </select>
                 @if ($errors->has('detail_id'))
                 <em class="invalid-feedback">
@@ -234,6 +233,7 @@
                 @endif
             </div>
         </td>
+
         <td style="width: 300px">
             <div class="form-group {{ $errors->has('barang_id') ? 'has-error' : '' }}">
                 <label id="hasil">Nama di Inventori</label>

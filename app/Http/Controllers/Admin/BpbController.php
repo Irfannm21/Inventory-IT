@@ -146,7 +146,10 @@ class BpbController extends Controller
     }
 
     public function edit(bpb $bpb) {
-        // dd($bpb->npp->kode);
+        // foreach ($bpb->detail_bpbs as $val) {
+        //     echo $val->detail_npp->nama;
+        // }
+        // die();
         $suppliers = supplier::all()->pluck('nama','id');
         $detail = detail_npp::all()->pluck('nama','id');
         $npp = npp::all()->pluck('kode','id');
@@ -157,41 +160,45 @@ class BpbController extends Controller
     public function update(UpdateBpbRequest $request, bpb $bpb) {
         // dd($request->all());
 
-        // foreach($request->id as $val) {
-        //     $aa = detail_bpb::FindOrFail($val);
-        //     echo $aa . "<br>";
-        // }
+        if($request->supplierID) {
+            $supplier = supplier::find($request->supplierID);
+        } else {
+            $supplier = new supplier;
+            $supplier->nama = $request->nama;
+            $supplier->kota = $request->kota;
+            $supplier->email = $request->email;
+            $supplier->telepon = $request->telepon;
+            $supplier->type = $request->type;
+            $supplier->alamat = $request->alamat;
+            $supplier->save();
 
-        // die();
-        // if($request->supplierID) {
-        //     $supplier = supplier::find($request->supplierID);
-        // } else {
-        //     $supplier = new supplier;
-        //     $supplier->nama = $request->nama;
-        //     $supplier->kota = $request->kota;
-        //     $supplier->email = $request->email;
-        //     $supplier->telepon = $request->telepon;
-        //     $supplier->type = $request->type;
-        //     $supplier->alamat = $request->alamat;
-        //     $supplier->save();
+            $supplier = supplier::where('nama',$request->nama)->first();
+        }
 
-        //     $supplier = supplier::where('nama',$request->nama)->first();
-        // }
+        $bpb->kode = $request->kode;
+        $bpb->tanggal = $request->tanggal;
+        $bpb->kelompok = $request->kelompok;
+        $bpb->npp()->associate($request->npp_id);
+        $bpb->supplier()->associate($supplier);
+        $bpb->save();
 
-        // $bpb->kode = $request->kode;
-        // $bpb->tanggal = $request->tanggal;
-        // $bpb->kelompok = $request->kelompok;
-        // $bpb->npp()->associate($request->npp_id);
-        // $bpb->supplier()->associate($supplier);
-        // $bpb->save();
 
-        foreach($request->id as $i => $value) {
+        foreach($bpb->detail_bpbs as $i => $value) {
             detail_bpb::UpdateOrCreate(
-                ["id" => $request->id[$i], ],
+                ["id" => $value->id ],
                 [
-                'jumlah'    =>$request->jumlah[$i],
+                    "detail_id" => $request->detail_id[$i],
+                    "jumlah" => $request->jumlah[$i],
                 ]
-        );
+                );
+
+                StockSparepart::UpdateOrCreate(
+                    ["id" => $value->stock->id ],
+                    [
+                        "jumlah" => $request->jumlah[$i],
+                        "satuan" => $request->satuan[$i],
+                    ]
+                    );
         }
 
         if($bpb->kelompok == "Administrasi")
