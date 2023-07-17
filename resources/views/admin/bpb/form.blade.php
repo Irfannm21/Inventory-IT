@@ -236,7 +236,7 @@
 
         <td style="width: 300px">
             <div class="form-group {{ $errors->has('barang_id') ? 'has-error' : '' }}">
-                <label id="hasil">Nama di Inventori</label>
+                <label id="hasil">Nama di Inventori </label>
                 <select name="barang_id[]" id="" class="form-control select2">
                       <option value="">-- Pilih --</option>
                     <option value="{{ $val->stock->barang->id }}" {{$val->stock->barang->id == (old('npp_id') ?? ($val->stock->barang->id ?? '') ?? isset($val->stock->barang->nama)) ? 'selected' : '' }}>{{ $val->stock->barang->nama }}</option>

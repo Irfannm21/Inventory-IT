@@ -107,8 +107,6 @@ class BpbController extends Controller
                 $data[$i]->stock()->save($stok);
             }
 
-
-
         }
 
         if($bpb->kelompok == "Administrasi")
@@ -146,10 +144,9 @@ class BpbController extends Controller
     }
 
     public function edit(bpb $bpb) {
-        // foreach ($bpb->detail_bpbs as $val) {
-        //     echo $val->detail_npp->nama;
-        // }
-        // die();
+        // dd($bpb->id);
+        $stock = StockSparepart::where('stockable_id',13)->get();
+        // dd($stock);
         $suppliers = supplier::all()->pluck('nama','id');
         $detail = detail_npp::all()->pluck('nama','id');
         $npp = npp::all()->pluck('kode','id');
@@ -158,7 +155,8 @@ class BpbController extends Controller
     }
 
     public function update(UpdateBpbRequest $request, bpb $bpb) {
-        // dd($request->all());
+        // dd($bpb->all());
+
 
         if($request->supplierID) {
             $supplier = supplier::find($request->supplierID);
@@ -183,24 +181,66 @@ class BpbController extends Controller
         $bpb->save();
 
 
-        foreach($bpb->detail_bpbs as $i => $value) {
-            detail_bpb::UpdateOrCreate(
-                ["id" => $value->id ],
-                [
-                    "detail_id" => $request->detail_id[$i],
-                    "jumlah" => $request->jumlah[$i],
-                ]
-                );
-
-                StockSparepart::UpdateOrCreate(
-                    ["id" => $value->stock->id ],
+        foreach($request->detail_id as $i => $value) {
+            // echo $value . "<br>";
+            // dd($bpb);
+            $detail_npp = detail_npp::where('id',$value)->first();
+            $detail_bpb = detail_bpb::where("detail_id",$value)->first();
+            $barang = DaftarBarang::where("nama",$detail_npp->nama)->first();
+            if($barang == true) {
+                detail_bpb::UpdateOrCreate(
+                    ["bpb_id" => $bpb->id,"detail_id" => $value ],
                     [
+                        "bpb_id" => $bpb->id,
+                        "detail_id" => $request->detail_id[$i],
+                        "jumlah" => $request->jumlah[$i],
+                    ]
+                    );
+
+                    StockSparepart::UpdateOrCreate(
+                        ["stockable_id" => $detail_bpb->id ],
+                        [
+                            // "barang_id" => $barang->id,
+                            "tanggal" => $request->tanggal,
+                            "jumlah" => $request->jumlah[$i],
+                            "satuan" => $request->satuan[$i],
+                        ]
+                        );
+            } else {
+
+              $result =  detail_bpb::UpdateOrCreate(
+                    ["bpb_id" => $bpb->id,"detail_id" => $value ],
+                    [
+                        "bpb_id" => $bpb->id,
+                        "detail_id" => $request->detail_id[$i],
+                        "jumlah" => $request->jumlah[$i],
+                    ]
+                    );
+
+                $faker = Faker::Create('id_ID');
+                $namaBarang = new DaftarBarang;
+                $namaBarang->kode = $faker->numerify("####");
+                $namaBarang->nama = $detail_npp->nama;
+                $namaBarang->satuan = $request->satuan{$i} ??  'Pcs';
+                $namaBarang->save();
+
+
+                $result->stock()->UpdateOrCreate(
+                    ["stockable_id" => $result->id ],
+                    [
+                        "barang_id" => $namaBarang->id,
+                        "tanggal" => $request->tanggal,
                         "jumlah" => $request->jumlah[$i],
                         "satuan" => $request->satuan[$i],
                     ]
                     );
-        }
+            }
 
+
+
+
+        }
+        // die();
         if($bpb->kelompok == "Administrasi")
         {
             return redirect()->route("admin.bpbs.administrasi");

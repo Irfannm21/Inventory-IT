@@ -24,3 +24,5 @@ class Detail_bpb extends Model
       return $this->belongsTo('App\Models\StokSparepart\DaftarBarang');
     }
 }
+
+
