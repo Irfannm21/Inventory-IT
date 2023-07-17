@@ -155,8 +155,6 @@ class BpbController extends Controller
     }
 
     public function update(UpdateBpbRequest $request, bpb $bpb) {
-        // dd($bpb->all());
-
 
         if($request->supplierID) {
             $supplier = supplier::find($request->supplierID);
@@ -182,8 +180,6 @@ class BpbController extends Controller
 
 
         foreach($request->detail_id as $i => $value) {
-            // echo $value . "<br>";
-            // dd($bpb);
             $detail_npp = detail_npp::where('id',$value)->first();
             $detail_bpb = detail_bpb::where("detail_id",$value)->first();
             $barang = DaftarBarang::where("nama",$detail_npp->nama)->first();
@@ -200,7 +196,7 @@ class BpbController extends Controller
                     StockSparepart::UpdateOrCreate(
                         ["stockable_id" => $detail_bpb->id ],
                         [
-                            // "barang_id" => $barang->id,
+                            "barang_id" => $request->barang_id[$i],
                             "tanggal" => $request->tanggal,
                             "jumlah" => $request->jumlah[$i],
                             "satuan" => $request->satuan[$i],
@@ -240,7 +236,7 @@ class BpbController extends Controller
 
 
         }
-        // die();
+
         if($bpb->kelompok == "Administrasi")
         {
             return redirect()->route("admin.bpbs.administrasi");
