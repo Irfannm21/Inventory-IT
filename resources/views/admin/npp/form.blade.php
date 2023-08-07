@@ -88,7 +88,7 @@
         <td style="width: 300px">
             <div class="form-group">
                 <label for=""> Nama Barang</label>
-                <input type="text" id="" class="form-control" name="id[]" value="{{$item->id}}" hidden>
+                {{-- <input type="text" id="" class="form-control" name="id[]" value="{{$item->id}}" hidden> --}}
                 <input type="text" id="" class="form-control" name="nama[]" value="{{old('nama') ?? ($item->nama ?? '') ?? isset($item->nama)}}">
                 @if ($errors->has('nama'))
                     <em class="invalid-feedback">
@@ -245,7 +245,7 @@
     <tr>
         <td style="width: 300px">
             <div class="form-group {{ $errors->has('nama[]') ? 'has-error' : '' }}">
-                <input type="text" id="" class="form-control" name="id[]" hidden>
+                {{-- <input type="text" id="" class="form-control" name="id[]"> --}}
                 <input type="text" id="" class="form-control" name="nama[]">
                 @if ($errors->has('nama'))
                     <em class="invalid-feedback">

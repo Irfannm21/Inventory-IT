@@ -18,9 +18,9 @@
                                 {{ $errors->first('kode') }}
                             </em>
                         @endif
-                        <p class="helper-block">
-                            {{ trans('*Wajib isi kode BPB') }}
-                        </p>
+
+
+
                     </div>
                 </div>
                 <div class="form-group row  {{ $errors->has('kelompok') ? 'has-error' : '' }}">

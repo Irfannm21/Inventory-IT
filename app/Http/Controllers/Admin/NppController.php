@@ -80,26 +80,38 @@ class NppController extends Controller
     public function update(StoreNppRequest $request, npp $npp)
     {
         // dd($request->all());
-         $npp->update([
-                'kode'      => $request->kode,
-                'tanggal'   => $request->tanggal,
-                'bagian_id' => $request->bagian,
-                "status"    => $request->status,
-            ]);
+      $npp->update([
+        "kode" => $request->kode,
+        "tanggal" => $request->tanggal,
+        "bagian_id" => $request->bagian,
+        "status" => $request->status,
+      ]);
+
+    //   dd($request->all());
+      foreach($request->nama as $i => $val) {
+        echo $npp->id . " ";
+        echo $val. " " ;
+        echo $request->jumlah[$i]. " " ;
+        echo $request->stok[$i] . " ";
+        echo $request->satuan[$i] . " ";
+        echo $request->keterangan[$i] . "<br>";
 
 
-            foreach($request->nama as $i => $value) {
-                            detail_npp::UpdateOrCreate(
-                                ["id" => $request->id[$i],  ],
-                                [
-                                'nama'      => trim(ucwords($request->nama[$i])) ?? '',
-                                'jumlah'    =>$request->jumlah[$i]?? 1,
-                                'satuan'    =>$request->satuan[$i]?? 'Pcs',
-                                'stok'      =>$request->stok[$i]?? 0,
-                                'keterangan'=> trim(ucwords($request->keterangan[$i])) ??'',
-                                ]
-                );
-            }
+        // echo $request->satuanp[$i];
+
+       $npp->details()->updateOrCreate(
+            ["npp_id" => $npp->id, "nama" => $val],
+            [
+                "npp_id" => $npp->id,
+                "jumlah" => $request->jumlah[$i],
+                "satuan" => $request->satuan[$i],
+                "stok" => $request->stok[$i],
+                "keterangan" => $request->keterangan[$i] ?? "",
+            ]
+            );
+      }
+
+
         return redirect()->route('admin.npps.index');
     }
 

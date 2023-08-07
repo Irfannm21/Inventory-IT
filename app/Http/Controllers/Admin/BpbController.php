@@ -155,7 +155,6 @@ class BpbController extends Controller
     }
 
     public function update(UpdateBpbRequest $request, bpb $bpb) {
-
         if($request->supplierID) {
             $supplier = supplier::find($request->supplierID);
         } else {
