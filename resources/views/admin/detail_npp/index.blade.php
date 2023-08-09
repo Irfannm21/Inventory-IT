@@ -63,7 +63,7 @@
                                 </td>
                                 <td>
                                     @can('komputer_show')
-                                    <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#contohModal">View</button>
+                                    {{-- <button type="button" class="btn btn-xs btn-primary" data-toggle="modal" data-target="#contohModal">View</button> --}}
                                     <div class="modal fade" id="contohModal" tabindex="-1">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
@@ -112,8 +112,8 @@
                                     </div>
                                     @endcan
                                     @can('detail_npp_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route("admin.details.edit", $value->id)  }}">
-                                        {{ trans('global.edit') }}
+                                    <a class="btn btn-xs btn-info" href="{{ route("admin.npps.edit", $value->npp->id)  }}">
+                                        Edit
                                     </a>
                                     @endcan
                                     @can('detail_npp_delete')
@@ -127,7 +127,7 @@
 
                             </tr>
                     @endforeach
-                </tbody>
+            </tbody>
             </table>
         </div>
     </div>

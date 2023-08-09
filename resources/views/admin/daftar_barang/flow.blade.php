@@ -155,7 +155,7 @@
                             let total = value.jumlah;
                             baris += `<tr data-entry-id=${value.id}>`;
                                 baris += `<td></td>`;
-                            if (value.stockable_type == "App\\Detail_bpb") {
+                            if (value.stockable_type == "App\\Models\\StokSparepart\\Detail_bpb") {
                                 baris += `<td>${value.stockable.bpb.kode}</td>`;
                                 baris += `<td>${value.stockable.bpb.tanggal}</td>`;
                                 baris +=
@@ -175,7 +175,7 @@
                             baris += `<td>${value.jumlah}</td>`;
                             baris += `</tr>`;
                         }
-                        console.log(masuk);
+                        // console.log(masuk);
                         let hasil = masuk - keluar;
                         baris += "<tr>";
                         baris += "<td></td>";

@@ -80,27 +80,19 @@ class NppController extends Controller
     public function update(StoreNppRequest $request, npp $npp)
     {
         // dd($request->all());
-      $npp->update([
-        "kode" => $request->kode,
-        "tanggal" => $request->tanggal,
-        "bagian_id" => $request->bagian,
-        "status" => $request->status,
-      ]);
+    //   $npp->update([
+    //     "kode" => $request->kode,
+    //     "tanggal" => $request->tanggal,
+    //     "bagian_id" => $request->bagian,
+    //     "status" => $request->status,
+    //   ]);
 
     //   dd($request->all());
       foreach($request->nama as $i => $val) {
-        echo $npp->id . " ";
-        echo $val. " " ;
-        echo $request->jumlah[$i]. " " ;
-        echo $request->stok[$i] . " ";
-        echo $request->satuan[$i] . " ";
-        echo $request->keterangan[$i] . "<br>";
-
-
-        // echo $request->satuanp[$i];
+        $result = detail_npp::where("nama",$request->nama[$i])->first();
 
        $npp->details()->updateOrCreate(
-            ["npp_id" => $npp->id, "nama" => $val],
+            ["npp_id" => $npp->id, "nama" => $val ?? ""],
             [
                 "npp_id" => $npp->id,
                 "jumlah" => $request->jumlah[$i],
@@ -110,8 +102,7 @@ class NppController extends Controller
             ]
             );
       }
-
-
+// die();
         return redirect()->route('admin.npps.index');
     }
 
