@@ -42,7 +42,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('komputers/destroy', 'KomputerController@massDestroy')->name('komputers.massDestroy');
     Route::resource('komputers','KomputerController');
 
-    Route::resource('kliens','KlienController');
+    Route::resource('/gudangits','GudangITController');
 
     Route::resource('departemens','DepartemenController');
 

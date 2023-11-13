@@ -2,6 +2,7 @@
 
 namespace App\Models\it;
 
+// use App\Models\it\guadangIT;
 use Illuminate\Database\Eloquent\Model;
 
 class komputer extends Model
@@ -16,5 +17,10 @@ class komputer extends Model
     public function klien()
     {
         return $this->hasOne('App\Models\it\klien');
+    }
+
+    public function gudangitable()
+    {
+        return $this->morphOne('App\Models\it\gudangIT','gudangitable');
     }
 }

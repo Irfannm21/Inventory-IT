@@ -16,7 +16,8 @@ class PrinterController extends Controller
 {
    public function index()
    {
-        $results = Printer::all();
+        $results = Printer::all(); 
+        
         return view('admin.printer.index', compact('results'));
    }
 
@@ -29,7 +30,6 @@ class PrinterController extends Controller
    public function show(printer $printer)
    {
         return view('admin.printer.show', compact('printer'));
-
    }
 
    public function store(StorePrinterRequest $request)

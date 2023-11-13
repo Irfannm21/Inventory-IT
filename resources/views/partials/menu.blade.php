@@ -102,7 +102,7 @@
                             IT Management
                         </a>
                         <ul class="nav-dropdown-items">
-
+{{--
                             <li class="nav-item">
                                 <a href="{{ route("admin.kliens.index") }}" class="nav-link {{ request()->is('admin/products') || request()->is('admin/products/*') ? 'active' : '' }}">
                                     <i class="fas fa-user nav-icon">
@@ -110,7 +110,7 @@
                                     </i>
                                     Data Klien
                                 </a>
-                            </li>
+                            </li> --}}
 
                             <li class="nav-item">
                                 <a href="{{ route("admin.printers.index") }}" class="nav-link {{ request()->is('admin/absensis') || request()->is('admin/absensis/*') ? 'active' : '' }}">
@@ -136,6 +136,14 @@
 
                                     </i>
                                     Daftar Perbaikan
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route("admin.gudangits.index") }}" class="nav-link {{ request()->is('admin/gudangs') || request()->is('admin/gudangs/*') ? 'active' : '' }}">
+                                    <i class="fas fa-warehouse nav-icon">
+
+                                    </i>
+                                    Data Gudang
                                 </a>
                             </li>
                         </ul>
