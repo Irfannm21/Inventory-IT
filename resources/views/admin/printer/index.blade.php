@@ -33,6 +33,9 @@
                             Tanggal
                         </th>
                         <th>
+                            Status
+                        </th>
+                        <th>
                             Deskripsi
                         </th>
                         <th>
@@ -51,6 +54,13 @@
                             </td>
                             <td>
                                 {{ $value->tanggal ?? '' }}
+                            </td>
+                            <td>
+                                @if ($value->gudangitable == true)
+                                    <span class="badge badge-danger">Di Gudang</span>
+                                @else
+                                    <span class="badge badge-success">Dipakai</span>
+                                @endif
                             </td>
                             <td>
                                 {{ $value->nama ?? '' }}

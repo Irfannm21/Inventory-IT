@@ -4,9 +4,13 @@
 @can('perbaikan_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
+            @if ($printer->gudangitable == true)
+
+            @else
             <a class="btn btn-success" href="{{ route("admin.perbaikans.create",['id'=> $printer->id, 'type' => 'printer'])}}">
                 Buat Perbaikan
             </a>
+            @endif
         </div>
     </div>
 @endcan
@@ -42,9 +46,22 @@
                     </th>
                     <td>
                         {{ $printer->nama }}
+                    </td>
+                <tr>
+                    <th>
+                        Status
+                    </th>
+                    <td>
+                        @if ($printer->gudangitable == true)
+                            <h5><span class="badge badge-danger">Digudang</span></h5>
+                        @else
+                            <h5><span class="badge badge-success badge-sm">Dipakai</span></h5>
+                        @endif
+                    </td>
+                </tr>
             </tbody>
         </table>
-
+        <span class="text-muted"><u>*Hardware yang sudah masuk gudang tidak bisa menambah data kerusakan</u></span>
         <div class="card-body">
             <div class="text-center h3">
                 Daftar Perbaikan {{$printer->kode}}

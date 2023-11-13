@@ -16,8 +16,8 @@ class PrinterController extends Controller
 {
    public function index()
    {
-        $results = Printer::all(); 
-        
+        $results = Printer::with('gudangitable')->get();
+
         return view('admin.printer.index', compact('results'));
    }
 

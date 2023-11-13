@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller     ;
 use App\Models\it\gudangIT;
+use App\Models\it\printer;
 use Illuminate\Http\Request;
 
 class GudangITController extends Controller
@@ -15,8 +16,8 @@ class GudangITController extends Controller
      */
     public function index()
     {
-        $results = gudangIT::all();
-        // dd($results->gudangitable_type);
+        $results = gudangIT::whereHasMorph('gudangitable',['App\Models\it\printer','App\Models\it\komputer'])->get();
+        // dd($results);
         return view('admin.cmsIT.gudang.index',compact('results'));
     }
 
