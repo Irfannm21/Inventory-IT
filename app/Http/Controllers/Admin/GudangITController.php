@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller     ;
 use App\Models\it\gudangIT;
 use App\Models\it\printer;
+use App\Models\it\komputer;
 use Illuminate\Http\Request;
 
 class GudangITController extends Controller
@@ -17,7 +18,6 @@ class GudangITController extends Controller
     public function index()
     {
         $results = gudangIT::whereHasMorph('gudangitable',['App\Models\it\printer','App\Models\it\komputer'])->get();
-        // dd($results);
         return view('admin.cmsIT.gudang.index',compact('results'));
     }
 
@@ -28,7 +28,7 @@ class GudangITController extends Controller
      */
     public function create()
     {
-        dd("TE");
+        return view('admin.cmsIT.gudang.create');
     }
 
     /**
@@ -39,7 +39,18 @@ class GudangITController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+
+        // if ($val_printer = printer::findOrFail(2) == true) {
+        //     #
+        // }
+        $val = new gudangIT;
+        $val->tanggal = $request->tanggal;
+        $val->keterangan = $request->keterangan;
+
+        $val_printer->gudangitable()->save($val);
+
+        return redirect()->route('admin.gudangits.index');
     }
 
     /**
@@ -59,9 +70,21 @@ class GudangITController extends Controller
      * @param  \App\gudangIT  $gudangIT
      * @return \Illuminate\Http\Response
      */
-    public function edit(gudangIT $gudangIT)
+    public function edit(Request $request, $id)
     {
-        //
+        $gudang = gudangIT::findORFail($id);
+        if($gudang->gudangitable_type == "App\Models\it\printer")
+        {
+            $gudang->jenis = "printer";
+            $printer = printer::all();
+        } elseif($gudang->gudangitable_type == "App\Models\it\komputer") {
+            $gudang->jenis = "komputer";
+            $komputer = komputer::all();
+        } else {
+            dd("none");
+        }
+
+        return view('admin.cmsIT.gudang.edit',compact('gudang','printer'));
     }
 
     /**
@@ -73,7 +96,7 @@ class GudangITController extends Controller
      */
     public function update(Request $request, gudangIT $gudangIT)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -84,6 +107,20 @@ class GudangITController extends Controller
      */
     public function destroy(gudangIT $gudangIT)
     {
-        //
+        dd($gudangIT);
+    }
+
+    public function jenisPerangkat(Request $request)
+    {
+        if ($request->nama == 'printer') {
+            return printer::select('id','kode as nama')->doesntHave('gudangitable')->get();
+        } elseif ($request->nama == 'cpu')
+        {
+            return komputer::select('id','kode as nama')->doesntHave('gudangitable')->get();
+        } else {
+            return "None";
+        }
+
+        // return __tooString($request->nama)::all();
     }
 }

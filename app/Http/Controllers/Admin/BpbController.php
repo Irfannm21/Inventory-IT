@@ -85,25 +85,24 @@ class BpbController extends Controller
                 $barang = new DaftarBarang;
                 $barang->kode = $faker->numerify("####");
                 $barang->nama = $namaBarang->nama;
-                $barang->satuan = $request->satuan{$i} ??  'Pcs';
+                $barang->satuan = $request->satuan[$i] ?? 'pcs';
                 $barang->save();
 
                 $stok = new StockSparepart;
                 $stok->barang_id = $barang->id  ?? '';
-                $stok->jumlah = $request->jumlah{$i} ?? '';
+                $stok->jumlah = $request->jumlah[$i]?? '';
                 $stok->tanggal = $tanggal;
-                $stok->satuan = $request->satuan{$i} ?? '';
+                $stok->satuan = $request->satuan[$i] ?? 'pcs';
 
                 $data[$i]->stock()->save($stok);
 
             } else {
                 $barang = DaftarBarang::find($request->barang_id[$i]);
-
                 $stok = new StockSparepart;
                 $stok->barang_id = $barang->id ?? '';
-                $stok->jumlah = $request->jumlah{$i} ?? '';
+                $stok->jumlah = $request->jumlah[$i] ?? 0;
                 $stok->tanggal = $request->tanggal;
-                $stok->satuan = $request->satuan{$i} ?? '';
+                $stok->satuan = $request->satuan[$i] ?? 'pcs';
                 $data[$i]->stock()->save($stok);
             }
 
@@ -216,7 +215,7 @@ class BpbController extends Controller
                 $namaBarang = new DaftarBarang;
                 $namaBarang->kode = $faker->numerify("####");
                 $namaBarang->nama = $detail_npp->nama;
-                $namaBarang->satuan = $request->satuan{$i} ??  'Pcs';
+                $namaBarang->satuan = $request->satuan[$i] ??  'Pcs';
                 $namaBarang->save();
 
 

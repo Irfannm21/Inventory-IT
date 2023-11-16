@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 @section('content')
 
+@if ($komputer->gudangitable == true)
+
+@else
 @can('perbaikan_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
@@ -11,6 +14,7 @@
     </div>
 @endcan
 
+@endif
 
 <div class="card">
     <div class="card-header">
@@ -34,6 +38,22 @@
                     </th>
                     <td>
                         {!! $komputer->kode !!}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Status
+                    </th>
+                    <td>
+                        @if ($komputer->gudangitable == true)
+                            <span class="badge badge-danger">
+                                Di gudang
+                            </span>
+                        @else
+                            <span class="badge badge-success">
+                                Dipakai
+                            </span>
+                        @endif
                     </td>
                 </tr>
                 <tr>
@@ -118,7 +138,11 @@
                 </tr>
             </tbody>
         </table>
-
+        <span class="text-muted">
+            <u>
+                *Komputer yang sudah masuk gudang tidak bisa menambah data kerusakan
+            </u>
+        </span>
         <div class="card-body">
             <div class="text-center h3">
                 Daftar Perbaikan {{$komputer->kode}}

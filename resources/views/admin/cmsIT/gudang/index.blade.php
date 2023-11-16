@@ -42,7 +42,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($results as $key => $value)
+                        @foreach($results as $value)
                             <tr data-entry-id="{{ $value->id }}">
                                 <td>
 
@@ -64,7 +64,28 @@
                                     {{$value->keterangan ?? ''}}
                                 </td>
                                 <td>
-
+                                    @can('bpb_create')
+                                    <a href="{{ route('admin.bpbs.print', ['bpb' => $value->kode]) }}" class="btn btn-xs btn-dark"
+                                        style="color:white">
+                                        Print
+                                    </a>
+                                @endcan
+                                @can('bpb_edit')
+                                    <a class="btn btn-xs btn-primary" style="color:black"
+                                        href="{{ route('admin.gudangits.edit',[$value->id]) }}">
+                                        {{ trans('global.edit') }}
+                                    </a>
+                                @endcan
+                                @can('npp_delete')
+                                    <form action="{{ route('admin.bpbs.destroy', $value->id) }}" method="POST"
+                                        onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
+                                        style="display: inline-block;">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                        <input type="submit" class="btn btn-xs btn-danger"
+                                            value="{{ trans('global.delete') }}">
+                                    </form>
+                                @endcan
                                 </td>
                             </tr>
                         @endforeach

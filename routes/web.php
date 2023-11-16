@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 Route::redirect('/', '/login');
 
@@ -42,8 +42,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::delete('komputers/destroy', 'KomputerController@massDestroy')->name('komputers.massDestroy');
     Route::resource('komputers','KomputerController');
 
-    Route::resource('/gudangits','GudangITController');
-
     Route::resource('departemens','DepartemenController');
 
     Route::get('npps/proses','NppController@diProses')->name('npps.proses');
@@ -74,6 +72,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('suppliers','SupplierController');
     Route::get('pembayarans/options','PembayaranController@options')->name('pembayarans.options');
+
+    Route::get('gudangits/jenisPerangkats','GudangITController@jenisPerangkat')->name('gudangits.jenisPerangkats');
+    Route::resource('/gudangits','GudangITController');
 
     Route::resource('pembayarans','PembayaranController');
     Route::resource('/emails','EmailBroadcasterController');

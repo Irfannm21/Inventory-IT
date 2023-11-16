@@ -27,6 +27,9 @@
                             Kode
                         </th>
                         <th>
+                            Status
+                        </th>
+                        <th>
                             Nomor IP
                         </th>
                         <th>
@@ -54,6 +57,15 @@
                             </td>
                             <td>
                                 {{ $value->kode ?? '' }}
+                            </td>
+                            <td>
+                                @if (($value->gudangitable == true))
+                                    <span class="badge badge-danger">Di Gudang</span>
+                                @else
+                                    <span class="badge badge-success">
+                                        Dipakai
+                                    </span>
+                                @endif
                             </td>
                             <td>
                                 {{ $value->nomor_ip ?? '' }}
