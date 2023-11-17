@@ -14,7 +14,21 @@ class KomputerTableSeeder extends Seeder
     {
         $pc = [
             [
-                "kode" => "002/INSAN/52",
+                "kode" => "001/INSAN/DIRE/51",
+                "system" => "Windows 7 Pro",
+                "nomor_ip" => "192.168.1.52",
+                "motherboard" => "Amptron H55",
+                "processor" => "Intel i3 Gen 1",
+                "powersupply" => "Innovation 400W",
+                "ram"   => "4GB DDR3",
+                "disk"  => "Hardisk 250 GB",
+                "vga"   => "Internal",
+                "split" => "Tidak",
+                "monitor1" => "LG 19 Inch",
+                "monitor2" => "Tidak",
+            ],
+            [
+                "kode" => "002/INSAN/MKTG/52",
                 "system" => "Windows 7 Pro",
                 "nomor_ip" => "192.168.1.52",
                 "motherboard" => "Amptron H55",
@@ -139,6 +153,7 @@ class KomputerTableSeeder extends Seeder
                 "vga"   => "Internal",
                 "split" => "Tidak",
                 "monitor1" => "LG 14 Inch",
+                
                 "monitor2" => "Tidak",
             ],
 
