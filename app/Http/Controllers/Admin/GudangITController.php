@@ -40,15 +40,18 @@ class GudangITController extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+        if($request->perangkat == "printer") {
+            $perangkat = printer::findOrFail($request->id);
+        }elseif($request->perangkat == 'komputer')
+        {
+            $perangkat = komputer::findOrFail($request->id);
+        }
 
-        // if ($val_printer = printer::findOrFail(2) == true) {
-        //     #
-        // }
         $val = new gudangIT;
         $val->tanggal = $request->tanggal;
         $val->keterangan = $request->keterangan;
 
-        $val_printer->gudangitable()->save($val);
+        $perangkat->gudangitable()->save($val);
 
         return redirect()->route('admin.gudangits.index');
     }
@@ -72,19 +75,20 @@ class GudangITController extends Controller
      */
     public function edit(Request $request, $id)
     {
+        // dd($gudang);
         $gudang = gudangIT::findORFail($id);
         if($gudang->gudangitable_type == "App\Models\it\printer")
         {
             $gudang->jenis = "printer";
-            $printer = printer::all();
+            $perangkat = printer::all();
         } elseif($gudang->gudangitable_type == "App\Models\it\komputer") {
             $gudang->jenis = "komputer";
-            $komputer = komputer::all();
+            $perangkat = komputer::all();
         } else {
             dd("none");
         }
 
-        return view('admin.cmsIT.gudang.edit',compact('gudang','printer'));
+        return view('admin.cmsIT.gudang.edit',compact('gudang','perangkat'));
     }
 
     /**
@@ -94,9 +98,22 @@ class GudangITController extends Controller
      * @param  \App\gudangIT  $gudangIT
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, gudangIT $gudangIT)
+    public function update(Request $request, $id)
     {
-        dd($request);
+
+        // dd($gudangIT);
+        if($request->perangkat == "printer")
+        {
+            $result = gudangIT::findOrFail($id);
+            $perangkat = printer::findOrFail($request->id);
+            $result->gudangitable_id = $perangkat->id;
+            $result->tanggal = $request->tanggal;
+            $result->keterangan = $request->keterangan;
+            $result->push();
+
+            return redirect()->route('admin.gudangits.index');
+        }
+        // dd($request->all());
     }
 
     /**
@@ -105,22 +122,23 @@ class GudangITController extends Controller
      * @param  \App\gudangIT  $gudangIT
      * @return \Illuminate\Http\Response
      */
-    public function destroy(gudangIT $gudangIT)
+    public function destroy($id)
     {
-        dd($gudangIT);
+        $result = gudangIT::findOrFail($id);
+        $result->delete();
+        return redirect()->route('admin.gudangits.index');
     }
 
     public function jenisPerangkat(Request $request)
     {
         if ($request->nama == 'printer') {
             return printer::select('id','kode as nama')->doesntHave('gudangitable')->get();
-        } elseif ($request->nama == 'cpu')
+        } elseif ($request->nama == 'komputer')
         {
             return komputer::select('id','kode as nama')->doesntHave('gudangitable')->get();
         } else {
             return "None";
         }
 
-        // return __tooString($request->nama)::all();
     }
 }

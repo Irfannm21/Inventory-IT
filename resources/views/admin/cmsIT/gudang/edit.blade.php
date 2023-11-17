@@ -17,12 +17,11 @@
         </form>
     </div>
 </div>
-
 @endsection
 @section('scripts')
     <script>
         $(document).ready(function() {
-\            $(document)
+            $(document)
                 .on('change', '#perangkat', function() {
                     console.log($(this).val())
                     $.ajax({
@@ -46,3 +45,4 @@
 
     </script>
 @endsection
+

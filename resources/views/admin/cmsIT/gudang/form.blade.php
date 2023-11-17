@@ -1,5 +1,6 @@
 <div class="col-md-4 {{ $errors->has('perangkat') ? 'has-error' : '' }}">
     <label for="perangkat">Jenis Perangkat</label>
+    <input type="text" name="key" value="@isset($gudang) {{$gudang->id}} @endisset" hidden  >
     <select name="perangkat" id="perangkat"  class="form-control">
         <option value="test" selected>-- Pilih --</option>
         <option value="printer" {{"printer" == (old('perangkat') ?? ($gudang->jenis ?? '') ?? isset($gudang->jenis)) ? 'selected' : '' }}>Printer</option>
@@ -17,11 +18,12 @@
 
 <div class="col-md-4 {{ $errors->has('id') ? 'has-error' : '' }}">
     <label for="id">ID Perangkat</label>
-    <select name="id" id="id" class="form-control">
-        <option value="" selected> -- Pilih --</option>
-        @if (isset($printer || $komputer)== true)
-            @foreach ($printer as $key => $item)
-                <option value="{{$key}}">{{$item->kode}}</option>
+    <select name="id" id="id" class="form-control select2">
+        <option value=""> -- Pilih --</option>
+        @if (isset($perangkat))
+        @foreach ($perangkat as $key => $item)
+        <option value="{{$item->id}}" {{$item->id == (old('id') ?? ($gudang->gudangitable->id ?? '') ?? isset($gudang->gudangitable->id)) ? 'selected' : '' }}>{{$item->kode}}</option>
+         {{-- <option value="{{$key}}">{{$item->kode}}</option> --}}
             @endforeach
         @endif
     </select>
