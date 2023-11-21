@@ -22,7 +22,7 @@ class EmailBroadcasterController extends Controller
             "body"  => "This Body for test email",
         ];
 
-        Mail::to(['irfannurmuhammad21@gmail.com','hwayyonglance@gmail.com'])->send(new SendMail($test));
+        Mail::to(['irfannurmuhammad21@gmail.com','hwalgityonglance@gmail.com'])->send(new SendMail($test));
         dd("Email Berhasil Dikirim");
     }
 
