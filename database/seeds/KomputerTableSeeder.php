@@ -153,7 +153,7 @@ class KomputerTableSeeder extends Seeder
                 "vga"   => "Internal",
                 "split" => "Tidak",
                 "monitor1" => "LG 14 Inch",
-                
+
                 "monitor2" => "Tidak",
             ],
 

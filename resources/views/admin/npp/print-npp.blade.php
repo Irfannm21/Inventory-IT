@@ -1,10 +1,3 @@
-<?php
-// dd($result->bagian->departemen->nama);
-// foreach ($result->details as $value) {
-//     echo $value;
-// }
-// die();
-?>
 <!doctype html>
 <html lang="en">
 
@@ -17,7 +10,7 @@
 
 <body>
     <table>
-        {{-- @foreach ($result as $val) --}}
+        @foreach ($rdesult as $val)
         <tr>
             <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $result->bagian->departemen->nama }}</td>
         </tr>

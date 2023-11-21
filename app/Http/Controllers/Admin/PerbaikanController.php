@@ -15,6 +15,7 @@ use App\Models\it\klien;
 use App\Models\it\TableBarangJaringan;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PerbaikanController extends Controller
 {
@@ -171,6 +172,22 @@ class PerbaikanController extends Controller
         } else {
             $model = "App\\".$request->nama;
             return $model::with('klien')->get(['id','kode']);
+        }
+    }
+
+    public function print(Request $request)
+    {
+        // dd($request->all());
+        if(printer::where('kode',$request->perangkat) == true) {
+            $result = printer::where("kode",$request->perangkat)->whereBetween('tanggal', [$request->mulai, $request->sampai])->get();
+
+            dd($result);
+
+            $pdf = PDF::loadView('admin.perbaikan.print',['result' => $result])->setPaper('a4','potrait');
+
+            return $pdf->stream();
+        } else {
+            dd("lain");
         }
     }
 }
