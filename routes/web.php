@@ -10,38 +10,40 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::view('/swal-display','swal-display');
 
+    // User Management
     Route::get('/', 'HomeController@index')->name('home');
-
     Route::delete('permissions/destroy', 'PermissionsController@massDestroy')->name('permissions.massDestroy');
-
     Route::resource('permissions', 'PermissionsController');
-
     Route::delete('roles/destroy', 'RolesController@massDestroy')->name('roles.massDestroy');
-
     Route::resource('roles', 'RolesController');
-
     Route::delete('users/destroy', 'UsersController@massDestroy')->name('users.massDestroy');
-
     Route::resource('users', 'UsersController');
-
     Route::delete('products/destroy', 'ProductsController@massDestroy')->name('products.massDestroy');
-
     Route::resource('products', 'ProductsController');
 
-    Route::get('/karyawans/test','KaryawanController@test')->name('karyawans.test');
-    Route::resource('karyawans','MasterKaryawanController');
+
+    // IT Management
 
     Route::delete('printers/destroy', 'PrinterController@massDestroy')->name('printers.massDestroy');
 
     Route::resource('printers','PrinterController');
+
+    Route::delete('komputers/destroy', 'KomputerController@massDestroy')->name('komputers.massDestroy');
+    Route::resource('komputers','KomputerController');
 
     Route::delete('perbaikans/destroy', 'PerbaikanController@massDestroy')->name('perbaikans.massDestroy');
     Route::get('perbaikans/cariItem','PerbaikanController@cariItem')->name("perbaikans.cariItem");
     Route::post('perbaikans/prints', 'PerbaikanController@print')->name('perbaikans.prints');
     Route::resource('perbaikans','PerbaikanController');
 
-    Route::delete('komputers/destroy', 'KomputerController@massDestroy')->name('komputers.massDestroy');
-    Route::resource('komputers','KomputerController');
+
+
+    Route::get('/karyawans/test','KaryawanController@test')->name('karyawans.test');
+    Route::resource('karyawans','MasterKaryawanController');
+
+
+
+
 
     Route::resource('departemens','DepartemenController');
 

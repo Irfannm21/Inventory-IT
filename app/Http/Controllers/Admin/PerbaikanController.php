@@ -46,7 +46,7 @@ class PerbaikanController extends Controller
 
     public function store(StorePerbaikanRequest $request)
     {
-        // dd($request->all());
+        dd($request->all());
         if (Printer::where("kode",$request->kode)->first() == true) {
             $result = Printer::where("kode",$request->kode)->first();
             $perbaikan = perbaikan::find($result->id);

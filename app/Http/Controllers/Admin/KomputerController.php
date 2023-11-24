@@ -31,6 +31,7 @@ class KomputerController extends Controller
 
     public function store(StoreKomputerRequest $request)
     {
+        dd($request->all());
         $result = Komputer::create($request->all());
         return redirect()->route('admin.komputers.index');
     }

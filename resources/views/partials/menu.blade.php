@@ -11,14 +11,14 @@
                 </a>
             </li>
 
-            <li class="nav-item">
+            {{-- <li class="nav-item">
                 <a href="{{ route("admin.emails.index") }}" class="nav-link">
                     <i class="nav-icon fas fa-tachometer-alt">
 
                     </i>
                     Send Email
                 </a>
-            </li>
+            </li> --}}
             @can('user_access')
 
             {{-- User Management --}}
@@ -59,7 +59,7 @@
             {{-- End User Management --}}
             @endcan
 
-            {{-- @can('karyawan') --}}
+            @can('karyawan')
 
             {{-- Karyawan Management --}}
             <li class="nav-item nav-dropdown">
@@ -89,7 +89,7 @@
                     </ul>
                 </li>
                 {{-- End Karyawan Management --}}
-                {{-- @endcan --}}
+                @endcan
 
                 {{-- @can('it_access') --}}
 

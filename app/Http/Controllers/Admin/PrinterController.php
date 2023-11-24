@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePrinterRequest;
-use App\Http\Requests\UpdatePrinterRequest;
 use App\Http\Requests\MassDestroyPrinterRequest;
 use Illuminate\Http\Request;
 
@@ -32,32 +31,30 @@ class PrinterController extends Controller
         return view('admin.printer.show', compact('printer'));
    }
 
-   public function store(StorePrinterRequest $request)
+   public function store(Request $request)
    {
-        // $valudateData = $request->validate();
-
-        $result = Printer::create($request->all());
-        return redirect()->route('admin.printers.index');
+    // dd($request->all());
+        $record = new printer;
+        return $record->handleStoreOrUpdate($request);
    }
 
    public function edit(printer $printer)
    {
+        // dd($printer);
         abort_unless(\Gate::allows('printer_edit'), 403);
         return view('admin.printer.edit', compact('printer'));
    }
 
-   public function update(UpdatePrinterRequest $request, printer $printer)
+   public function update(Request $request, printer $printer)
    {
         abort_unless(\Gate::allows('product_edit'), 403);
-        $printer->update($request->all());
-        return redirect()->route('admin.printers.index');
+        return $printer->handleStoreOrUpdate($request);
    }
 
    public function destroy(printer $printer)
    {
         abort_unless(\Gate::allows('printer_delete'), 403);
-        $printer->delete();
-        return back();
+        return $printer->handleDestroy();
    }
 
    public function massDestroy(MassDestroyPrinterRequest $request)

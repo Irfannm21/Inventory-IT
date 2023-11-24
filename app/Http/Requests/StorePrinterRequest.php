@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\printer;
 use Illuminate\Foundation\Http\FormRequest;
-
 class StorePrinterRequest extends FormRequest
 {
     /**
@@ -24,12 +22,19 @@ class StorePrinterRequest extends FormRequest
      */
     public function rules()
     {
-
-        // dd($request->all());
-        return [
-            'kode' =>   'required|max:30|min:5|unique:printers,kode',
+        // $id = $this->record->id ?? '';
+        $rules =  [
+            'kode' => 'required|max:30|min:5|unique:printers,kode',
             'tanggal' => 'required',
             'deskripsi' => 'required',
+        ];
+        return $rules;
+    }
+
+    public function messsages()
+    {
+        return [
+            // 'unique_with' => "Data Sudah ada"
         ];
     }
 }
