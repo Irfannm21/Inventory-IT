@@ -14,18 +14,18 @@ class KomputerController extends Controller
     public function index()
     {
         $result = Komputer::all();
-        return view('admin.cpu.index', compact('result'));
+        return view('admin.cmsIT.cpu.index', compact('result'));
     }
 
     public function show(komputer $komputer)
     {
-        return view('admin.cpu.show', compact('komputer'));
+        return view('admin.cmsIT.cpu.show', compact('komputer'));
     }
 
     public function create()
     {
         abort_unless(\Gate::allows('komputer_create'), 403);
-        return view('admin.cpu.create');
+        return view('admin.cmsIT.cpu.create');
     }
 
     public function store(KomputerStoreUpdateRequest $request)
@@ -38,7 +38,7 @@ class KomputerController extends Controller
     public function edit(komputer $komputer)
     {
         abort_unless(\Gate::allows('komputer_edit'), 403);
-        return view('admin.cpu.edit', compact('komputer'));
+        return view('admin.cmsIT.cpu.edit', compact('komputer'));
     }
 
     public function update(KomputerStoreUpdateRequest $request, Komputer $komputer)

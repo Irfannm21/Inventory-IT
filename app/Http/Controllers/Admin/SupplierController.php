@@ -15,6 +15,6 @@ class SupplierController extends Controller
     {
         dd($request);
         supplier::create($request->all());
-        return view('admin.printer.index');
+        return view('admin.cmsIT.printer.index');
     }
 }

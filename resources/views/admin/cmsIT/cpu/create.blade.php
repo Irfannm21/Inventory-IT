@@ -3,13 +3,13 @@
 
 <div class="card">
     <div class="card-header">
-        Buat Data Perbaikan
+        Buat Data Komputer
     </div>
 
     <div class="card-body">
-        <form action="{{ route("it.perbaikans.store") }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route("it.komputers.store") }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @include('admin.perbaikan.form')
+            @include('admin.cmsIT.cpu.form')
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
             </div>

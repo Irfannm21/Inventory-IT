@@ -22,7 +22,7 @@ class PerbaikanController extends Controller
     public function index()
     {
         $results = Perbaikan::all();
-        return view('admin.perbaikan.index', compact('results'));
+        return view('admin.cmsIT.perbaikan.index', compact('results'));
     }
 
     public function create(Request $request)
@@ -41,7 +41,7 @@ class PerbaikanController extends Controller
         $tipe = $request->type;
         // dd($hadrware);
         abort_unless(\Gate::allows('perbaikan_create'), 403);
-        return view('admin.perbaikan.create',compact('hardware','tipe'));
+        return view('admin.cmsIT.perbaikan.create',compact('hardware','tipe'));
     }
 
     public function store(StorePerbaikanRequest $request)
@@ -97,7 +97,7 @@ class PerbaikanController extends Controller
         // $komputer = komputer::get(["id","kode"]);
         // $jaringan = TableBarangJaringan::get(["id","kode"]);
         abort_unless(\Gate::allows('perbaikan_edit'), 403);
-        return view('admin.perbaikan.edit', compact('result'));
+        return view('admin.cmsIT.perbaikan.edit', compact('result'));
     }
 
     public function update(Request $request, $id)
@@ -183,7 +183,7 @@ class PerbaikanController extends Controller
 
             dd($result);
 
-            $pdf = PDF::loadView('admin.perbaikan.print',['result' => $result])->setPaper('a4','potrait');
+            $pdf = PDF::loadView('admin.pcmsIT.erbaikan.print',['result' => $result])->setPaper('a4','potrait');
 
             return $pdf->stream();
         } else {

@@ -16,18 +16,18 @@ class PrinterController extends Controller
    {
         $results = Printer::with('gudangitable')->get();
 
-        return view('admin.printer.index', compact('results'));
+        return view('admin.cmsIT.printer.index', compact('results'));
    }
 
    public function create()
     {
         abort_unless(\Gate::allows('printer_create'), 403);
-        return view('admin.printer.create');
+        return view('admin.cmsIT.printer.create');
     }
 
    public function show(printer $printer)
    {
-        return view('admin.printer.show', compact('printer'));
+        return view('admin.cmsIT.printer.show', compact('printer'));
    }
 
    public function store(Request $request)
@@ -42,7 +42,7 @@ class PrinterController extends Controller
    {
         // dd($printer);
         abort_unless(\Gate::allows('printer_edit'), 403);
-        return view('admin.printer.edit', compact('printer'));
+        return view('admin.cmsIT.printer.edit', compact('printer'));
    }
 
    public function update(Request $request, printer $printer)

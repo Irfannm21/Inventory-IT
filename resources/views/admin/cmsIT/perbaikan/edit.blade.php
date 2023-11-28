@@ -13,7 +13,7 @@
         <form action="{{ route("it.perbaikans.update", $result->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            @include('admin.perbaikan.form')
+            @include('admin.cmsIT.perbaikan.form')
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
             </div>

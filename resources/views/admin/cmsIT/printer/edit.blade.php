@@ -3,13 +3,14 @@
 
 <div class="card">
     <div class="card-header">
-        Buat Data Komputer
+        {{ trans('global.edit') }} {{ trans('global.product.title_singular') }}
     </div>
 
     <div class="card-body">
-        <form action="{{ route("it.komputers.store") }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route("it.printers.update", [$printer->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @include('admin.cpu.form')
+                @method('PUT')
+                @include('admin.cmsIT.printer.form')
             <div>
                 <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
             </div>

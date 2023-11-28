@@ -65,7 +65,7 @@
 
                             <td>
                                 {{-- @can('perbaikan_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.perbaikan.show', $value->id) }}">
+                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.cmsIT.perbaikan.show', $value->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan --}}

@@ -7,7 +7,7 @@ trait ResponseTrait
     public function responseSuccess($params = [])
 	{
         // dd($params);
-        // return redirect()->route('admin.printers.index');
+        // return redirect()->route('admin.cmsIT.printers.index');
 	}
 
 	public function responseError($params = [])
