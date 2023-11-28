@@ -6,7 +6,7 @@
 @can('printer_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.printers.create") }}">
+            <a class="btn btn-success" href="{{ route("it.printers.create") }}">
                 {{ trans('global.add') }} {{ trans('global.product.title_singular') }}
             </a>
         </div>
@@ -68,17 +68,17 @@
 
                             <td>
                                 @can('product_edit')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.printers.show', $value->id) }}">
+                                    <a class="btn btn-xs btn-primary" href="{{ route('it.printers.show', $value->id) }}">
                                         {{ trans('global.view') }}
                                     </a>
                                 @endcan
                                 @can('printer_edit')
-                                <a class="btn btn-xs btn-info" href="{{ route("admin.printers.edit", $value->id)  }}">
+                                <a class="btn btn-xs btn-info" href="{{ route("it.printers.edit", $value->id)  }}">
                                     {{ trans('global.edit') }}
                                 </a>
                                 @endcan
                                 @can('printer_delete')
-                                    <form action="{{ route('admin.printers.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <form action="{{ route('it.printers.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -100,7 +100,7 @@
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.printers.massDestroy') }}",
+    url: "{{ route('it.printers.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\CmsIT;
 
-use App\Http\Controllers\Controller     ;
+use App\Http\Controllers\Controller;
 use App\Models\it\gudangIT;
 use App\Models\it\printer;
 use App\Models\it\komputer;
@@ -53,7 +53,7 @@ class GudangITController extends Controller
 
         $perangkat->gudangitable()->save($val);
 
-        return redirect()->route('admin.gudangits.index');
+        return redirect()->route('it.gudangits.index');
     }
 
     /**
@@ -111,7 +111,7 @@ class GudangITController extends Controller
             $result->keterangan = $request->keterangan;
             $result->push();
 
-            return redirect()->route('admin.gudangits.index');
+            return redirect()->route('it.gudangits.index');
         }
         // dd($request->all());
     }
@@ -126,7 +126,7 @@ class GudangITController extends Controller
     {
         $result = gudangIT::findOrFail($id);
         $result->delete();
-        return redirect()->route('admin.gudangits.index');
+        return redirect()->route('it.gudangits.index');
     }
 
     public function jenisPerangkat(Request $request)

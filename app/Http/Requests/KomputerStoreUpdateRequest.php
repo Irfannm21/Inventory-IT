@@ -3,10 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Gate;
-use App\Komputer;
-
-class StoreKomputerRequest extends FormRequest
+use App\Models\Model;
+class KomputerStoreUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +13,7 @@ class StoreKomputerRequest extends FormRequest
      */
     public function authorize()
     {
-        return \Gate::allows('komputer_create');
+        return true;
     }
 
     /**
@@ -25,8 +23,9 @@ class StoreKomputerRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->komputer->id ?? '';
         return [
-            'kode' =>   'required|min:12|max:12|unique:komputers,kode',
+            'kode' =>   'required|min:12|max:12|unique:komputers,kode,' . $id,
             'system' =>   'required',
             'nomor_ip' => 'required',
             'motherboard' =>   'required',

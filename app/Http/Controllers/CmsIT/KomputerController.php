@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\CmsIT;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreKomputerRequest;
-use App\Http\Requests\UpdateKomputerRequest;
+use App\Http\Requests\KomputerStoreUpdateRequest;
 use App\Http\Requests\MassDestroyKomputerRequest;
 use Illuminate\Http\Request;
 
@@ -29,11 +28,11 @@ class KomputerController extends Controller
         return view('admin.cpu.create');
     }
 
-    public function store(StoreKomputerRequest $request)
+    public function store(KomputerStoreUpdateRequest $request)
     {
-        dd($request->all());
+        // dd($request->all());
         $result = Komputer::create($request->all());
-        return redirect()->route('admin.komputers.index');
+        return redirect()->route('it.komputers.index');
     }
 
     public function edit(komputer $komputer)
@@ -42,11 +41,11 @@ class KomputerController extends Controller
         return view('admin.cpu.edit', compact('komputer'));
     }
 
-    public function update(UpdateKomputerRequest $request, Komputer $komputer)
+    public function update(KomputerStoreUpdateRequest $request, Komputer $komputer)
     {
         abort_unless(\Gate::allows('komputer_edit'), 403);
         $komputer->update($request->all());
-        return redirect()->route('admin.komputers.index');
+        return redirect()->route('it.komputers.index');
     }
 
     public function destroy(Komputer $komputer)

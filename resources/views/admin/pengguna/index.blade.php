@@ -53,10 +53,10 @@
                                 {{ $value->karyawan->nama ?? '' }}
                             </td>
                             <td>
-                                <a href="{{route('admin.komputers.show', $value->komputer->id)}}"> {{ $value->komputer->kode ?? '' }}</a>
+                                <a href="{{route('it.komputers.show', $value->komputer->id)}}"> {{ $value->komputer->kode ?? '' }}</a>
                             </td>
                             <td>
-                                <a href="{{route('admin.printers.show', $value->printer->id ?? '')}}"> {{ $value->printer->kode ?? '' }}</a>
+                                <a href="{{route('it.printers.show', $value->printer->id ?? '')}}"> {{ $value->printer->kode ?? '' }}</a>
                             </td>
 
                             <td>
@@ -93,7 +93,7 @@
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.printers.massDestroy') }}",
+    url: "{{ route('it.printers.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {

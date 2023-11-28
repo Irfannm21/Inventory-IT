@@ -33,9 +33,9 @@ class printer extends Model
         try {
             $this->fill($request->all());
             $this->save();
-            // $this->saveLogNotify();
+            \DB::commit();
 
-            return $this->commitSaved();
+            return redirect()->route('it.printers.index');
         } catch (\Exception $e) {
             $this->rollBack($e);
         }

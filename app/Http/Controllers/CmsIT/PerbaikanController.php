@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\CmsIT;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePerbaikanRequest;
@@ -46,7 +46,7 @@ class PerbaikanController extends Controller
 
     public function store(StorePerbaikanRequest $request)
     {
-        dd($request->all());
+        // dd($request->all());
         if (Printer::where("kode",$request->kode)->first() == true) {
             $result = Printer::where("kode",$request->kode)->first();
             $perbaikan = perbaikan::find($result->id);
@@ -85,7 +85,7 @@ class PerbaikanController extends Controller
 
         $result->perbaikans()->save($perbaikan);
 
-        return redirect()->route('admin.perbaikans.index');
+        return redirect()->route('it.perbaikans.index');
     }
 
     public function edit($id)
@@ -148,7 +148,7 @@ class PerbaikanController extends Controller
         ]);
 
 
-        return redirect()->route('admin.perbaikans.index');
+        return redirect()->route('it.perbaikans.index');
     }
 
     public function destroy(Perbaikan $perbaikan)

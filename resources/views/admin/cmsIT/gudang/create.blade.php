@@ -7,7 +7,7 @@
     </div>
 
     <div class="card-body">
-        <form action="{{ route("admin.gudangits.store") }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route("it.gudangits.store") }}" method="POST" enctype="multipart/form-data">
             @csrf
                 @include('admin.cmsIT.gudang.form')
             <div>
@@ -26,7 +26,7 @@
                     console.log($(this).val())
                     $.ajax({
                         method: 'GET',
-                        url: '{{ url('admin/gudangits/jenisPerangkats') }}',
+                        url: '{{ url('it/gudangits/jenisPerangkats') }}',
                         data: {
                             nama: $(this).val()
                         },

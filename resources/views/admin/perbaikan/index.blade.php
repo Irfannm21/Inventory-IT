@@ -70,12 +70,12 @@
                                     </a>
                                 @endcan --}}
                                 @can('perbaikan_edit')
-                                <a class="btn btn-xs btn-info" href="{{ route("admin.perbaikans.edit", $value->id)  }}">
+                                <a class="btn btn-xs btn-info" href="{{ route("it.perbaikans.edit", $value->id)  }}">
                                     {{ trans('global.edit') }}
                                 </a>
                                 @endcan
                                 @can('perbaikan_delete')
-                                    <form action="{{ route('admin.perbaikans.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                    <form action="{{ route('it.perbaikans.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
@@ -97,7 +97,7 @@
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('admin.perbaikans.massDestroy') }}",
+    url: "{{ route('it.perbaikans.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {

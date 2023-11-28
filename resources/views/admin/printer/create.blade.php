@@ -3,11 +3,11 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.edit') }} {{ trans('global.product.title_singular') }}
+        Tambah Data Printer
     </div>
 
     <div class="card-body">
-        <form action="{{ route("admin.printers.store") }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route("it.printers.store") }}" method="POST" enctype="multipart/form-data">
             @csrf
                 @include('admin.printer.form')
             <div>

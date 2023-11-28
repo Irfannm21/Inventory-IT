@@ -13,6 +13,6 @@ class Model extends Base
 
     public function saveLogNotify()
     {
-        return redirect()->route('admin.printers.index');
+        return redirect()->route('it.printers.index');
     }
 }

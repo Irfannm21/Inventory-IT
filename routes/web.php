@@ -6,6 +6,21 @@ Route::redirect('/home', '/admin');
 
 Auth::routes(['register' => false]);
 
+Route::group(['prefix' => 'cms-it', 'as' => 'it.', 'namespace' => 'CmsIT', 'middleware' => ['auth']], function () {
+
+    // IT Management
+    Route::delete('printers/destroy', 'PrinterController@massDestroy')->name('printers.massDestroy');
+    Route::resource('printers','PrinterController');
+    Route::delete('komputers/destroy', 'KomputerController@massDestroy')->name('komputers.massDestroy');
+    Route::resource('komputers','KomputerController');
+    Route::delete('perbaikans/destroy', 'PerbaikanController@massDestroy')->name('perbaikans.massDestroy');
+    Route::get('perbaikans/cariItem','PerbaikanController@cariItem')->name("perbaikans.cariItem");
+    Route::post('perbaikans/prints', 'PerbaikanController@print')->name('perbaikans.prints');
+    Route::resource('perbaikans','PerbaikanController');
+    Route::get('gudangits/jenisPerangkats','GudangITController@jenisPerangkat')->name('gudangits.jenisPerangkats');
+    Route::resource('/gudangits','GudangITController');
+});
+
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
 
     Route::view('/swal-display','swal-display');
@@ -22,24 +37,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('products', 'ProductsController');
 
 
-    // IT Management
-
-    Route::delete('printers/destroy', 'PrinterController@massDestroy')->name('printers.massDestroy');
-
-    Route::resource('printers','PrinterController');
-
-    Route::delete('komputers/destroy', 'KomputerController@massDestroy')->name('komputers.massDestroy');
-    Route::resource('komputers','KomputerController');
-
-    Route::delete('perbaikans/destroy', 'PerbaikanController@massDestroy')->name('perbaikans.massDestroy');
-    Route::get('perbaikans/cariItem','PerbaikanController@cariItem')->name("perbaikans.cariItem");
-    Route::post('perbaikans/prints', 'PerbaikanController@print')->name('perbaikans.prints');
-    Route::resource('perbaikans','PerbaikanController');
 
 
-
-    Route::get('/karyawans/test','KaryawanController@test')->name('karyawans.test');
-    Route::resource('karyawans','MasterKaryawanController');
 
 
 
@@ -75,9 +74,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
 
     Route::resource('suppliers','SupplierController');
     Route::get('pembayarans/options','PembayaranController@options')->name('pembayarans.options');
-
-    Route::get('gudangits/jenisPerangkats','GudangITController@jenisPerangkat')->name('gudangits.jenisPerangkats');
-    Route::resource('/gudangits','GudangITController');
 
     Route::resource('pembayarans','PembayaranController');
     Route::resource('/emails','EmailBroadcasterController');

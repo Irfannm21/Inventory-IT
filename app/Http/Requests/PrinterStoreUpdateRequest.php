@@ -4,8 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-
-class StorePrinterRequest extends FormRequest
+use App\printer;
+class PrinterStoreUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -14,7 +14,6 @@ class StorePrinterRequest extends FormRequest
      */
     public function authorize()
     {
-        // return \Gate::allows('printer_create');
         return true;
     }
 
@@ -25,21 +24,11 @@ class StorePrinterRequest extends FormRequest
      */
     public function rules()
     {
-
-        // dd($this->request->all());
-        // $id = $this->printer->id ?? 0;
+        // dd($this->request-> all());
         return  [
-            'kode' => 'required|max:30|min:5|unique:printers',
+            'kode' => 'required',
             'tanggal' => 'required',
             'deskripsi' => 'required',
-        ];
-        // return $rules;
-    }
-
-    public function messsages()
-    {
-        return [
-            // 'unique_with' => "Data Sudah ada"
         ];
     }
 }

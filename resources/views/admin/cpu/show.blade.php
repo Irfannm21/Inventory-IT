@@ -7,7 +7,7 @@
 @can('perbaikan_create')
     <div style="margin-bottom: 10px;" class="row">
         <div class="col-lg-12">
-            <a class="btn btn-success" href="{{ route("admin.perbaikans.create",['id'=> $komputer->id, 'type' => 'komputer'])}}">
+            <a class="btn btn-success" href="{{ route("it.perbaikans.create",['id'=> $komputer->id, 'type' => 'komputer'])}}">
                 Buat Perbaikan
             </a>
         </div>
@@ -211,12 +211,12 @@
 
                                 <td>
                                     @can('perbaikan_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route("admin.perbaikans.edit", $value->id)  }}">
+                                    <a class="btn btn-xs btn-info" href="{{ route("it.perbaikans.edit", $value->id)  }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                     @endcan
                                     @can('perbaikan_delete')
-                                        <form action="{{ route('admin.komputers.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                        <form action="{{ route('it.komputers.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">

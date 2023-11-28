@@ -4,7 +4,7 @@
     @can('bpb_create')
         <div style="margin-bottom: 10px;" class="row">
             <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route('admin.gudangits.create') }}">
+                <a class="btn btn-success" href="{{ route('it.gudangits.create') }}">
                     Tambah Data
                 </a>
             </div>
@@ -72,12 +72,12 @@
                                 @endcan
                                 @can('bpb_edit')
                                     <a class="btn btn-xs btn-primary" style="color:black"
-                                        href="{{ route('admin.gudangits.edit',[$value->id]) }}">
+                                        href="{{ route('it.gudangits.edit',[$value->id]) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
                                 @can('npp_delete')
-                                    <form action="{{ route('admin.gudangits.destroy', $value->id) }}" method="POST"
+                                    <form action="{{ route('it.gudangits.destroy', $value->id) }}" method="POST"
                                         onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
                                         style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
@@ -126,7 +126,7 @@
             let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
             let deleteButton = {
                 text: deleteButtonTrans,
-                url: "{{ route('admin.komputers.massDestroy') }}",
+                url: "{{ route('it.komputers.massDestroy') }}",
                 className: 'btn-danger',
                 action: function(e, dt, node, config) {
                     var ids = $.map(dt.rows({

@@ -7,7 +7,7 @@
             @if ($printer->gudangitable == true)
 
             @else
-            <a class="btn btn-success" href="{{ route("admin.perbaikans.create",['id'=> $printer->id, 'type' => 'printer'])}}">
+            <a class="btn btn-success" href="{{ route("it.perbaikans.create",['id'=> $printer->id, 'type' => 'printer'])}}">
                 Buat Perbaikan
             </a>
             @endif
@@ -64,7 +64,7 @@
                 </table>
             </div>
             <div class="col-md-6">
-                <form class="_blank" action="{{ route("admin.perbaikans.prints",['perangkat' => $printer->kode]) }}" method="post" enctype="multipart/form-data">
+                <form class="_blank" action="{{ route("it.perbaikans.prints",['perangkat' => $printer->kode]) }}" method="post" enctype="multipart/form-data">
                     @csrf
                        <span>Cetak Rekap Data Pebaikan {{$printer->kode}}</span>
                     <hr>
@@ -166,7 +166,7 @@
 
                                 <td>
                                     @can('perbaikan_create')
-                                    <a class="btn btn-xs btn-info" href="{{ route("admin.printers.edit", $value->id)  }}">
+                                    <a class="btn btn-xs btn-info" href="{{ route("it.printers.edit", $value->id)  }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                     @endcan

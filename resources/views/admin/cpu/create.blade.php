@@ -7,7 +7,7 @@
     </div>
 
     <div class="card-body">
-        <form action="{{ route("admin.komputers.store") }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route("it.komputers.store") }}" method="POST" enctype="multipart/form-data">
             @csrf
             @include('admin.cpu.form')
             <div>

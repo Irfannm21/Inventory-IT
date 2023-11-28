@@ -6,7 +6,8 @@ trait ResponseTrait
 {
     public function responseSuccess($params = [])
 	{
-        return redirect()->route('admin.printers.index');
+        // dd($params);
+        // return redirect()->route('admin.printers.index');
 	}
 
 	public function responseError($params = [])
@@ -40,6 +41,7 @@ trait ResponseTrait
 
     public function commitSaved($params = [])
 	{
+        // dd($params);
 		\DB::commit();
 		$message = __('base.success.saved');
 		return $this->responseSuccess(array_merge(compact('message'), $params));
@@ -48,6 +50,6 @@ trait ResponseTrait
     public function commitDeleted($params = [])
 	{
 		\DB::commit();
-        return redirect()->route('admin.printers.index');
+        return redirect()->route('it.printers.index');
 	}
 }

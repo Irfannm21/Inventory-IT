@@ -7,7 +7,7 @@
     </div>
 
     <div class="card-body">
-        <form action="{{ route("admin.printers.update", [$printer->id]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route("it.printers.update", [$printer->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
                 @method('PUT')
                 @include('admin.printer.form')

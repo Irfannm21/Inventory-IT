@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\CmsIT;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePrinterRequest;
-use App\Http\Requests\MassDestroyPrinterRequest;
+use App\Http\Requests\PrinterStoreUpdateRequest;
 use Illuminate\Http\Request;
 
 
@@ -34,8 +33,9 @@ class PrinterController extends Controller
    public function store(Request $request)
    {
     // dd($request->all());
-        $record = new printer;
-        return $record->handleStoreOrUpdate($request);
+    // $record->save($request->all());
+        printer::create($request->all());
+        return redirect()->route('it.printers.index')->with('success','Data Printer Berhasil ditambahkan.');
    }
 
    public function edit(printer $printer)

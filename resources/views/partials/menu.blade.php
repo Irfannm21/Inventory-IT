@@ -62,7 +62,7 @@
             @can('karyawan')
 
             {{-- Karyawan Management --}}
-            <li class="nav-item nav-dropdown">
+            {{-- <li class="nav-item nav-dropdown">
                     <a class="nav-link  nav-dropdown-toggle">
                         <i class="fas fa-users nav-icon">
 
@@ -87,7 +87,7 @@
                             </a>
                         </li>
                     </ul>
-                </li>
+                </li> --}}
                 {{-- End Karyawan Management --}}
                 @endcan
 
@@ -113,7 +113,7 @@
                             </li> --}}
 
                             <li class="nav-item">
-                                <a href="{{ route("admin.printers.index") }}" class="nav-link {{ request()->is('admin/absensis') || request()->is('admin/absensis/*') ? 'active' : '' }}">
+                                <a href="{{ route("it.printers.index") }}" class="nav-link {{ request()->is('it/printers') || request()->is('it/printers/*') ? 'active' : '' }}">
                                     <i class="fas fa-calendar nav-icon">
 
                                     </i>
@@ -122,7 +122,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ route("admin.komputers.index") }}" class="nav-link {{ request()->is('admin/komputers') || request()->is('admin/perbaikans/*') ? 'active' : '' }}">
+                                <a href="{{ route("it.komputers.index") }}" class="nav-link {{ request()->is('admin/komputers') || request()->is('admin/perbaikans/*') ? 'active' : '' }}">
                                     <i class="fas fa-list nav-icon">
 
                                     </i>
@@ -131,7 +131,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ route("admin.perbaikans.index") }}" class="nav-link {{ request()->is('admin/perbaikans') || request()->is('admin/perbaikans/*') ? 'active' : '' }}">
+                                <a href="{{ route("it.perbaikans.index") }}" class="nav-link {{ request()->is('admin/perbaikans') || request()->is('admin/perbaikans/*') ? 'active' : '' }}">
                                     <i class="fas fa-cogs nav-icon">
 
                                     </i>
@@ -139,7 +139,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route("admin.gudangits.index") }}" class="nav-link {{ request()->is('admin/gudangs') || request()->is('admin/gudangs/*') ? 'active' : '' }}">
+                                <a href="{{ route("it.gudangits.index") }}" class="nav-link {{ request()->is('admin/gudangs') || request()->is('admin/gudangs/*') ? 'active' : '' }}">
                                     <i class="fas fa-warehouse nav-icon">
 
                                     </i>

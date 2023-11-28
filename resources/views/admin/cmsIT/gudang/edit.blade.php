@@ -7,7 +7,7 @@
     </div>
 
     <div class="card-body">
-        <form action="{{ route("admin.gudangits.update", [$gudang->id]) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route("it.gudangits.update", [$gudang->id]) }}" method="POST" enctype="multipart/form-data">
             @csrf
                 @method('PUT')
                 @include('admin.cmsIT.gudang.form')
@@ -26,7 +26,7 @@
                     console.log($(this).val())
                     $.ajax({
                         method: 'GET',
-                        url: '{{ url('admin/gudangits/jenisPerangkats') }}',
+                        url: '{{ url('it/gudangits/jenisPerangkats') }}',
                         data: {
                             nama: $(this).val()
                         },
