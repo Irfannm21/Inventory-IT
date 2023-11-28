@@ -131,6 +131,7 @@ class GudangITController extends Controller
 
     public function jenisPerangkat(Request $request)
     {
+        // dd("TEST");
         if ($request->nama == 'printer') {
             return printer::select('id','kode as nama')->doesntHave('gudangitable')->get();
         } elseif ($request->nama == 'komputer')

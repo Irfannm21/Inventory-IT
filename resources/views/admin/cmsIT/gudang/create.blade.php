@@ -26,7 +26,7 @@
                     console.log($(this).val())
                     $.ajax({
                         method: 'GET',
-                        url: '{{ url('it/gudangits/jenisPerangkats') }}',
+                        url: '{{ url('cms-it/gudangits/jenisPerangkats') }}',
                         data: {
                             nama: $(this).val()
                         },

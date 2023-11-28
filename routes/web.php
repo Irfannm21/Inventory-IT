@@ -10,14 +10,19 @@ Route::group(['prefix' => 'cms-it', 'as' => 'it.', 'namespace' => 'CmsIT', 'midd
 
     // IT Management
     Route::delete('printers/destroy', 'PrinterController@massDestroy')->name('printers.massDestroy');
-    Route::resource('printers','PrinterController');
     Route::delete('komputers/destroy', 'KomputerController@massDestroy')->name('komputers.massDestroy');
-    Route::resource('komputers','KomputerController');
     Route::delete('perbaikans/destroy', 'PerbaikanController@massDestroy')->name('perbaikans.massDestroy');
+
+    // Ajax Jquery
     Route::get('perbaikans/cariItem','PerbaikanController@cariItem')->name("perbaikans.cariItem");
-    Route::post('perbaikans/prints', 'PerbaikanController@print')->name('perbaikans.prints');
-    Route::resource('perbaikans','PerbaikanController');
     Route::get('gudangits/jenisPerangkats','GudangITController@jenisPerangkat')->name('gudangits.jenisPerangkats');
+
+    // Print
+    Route::post('perbaikans/prints', 'PerbaikanController@print')->name('perbaikans.prints');
+
+    Route::resource('printers','PrinterController');
+    Route::resource('komputers','KomputerController');
+    Route::resource('perbaikans','PerbaikanController');
     Route::resource('/gudangits','GudangITController');
 });
 
@@ -35,14 +40,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('users', 'UsersController');
     Route::delete('products/destroy', 'ProductsController@massDestroy')->name('products.massDestroy');
     Route::resource('products', 'ProductsController');
-
-
-
-
-
-
-
-
 
     Route::resource('departemens','DepartemenController');
 

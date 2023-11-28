@@ -307,7 +307,7 @@
     </li>
 
 
-            <li class="nav-item nav-dropdown">
+            {{-- <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                     <i class="fas fa-wallet nav-icon">
 
@@ -332,7 +332,7 @@
                         </a>
                     </li>
             </ul>
-        </li>
+        </li> --}}
 
             {{-- <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
@@ -362,16 +362,16 @@
             </ul>
         </li> --}}
 
+    {{--
 
+                <li class="nav-item">
+                    <a href="{{ route("admin.products.index") }}" class="nav-link {{ request()->is('admin/products') || request()->is('admin/products/*') ? 'active' : '' }}">
+                        <i class="fas fa-cogs nav-icon">
 
-            <li class="nav-item">
-                <a href="{{ route("admin.products.index") }}" class="nav-link {{ request()->is('admin/products') || request()->is('admin/products/*') ? 'active' : '' }}">
-                    <i class="fas fa-cogs nav-icon">
-
-                    </i>
-                    {{ trans('global.product.title') }}
-                </a>
-            </li>
+                        </i>
+                        {{ trans('global.product.title') }}
+                    </a>
+                </li> --}}
 
 
             <li class="nav-item">
