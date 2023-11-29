@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
             // NppTableSeeder::class,
             // DetailNppTableSeeder::class,
             // BpbTableSeeder::class,
-            // PrinterTableSeeder::class,
-            // KomputerTableSeeder::class,
-            // DaftarBarangJaringanTableSeeder::class,
+            PrinterTableSeeder::class,
+            KomputerTableSeeder::class,
+            DaftarBarangJaringanTableSeeder::class,
         ]);
     }
 }

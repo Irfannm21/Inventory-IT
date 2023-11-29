@@ -1,14 +1,23 @@
     <?php
+use App\Models\it\printer;
 
+Route::get('/test-perbaikan', function () {
+    $result = printer::where('id',3)->first();
+
+    $array_ip2770 = [
+        []
+    ]
+    dd($result);
+});
 Route::redirect('/', '/login');
 
 Route::redirect('/home', '/admin');
 
 Auth::routes(['register' => false]);
 
+// IT Management
 Route::group(['prefix' => 'cms-it', 'as' => 'it.', 'namespace' => 'CmsIT', 'middleware' => ['auth']], function () {
 
-    // IT Management
     Route::delete('printers/destroy', 'PrinterController@massDestroy')->name('printers.massDestroy');
     Route::delete('komputers/destroy', 'KomputerController@massDestroy')->name('komputers.massDestroy');
     Route::delete('perbaikans/destroy', 'PerbaikanController@massDestroy')->name('perbaikans.massDestroy');
@@ -22,6 +31,7 @@ Route::group(['prefix' => 'cms-it', 'as' => 'it.', 'namespace' => 'CmsIT', 'midd
 
     Route::resource('printers','PrinterController');
     Route::resource('komputers','KomputerController');
+    Route::resource('/perangkats','TableBarangJaringanController');
     Route::resource('perbaikans','PerbaikanController');
     Route::resource('/gudangits','GudangITController');
 });

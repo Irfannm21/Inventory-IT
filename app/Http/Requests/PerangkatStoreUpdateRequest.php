@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PrinterStoreUpdateRequest extends FormRequest
+class PerangkatStoreUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,13 @@ class PrinterStoreUpdateRequest extends FormRequest
      */
     public function rules()
     {
-        // dd($this->request-> all());
-        return  [
-            'kode' => 'required',
-            'tanggal' => 'required',
-            'deskripsi' => 'required',
+        $id = $this->perangkat->id ?? 0;
+
+        return [
+            "kode" => 'required|min:18|max:18|unique:table_barang_jaringans,kode,' . $id,
+            "tanggal" => 'required',
+            "kelompok" => 'required',
+            'nama'  => 'required',
         ];
     }
 }

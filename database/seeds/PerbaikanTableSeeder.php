@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Models\CmsIT\printer;
 
 class PerbaikanTableSeeder extends Seeder
 {
@@ -11,6 +12,7 @@ class PerbaikanTableSeeder extends Seeder
      */
     public function run()
     {
+
 
     }
 }

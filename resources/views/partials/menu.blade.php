@@ -122,7 +122,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ route("it.komputers.index") }}" class="nav-link {{ request()->is('admin/komputers') || request()->is('admin/perbaikans/*') ? 'active' : '' }}">
+                                <a href="{{ route("it.komputers.index") }}" class="nav-link {{ request()->is('it/komputers') || request()->is('it/perbaikans/*') ? 'active' : '' }}">
                                     <i class="fas fa-list nav-icon">
 
                                     </i>
@@ -131,7 +131,17 @@
                             </li>
 
                             <li class="nav-item">
-                                <a href="{{ route("it.perbaikans.index") }}" class="nav-link {{ request()->is('admin/perbaikans') || request()->is('admin/perbaikans/*') ? 'active' : '' }}">
+                                <a href="{{ route("it.perangkats.index") }}" class="nav-link {{ request()->is('it/perangkats') || request()->is('it/perangkats/*') ? 'active' : '' }}">
+                                        <i class="fas fa-memory nav-icon">
+
+                                        </i>
+
+                                    Perangkat Lain
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="{{ route("it.perbaikans.index") }}" class="nav-link {{ request()->is('it/perbaikans') || request()->is('it/perbaikans/*') ? 'active' : '' }}">
                                     <i class="fas fa-cogs nav-icon">
 
                                     </i>
@@ -139,7 +149,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route("it.gudangits.index") }}" class="nav-link {{ request()->is('admin/gudangs') || request()->is('admin/gudangs/*') ? 'active' : '' }}">
+                                <a href="{{ route("it.gudangits.index") }}" class="nav-link {{ request()->is('it/gudangs') || request()->is('it/gudangs/*') ? 'active' : '' }}">
                                     <i class="fas fa-warehouse nav-icon">
 
                                     </i>
