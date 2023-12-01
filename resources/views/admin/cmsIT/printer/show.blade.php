@@ -90,7 +90,7 @@
                         </div>
                         <div class="col">
                             <input class="btn btn-danger" type="reset" value="Reset">
-                            <input class="btn btn-success" type="submit" value="{{ trans('global.save')}}">
+                            <input class="btn btn-secondary" type="submit" value="Print">
                         </div>
                     </div>
                 </form>
@@ -171,7 +171,7 @@
                                     </a>
                                     @endcan
                                     @can('perbaikan_delete')
-                                        <form action="{{ route('admin.cmsIT.printers.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                        <form action="{{ route('it.printers.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">

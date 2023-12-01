@@ -31,6 +31,9 @@
                             Tindakan
                         </th>
                         <th>
+                            Waktu Perbaikan
+                        </th>
+                        <th>
                             Petugas
                         </th>
                         <th>
@@ -58,6 +61,9 @@
                             </td>
                             <td>
                                 {{ $value->tindakan ?? '' }}
+                            </td>
+                            <td>
+                                {{ $value->total ?? '' }}
                             </td>
                             <td>
                                 {{ $value->petugas ?? '' }}

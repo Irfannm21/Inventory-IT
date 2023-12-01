@@ -56,33 +56,22 @@ class PerbaikanController extends Controller
         } else {
             dd("none");
         }
-        $stop = carbon::createFromFormat('H:i', $request->stop);
-        $selesai = carbon::createFromFormat('H:i', $request->selesai);
 
-        $detik = $selesai->diffInSeconds($stop);
+        $datetime = new \Datetime($request->stop);
+        $datetime2 = new \Datetime($request->selesai);
 
-        $day = $selesai->diffInDays($selesai->copy()->addSeconds($detik));
-        $jam = $selesai->diffInHours($selesai->copy()->addSeconds($detik)->subDays($day));
-        $menit = $selesai->diffInMinutes($selesai->copy()->addSeconds($detik)->subDays($day)->subHours($jam));
-
-        $a = CarbonInterval::hours($jam)->minutes($menit);
-
-        // Error jika kedua menit di angka 00
-        if($a->i == 0) {
-            $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i.$a->i);
-        } else {
-            $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
-        }
+        $interval = $datetime->diff($datetime2)->format('%H:%I:%S');
 
         $perbaikan =  new Perbaikan;
         $perbaikan->tanggal = $request->tanggal;
         $perbaikan->kerusakan = $request->kerusakan;
         $perbaikan->tindakan = $request->tindakan;
-        $perbaikan->stop = $request->stop;
-        $perbaikan->mulai = $request->selesai;
-        $perbaikan->total = $totall;
+        $perbaikan->stop = $datetime->format('H:i:s');
+        $perbaikan->mulai = $datetime2->format('H:i:s');
+        $perbaikan->total = $interval;
         $perbaikan->petugas = $request->petugas;
 
+        // dd($perbaikan);
         $result->perbaikans()->save($perbaikan);
 
         return redirect()->route('it.perbaikans.index');
@@ -102,11 +91,9 @@ class PerbaikanController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request->all());
         $result = perbaikan::find($id);
 
 
-        // die();
         // $type = $request->type;
         // if (Printer::where("kode",$request->kode)->first() == true) {
         //     $result = Printer::where("kode",$request->kode)->first();
@@ -118,31 +105,18 @@ class PerbaikanController extends Controller
         //     dd("none");
         // }
 
-        // dd($result);
-        $stop = carbon::createFromFormat('H:i', $request->stop);
-        $selesai = carbon::createFromFormat('H:i', $request->selesai);
+        $datetime = new \Datetime($request->stop);
+        $datetime2 = new \Datetime($request->selesai);
 
-        $detik = $selesai->diffInSeconds($stop);
-
-        $day = $selesai->diffInDays($selesai->copy()->addSeconds($detik));
-        $jam = $selesai->diffInHours($selesai->copy()->addSeconds($detik)->subDays($day));
-        $menit = $selesai->diffInMinutes($selesai->copy()->addSeconds($detik)->subDays($day)->subHours($jam));
-
-        $a = CarbonInterval::hours($jam)->minutes($menit);
-
-        if($a->i == 0) {
-            $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i.$a->i);
-        } else {
-            $totall = carbon::createFromFormat("H:i",$a->h.":".$a->i);
-        }
+        $interval = $datetime->diff($datetime2)->format('%H:%I:%S');
 
         $result->update([
             "tanggal" => $request->tanggal,
             "kerusakan" => $request->kerusakan,
             "tindakan" => $request->tindakan,
-            "stop" => $request->stop,
-            "mulai" => $request->selesai,
-            "total" => $totall,
+            "stop" => $datetime,
+            "mulai" => $datetime2,
+            "total" => $interval,
             "petugas" => $request->petugas,
 
         ]);
@@ -179,11 +153,8 @@ class PerbaikanController extends Controller
     {
         // dd($request->all());
         if(printer::where('kode',$request->perangkat) == true) {
-            $result = printer::where("kode",$request->perangkat)->whereBetween('tanggal', [$request->mulai, $request->sampai])->get();
-
-            dd($result);
-
-            $pdf = PDF::loadView('admin.pcmsIT.erbaikan.print',['result' => $result])->setPaper('a4','potrait');
+            $result = perbaikan::all();
+            $pdf = PDF::loadView('admin.cmsIT.perbaikan.print',['results' => $result])->setPaper('a4','landscape');
 
             return $pdf->stream();
         } else {

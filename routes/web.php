@@ -1,14 +1,6 @@
     <?php
 use App\Models\it\printer;
 
-Route::get('/test-perbaikan', function () {
-    $result = printer::where('id',3)->first();
-
-    $array_ip2770 = [
-        []
-    ]
-    dd($result);
-});
 Route::redirect('/', '/login');
 
 Route::redirect('/home', '/admin');

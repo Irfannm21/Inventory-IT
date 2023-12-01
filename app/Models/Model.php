@@ -15,4 +15,9 @@ class Model extends Base
     {
         return redirect()->route('it.printers.index');
     }
+
+    public function calculateInterval($stop,$selesai)
+    {
+
+    }
 }
