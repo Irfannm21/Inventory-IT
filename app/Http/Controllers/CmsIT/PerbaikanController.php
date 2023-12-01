@@ -153,12 +153,25 @@ class PerbaikanController extends Controller
     {
         // dd($request->all());
         if(printer::where('kode',$request->perangkat) == true) {
-            $result = perbaikan::all();
-            $pdf = PDF::loadView('admin.cmsIT.perbaikan.print',['results' => $result])->setPaper('a4','landscape');
+            $printer = printer::where("kode",$request->perangkat)->first();
+
+            $results = printer::find($printer->kode)
+            ->perbaikans()
+            ->whereBetween('tanggal',[$request->mulai,$request->sampai])
+            ->get();
+            $pdf = PDF::loadView('admin.cmsIT.perbaikan.print',['perangkat' => $printer, 'results' => $results , 'awal' => $request->mulai, 'akhir' => $request->sampai])->setPaper('a4','landscape');
 
             return $pdf->stream();
         } else {
-            dd("lain");
+            $komputer = komputer::where("kode",$request->perangkat)->first();
+
+            $results = komputer::find($komputer->kode)
+            ->perbaikans()
+            ->whereBetween('tanggal',[$request->mulai,$request->sampai])
+            ->get();
+            $pdf = PDF::loadView('admin.cmsIT.perbaikan.print',['perangkat' => $komputer, 'results' => $results , 'awal' => $request->mulai, 'akhir' => $request->sampai])->setPaper('a4','landscape');
+
+            return $pdf->stream();
         }
     }
 }

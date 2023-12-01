@@ -1,3 +1,6 @@
+<?php
+// dd($perangkat);
+?>
 <html>
 <head>
     <title></title>
@@ -124,8 +127,8 @@
                 <td style="border:none;" width="150px">
               </td>
                 <td style="border:none;  text-align: center; font-size: 14pt;" width="auto">
-                    <b>{{ strtoupper(__('Data Perbaikan Printer')) }}</b>
-                    <div style="font-size: 1em"><b>{{ strtoupper('Periode ?? - ??') }}</b></div>
+                    <b>{{ strtoupper(__('Data Perbaikan Perangkat ' . $perangkat->kode)) }}</b>
+                    <div style="font-size: 1em"><b>{{ strtoupper('Periode : ' . date('d-m-Y', strtotime($awal)) . ' - ' . date('d-m-Y', strtotime($akhir)))}}</b></div>
                 </td>
                 <td style="border:none; text-align: right; font-size: 12px;" width="150px">
                     <b></b>
@@ -143,7 +146,8 @@
         </table>
     </footer>
     <main>
-        {{-- {{ dd(json_decode($WARGA)) }} --}}
+       <table width="50%" border="0" style="border: none;">
+       </table>
         <table class="table-detail">
             <thead>
                 <tr>
