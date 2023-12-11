@@ -64,7 +64,7 @@
 
         <td class="pt-3">
             <select name="bagian" id="bagian" class="form-control">
-                <option value="">-- Pilih --</option>
+                <option value="">-- Pilih --</option>   
                 @foreach ($bagian as $id => $value)
                     <option value="{{$id}}"{{$value == (old('bagian') ?? ($npp->bagian->nama ?? '') ?? isset($npp->bagian->nama)) ? 'selected' : '' }}>{{$value}}</option>
                 @endforeach
@@ -80,152 +80,141 @@
     </tr>
 </table>
 
-<button class="btn btn-primary" id="addBtn" type="button">Tambah</button>
-<table class="table table-responsive table-borderless" id="detailTBody">
-    @if(isset($npp))
-    @foreach ($npp->details as $item)
-    <tr class=" {{ $errors->has('nama') ? 'has-error' : '' }}">
-        <td style="width: 300px">
-            <div class="form-group">
-                <label for=""> Nama Barang</label>
-                {{-- <input type="text" id="" class="form-control" name="id[]" value="{{$item->id}}" hidden> --}}
-                <input type="text" id="" class="form-control" name="nama[]" value="{{old('nama') ?? ($item->nama ?? '') ?? isset($item->nama)}}">
-                @if ($errors->has('nama'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('nama') }}
-                    </em>
-                @endif
+<button class="btn btn-primary mb-2" id="addBtn" type="button">Tambah</button>
+@if(isset($npp))
+@foreach ($npp->details as $item)
+<div class="card p-2" id="detailTBody">
+    <div class="card-title">
+        <div class="row">
+            <div class="col-sm-12 col-md-4">
+                <div class="form-group">
+                    <label for=""> Nama</label>
+                    <input type="text" name="id[]" value="{{old('id') ?? ($item->id ?? '') ?? isset($item->id)}}" hidden    >
+                    <input type="text" id="" class="form-control" name="nama[]" value="{{old('nama') ?? ($item->nama ?? '') ?? isset($item->nama)}}">
+                    @if ($errors->has('nama'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('nama') }}
+                        </em>
+                    @endif
+                </div>
             </div>
-        </td>
-
-        <td style="width: 150px">
-            <div class="form-group {{ $errors->has('stok[]') ? 'has-error' : '' }}">
-                <label for="">Stok</label>
-                <input type="number" id="" class="form-control" name="stok[]" value="{{old('stok') ?? ($item->stok ?? '') ?? isset($item->stok)}}">
-                @if ($errors->has('stok'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('stok') }}
-                    </em>
-                @endif
+            <div class="col col-md-1">
+                <div class="form-group {{ $errors->has('stok[]') ? 'has-error' : '' }}">
+                    <label for="">Stok</label>
+                    <input type="number" id="" class="form-control" name="stok[]" value="{{old('stok') ?? ($item->stok ?? '') ?? isset($item->stok)}}">
+                    @if ($errors->has('stok'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('stok') }}
+                        </em>
+                    @endif
+                </div>
             </div>
-        </td>
-
-        <td style="width: 150px">
-            <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
-                <label for=""> Jumlah Npp</label>
-                <input type="number" id="" class="form-control" name="jumlah[]" value="{{old('jumlah') ?? ($item->jumlah ?? '') ?? isset($item->jumlah)}}">
-                @if ($errors->has('jumlah'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('jumlah') }}
-                    </em>
-                @endif
+            <div class="col col-md-1">
+                <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
+                    <label for=""> Jumlah</label>
+                    <input type="number" id="" class="form-control" name="jumlah[]"   value="{{old('jumlah') ?? ($item->jumlah ?? '') ?? isset($item->jumlah)}}">
+                    @if ($errors->has('jumlah'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('jumlah') }}
+                        </em>
+                    @endif
+                </div>
             </div>
-        </td>
-
-
-        <td style="width: 150px">
-            <div class="form-group {{ $errors->has('satuan[]') ? 'has-error' : '' }}">
-                <label for="">Satuan</label>
-                <select name="satuan[]" class="form-control" id="">
-                    <option value="" selected>-- Pilih --</option>
-                    <option value="Pcs" {{"Pcs" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pcs</option>
-                    <option value="Unit" {{"Unit" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Unit</option>
-                    <option value="Pack" {{"Pack" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pack</option>
-                    <option value="Dus" {{"Dus" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Dus</option>
-                    <option value="Kg" {{"Kg" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Kg</option>
-                    <option value="Liter" {{"Liter" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Liter</option>
-                    <option value="Meter" {{"Meter" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Meter</option>
-                </select>
-                @if ($errors->has('satuan'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('satuan') }}
-                    </em>
-                @endif
+            <div class="col col-md-1">
+                <div class="form-group {{ $errors->has('satuan[]') ? 'has-error' : '' }}">
+                    <label for="">Satuan</label>
+                    <select name="satuan[]" class="form-control" id="">
+                        <option value="" selected>-- Pilih --</option>
+                        <option value="Pcs" {{"Pcs" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pcs</option>
+                        <option value="Unit" {{"Unit" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Unit</option>
+                        <option value="Pack" {{"Pack" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pack</option>
+                        <option value="Dus" {{"Dus" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Dus</option>
+                        <option value="Kg" {{"Kg" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Kg</option>
+                        <option value="Liter" {{"Liter" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Liter</option>
+                        <option value="Meter" {{"Meter" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Meter</option>
+                    </select>
+                    @if ($errors->has('satuan'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('satuan') }}
+                        </em>
+                    @endif
             </div>
-        </td>
-
-        <td style="width: 300px">
+        </div>
+        <div class="col-sm-12 col-md-5">
             <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
                 <label for="">Keterangan</label>
-                <input type="text" id="" class="form-control" name="keterangan[]" value="{{old('keterangan') ?? ($item->keterangan ?? '') ?? isset($item->keterangan)}}">
+                <input type="text" id="" class="form-control" name="keterangan[]" value="{{old('keterangan') ?? ($item->keterangan ?? '') ?? isset($item->keterangan)}}"    >
                 @if ($errors->has('keterangan'))
                     <em class="invalid-feedback">
                         {{ $errors->first('keterangan') }}
                     </em>
                 @endif
             </div>
-        </td>
+        </div>
+    </div>
+</div>
+</div>
 
-        <td style="width: 50px">
-            <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
-                <label for=""></label>
-                <button class="btn btn-danger removeBtn">Del</button>
+@endforeach
+@else
+
+<div class="card p-2" id="detailTBody">
+    <div class="card-title">
+        <div class="row">
+            <div class="col-sm-12 col-md-3">
+                <div class="form-group">
+                    <label for=""> Nama</label>
+                    <input type="text" id="" class="form-control" name="nama[]">
+                    @if ($errors->has('nama'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('nama') }}
+                        </em>
+                    @endif
+                </div>
             </div>
-        </td>
-
-    </tr>
-    @endforeach
-    @else
-    <tr class=" {{ $errors->has('nama') ? 'has-error' : '' }}">
-        <td style="width: 300px">
-            <div class="form-group">
-                <label for=""> Nama Barang</label>
-                <input type="text" id="" class="form-control" name="nama[]">
-                @if ($errors->has('nama'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('nama') }}
-                    </em>
-                @endif
+            <div class="col col-md-2">
+                <div class="form-group {{ $errors->has('stok[]') ? 'has-error' : '' }}">
+                    <label for="">Stok</label>
+                    <input type="number" id="" class="form-control" name="stok[]">
+                    @if ($errors->has('stok'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('stok') }}
+                        </em>
+                    @endif
+                </div>
             </div>
-        </td>
-
-        <td style="width: 150px">
-            <div class="form-group {{ $errors->has('stok[]') ? 'has-error' : '' }}">
-                <label for="">Stok</label>
-                <input type="number" id="" class="form-control" name="stok[]">
-                @if ($errors->has('stok'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('stok') }}
-                    </em>
-                @endif
+            <div class="col col-md-2">
+                <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
+                    <label for=""> Jumlah</label>
+                    <input type="number" id="" class="form-control" name="jumlah[]">
+                    @if ($errors->has('jumlah'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('jumlah') }}
+                        </em>
+                    @endif
+                </div>
             </div>
-        </td>
-
-        <td style="width: 150px">
-            <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
-                <label for=""> Jumlah Npp</label>
-                <input type="number" id="" class="form-control" name="jumlah[]">
-                @if ($errors->has('jumlah'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('jumlah') }}
-                    </em>
-                @endif
+            <div class="col col-md-2">
+                <div class="form-group {{ $errors->has('satuan[]') ? 'has-error' : '' }}">
+                    <label for="">Satuan</label>
+                    <select name="satuan[]" class="form-control" id="">
+                        <option value="" selected>-- Pilih --</option>
+                        <option value="Pcs" {{"Pcs" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pcs</option>
+                        <option value="Unit" {{"Unit" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Unit</option>
+                        <option value="Pack" {{"Pack" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pack</option>
+                        <option value="Dus" {{"Dus" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Dus</option>
+                        <option value="Kg" {{"Kg" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Kg</option>
+                        <option value="Liter" {{"Liter" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Liter</option>
+                        <option value="Meter" {{"Meter" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Meter</option>
+                    </select>
+                    @if ($errors->has('satuan'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('satuan') }}
+                        </em>
+                    @endif
             </div>
-        </td>
-
-
-        <td style="width: 150px">
-            <div class="form-group {{ $errors->has('satuan[]') ? 'has-error' : '' }}">
-                <label for="">Satuan</label>
-                <select name="satuan[]" class="form-control" id="">
-                    <option value="" selected>-- Pilih --</option>
-                    <option value="Pcs" {{"Pcs" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pcs</option>
-                    <option value="Unit" {{"Unit" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Unit</option>
-                    <option value="Pack" {{"Pack" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pack</option>
-                    <option value="Dus" {{"Dus" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Dus</option>
-                    <option value="Kg" {{"Kg" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Kg</option>
-                    <option value="Liter" {{"Liter" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Liter</option>
-                    <option value="Meter" {{"Meter" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Meter</option>
-                </select>
-                @if ($errors->has('satuan'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('satuan') }}
-                    </em>
-                @endif
-            </div>
-        </td>
-
-        <td style="width: 350px">
+        </div>
+        <div class="col-sm-12 col-md-3">
             <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
                 <label for="">Keterangan</label>
                 <input type="text" id="" class="form-control" name="keterangan[]">
@@ -235,84 +224,85 @@
                     </em>
                 @endif
             </div>
-        </td>
-    </tr>
-    @endif
-
-</table>
-
+        </div>
+    </div>
+</div>
+</div>
+@endif
 <template id="detailTmpl">
-    <tr>
-        <td style="width: 300px">
-            <div class="form-group {{ $errors->has('nama[]') ? 'has-error' : '' }}">
-                {{-- <input type="text" id="" class="form-control" name="id[]"> --}}
-                <input type="text" id="" class="form-control" name="nama[]">
-                @if ($errors->has('nama'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('nama') }}
-                    </em>
-                @endif
+    <div class="card p-2" id="contentBody">
+        <div class="card-title">
+            <div class="row">
+                <div class="col-sm-12 col-md-3">
+                    <div class="form-group">
+                        <label for=""> Nama</label>
+                        <input type="text" id="" class="form-control" name="nama[]">
+                        @if ($errors->has('nama'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('nama') }}
+                            </em>
+                        @endif
+                    </div>
+                </div>
+                <div class="col col-md-2">
+                    <div class="form-group {{ $errors->has('stok[]') ? 'has-error' : '' }}">
+                        <label for="">Stok</label>
+                        <input type="number" id="" class="form-control" name="stok[]">
+                        @if ($errors->has('stok'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('stok') }}
+                            </em>
+                        @endif
+                    </div>
+                </div>
+                <div class="col col-md-2">
+                    <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
+                        <label for=""> Jumlah</label>
+                        <input type="number" id="" class="form-control" name="jumlah[]">
+                        @if ($errors->has('jumlah'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('jumlah') }}
+                            </em>
+                        @endif
+                    </div>
+                </div>
+                <div class="col col-md-2">
+                    <div class="form-group {{ $errors->has('satuan[]') ? 'has-error' : '' }}">
+                        <label for="">Satuan</label>
+                        <select name="satuan[]" class="form-control" id="">
+                            <option value="" selected>-- Pilih --</option>
+                            <option value="Pcs" {{"Pcs" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pcs</option>
+                            <option value="Unit" {{"Unit" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Unit</option>
+                            <option value="Pack" {{"Pack" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pack</option>
+                            <option value="Dus" {{"Dus" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Dus</option>
+                            <option value="Kg" {{"Kg" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Kg</option>
+                            <option value="Liter" {{"Liter" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Liter</option>
+                            <option value="Meter" {{"Meter" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Meter</option>
+                        </select>
+                        @if ($errors->has('satuan'))
+                            <em class="invalid-feedback">
+                                {{ $errors->first('satuan') }}
+                            </em>
+                        @endif
+                </div>
             </div>
-        </td>
-
-        <td style="width: 150px">
-            <div class="form-group {{ $errors->has('stok[]') ? 'has-error' : '' }}">
-                <input type="number" id="" class="form-control" name="stok[]">
-                @if ($errors->has('stok'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('stok') }}
-                    </em>
-                @endif
+            <div class="col-sm-12 col-md-3">
+                <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
+                    <label for="">Keterangan</label>
+                    <input type="text" id="" class="form-control" name="keterangan[]">
+                    @if ($errors->has('keterangan'))
+                        <em class="invalid-feedback">
+                            {{ $errors->first('keterangan') }}
+                        </em>
+                    @endif
+                </div>
             </div>
-        </td>
-
-        <td style="width: 150px">
-            <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
-                <input type="number" id="" class="form-control" name="jumlah[]">
-                @if ($errors->has('jumlah'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('jumlah') }}
-                    </em>
-                @endif
+            <div class="col-sm-12">
+                <button class="btn btn-danger removeBtn">Hapus</button>
             </div>
-        </td>
-
-
-        <td style="width: 150px">
-            <div class="form-group {{ $errors->has('satuan[]') ? 'has-error' : '' }}">
-                <select name="satuan[]" class="form-control" id="">
-                    <option value="" selected>-- Pilih --</option>
-                    <option value="Pcs">Pcs</option>
-                    <option value="Unit">Unit</option>
-                    <option value="Pack">Pack</option>
-                    <option value="Dus">Dus</option>
-                    <option value="Kg">Kg</option>
-                    <option value="Liter">Liter</option>
-                    <option value="Meter">Meter</option>
-                </select>
-                @if ($errors->has('satuan'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('satuan') }}
-                    </em>
-                @endif
-            </div>
-        </td>
-
-        <td style="width: 350px">
-            <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
-                <input type="text" id="" class="form-control" name="keterangan[]">
-                @if ($errors->has('keterangan'))
-                    <em class="invalid-feedback">
-                        {{ $errors->first('keterangan') }}
-                    </em>
-                @endif
-            </div>
-        </td>
-
-        <td style="width 50px">
-            <button class="btn btn-danger removeBtn">Del</button>
-        </td>
-    </tr>
+        </div>
+    </div>
+    </div>
 </template>
 <br>
 <br>
@@ -320,7 +310,7 @@
     <script>
         $(document).ready(function() {
             $(document).on('click', '#addBtn', function() {
-                $('#detailTBody').append($('#detailTmpl').html());
+                $('#detailTBody').after($('#detailTmpl').html());
             }).on('change', '#departemen', function() {
                     $.ajax({
                         method: 'GET',
@@ -340,8 +330,8 @@
                 });
         })
 
-        $("#detailTBody").on('click','.removeBtn',function() {
-                $(this).closest('tr').remove();
+        $(document).on('click','.removeBtn',function() {
+                $(this).closest("#contentBody").remove();
         })
 
     </script>

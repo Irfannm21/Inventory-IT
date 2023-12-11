@@ -87,14 +87,13 @@ class NppController extends Controller
     //     "status" => $request->status,
     //   ]);
 
-    //   dd($request->all());
-      foreach($request->nama as $i => $val) {
-        $result = detail_npp::where("nama",$request->nama[$i])->first();
-
+        //   dd($npp);
+      foreach($request->id as $i => $val) {
+        // $result = detail_npp::where("nama",$val)->first();
        $npp->details()->updateOrCreate(
-            ["npp_id" => $npp->id, "nama" => $val ?? ""],
+        ["npp_id" => $npp->id, "id" => $val],
             [
-                "npp_id" => $npp->id,
+                "nama" => $request->nama[$i],
                 "jumlah" => $request->jumlah[$i],
                 "satuan" => $request->satuan[$i],
                 "stok" => $request->stok[$i],
@@ -102,7 +101,6 @@ class NppController extends Controller
             ]
             );
       }
-// die();
         return redirect()->route('admin.npps.index');
     }
 

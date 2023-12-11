@@ -9,9 +9,9 @@
     <div class="card-body">
         <form action="{{ route("admin.npps.store") }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @include('admin.npp.form')
+                @include('admin.npp.form')
             <div>
-                <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+                <input class="btn btn-success" type="submit" value="Simpan">
             </div>
         </form>
     </div>

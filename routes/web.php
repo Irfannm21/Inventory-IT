@@ -1,9 +1,29 @@
     <?php
 use App\Models\it\printer;
+use XBase\TableReader;
+route::get('/testing', function () {
+
+    // Lokasi file DBF
+    $dbfFilePath = public_path('db\Upah.dbf');
+    $dbf = new TableReader($dbfFilePath);
+    // dd($dbf);
+
+    while ($record = $dbf->nextRecord()) {
+        echo $record->get('bulan') . "|";
+        echo $record->get('nama') . "|";
+        echo $record->get('kode') . "|";
+        echo $record->get('bagian') . "|";
+        echo $record->get('kode') . "|";
+        echo "<br>";
+        // echo $record->my_column;
+    }
+});
 
 Route::redirect('/', '/login');
 
 Route::redirect('/home', '/admin');
+
+https://chat.openai.com/c/2c5a9a17-1e9f-4966-a937-8f12aa82d950
 
 Auth::routes(['register' => false]);
 

@@ -14,6 +14,8 @@
         "doctrine/dbal": "^2.9",
         "fideloper/proxy": "^4.0",
         "haruncpi/laravel-id-generator": "^1.1",
+        "hisamu/php-xbase": "^2.1",
+        "ifsnop/mysqldump-php": "^2.12",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "mtownsend/laravel-make-trait": "^1.5",
