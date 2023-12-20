@@ -80,28 +80,32 @@ class NppController extends Controller
     public function update(StoreNppRequest $request, npp $npp)
     {
         // dd($request->all());
-    //   $npp->update([
-    //     "kode" => $request->kode,
-    //     "tanggal" => $request->tanggal,
-    //     "bagian_id" => $request->bagian,
-    //     "status" => $request->status,
-    //   ]);
+      $npp->update([
+        "kode" => $request->kode,
+        "tanggal" => $request->tanggal,
+        "bagian_id" => $request->bagian,
+        "status" => $request->status,
+      ]);
 
-        //   dd($npp);
-      foreach($request->id as $i => $val) {
-        // $result = detail_npp::where("nama",$val)->first();
-       $npp->details()->updateOrCreate(
-        ["npp_id" => $npp->id, "id" => $val],
-            [
-                "nama" => $request->nama[$i],
-                "jumlah" => $request->jumlah[$i],
-                "satuan" => $request->satuan[$i],
-                "stok" => $request->stok[$i],
-                "keterangan" => $request->keterangan[$i] ?? "",
-            ]
-            );
+      $detail = [];
+      foreach($request->id as $i => $val)
+      {
+        $detail[] = [
+            ["id" => $val],
+               [ 'nama'      => trim(ucwords($request->nama[$i])) ?? '',
+                'jumlah'    =>$request->jumlah[$i]?? 1,
+                'satuan'    =>$request->satuan[$i]?? 'Pcs',
+                'stok'      =>$request->stok[$i]?? 0,
+                'keterangan'=> trim(ucwords($request->keterangan[$i])) ??'',]
+        ];
       }
-        return redirect()->route('admin.npps.index');
+
+      foreach($detail as $item) {
+            $id = $item[0]["id"];
+            $data = $item[1];
+          $npp->details()->updateOrCreate(['id' => $id], $data);
+      }
+       return redirect()->route('admin.npps.index');
     }
 
     public function destroy(Request $request, npp $npp)

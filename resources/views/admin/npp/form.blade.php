@@ -64,7 +64,7 @@
 
         <td class="pt-3">
             <select name="bagian" id="bagian" class="form-control">
-                <option value="">-- Pilih --</option>   
+                <option value="">-- Pilih --</option>
                 @foreach ($bagian as $id => $value)
                     <option value="{{$id}}"{{$value == (old('bagian') ?? ($npp->bagian->nama ?? '') ?? isset($npp->bagian->nama)) ? 'selected' : '' }}>{{$value}}</option>
                 @endforeach
@@ -89,8 +89,9 @@
             <div class="col-sm-12 col-md-4">
                 <div class="form-group">
                     <label for=""> Nama</label>
-                    <input type="text" name="id[]" value="{{old('id') ?? ($item->id ?? '') ?? isset($item->id)}}" hidden    >
-                    <input type="text" id="" class="form-control" name="nama[]" value="{{old('nama') ?? ($item->nama ?? '') ?? isset($item->nama)}}">
+                    <input type="text" id="" class="form-control" name="id[]" value="{{old('nama') ?? ($item->id ?? '') ?? isset($item->id)}}">
+
+                   <input type="text" id="" class="form-control" name="nama[]" value="{{old('nama') ?? ($item->nama ?? '') ?? isset($item->nama)}}">
                     @if ($errors->has('nama'))
                         <em class="invalid-feedback">
                             {{ $errors->first('nama') }}
@@ -161,7 +162,7 @@
 <div class="card p-2" id="detailTBody">
     <div class="card-title">
         <div class="row">
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-12 col-md-4">
                 <div class="form-group">
                     <label for=""> Nama</label>
                     <input type="text" id="" class="form-control" name="nama[]">
@@ -172,7 +173,7 @@
                     @endif
                 </div>
             </div>
-            <div class="col col-md-2">
+            <div class="col col-md-1">
                 <div class="form-group {{ $errors->has('stok[]') ? 'has-error' : '' }}">
                     <label for="">Stok</label>
                     <input type="number" id="" class="form-control" name="stok[]">
@@ -183,7 +184,7 @@
                     @endif
                 </div>
             </div>
-            <div class="col col-md-2">
+            <div class="col col-md-1">
                 <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
                     <label for=""> Jumlah</label>
                     <input type="number" id="" class="form-control" name="jumlah[]">
@@ -194,7 +195,7 @@
                     @endif
                 </div>
             </div>
-            <div class="col col-md-2">
+            <div class="col col-md-1">
                 <div class="form-group {{ $errors->has('satuan[]') ? 'has-error' : '' }}">
                     <label for="">Satuan</label>
                     <select name="satuan[]" class="form-control" id="">
@@ -214,7 +215,7 @@
                     @endif
             </div>
         </div>
-        <div class="col-sm-12 col-md-3">
+        <div class="col-sm-12 col-md-5">
             <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
                 <label for="">Keterangan</label>
                 <input type="text" id="" class="form-control" name="keterangan[]">
@@ -230,13 +231,15 @@
 </div>
 @endif
 <template id="detailTmpl">
-    <div class="card p-2" id="contentBody">
+    <div class="card p-2" id="detailTBody">
         <div class="card-title">
             <div class="row">
-                <div class="col-sm-12 col-md-3">
+                <div class="col-sm-12 col-md-4">
                     <div class="form-group">
                         <label for=""> Nama</label>
-                        <input type="text" id="" class="form-control" name="nama[]">
+                        <input type="text" class="form-control" name="id[]" value="{{null}}" hidden>
+
+                        <input type="text" class="form-control" name="nama[]">
                         @if ($errors->has('nama'))
                             <em class="invalid-feedback">
                                 {{ $errors->first('nama') }}
@@ -244,7 +247,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="col col-md-2">
+                <div class="col col-md-1">
                     <div class="form-group {{ $errors->has('stok[]') ? 'has-error' : '' }}">
                         <label for="">Stok</label>
                         <input type="number" id="" class="form-control" name="stok[]">
@@ -255,7 +258,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="col col-md-2">
+                <div class="col col-md-1">
                     <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
                         <label for=""> Jumlah</label>
                         <input type="number" id="" class="form-control" name="jumlah[]">
@@ -266,7 +269,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="col col-md-2">
+                <div class="col col-md-1">
                     <div class="form-group {{ $errors->has('satuan[]') ? 'has-error' : '' }}">
                         <label for="">Satuan</label>
                         <select name="satuan[]" class="form-control" id="">
@@ -286,7 +289,7 @@
                         @endif
                 </div>
             </div>
-            <div class="col-sm-12 col-md-3">
+            <div class="col-sm-12 col-md-5">
                 <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
                     <label for="">Keterangan</label>
                     <input type="text" id="" class="form-control" name="keterangan[]">
@@ -310,7 +313,8 @@
     <script>
         $(document).ready(function() {
             $(document).on('click', '#addBtn', function() {
-                $('#detailTBody').after($('#detailTmpl').html());
+                $('#detailTBody').before($('#detailTmpl').html());
+
             }).on('change', '#departemen', function() {
                     $.ajax({
                         method: 'GET',
@@ -331,7 +335,7 @@
         })
 
         $(document).on('click','.removeBtn',function() {
-                $(this).closest("#contentBody").remove();
+                $(this).closest("#detailTBody").remove();
         })
 
     </script>

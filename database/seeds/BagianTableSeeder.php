@@ -47,10 +47,7 @@ class BagianTableSeeder extends Seeder
 
                     "nama" => "Boiler"
                 ],
-                [
 
-                    "nama" => "IT"
-                ],
                 [
 
                     "nama" => "Listrik"
@@ -188,6 +185,10 @@ class BagianTableSeeder extends Seeder
         [
 
             "nama" => "Resepsionis"
+        ],
+        [
+
+            "nama" => "IT"
         ],
     ]);
 

@@ -1,8 +1,9 @@
 <?php
 
 
-use App\npp;
-use App\detail_npp;
+use App\Models\StokSparepart\npp;
+use App\Models\hrd\bagian_dept;
+use App\Models\StokSparepart\detail_npp;
 
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
@@ -12,83 +13,75 @@ class DetailNppTableSeeder extends Seeder
 
     public function run()
     {
+        // Create
+        // $result = bagian_dept::findOrFail(1);
 
-        $npp = npp::where("kode","01/ED.EL/X/2022")->first();
-        $faker = Faker::create('id_ID');
+        // $npp = npp::create([
+        //     "kode" => "01/UMP.IT/XII/23",
+        //     "tanggal" => "2023-12-20",
+        //     "status" => null,
+        //     "bagian_id" => $result->id,
+        // ]);
+        // $faker = Faker::create('id_ID');
 
-            $npp->details()->createMany([
-            [
-                "nama" => "Mouse",
-                "jumlah" => 4,
-                "satuan" => "unit",
-                "stok"  => $faker->numberBetween(0,10),
-                "keterangan" => "U/ ADM DF",
-            ],
-            [
-                "nama" => "Keyboard",
-                "jumlah" => $faker->numberBetween(1,10),
-                "satuan" => "unit",
-                "stok"  => $faker->numberBetween(0,10),
-                "keterangan" => $faker->word,
-            ],
-            [
-                "nama" => "Monitor",
-                "jumlah" => $faker->numberBetween(1,10),
-                "satuan" => "unit",
-                "stok"  => $faker->numberBetween(0,10),
-                "keterangan" => $faker->word,
-            ],
+        //     $npp->details()->createMany([
+        //     [
+        //         "nama" => "Mouse",
+        //         "jumlah" => 4,
+        //         "satuan" => "unit",
+        //         "stok"  => $faker->numberBetween(0,10),
+        //         "keterangan" => "U/ ADM DF",
+        //     ],
+        //     [
+        //         "nama" => "Keyboard",
+        //         "jumlah" => $faker->numberBetween(1,10),
+        //         "satuan" => "unit",
+        //         "stok"  => $faker->numberBetween(0,10),
+        //         "keterangan" => $faker->word,
+        //     ],
+        //     [
+        //         "nama" => "Monitor",
+        //         "jumlah" => $faker->numberBetween(1,10),
+        //         "satuan" => "unit",
+        //         "stok"  => $faker->numberBetween(0,10),
+        //         "keterangan" => $faker->word,
+        //     ],
 
-            ]);
+        //     ]);
 
-        $npp2 = npp::where("kode","02/ED.EL/X/2022")->first();
-        $npp2->details()->createMany([
-            [
-                "nama" => "CCTV",
-                "jumlah" => 4,
-                "satuan" => "unit",
-                "stok"  => $faker->numberBetween(0,10),
-                "keterangan" => "U/ ADM DF",
-            ],
-            [
-                "nama" => "Switch 8HUB",
-                "jumlah" => $faker->numberBetween(1,10),
-                "satuan" => "unit",
-                "stok"  => $faker->numberBetween(0,10),
-                "keterangan" => $faker->word,
-            ],
-            [
-                "nama" => "VGA",
-                "jumlah" => $faker->numberBetween(1,10),
-                "satuan" => "unit",
-                "stok"  => $faker->numberBetween(0,10),
-                "keterangan" => $faker->word,
-            ],
-        ]);
+        // Update
 
-        $npp2 = npp::where("kode","03/ED.EL/X/2022")->first();
-        $npp2->details()->createMany([
+        $result = npp::where("kode","01/UMP.IT/XII/23")->first();
+        $detail[] = [
+            ["id" => 2],
             [
-                "nama" => "CDROM",
-                "jumlah" => 4,
-                "satuan" => "unit",
-                "stok"  => $faker->numberBetween(0,10),
-                "keterangan" => "U/ ADM DF",
+                "nama" => "Keyboard Logitek",
+                "jumlah" => 2,
+                "satuan" => "Unit",
+                "stok" => 0,
+                "Keterangan" => "Hasil dari null",
             ],
+            ["id" => 3],
             [
-                "nama" => "Cathridge",
-                "jumlah" => $faker->numberBetween(1,10),
-                "satuan" => "unit",
-                "stok"  => $faker->numberBetween(0,10),
-                "keterangan" => $faker->word,
-            ],
+                "nama" => "Keyboard Logitek",
+                "jumlah" => 2,
+                "satuan" => "Unit",
+                "stok" => 0,
+                "Keterangan" => "Hasil dari null",
+            ]
+        ];
+
+        dd($detail);
+
+        $result->details()->updateOrCreate(
+            ["id" => null],
             [
-                "nama" => "RAM 4GB",
-                "jumlah" => $faker->numberBetween(1,10),
-                "satuan" => "unit",
-                "stok"  => $faker->numberBetween(0,10),
-                "keterangan" => $faker->word,
-            ],
-        ]);
+                "nama" => "Keyboard Logitek",
+                "jumlah" => 2,
+                "satuan" => "Unit",
+                "stok" => 0,
+                "Keterangan" => "Hasil dari null",
+            ]
+            );
     }
 }
