@@ -150,10 +150,14 @@ class BpbController extends Controller
         $detail = detail_npp::all()->pluck('nama','id');
         $npp = npp::all()->pluck('kode','id');
         $barang = DaftarBarang::all()->pluck('nama','id');
+
+        dd($detail->);
+
         return view("admin.bpb.edit",compact('bpb','detail','npp','suppliers','barang'));
     }
 
     public function update(UpdateBpbRequest $request, bpb $bpb) {
+        // dd($request->all());
         if($request->supplierID) {
             $supplier = supplier::find($request->supplierID);
         } else {
@@ -177,63 +181,82 @@ class BpbController extends Controller
         $bpb->save();
 
 
-        foreach($request->detail_id as $i => $value) {
-            $detail_npp = detail_npp::where('id',$value)->first();
-            $detail_bpb = detail_bpb::where("detail_id",$value)->first();
-            $barang = DaftarBarang::where("nama",$detail_npp->nama)->first();
-            if($barang == true) {
-                detail_bpb::UpdateOrCreate(
-                    ["bpb_id" => $bpb->id,"detail_id" => $value ],
-                    [
-                        "bpb_id" => $bpb->id,
-                        "detail_id" => $request->detail_id[$i],
-                        "jumlah" => $request->jumlah[$i],
-                    ]
-                    );
-
-                    StockSparepart::UpdateOrCreate(
-                        ["stockable_id" => $detail_bpb->id ],
-                        [
-                            "barang_id" => $request->barang_id[$i],
-                            "tanggal" => $request->tanggal,
-                            "jumlah" => $request->jumlah[$i],
-                            "satuan" => $request->satuan[$i],
-                        ]
-                        );
-            } else {
-
-              $result =  detail_bpb::UpdateOrCreate(
-                    ["bpb_id" => $bpb->id,"detail_id" => $value ],
-                    [
-                        "bpb_id" => $bpb->id,
-                        "detail_id" => $request->detail_id[$i],
-                        "jumlah" => $request->jumlah[$i],
-                    ]
-                    );
-
-                $faker = Faker::Create('id_ID');
-                $namaBarang = new DaftarBarang;
-                $namaBarang->kode = $faker->numerify("####");
-                $namaBarang->nama = $detail_npp->nama;
-                $namaBarang->satuan = $request->satuan[$i] ??  'Pcs';
-                $namaBarang->save();
-
-
-                $result->stock()->UpdateOrCreate(
-                    ["stockable_id" => $result->id ],
-                    [
-                        "barang_id" => $namaBarang->id,
-                        "tanggal" => $request->tanggal,
-                        "jumlah" => $request->jumlah[$i],
-                        "satuan" => $request->satuan[$i],
-                    ]
-                    );
-            }
-
-
-
-
+        $detail_bpb = [];
+        foreach($request->id as $i => $val) {
+            $detail_bpb[] = [
+                ["id" => $val],
+                [
+                    "detail_id" => $request->detail_id[$i],
+                    "jumlah" => $request->jumlah[$i],
+                ]
+            ];
         }
+
+        foreach($detail_bpb as $item ){
+            // dd($item);
+            $id = $item[0]["id"];
+            $value = $item[1];
+            $bpb->detail_bpbs()->updateOrCreate(['id' => $id],$value);
+        }
+
+        // foreach($request->detail_id as $i => $value) {
+        //     $detail_npp = detail_npp::where('id',$value)->first();
+        //     $detail_bpb = detail_bpb::where("detail_id",$value)->first();
+        //     $barang = DaftarBarang::where("nama",$detail_npp->nama)->first();
+
+        //     if($barang == true) {
+        //         detail_bpb::UpdateOrCreate(
+        //             ["bpb_id" => $bpb->id,"detail_id" => $value ],
+        //             [
+        //                 "bpb_id" => $bpb->id,
+        //                 "detail_id" => $request->detail_id[$i],
+        //                 "jumlah" => $request->jumlah[$i],
+        //             ]
+        //             );
+
+        //             StockSparepart::UpdateOrCreate(
+        //                 ["stockable_id" => $detail_bpb->id ],
+        //                 [
+        //                     "barang_id" => $request->barang_id[$i],
+        //                     "tanggal" => $request->tanggal,
+        //                     "jumlah" => $request->jumlah[$i],
+        //                     "satuan" => $request->satuan[$i],
+        //                 ]
+        //                 );
+        //     } else {
+
+        //       $result =  detail_bpb::UpdateOrCreate(
+        //             ["bpb_id" => $bpb->id,"detail_id" => $value ],
+        //             [
+        //                 "bpb_id" => $bpb->id,
+        //                 "detail_id" => $request->detail_id[$i],
+        //                 "jumlah" => $request->jumlah[$i],
+        //             ]
+        //             );
+
+        //         $faker = Faker::Create('id_ID');
+        //         $namaBarang = new DaftarBarang;
+        //         $namaBarang->kode = $faker->numerify("####");
+        //         $namaBarang->nama = $detail_npp->nama;
+        //         $namaBarang->satuan = $request->satuan[$i] ??  'Pcs';
+        //         $namaBarang->save();
+
+
+        //         $result->stock()->UpdateOrCreate(
+        //             ["stockable_id" => $result->id ],
+        //             [
+        //                 "barang_id" => $namaBarang->id,
+        //                 "tanggal" => $request->tanggal,
+        //                 "jumlah" => $request->jumlah[$i],
+        //                 "satuan" => $request->satuan[$i],
+        //             ]
+        //             );
+        //     }
+
+
+
+
+        // }
 
         if($bpb->kelompok == "Administrasi")
         {

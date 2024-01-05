@@ -89,7 +89,7 @@
             <div class="col-sm-12 col-md-4">
                 <div class="form-group">
                     <label for=""> Nama</label>
-                    <input type="text" id="" class="form-control" name="id[]" value="{{old('nama') ?? ($item->id ?? '') ?? isset($item->id)}}">
+                    <input type="text" id="" class="form-control" name="id[]" value="{{old('nama') ?? ($item->id ?? '') ?? isset($item->id)}}" hidden>
 
                    <input type="text" id="" class="form-control" name="nama[]" value="{{old('nama') ?? ($item->nama ?? '') ?? isset($item->nama)}}">
                     @if ($errors->has('nama'))

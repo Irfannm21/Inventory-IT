@@ -63,7 +63,7 @@ class NppController extends Controller
                 'stok'      =>$request->stok[$i]?? 0,
                 'keterangan'=> trim(ucwords($request->keterangan[$i])) ??'',
             ];
-        }
+    }
         $npp->details()->createMany($detail);
         $npp->load('details');
 
@@ -133,8 +133,8 @@ class NppController extends Controller
     {
         // dd($request->npp);
         $result = npp::with('bagian')->where('id',$request->npp)->first();
-        // dd($result);
-        $pdf = PDF::loadView('admin.npp.print-npp',['result' => $result])->setPaper('a5'.'potrait');
+
+        $pdf = PDF::loadView('admin.npp.print-npp',['result' => $result])->setPaper('a4','potrait');
         return $pdf->stream();
     }
 

@@ -5,45 +5,116 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Print</title>
-
 </head>
 
+<style>
+    .header {
+        margin-top: 25px;
+        margin-left: 85px;
+        margin-bottom: 50px;
+    }
+
+    .val:nth-child(1) {
+        width: 350px !important;
+    }
+
+    .val:nth-child(2) {
+        padding-left: 10px;
+        width: 50px;
+    }
+
+    .val:nth-child(3) {
+        padding-left: 10px;
+        width: 50px;
+    }
+
+    .val:nth-child(4) {
+        padding-left: 20px;
+        width: 250px;
+    }
+    #footer{
+        position: absolute;
+        bottom: 180px;
+    }
+
+
+@page {size:21cm 21cm;}
+</style>
 <body>
-    <table>
-        {{-- @foreach ($result as $val) --}}
-        <tr>
-            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $result->bagian->departemen->nama }}</td>
-        </tr>
-        <tr>
-            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ $result->kode }}</td>
-        </tr>
-        <tr>
-            <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ date('d-m-Y', strtotime($result->tanggal)) }}</td>
-        </tr>
-        <br>
-        <br>
-        @foreach ($result->details as $item)
+    <div class="header">
+        <table>
             <tr>
-                <td style="width: 400px">
+                <td>
+                    {{ $result->bagian->departemen->nama }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ $result->kode }}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    {{ date('d-M-Y', strtotime($result->tanggal)) }}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="content">
+        <table>
+            @foreach ($result->details as $item)
+            <tr>
+                <td class="val">
                     {{ $loop->iteration }}. {{ $item->nama }}
                 </td>
-                <td style="width: 50px">
-                    {{ $item->stok }}
+                <td class="val">
+                    @php
+                        if($item->stok >= 0) {
+
+                        } else {
+                            echo $item->stok;
+                        }
+                    @endphp
                 </td>
-                <td style="width: 100px">
+                <td class="val">
                     {{ $item->jumlah . ' ' . $item->satuan }}
                 </td>
-                <td>
+                <td class="val">
                     {{ $item->keterangan }}
                 </td>
             </tr>
         @endforeach
-        {{-- @endforeach --}}
 
-    </table>
+        </table>
+    </div>
+
+    <div id="footer">
+        <table>
+            <tr>
+                <td style="width:140px">
+                    Yudi Hadiandi
+                </td>
+                <td style="width:140px">
+                    Rikrik Gumilar
+                </td>
+
+                <td style="width:140px">
+                    The Pek Kiong
+                </td>
+
+                <td style="width:140px">
+                    Hanning Yanwar
+                </td>
+
+                <td style="width:140px">
+                    Dani
+                </td>
+            </tr>
+        </table>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
     </script>
 </body>
-
 </html>
