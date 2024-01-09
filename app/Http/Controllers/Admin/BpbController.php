@@ -151,7 +151,6 @@ class BpbController extends Controller
         $npp = npp::all()->pluck('kode','id');
         $barang = DaftarBarang::all()->pluck('nama','id');
 
-        dd($detail->);
 
         return view("admin.bpb.edit",compact('bpb','detail','npp','suppliers','barang'));
     }
@@ -188,16 +187,23 @@ class BpbController extends Controller
                 [
                     "detail_id" => $request->detail_id[$i],
                     "jumlah" => $request->jumlah[$i],
+                ],
+                [
+                    "barang_id" => $request->barang_id[$i],
+                    "jumlah" => $request->jumlah[$i],
                 ]
             ];
         }
-
+        $result = [];
         foreach($detail_bpb as $item ){
-            // dd($item);
             $id = $item[0]["id"];
             $value = $item[1];
-            $bpb->detail_bpbs()->updateOrCreate(['id' => $id],$value);
+            $stock = $item[2];
+             $result = $bpb->detail_bpbs()->updateOrCreate(['id' => $id], $value);
+
+            $result->stock()->updateOrCreate(["id" => $result->stock->id],$stock );
         }
+
 
         // foreach($request->detail_id as $i => $value) {
         //     $detail_npp = detail_npp::where('id',$value)->first();

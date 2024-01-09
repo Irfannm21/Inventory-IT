@@ -220,12 +220,12 @@
             <div class="row">
                 <div class="col-sm-12 col-md-3">
                     <div class="form-group">
-                        <label id="hasil">Nama Pesanan Barang</label>
+                        <label id="hasil">Nama di NPP</label>
                         <input type="text" id="" class="form-control" name="id[]" value="{{$val->id}}" hidden>
                         <select name="detail_id[]" id="detail_id" class="form-control detail_id">
                             <option value="">-- Pilih --</option>
                             @foreach ($bpb->detail_bpbs as $item)
-                            <option value="{{ $item->id}}" {{$item->detail_id == (old('detail_id') ?? ($val->detail_npp->id ?? '') ?? isset($val->detail_npp->id)) ? 'selected' : '' }}>{{ $item->detail_npp->nama }}</option>
+                            <option value="{{ $item->detail_npp->id }}" {{$item->detail_id == (old('detail_id') ?? ($val->detail_npp->id ?? '') ?? isset($val->detail_npp->id)) ? 'selected' : '' }}>{{ $item->detail_npp->nama }}</option>
                          @endforeach
                         </select>
                         @if ($errors->has('detail_id'))
@@ -241,7 +241,7 @@
                         <select name="barang_id[]" id="" class="form-control select2">
                             <option value="">-- Pilih --</option>
                             @foreach ($barang as $i => $item)
-                            <option value="{{ $i}}" {{$i == (old('barang_id') ?? ($item ?? '') ?? isset($item)) ? 'selected' : '' }}>{{ $item }}</option>
+                            <option value="{{ $i}}" {{$val->stock->barang_id == (old('barang_id') ?? ($i ?? '') ?? isset($i)) ? 'selected' : '' }}>{{ $item }}</option>
                          @endforeach
                         </select>
                         @if ($errors->has('barang_id'))
@@ -292,7 +292,7 @@
             <div class="row">
         <div class="col-sm-12 col-md-3">
             <div class="form-group {{ $errors->has('detail_id') ? 'has-error' : '' }}">
-                <label id="hasil">Nama Pesanan Barang</label>
+                <label id="hasil">Nama di NPP</label>
                 <select name="detail_id[]" id="detail_id" class="form-control detail_id">
 
                 </select>
@@ -366,7 +366,7 @@
             <div class="row">
         <div class="col-sm-12 col-md-3">
             <div class="form-group {{ $errors->has('detail_id') ? 'has-error' : '' }}">
-                <label id="hasil">Nama Pesanan Barang</label>
+                <label id="hasil">Nama di NPP</label>
 
                 {{-- <input type="text" class="form-control" name="id[]" value="{{null}}" hidden> --}}
                 <select name="detail_id[]" id="detail_id" class="form-control detail_id">

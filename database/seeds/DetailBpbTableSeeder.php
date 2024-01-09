@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\bpb;
+use App\Models\StokSparepart\bpb;
 use App\detail_npp;
 use App\Detail_bpb;
 use App\StockSparepart;
@@ -13,13 +13,26 @@ class DetailBpbTableSeeder extends Seeder
 {
     public function run()
     {
-        $barang = DaftarBarang::find(1);
-        $detail = Detail_bpb::where('id',26)->first();
+        $result = bpb::findOrFail(6);
 
-        $val = new StockSparepart;
-        $val->barang_id = $barang->id;
-        $val->jumlah = 2;
-        $val->satuan = "Unit";
-        $detail->stock()->save($val);
+
+       $val =  $result->detail_bpbs()->updateOrCreate(
+            ["id" => 11],
+            [
+                "detail_id" => 2,
+                "jumlah" => 3,
+            ]
+            );
+
+        $val->stock()->updateOrCreate(
+            [
+                "id" => $val->stock->id,
+            ],
+            [
+                "barang_id" => 1,
+                "jumlah" => 3,
+            ]
+
+        );
     }
-}
+    }
