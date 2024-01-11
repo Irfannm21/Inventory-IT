@@ -72,69 +72,36 @@ class BpbController extends Controller
                 "jumlah" => $request->jumlah[$i] ?? '',
             ];
         }
+
         $data = $bpb->detail_bpbs()->createMany($detail);
 
         $faker = Faker::Create('id_ID');
+        foreach($data as $item) {
+            $find = daftarBarang::where("nama",$item->detail_npp->nama)->first();
 
-        $tanggal = $request->tanggal;
-        foreach($request->barang_id as $i => $tt) {
+            if($find == null) {
+                $val = new DaftarBarang;
+                $val->kode = $faker->numerify("####");
+                $val->nama = $item->detail_npp->nama;
+                $val->save();
 
-            if($request->barang_id[$i] == null) {
-                // dd($request->detail_id[$i]);
-                $namaBarang = detail_npp::select('nama')->where('id',$request->detail_id[$i])->first();
-                $barang = new DaftarBarang;
-                $barang->kode = $faker->numerify("####");
-                $barang->nama = $namaBarang->nama;
-                $barang->satuan = $request->satuan[$i] ?? 'pcs';
-                $barang->save();
-
-                $stok = new StockSparepart;
-                $stok->barang_id = $barang->id  ?? '';
-                $stok->jumlah = $request->jumlah[$i]?? '';
-                $stok->tanggal = $tanggal;
-                $stok->satuan = $request->satuan[$i] ?? 'pcs';
-
-                $data[$i]->stock()->save($stok);
-
+                $item->stock()->create([
+                    "barang_id" => $val->id,
+                    "tanggal"   => $item->bpb->tanggal,
+                    "jumlah"    => $item->jumlah,
+                    "satuan"    => "Unit",
+                ]);
             } else {
-                $barang = DaftarBarang::find($request->barang_id[$i]);
-                $stok = new StockSparepart;
-                $stok->barang_id = $barang->id ?? '';
-                $stok->jumlah = $request->jumlah[$i] ?? 0;
-                $stok->tanggal = $request->tanggal;
-                $stok->satuan = $request->satuan[$i] ?? 'pcs';
-                $data[$i]->stock()->save($stok);
+                $item->stock()->create([
+                    "barang_id" => $find->id,
+                    "tanggal"   => $item->bpb->tanggal,
+                    "jumlah"    => $item->jumlah,
+                    "satuan"    => "Unit",
+                ]);
             }
-
         }
 
-        if($bpb->kelompok == "Administrasi")
-        {
-            return redirect()->route("admin.bpbs.administrasi");
-        } elseif ($bpb->kelompok == "Sparepart")
-        {
-            return redirect()->route("admin.bpbs.sparepart");
-        }
-         elseif($bpb->kelompok == "Mobil")
-        {
-            return redirect()->route("admin.bpbs.mobil");
-        }
-        elseif($bpb->kelompok == "Elektrik")
-        {
-            return redirect()->route("admin.bpbs.elektrik");
-        }
-        elseif($bpb->kelompok == "PT")
-        {
-            return redirect()->route("admin.bpbs.pt");
-        }
-        elseif($bpb->kelompok == "Spinning")
-        {
-            return redirect()->route("admin.bpbs.spinning");
-        }
-        elseif($bpb->kelompok == "UM")
-        {
-            return redirect()->route("admin.bpbs.um");
-        }
+        return redirect()->route("admin.bpbs.".strtolower($request->kelompok));
     }
 
     public function show() {
@@ -156,32 +123,58 @@ class BpbController extends Controller
     }
 
     public function update(UpdateBpbRequest $request, bpb $bpb) {
-        // dd($request->all());
-        if($request->supplierID) {
-            $supplier = supplier::find($request->supplierID);
-        } else {
-            $supplier = new supplier;
-            $supplier->nama = $request->nama;
-            $supplier->kota = $request->kota;
-            $supplier->email = $request->email;
-            $supplier->telepon = $request->telepon;
-            $supplier->type = $request->type;
-            $supplier->alamat = $request->alamat;
-            $supplier->save();
+            // dd($request->all());
+            $supplier = supplier::firstOrCreate(
+            ["id" => $request->supplierID],
+            [
+                "nama" => $request->nama,
+                "kota" => $request->kota,
+                "type" => $request->type,
+                "telepon" => $request->telepon,
+                "email" => $request->email,
+                "alamat" => $request->alamat,
+            ]
+            );
 
-            $supplier = supplier::where('nama',$request->nama)->first();
-        }
-
-        $bpb->kode = $request->kode;
-        $bpb->tanggal = $request->tanggal;
-        $bpb->kelompok = $request->kelompok;
-        $bpb->npp()->associate($request->npp_id);
-        $bpb->supplier()->associate($supplier);
-        $bpb->save();
-
+            $bpb = bpb::updateOrCreate(
+                [
+                    "id" => $bpb->id
+                ],
+                [
+                    "npp_id" => $request->npp_id,
+                    "supplier_id" => $supplier->id,
+                    "kode" => $request->kode,
+                    "tanggal" => $request->tanggal,
+                    "kelompok" => $request->kelompok,
+                ]
+            );
 
         $detail_bpb = [];
+        $faker = Faker::Create('id_ID');
+
         foreach($request->id as $i => $val) {
+            // dd($request->detail_id[$i]);
+
+            // di inventori barang tidak ada
+             $data_barang =  daftarBarang::find($request->barang_id[$i]);
+             $pesenan = detail_npp::find($request->detail_id[$i]);
+             $cari_data = DaftarBarang::where("nama",$pesenan->nama)->first();
+            // cek nama barang apakah tersedia di inventori barang? jika tidak gunakan nama barang dari detail npp
+
+            // Urai Daftar Barang yang datang
+
+            if($data_barang == null && $cari_data == null) {
+
+                $barang = new DaftarBarang;
+                $barang->kode = $faker->numerify("####");
+                $barang->nama = $pesenan->nama;
+                $barang->satuan = $request->satuan[$i];
+                $barang->save();
+
+            } else {
+                $barang = $data_barang;
+            }
+
             $detail_bpb[] = [
                 ["id" => $val],
                 [
@@ -189,11 +182,15 @@ class BpbController extends Controller
                     "jumlah" => $request->jumlah[$i],
                 ],
                 [
-                    "barang_id" => $request->barang_id[$i],
+                    "barang_id" => $barang->id,
                     "jumlah" => $request->jumlah[$i],
                 ]
             ];
+
+
         }
+
+
         $result = [];
         foreach($detail_bpb as $item ){
             $id = $item[0]["id"];
@@ -205,92 +202,8 @@ class BpbController extends Controller
         }
 
 
-        // foreach($request->detail_id as $i => $value) {
-        //     $detail_npp = detail_npp::where('id',$value)->first();
-        //     $detail_bpb = detail_bpb::where("detail_id",$value)->first();
-        //     $barang = DaftarBarang::where("nama",$detail_npp->nama)->first();
+        return redirect()->route("admin.bpbs.".strtolower($request->kelompok));
 
-        //     if($barang == true) {
-        //         detail_bpb::UpdateOrCreate(
-        //             ["bpb_id" => $bpb->id,"detail_id" => $value ],
-        //             [
-        //                 "bpb_id" => $bpb->id,
-        //                 "detail_id" => $request->detail_id[$i],
-        //                 "jumlah" => $request->jumlah[$i],
-        //             ]
-        //             );
-
-        //             StockSparepart::UpdateOrCreate(
-        //                 ["stockable_id" => $detail_bpb->id ],
-        //                 [
-        //                     "barang_id" => $request->barang_id[$i],
-        //                     "tanggal" => $request->tanggal,
-        //                     "jumlah" => $request->jumlah[$i],
-        //                     "satuan" => $request->satuan[$i],
-        //                 ]
-        //                 );
-        //     } else {
-
-        //       $result =  detail_bpb::UpdateOrCreate(
-        //             ["bpb_id" => $bpb->id,"detail_id" => $value ],
-        //             [
-        //                 "bpb_id" => $bpb->id,
-        //                 "detail_id" => $request->detail_id[$i],
-        //                 "jumlah" => $request->jumlah[$i],
-        //             ]
-        //             );
-
-        //         $faker = Faker::Create('id_ID');
-        //         $namaBarang = new DaftarBarang;
-        //         $namaBarang->kode = $faker->numerify("####");
-        //         $namaBarang->nama = $detail_npp->nama;
-        //         $namaBarang->satuan = $request->satuan[$i] ??  'Pcs';
-        //         $namaBarang->save();
-
-
-        //         $result->stock()->UpdateOrCreate(
-        //             ["stockable_id" => $result->id ],
-        //             [
-        //                 "barang_id" => $namaBarang->id,
-        //                 "tanggal" => $request->tanggal,
-        //                 "jumlah" => $request->jumlah[$i],
-        //                 "satuan" => $request->satuan[$i],
-        //             ]
-        //             );
-        //     }
-
-
-
-
-        // }
-
-        if($bpb->kelompok == "Administrasi")
-        {
-            return redirect()->route("admin.bpbs.administrasi");
-        } elseif ($bpb->kelompok == "Sparepart")
-        {
-            return redirect()->route("admin.bpbs.sparepart");
-        }
-        elseif ($bpb->kelompok == "Elektrik")
-        {
-            return redirect()->route("admin.bpbs.elektrik");
-        }
-         elseif($bpb->kelompok == "Mobil")
-        {
-            return redirect()->route("admin.bpbs.mobil");
-        }
-        elseif($bpb->kelompok == "PT")
-        {
-            return redirect()->route("admin.bpbs.pt");
-        }
-        elseif($bpb->kelompok == "Spinning")
-        {
-            return redirect()->route("admin.bpbs.spinning");
-        }
-        elseif($bpb->kelompok == "UM")
-        {
-            return redirect()->route("admin.bpbs.um");
-        }
     }
 
     public function destroy(Request $bpb, $id) {

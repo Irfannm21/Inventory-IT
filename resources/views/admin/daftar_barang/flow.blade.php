@@ -21,28 +21,28 @@
             <div class="form-group row">
                 <div class="col-md-2">
                     <label for="">Kode Barang</label>
-                    <input type="kode" class="form-control" id="kode">
+                    <input type="kode" class="form-control" id="kode" readonly>
                 </div>
                 <div class="col-md-4">
                     <label for="">Nama Barang</label>
-                    <input type="nama" class="form-control" id="nama">
+                    <input type="nama" class="form-control" id="nama" readonly>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-md-3">
                     <label for="">Part Nomor</label>
-                    <input type="nomor_part" class="form-control" id="nomor_part">
+                    <input type="nomor_part" class="form-control" id="nomor_part" readonly>
                 </div>
                 <div class="col-md-3">
                     <label for="">Nomor Kartu</label>
-                    <input type="no_kartu" class="form-control" id="no_kartu">
+                    <input type="no_kartu" class="form-control" id="no_kartu" readonly>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-md-2">
-                    <label for="jenis">Kelompok Barang</label>
-                    <select name="jenis" id="jenis" class="form-control">
-                        <option value="" selected>-- Pilih --</option>
+                    <label for="jenis">Jenis Barang</label>
+                    <select name="jenis" id="jenis" class="form-control" readonly>
+                        <option value="" selected>-- Belum Di Update --</option>
                         <option value="Administrasi">Administrasi</option>
                         <option value="AJL">AJL</option>
                         <option value="Bearing">Bearing</option>
@@ -55,9 +55,9 @@
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <label for="kelompok">kelompok Barang</label>
-                    <select name="kelompok" id="kelompok" class="form-control">
-                        <option value="" selected>-- Pilih --</option>
+                    <label for="kelompok">Kelompok Barang</label>
+                    <select name="kelompok" id="kelompok" class="form-control" readonly>
+                        <option value="" selected>-- Belum Di Update --</option>
                         <option value="Administrasi">Administrasi</option>
                         <option value="Sparepart Insan">Sparepart Insan</option>
                         <option value="Sparepart Spinning">Sparepart Spinning</option>
@@ -68,8 +68,8 @@
                 </div>
                 <div class="col-md-2">
                     <label for="satuan">Satuan</label>
-                    <select name="satuan" id="satuan" class="form-control">
-                        <option value="" selected></option>
+                    <select name="satuan" id="satuan" class="form-control" readonly>
+                        <option value="" selected>Belum Di Update</option>
                         <option value="Batang">Batang</option>
                         <option value="Bungkus">Bungkus</option>
                         <option value="Buah">Buah</option>

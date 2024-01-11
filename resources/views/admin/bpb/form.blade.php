@@ -12,7 +12,7 @@
                         class="col-sm-3 col-form-label">Kode Bpb</label>
                     <div class="col-sm-9">
                         <input type="text" name="kode" class="form-control"
-                            value="{{ old('kode', isset($bpb) ? $bpb->kode : '') }}" placeholder="Cth: 001/ENG/22">
+                            value="{{ old('kode', isset($bpb) ? $bpb->kode : '') }}" placeholder="Cth: 001/ENG/22" required>
                         @if ($errors->has('kode'))
                             <em class="invalid-feedback">
                                 {{ $errors->first('kode') }}
@@ -27,7 +27,7 @@
                     <label for="kelompok"
                         class="col-sm-3 col-form-label">Kelompok Bpb</label>
                     <div class="col-sm-9">
-                        <select name="kelompok" id="kelompok" class="form-control">
+                        <select name="kelompok" id="kelompok" class="form-control" required>
                             <option value="">-- Pilih -- </option>
                             <option value="Sparepart" {{"Sparepart" == (old('kelompok') ?? ($bpb->kelompok ?? '') ?? isset($bpb->kelompok)) ? 'selected' : '' }}>Sparepart</option>
                             <option value="Administrasi" {{"Administrasi" == (old('kelompok') ?? ($bpb->kelompok ?? '') ?? isset($bpb->kelompok)) ? 'selected' : '' }}>Administrasi</option>
@@ -52,7 +52,7 @@
                         class="col-sm-3 col-form-label">Tanggal</label>
                     <div class="col-sm-9">
                         <input type="date" name="tanggal" class="form-control"
-                            value="{{ old('tanggal', isset($bpb) ? $bpb->tanggal : '') }}">
+                            value="{{ old('tanggal', isset($bpb) ? $bpb->tanggal : '') }}" required>
                         @if ($errors->has('tanggal'))
                             <em class="invalid-feedback">
                                 {{ $errors->first('tanggal') }}
@@ -68,7 +68,7 @@
                         class="col-sm-3 col-form-label {{ $errors->has('kode_npp') ? 'has-error' : '' }}">Kode
                         NPP</label>
                     <div class="col-sm-9">
-                        <select name="npp_id" id="npp_id" class="form-control select2">
+                        <select name="npp_id" id="npp_id" class="form-control select2" required>
                             <option>-- Pilih --</option>
                             @foreach ($npp as $i => $item)
                                 <option value="{{ $i }}" {{$item == (old('npp_id') ?? ($bpb->npp->kode ?? '') ?? isset($bpb->npp->kode)) ? 'selected' : '' }}>{{ $item }}</option>
@@ -132,7 +132,7 @@
                                     </em>
                                 @endif
                                 <p class="helper-block">
-                                    {{ trans('*Wajib di isi') }}
+
                                 </p>
                             </div>
                             <div class="form-group col-md-4 {{ $errors->has('kota') ? 'has-error' : '' }}">
@@ -145,7 +145,7 @@
                                     </em>
                                 @endif
                                 <p class="helper-block">
-                                    {{ trans('*Wajib di isi') }}
+
                                 </p>
                             </div>
                         </div>
@@ -222,7 +222,7 @@
                     <div class="form-group">
                         <label id="hasil">Nama di NPP</label>
                         <input type="text" id="" class="form-control" name="id[]" value="{{$val->id}}" hidden>
-                        <select name="detail_id[]" id="detail_id" class="form-control detail_id">
+                        <select name="detail_id[]" id="detail_id" class="form-control detail_id" required>
                             <option value="">-- Pilih --</option>
                             @foreach ($bpb->detail_bpbs as $item)
                             <option value="{{ $item->detail_npp->id }}" {{$item->detail_id == (old('detail_id') ?? ($val->detail_npp->id ?? '') ?? isset($val->detail_npp->id)) ? 'selected' : '' }}>{{ $item->detail_npp->nama }}</option>
@@ -254,7 +254,7 @@
                 <div class="col-sm-12 col-md-3">
                     <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
                         <label id="hasil">Jumlah</label>
-                        <input type="number" id="" class="form-control" name="jumlah[]" value="{{old('jumlah') ?? ($val->stock->jumlah ?? '') ?? isset($val->stock->jumlah)}}">
+                        <input type="number" id="" class="form-control" name="jumlah[]" value="{{old('jumlah') ?? ($val->stock->jumlah ?? '') ?? isset($val->stock->jumlah)}}" required>
                         @if ($errors->has('jumlah'))
                             <em class="invalid-feedback">
                                 {{ $errors->first('jumlah') }}
