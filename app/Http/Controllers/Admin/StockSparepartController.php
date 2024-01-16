@@ -9,7 +9,7 @@ use App\Models\StokSparepart\StockSparepart;
 use App\Models\StokSparepart\DaftarBarang;
 use App\Models\StokSparepart\bpb;
 use App\Models\StokSparepart\detail_npp;
-use App\Models\StokSparepart\BonPengambilan;
+use App\Models\StokSparepart\BonKeluar;
 
 class StockSparepartController extends Controller
 {
@@ -112,6 +112,6 @@ class StockSparepartController extends Controller
     }
 
     public function cariDataStock(Request $request) {
-        return  StockSparepart::with('barang','stockable.bpb')->where('barang_id',"$request->id")->get();
+        return  StockSparepart::with('barang','stockable')->where('barang_id',"$request->id")->get();
     }
 }

@@ -40,8 +40,9 @@ class DaftarBarangController extends Controller
 
     public function edit($id)
     {
+
         abort_unless(\Gate::allows('barang_edit'), 403);
-        // $barang = DaftarBarang::findOrFail($id);ee
+        $barang = DaftarBarang::findOrFail($id);
 
         return view('admin.daftar_barang.edit', compact('barang'));
     }
@@ -68,7 +69,7 @@ class DaftarBarangController extends Controller
 
     public function laporan(){
         //  $masuk = $item->stocks()->where('stockable_type', 'App\Detail_bpb')->sum('jumlah');
-        //      $keluar = $item->stocks()->where('stockable_type', 'App\BonPengambilan')->sum('jumlah');
+        //      $keluar = $item->stocks()->where('stockable_type', 'App\BonKeluar')->sum('jumlah');
         //     $total = $masuk - $keluar;
 
             return view('admin.daftar_barang.laporan');

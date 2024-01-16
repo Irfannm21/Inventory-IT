@@ -16,32 +16,13 @@ class NppTableSeeder extends Seeder
 
         // $bagian = bagian_dept::where("nama","IT")->first();
 
-        npp::createMany([
-            [
+        npp::create([
+
                 "kode" => "01/ED.EL/X/2022",
-                "tanggal" => "2022-10-01",
-                "status"    => "Pending"
-            ],
-            [
-                "kode" => "02/ED.EL/X/2022",
-                "tanggal" => "2022-10-02",
-                "status"    => "Pending"
-            ],
-            [
-                "kode" => "03/ED.EL/X/2022",
-                "tanggal" => "2022-10-03",
-                "status"    => "Pending"
-            ],
-            [
-                "kode" => "04/ED.EL/X/2022",
-                "tanggal" => "2022-10-04",
-                "status"    => "Pending"
-            ],
-            [
-                "kode" => "05/ED.EL/X/2022",
-                "tanggal" => "2022-10-05",
-                "status"    => "Pending"
-            ]
+                "tanggal" => "2022-01-01",
+                "status"    => null,
+                "bagian_id" => 39,
+
         ]
             );
     }

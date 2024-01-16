@@ -167,7 +167,7 @@
                         <i class="fas fa-list nav-icon">
 
                         </i>
-                        Kelola NPP
+                        Data NPP
                     </a>
                     <ul class="nav-dropdown-items">
                         <li class="nav-item">
@@ -208,7 +208,7 @@
                             <i class="fas fa-list nav-icon">
 
                             </i>
-                    Daftar BPB
+                    Data BPB
                 </a>
                 <ul class="nav-dropdown-items">
                     <li class="nav-item">

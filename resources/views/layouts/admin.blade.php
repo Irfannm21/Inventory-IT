@@ -166,9 +166,8 @@
         extend: 'print',
         className: 'btn-default',
         text: printButtonTrans,
-        exportOptions: {
-          columns: ':visible'
-        }
+
+
       },
       {
         extend: 'colvis',

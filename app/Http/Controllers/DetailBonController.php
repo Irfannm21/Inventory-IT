@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\StokSparepart\BonKeluar;
+use App\DetailBon;
 use Illuminate\Http\Request;
 
-class BonKeluarController extends Controller
+class DetailBonController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class BonKeluarController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\BonKeluar  $BonKeluar
+     * @param  \App\DetailBon  $detailBon
      * @return \Illuminate\Http\Response
      */
-    public function show(BonKeluar $BonKeluar)
+    public function show(DetailBon $detailBon)
     {
         //
     }
@@ -52,10 +52,10 @@ class BonKeluarController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\BonKeluar  $BonKeluar
+     * @param  \App\DetailBon  $detailBon
      * @return \Illuminate\Http\Response
      */
-    public function edit(BonKeluar $BonKeluar)
+    public function edit(DetailBon $detailBon)
     {
         //
     }
@@ -64,10 +64,10 @@ class BonKeluarController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\BonKeluar  $BonKeluar
+     * @param  \App\DetailBon  $detailBon
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, BonKeluar $BonKeluar)
+    public function update(Request $request, DetailBon $detailBon)
     {
         //
     }
@@ -75,10 +75,10 @@ class BonKeluarController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\BonKeluar  $BonKeluar
+     * @param  \App\DetailBon  $detailBon
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BonKeluar $BonKeluar)
+    public function destroy(DetailBon $detailBon)
     {
         //
     }

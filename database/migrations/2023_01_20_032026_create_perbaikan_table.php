@@ -26,7 +26,7 @@ class CreatePerbaikanTable extends Migration
             $table->string('petugas')->nullable(); // Opsional
             $table->timestamps();
 
-            $table->foreign('bon_id')->references('id')->on('bon_pengambilans');
+            $table->foreign('bon_id')->references('id')->on('bon_keluars');
         });
     }
 

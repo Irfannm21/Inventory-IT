@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBonPengambilansTable extends Migration
+class CreateBonKeluarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,16 @@ class CreateBonPengambilansTable extends Migration
      */
     public function up()
     {
-        Schema::create('bon_pengambilans', function (Blueprint $table) {
+        Schema::create('bon_keluars', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('kode')->unique();
-            $table->unsignedBigInteger('detail_id')->constrained()->onDelete('detail_id');
             $table->date('tanggal');
+            $table->unsignedBigInteger('bagian_id')->constrained()->onDelete('cascade');
+
+
+            $table->foreign('bagian_id')->references('id')->on('bagian_depts');
             $table->timestamps();
 
-
-            $table->foreign('detail_id')->references('id')->on('detail_bpbs');
         });
     }
 
@@ -32,6 +33,6 @@ class CreateBonPengambilansTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bon_pengambilans');
+        Schema::dropIfExists('bon_keluars');
     }
 }

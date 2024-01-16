@@ -16,37 +16,64 @@ class BpbTableSeeder extends Seeder
     {
         $faker = Faker::Create('id_ID');
         $supplier = supplier::findOrFail(1);
-        $npp = npp::find(2);
+        $npp = npp::find(1);
         $detail = detail_npp::where('id',1)->first();
 
-        $bpb = bpb::find(21);
-        $detail_bpb = detail_bpb::find(33);
+        // BUAT DATA BPB
+        $bpb = bpb::create([
+            "npp_id" => 1,
+            "supplier_id" => 1,
+            "kode" => "10/UMP.IT/I/24",
+            "Kelompok" => "Administratsi",
+            "tanggal" => "2024-01-01",
+        ]);
 
-        $find = DaftarBarang::where("nama",$detail_bpb->detail_npp->nama)->first();
+        // BUAT DATA DETAIL BPB
+      $detail =   $bpb->detail_bpbs()->createMany([
+            [
+                "detail_id" => 1,
+                "jumlah" => 1,
+            ],
+            [
+                "detail_id" => 2,
+                "jumlah" => 2,
+            ],
+            [
+                "detail_id" => 3,
+                "jumlah" => 3,
+            ],
+        ]);
 
-        if($find == null)
-        {
-            $val = new DaftarBarang;
-            $val->kode = 1234;
-            $val->nama = $detail_bpb->detail_npp->nama;
-            $val->save();
 
-            dd($val->nama);
-            $detail_bpb->stock()->create([
-                "barang_id" => $val->id,
-                "tanggal"   => "2024/01/01",
-                "jumlah"    => 2,
-                "satuan"    => "Unit",
-            ]);
-        } else {
-            dump($find->id);
-            $detail_bpb->stock()->create([
-                "barang_id" => $find->id,
-                "tanggal"   => "2024/01/01",
-                "jumlah"    => 2,
-                "satuan"    => "Unit",
-            ]);
+
+        foreach($detail as $item) {
+            $find = DaftarBarang::where("nama",$item->detail_npp->nama)->first();
+
+            if($find == null)
+            {
+                $val = new DaftarBarang;
+                $val->kode = $faker->numerify("####");
+                $val->nama = $item->detail_npp->nama;
+                $val->save();
+
+                $item->stock()->create([
+                    "barang_id" => $val->id,
+                    "tanggal"   => "2024/01/01",
+                    "jumlah"    => $item->detail_npp->jumlah,
+                    "satuan"    => "Unit",
+                ]);
+            } else {
+
+                $item->stock()->create([
+                    "barang_id" => $find->id,
+                    "tanggal"   => "2024/01/01",
+                    "jumlah"    => $item->detail_npp->jumlah,
+                    "satuan"    => "Unit",
+                ]);
+            }
         }
+
+
 
     }
 }
