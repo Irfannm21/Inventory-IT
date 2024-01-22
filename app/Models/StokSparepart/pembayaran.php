@@ -8,8 +8,8 @@ class pembayaran extends Model
 {
     protected $guarded = [];
 
-    public function bpb()
+    public function Detail_bpb()
     {
-        return $this->belongsTo('App\Models\StokSparepart\bpb');
+        return $this->belongsTo('App\Models\StokSparepart\Detail_bpb',"detail_id");
     }
 }

@@ -20,7 +20,7 @@ class CreateDetailBonsTable extends Migration
             $table->integer('jumlah');
             $table->string('satuan');
 
-
+            $table->string('keterangan')->nullable();
             $table->foreign('bon_id')->references('id')->on('bon_keluars');
             $table->foreign('barang_id')->references('id')->on('daftar_barangs');
             $table->timestamps();

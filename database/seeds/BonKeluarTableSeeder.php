@@ -14,30 +14,31 @@ class BonKeluarTableSeeder extends Seeder
 {
     public function run()
     {
-    // $result = BonKeluar::create([
-        //     "kode" => "01/BP.IT/I/24",
-        //     "tanggal" => "2024-01-01",
-        //     "bagian_id" => 39,
-        // ]);
+    $result = BonKeluar::create([
+            "kode" => "01/BP.IT/I/24",
+            "tanggal" => "2024-01-02",
+            "bagian_id" => 39,
+            "Penerima" => "Irfan"
+        ]);
 
         // $result = BonKeluar::find(4);
-        // $result->detail_bons()->createMany([
-        //     [
-        //         "barang_id" => 1,
-        //         "jumlah" => 1,
-        //         "satuan" => "Unit",
-        //     ],
-        //     [
-        //         "barang_id" => 2,
-        //         "jumlah" => 1,
-        //         "satuan" => "Unit",
-        //     ],
-        //     [
-        //         "barang_id" => 3,
-        //         "jumlah" => 1,
-        //         "satuan" => "Unit",
-        //     ],
-        // ]);
+        $result->detail_bons()->createMany([
+            [
+                "barang_id" => 1,
+                "jumlah" => 1,
+                "satuan" => "Unit",
+            ],
+            [
+                "barang_id" => 2,
+                "jumlah" => 1,
+                "satuan" => "Unit",
+            ],
+            [
+                "barang_id" => 3,
+                "jumlah" => 1,
+                "satuan" => "Unit",
+            ],
+        ]);
 
         $result = DetailBon::whereIn('id',[1,2,3])->get();
 

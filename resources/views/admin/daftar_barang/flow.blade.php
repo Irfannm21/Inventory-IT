@@ -152,41 +152,48 @@
                         let keluar = 0;
 
                         for (let value of response) {
-                            console.log(value.stockable)
-                            // let total = value.jumlah;
-                            // baris += `<tr data-entry-id=${value.id}>`;
-                            //     baris += `<td></td>`;
-                            // if (value.stockable_type == "App\\Models\\StokSparepart\\Detail_bpb") {
-                            //     baris += `<td>${value.stockable.bpb.kode}</td>`;
-                            //     baris += `<td>${value.stockable.bpb.tanggal}</td>`;
-                            //     baris +=
-                            //         "<td><span class='badge rounded-pill bg-success'>Saldo Masuk</td>";
-                            //     if ($.isNumeric(total)) {
-                            //         masuk += parseFloat(total);
-                            //     }
-                            // } else {
-                            //     baris += `<td>${value.stockable.kode}</td>`;
-                            //     baris += `<td>${value.stockable.tanggal}</td>`;
-                            //     baris += "<td><span class='badge rounded-pill bg-danger'>Saldo Keluar</td>";
-                            //         let total = value.jumlah;
-                            //     if ($.isNumeric(total)) {
-                            //         keluar += parseFloat(total);
-                            //     }
-                            // }
-                            // baris += `<td>${value.jumlah}</td>`;
-                            // baris += `</tr>`;
+                            let total = value.jumlah;
+                            baris += `<tr data-entry-id=${value.id}>`;
+                            baris += `<td></td>`;
+                            switch (value.stockable_type) {
+                                case "App\\Models\\StokSparepart\\Detail_bpb" :
+                                console.log(value);
+                                baris += `<td>${value.stockable.bpb.kode}</td>`;
+                                baris += `<td>${value.stockable.bpb.tanggal}</td>`;
+                                baris += "<td><span class='badge rounded-pill bg-success'>Saldo Masuk</td>";
+                                    // let total = value.jumlah;
+                                if ($.isNumeric(total)) {
+                                    masuk += parseFloat(total);
+                                }
+                                break;
+                                case "App\\Models\\StokSparepart\\DetailBon" :
+                                console.log(value.stockable.bon.kode);
+                                baris += `<td>${value.stockable.bon.kode}</td>`;
+                                baris += `<td>${value.stockable.bon.tanggal}</td>`;
+                                baris += "<td><span class='badge rounded-pill bg-danger'>Saldo Keluar</td>";
+                                    // let total = total;
+                                if ($.isNumeric(total)) {
+                                    keluar += parseFloat(total);
+                                }
+                                break;
+                                default :
+                                    console.log(204,response)
+                            }
+
+                            baris += `<td>${value.jumlah}</td>`;
+                            baris += `</tr>`;
                         }
                         // console.log(masuk);
-                        // let hasil = masuk - keluar;
-                        // baris += "<tr>";
-                        // baris += "<td></td>";
-                        // baris += "<td></td>";
-                        // baris += "<td> </td>";
-                        // baris += "<td>Saldo </td>";
-                        // baris += `<td>${hasil}</td>`;
-                        // baris += "</tr>";
+                        let hasil = masuk - keluar;
+                        baris += "<tr>";
+                        baris += "<td></td>";
+                        baris += "<td></td>";
+                        baris += "<td> </td>";
+                        baris += "<td>Saldo </td>";
+                        baris += `<td>${hasil}</td>`;
+                        baris += "</tr>";
 
-                        // $('#content').html(baris);
+                        $('#content').html(baris);
 
                     }
                 })

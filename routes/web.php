@@ -1,29 +1,9 @@
     <?php
-use App\Models\it\printer;
-use XBase\TableReader;
-route::get('/testing', function () {
-
-    // Lokasi file DBF
-    $dbfFilePath = public_path('db\Upah.dbf');
-    $dbf = new TableReader($dbfFilePath);
-    // dd($dbf);
-
-    while ($record = $dbf->nextRecord()) {
-        echo $record->get('bulan') . "|";
-        echo $record->get('nama') . "|";
-        echo $record->get('kode') . "|";
-        echo $record->get('bagian') . "|";
-        echo $record->get('kode') . "|";
-        echo "<br>";
-        // echo $record->my_column;
-    }
-});
 
 Route::redirect('/', '/login');
 
 Route::redirect('/home', '/admin');
 
-https://chat.openai.com/c/2c5a9a17-1e9f-4966-a937-8f12aa82d950
 
 Auth::routes(['register' => false]);
 
@@ -90,10 +70,12 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('/stock_spareparts/cariNamaBarangs','StockSparepartController@cariNamaBarang')->name('stock_spareparts.cariNamaBarangs');
     Route::get('/stock_spareparts/cariDataStocks','StockSparepartController@cariDataStock')->name('stock_spareparts.cariDataStocks');
     Route::resource('/stock_spareparts','StockSparepartController');
-
     Route::resource('suppliers','SupplierController');
-    Route::get('pembayarans/options','PembayaranController@options')->name('pembayarans.options');
+    Route::get("/bons/detail",'BonKeluarController@detail')->name('bons.detail');
+    Route::resource("/bons",'BonKeluarController');
 
+
+    Route::get('pembayarans/options','PembayaranController@options')->name('pembayarans.options');
     Route::resource('pembayarans','PembayaranController');
     Route::resource('/emails','EmailBroadcasterController');
 });

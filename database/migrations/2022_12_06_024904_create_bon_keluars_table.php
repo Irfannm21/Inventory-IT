@@ -19,7 +19,7 @@ class CreateBonKeluarsTable extends Migration
             $table->date('tanggal');
             $table->unsignedBigInteger('bagian_id')->constrained()->onDelete('cascade');
 
-
+            $table->string('penerima');
             $table->foreign('bagian_id')->references('id')->on('bagian_depts');
             $table->timestamps();
 
@@ -28,7 +28,7 @@ class CreateBonKeluarsTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
+     *.;;;;
      * @return void
      */
     public function down()

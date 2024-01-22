@@ -280,6 +280,40 @@
         {{-- END BPB MANAGEMENT --}}
     @endcan
 
+    <li class="nav-item nav-dropdown">
+        <a class="nav-link  nav-dropdown-toggle">
+            <i class="fas fa-list nav-icon">
+
+            </i>
+            Bon Pengambilan
+        </a>
+        <ul class="nav-dropdown-items">
+            <li class="nav-item">
+                <a href="{{ route("admin.bons.index") }}" class="nav-link {{ request()->is('admin/bons') || request()->is('admin/bons/*') ? 'active' : '' }}">
+                    <i class="fas fa-sm fa-circle nav-icon">
+
+                    </i>
+                   Data Bon
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route("admin.bons.detail") }}" class="nav-link {{ request()->is('admin/bons') || request()->is('admin/bons/*') ? 'active' : '' }}">
+                    <i class="fas fa-sm fa-circle nav-icon">
+
+                    </i>
+                   Detail Bon
+                </a>
+            </li>
+            {{-- <li class="nav-item">
+                <a href="" class="nav-link {{ request()->is('admin/bons') || request()->is('admin/bons/*') ? 'active' : '' }}">
+                    <i class="fas fa-sm fa-circle nav-icon">
+
+                    </i>
+                   Cetak Laporan
+                </a>
+            </li> --}}
+    </ul>
+</li>
 
         <li class="nav-item nav-dropdown">
             <a class="nav-link  nav-dropdown-toggle">
@@ -317,7 +351,7 @@
     </li>
 
 
-            {{-- <li class="nav-item nav-dropdown">
+            <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                     <i class="fas fa-wallet nav-icon">
 
@@ -342,7 +376,7 @@
                         </a>
                     </li>
             </ul>
-        </li> --}}
+        </li>
 
             {{-- <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">

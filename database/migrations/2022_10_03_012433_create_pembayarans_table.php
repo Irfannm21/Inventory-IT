@@ -15,15 +15,16 @@ class CreatePembayaransTable extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('bpb_detail_id')->constrained()->onDelete('cascade');
-            $table->bigInteger('harga_satuan');
+            $table->unsignedBigInteger('detail_id')->constrained()->onDelete('cascade');
+            $table->bigInteger('rupiah')->nullable();
+            $table->bigInteger('dollar')->nullable();
             $table->bigInteger('ppn');
             $table->bigInteger('total_harga');
             $table->string('jenis_pembayaran');
             $table->string('lama_kredit')->nullable();
             $table->timestamps();
 
-            $table->foreign('bpb_detail_id')->references('id')->on('bpbs');
+            $table->foreign('detail_id')->references('id')->on('Detail_bpbs');
         });
     }
 

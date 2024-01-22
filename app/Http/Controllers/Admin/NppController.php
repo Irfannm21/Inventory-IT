@@ -110,6 +110,7 @@ class NppController extends Controller
 
     public function destroy(Request $request, npp $npp)
     {
+        // if(npp::has())
         $npp->details()->delete();
         $npp->delete();
         return redirect()->route('admin.npps.index');

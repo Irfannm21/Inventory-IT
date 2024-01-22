@@ -22,11 +22,11 @@ class CreatePerbaikanTable extends Migration
             $table->time("stop")->nullable(); // Opsional
             $table->time("mulai")->nullable(); // Opsional
             $table->time("total")->nullable(); // Opsional
-            $table->unsignedBigInteger('bon_id')->constrained()->onDelete('cascade')->nullable();
+            $table->unsignedBigInteger('detail_id')->constrained()->onDelete('cascade')->nullable();
             $table->string('petugas')->nullable(); // Opsional
             $table->timestamps();
 
-            $table->foreign('bon_id')->references('id')->on('bon_keluars');
+            $table->foreign('detail_id')->references('id')->on('detail_bons');
         });
     }
 

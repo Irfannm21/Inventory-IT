@@ -1,4 +1,4 @@
-<?php
+dddd<?php
 
 use App\Models\StokSparepart\bpb;
 use App\Models\StokSparepart\Detail_bpb;
@@ -17,7 +17,6 @@ class BpbTableSeeder extends Seeder
         $faker = Faker::Create('id_ID');
         $supplier = supplier::findOrFail(1);
         $npp = npp::find(1);
-        $detail = detail_npp::where('id',1)->first();
 
         // BUAT DATA BPB
         $bpb = bpb::create([
@@ -25,7 +24,7 @@ class BpbTableSeeder extends Seeder
             "supplier_id" => 1,
             "kode" => "10/UMP.IT/I/24",
             "Kelompok" => "Administratsi",
-            "tanggal" => "2024-01-01",
+            "tanggal" => "2024-01-10",
         ]);
 
         // BUAT DATA DETAIL BPB
@@ -36,12 +35,12 @@ class BpbTableSeeder extends Seeder
             ],
             [
                 "detail_id" => 2,
-                "jumlah" => 2,
+                "jumlah" => 1,
             ],
             [
                 "detail_id" => 3,
-                "jumlah" => 3,
-            ],
+                "jumlah" => 1,
+            ]
         ]);
 
 

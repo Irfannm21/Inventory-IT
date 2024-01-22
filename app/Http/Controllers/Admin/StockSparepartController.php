@@ -10,6 +10,7 @@ use App\Models\StokSparepart\DaftarBarang;
 use App\Models\StokSparepart\bpb;
 use App\Models\StokSparepart\detail_npp;
 use App\Models\StokSparepart\BonKeluar;
+use App\Models\StokSparepart\DetailBon;
 
 class StockSparepartController extends Controller
 {
@@ -20,7 +21,32 @@ class StockSparepartController extends Controller
      */
     public function index()
     {
-        //
+        // $result = StockSparepart::with('barang')->where('barang_id',1)->get();
+        // dd($result);
+
+        $stockData = StockSparepart::with('barang','stockable')->where('barang_id',1)->OrderBy('tanggal',"DESC")->get();
+
+        // dd($stockData);
+        foreach($stockData as $item) {
+            // echo $item->stockable_type;
+            switch($item->stockable_type) {
+                case "App\Models\StokSparepart\Detail_bpb" :
+                    echo $item->stockable->bpb->kode;
+                    echo " - " . $item->jumlah;
+                    echo " - " . $item->satuan;
+                    echo "<br>";
+                    break;
+                case "App\Models\StokSparepart\DetailBon" :
+                    echo $item->stockable->bon->kode;
+                    echo " - " . $item->jumlah;
+                    echo " - " . $item->satuan;
+                    echo "<br>";
+                    break;
+                default :
+                    echo "Data Tidak ditemukan";
+            }
+        }
+
     }
 
     /**
@@ -112,6 +138,6 @@ class StockSparepartController extends Controller
     }
 
     public function cariDataStock(Request $request) {
-        return  StockSparepart::with('barang','stockable')->where('barang_id',"$request->id")->get();
+        return StockSparepart::with('barang','stockable.bpb','stockable.bon')->where('barang_id',$request->id)->OrderBy('tanggal',"DESC")->get();
     }
 }

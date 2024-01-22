@@ -1,40 +1,42 @@
-
 @extends('layouts.admin')
 @section('content')
+@can('product_create')
+    <div style="margin-bottom: 10px;" class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-success" href="{{ route("admin.bons.create") }}">
+                Buat Data Baru
+            </a>
+        </div>
+    </div>
+@endcan
 
 <div class="card">
     <div class="card-header">
         {{ trans('global.product.title_singular') }} {{ trans('global.list') }}
     </div>
 
-    <div class="card-body">
+    <div class="card-body bg-black">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable">
+            <table class="table table-bordered table-striped table-hover datatable">
                 <thead>
                     <tr>
                         <th width="10">
 
                         </th>
                         <th>
+                            Kode BP
+                        </th>
+                        <th>
                             Tanggal
                         </th>
                         <th>
-                            Nama Klien
+                            Departemen
                         </th>
                         <th>
-                            Hardware ID
+                            Bagian
                         </th>
                         <th>
-                            Kerusakan
-                        </th>
-                        <th>
-                            Tindakan
-                        </th>
-                        <th>
-                            Waktu Perbaikan
-                        </th>
-                        <th>
-                            Petugas
+                            Penerima
                         </th>
                         <th>
                             &nbsp;
@@ -48,47 +50,37 @@
 
                             </td>
                             <td>
-                                {{ $value->tanggal ?? '' }}
+                                {{ $value->kode ?? '' }}
                             </td>
                             <td>
-                                {{$value->hardwareable->klien->kode ?? ''}}
-                             </td>
-                            <td>
-                               {{$value->hardwareable->kode ?? ''}}
+                                {{ date('d-m-Y', strtotime($value->tanggal)) ?? '' }}
                             </td>
                             <td>
-                                {{ $value->kerusakan ?? '' }}
+                                {{ $value->bagian->departemen->nama ?? '' }}
                             </td>
                             <td>
-                                {{ $value->tindakan ?? '' }}
+                                {{ $value->bagian->nama ?? '' }}
                             </td>
                             <td>
-                                {{ $value->total ?? '' }}
+                                {{ 'Irfan' }}
                             </td>
                             <td>
-                                {{ $value->petugas ?? '' }}
-                            </td>
-
-                            <td>
-                                {{-- @can('perbaikan_show') --}}
-                                    <a class="btn btn-xs btn-primary" href="{{ route('it.perbaikans.show', $value->id) }}">
-                                        {{ trans('global.view') }}
-                                    </a>
-                                {{-- @endcan --}}
-                                @can('perbaikan_edit')
-                                <a class="btn btn-xs btn-info" href="{{ route("it.perbaikans.edit", $value->id)  }}">
+                                @can('npp_access')
+                                    {{-- <a href="{{route('admin.bons.print',['npp' => $value->id])}}" class="btn btn-xs btn-dark" style="color:white" target="_blank">
+                                        Print
+                                    </a> --}}
+                                <a class="btn btn-xs btn-primary" style="color:black" href="{{ route('admin.bons.edit', $value->id)  }}">
                                     {{ trans('global.edit') }}
                                 </a>
                                 @endcan
-                                @can('perbaikan_delete')
-                                    <form action="{{ route('it.perbaikans.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
+                                @can('npp_delete')
+                                    <form  action="{{ route('admin.bons.destroy', $value->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
-                                    </form>
+                                       </form>
                                 @endcan
                             </td>
-
                         </tr>
                     @endforeach
                 </tbody>
@@ -103,7 +95,7 @@
   let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
   let deleteButton = {
     text: deleteButtonTrans,
-    url: "{{ route('it.perbaikans.massDestroy') }}",
+    url: "{{ route('it.komputers.massDestroy') }}",
     className: 'btn-danger',
     action: function (e, dt, node, config) {
       var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
@@ -127,7 +119,7 @@
     }
   }
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-@can('perbaikan_delete')
+@can('komputer_delete')
   dtButtons.push(deleteButton)
 @endcan
 
@@ -137,3 +129,4 @@
 </script>
 @endsection
 @endsection
+

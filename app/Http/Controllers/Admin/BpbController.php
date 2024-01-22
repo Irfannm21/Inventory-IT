@@ -26,7 +26,7 @@ class BpbController extends Controller
         $suppliers = supplier::all();
         $results = bpb::has("Detail_bpbs")->get();
             return view('admin.bpb.index', compact('results'));
-    }
+        }
 
     public function create()
     {

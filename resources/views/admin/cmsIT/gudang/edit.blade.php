@@ -12,7 +12,7 @@
                 @method('PUT')
                 @include('admin.cmsIT.gudang.form')
             <div>
-                <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+                <input class="btn btn-success" type="submit" value="{{ trans('global.save') }}">
             </div>
         </form>
     </div>

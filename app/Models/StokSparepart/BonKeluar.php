@@ -8,13 +8,16 @@ class BonKeluar extends Model
 {
     protected $guarded = [];
 
-    public function stock() {
-        return $this->morphOne('App\Models\StokSparepart\StockSparepart','stockable');
-    }
 
     public function detail_bons() {
         return $this->hasMany(DetailBon::class,'bon_id');
     }
 
+    public function bon() {
+        return $this->belongsTo('App\Models\StokSparepart\DetailBpb');
+      }
 
+      public function bagian() {
+        return $this->belongsTo('App\Models\hrd\bagian_dept');
+      }
 }

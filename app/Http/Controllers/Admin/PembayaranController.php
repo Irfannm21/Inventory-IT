@@ -84,9 +84,9 @@ class PembayaranController extends Controller
 
     public function options(Request $request)
     {
-        // return bpb::with("detail")->where("kode","$request->kode")->get();
+        return bpb::with("detail_bpbs.detail_npp")->where("kode","$request->kode")->first();
 
-        return $request->nama;
+        // return $request->kode;
 
     }
 }

@@ -1,4 +1,3 @@
-
 @extends('layouts.admin')
 @section('content')
     <div class="card">
@@ -7,10 +6,11 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ route('admin.npps.update', [$npp->id]) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('admin.bons.update', [$result->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                @include('admin.npp.form')
+
+                @include('admin.bon.form')
 
                 <div>
                     <input class="btn btn-success" type="submit" value="{{ trans('global.save') }}">

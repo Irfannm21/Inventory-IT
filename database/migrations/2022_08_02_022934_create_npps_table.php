@@ -17,7 +17,7 @@ class CreateNppsTable extends Migration
             $table->bigIncrements('id');
             $table->string('kode')->unique();
             $table->date('tanggal');
-            $table->date('status')->nullable();
+            $table->String('status')->nullable();
             $table->unsignedBigInteger('bagian_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 

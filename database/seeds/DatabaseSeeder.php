@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             DetailNppTableSeeder::class,
             SupplierTableSeeder::class,
             BpbTableSeeder::class,
+            // BonKeluarTableSeeder::class,
             PrinterTableSeeder::class,
             KomputerTableSeeder::class,
             DaftarBarangJaringanTableSeeder::class,

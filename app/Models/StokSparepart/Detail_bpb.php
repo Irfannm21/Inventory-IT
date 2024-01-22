@@ -23,6 +23,14 @@ class Detail_bpb extends Model
     public function barang() {
       return $this->belongsTo('App\Models\StokSparepart\DaftarBarang');
     }
+
+    public function bon() {
+        return $this->belongsTo('App\Models\StokSparepart\BonKeluar');
+      }
+
+    public function pembayarans() {
+        return $this->hasMany('App\Models\StokSparepart\pembayaran','detail_id');
+    }
 }
 
 

@@ -17,4 +17,9 @@ class bagian_dept extends Model
     {
         return $this->hasMany('App\Models\StokSparepart\StockSparepart','bagian_id');
     }
+
+    public function bons()
+    {
+        return $this->hasMany('App\Models\StokSparepart\StockSparepart','bagian_id');
+    }
 }

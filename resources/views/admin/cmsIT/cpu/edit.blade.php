@@ -3,7 +3,7 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.edit') }} {{ trans('global.product.title_singular') }}
+        Edit Data
     </div>
 
     <div class="card-body">
@@ -12,7 +12,7 @@
             @method('PUT')
             @include('admin.cmsIT.cpu.form')
             <div>
-                <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+                <input class="btn btn-success" type="submit" value="{{ trans('global.save') }}">
             </div>
         </form>
     </div>

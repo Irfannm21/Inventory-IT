@@ -19,7 +19,7 @@ class DetailNppTableSeeder extends Seeder
             $result->details()->createMany([
             [
                 "nama" => "Mouse",
-                "jumlah" => 4,
+                "jumlah" => 15,
                 "satuan" => "unit",
                 "stok"  => 0,
                 "keterangan" => "U/ ADM DF",

@@ -39,10 +39,25 @@
         <td style="width: 300px">
             <div class="form-group {{ $errors->has('harga_satuan') ? 'has-error' : '' }}">
                 <label for="">Harga Satuan</label>
-               <input type="text" name="harga_satuan[]" class="form-control">
+                <select name="currency" id="" class="form-control">
+                    <option value="">- Pilih -</option>
+                    <option value="rupiah">Rupiah (Rp.)</option>
+                    <option value="dollar">Dollar ($)</option>
+                </select>
                 @if ($errors->has('harga_satuan'))
                     <em class="invalid-feedback">
                         {{ $errors->first('harga_satuan') }}
+                    </em>
+                @endif
+            </div>
+        </td>
+        <td style="width: 300px">
+            <div class="form-group {{ $errors->has('nomiinal') ? 'has-error' : '' }}">
+                <label for="">Masukan Nominal</label>
+               {{-- <input type="number" name="nomiinal[]" class="form-control"> --}}
+                @if ($errors->has('kode_bpb'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('ppn') }}
                     </em>
                 @endif
             </div>
@@ -108,6 +123,7 @@
         </td>
         <td style="width: 300px">
             <div class="form-group {{ $errors->has('harga_satuan') ? 'has-error' : '' }}">
+                <select name="sa" id=""></select>
                 <input type="text" name="harga_satuan[]" class="form-control">
                  @if ($errors->has('harga_satuan'))
                      <em class="invalid-feedback">
@@ -116,6 +132,18 @@
                  @endif
              </div>
         </td>
+
+        <td style="width: 300px">
+            <div class="form-group {{ $errors->has('nominal') ? 'has-error' : '' }}">
+                <input type="text" name="nominal[]" class="form-control">
+                 @if ($errors->has('nominal'))
+                     <em class="invalid-feedback">
+                         {{ $errors->first('nominal') }}
+                     </em>
+                 @endif
+             </div>
+        </td>
+
         <td style="width: 300px">
             <div class="form-group {{ $errors->has('ppn') ? 'has-error' : '' }}">
                 <input type="text" name="ppn[]" class="form-control">
@@ -178,8 +206,9 @@
                         success: function(response) {
                             console.log(204, response);
                             let options = '';
-                            for (let item of response) {
-                                options += `<option value='${item.id}'>${item.detail.nama} | ${item.jumlah} ${item.satuan}</option>`;
+
+                            for (let item of response.detail_bpbs) {
+                                options += `<option value='${item.id}'>${item.detail_npp.nama} | ${item.jumlah} ${item.detail_npp.satuan}</option>`;
                             }
                             $('.nama_bpb').html(options);
                         }

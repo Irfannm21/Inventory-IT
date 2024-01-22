@@ -13,6 +13,7 @@ use App\Models\it\printer;
 use App\Models\it\komputer;
 use App\Models\it\klien;
 use App\Models\it\TableBarangJaringan;
+use App\Models\StokSparepart\BonKeluar;
 use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -27,6 +28,7 @@ class PerbaikanController extends Controller
 
     public function create(Request $request)
     {
+        $BonKeluar = BonKeluar::select('id','kode')->get();
         switch ($request->type) {
             case 'printer':
                 $hardware = printer::find($request->id);
@@ -41,7 +43,11 @@ class PerbaikanController extends Controller
         $tipe = $request->type;
         // dd($hadrware);
         abort_unless(\Gate::allows('perbaikan_create'), 403);
-        return view('admin.cmsIT.perbaikan.create',compact('hardware','tipe'));
+        return view('admin.cmsIT.perbaikan.create',compact('hardware','tipe','BonKeluar'));
+    }
+
+    public function show(StorePerbaikanRequest $request) {
+        dd($request->all());
     }
 
     public function store(StorePerbaikanRequest $request)
@@ -69,6 +75,7 @@ class PerbaikanController extends Controller
         $perbaikan->stop = $datetime->format('H:i:s');
         $perbaikan->mulai = $datetime2->format('H:i:s');
         $perbaikan->total = $interval;
+        $perbaikan->detail_id = $request->barang_id;
         $perbaikan->petugas = $request->petugas;
 
         // dd($perbaikan);
@@ -81,12 +88,9 @@ class PerbaikanController extends Controller
     {
         // dd($id);
         $result = perbaikan::find($id);
-        // $result = $result->hardwareable->kode;
-        // $printer = printer::get(['id',"kode"]);
-        // $komputer = komputer::get(["id","kode"]);
-        // $jaringan = TableBarangJaringan::get(["id","kode"]);
+        $BonKeluar = BonKeluar::select('id','kode')->get();
         abort_unless(\Gate::allows('perbaikan_edit'), 403);
-        return view('admin.cmsIT.perbaikan.edit', compact('result'));
+        return view('admin.cmsIT.perbaikan.edit', compact('result','BonKeluar'));
     }
 
     public function update(Request $request, $id)
@@ -141,12 +145,7 @@ class PerbaikanController extends Controller
 
     public function cariItem(Request $request)
     {
-        if($request->nama === "TableBarangJaringan") {
-            return TableBarangJaringan::get(['id','kode']);
-        } else {
-            $model = "App\\".$request->nama;
-            return $model::with('klien')->get(['id','kode']);
-        }
+        return BonKeluar::with('detail_bons.barang')->where("kode",$request->kode)->first();
     }
 
     public function print(Request $request)
