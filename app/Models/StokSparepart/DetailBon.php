@@ -5,6 +5,7 @@ namespace App\Models\StokSparepart;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\StokSparepart\StockSparepart;
 use App\Models\StokSparepart\BonKeluar;
+use App\Models\it\Perbaikan;
 use App\Models\StokSparepart\DaftarBarang;
 use App\Models\StokSparepart\bpb;
 class DetailBon extends Model
@@ -28,6 +29,11 @@ class DetailBon extends Model
 
     public function stock() {
         return $this->morphOne(StockSparepart::class,'stockable');
+    }
+
+    public function perbaikans()
+    {
+        return $this->hasMany(Perbaikan::class, 'detail_id');
     }
 
 }

@@ -13,7 +13,7 @@
                 @include('admin.bon.form')
 
                 <div>
-                    <input class="btn btn-success" type="submit" value="{{ trans('global.save') }}">
+                    <input class="btn btn-success mt-2" type="submit" value="{{ trans('global.save') }}">
                 </div>
             </form>
         </div>

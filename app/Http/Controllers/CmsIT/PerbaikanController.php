@@ -87,7 +87,8 @@ class PerbaikanController extends Controller
     public function edit($id)
     {
         // dd($id);
-        $result = perbaikan::find($id);
+        $result = perbaikan::with('detail_bon')->find($id);
+        // dd($result->detail_bon->bon->kode);
         $BonKeluar = BonKeluar::select('id','kode')->get();
         abort_unless(\Gate::allows('perbaikan_edit'), 403);
         return view('admin.cmsIT.perbaikan.edit', compact('result','BonKeluar'));
@@ -95,6 +96,7 @@ class PerbaikanController extends Controller
 
     public function update(Request $request, $id)
     {
+        // dd($request->all());
         $result = perbaikan::find($id);
 
 
@@ -121,6 +123,7 @@ class PerbaikanController extends Controller
             "stop" => $datetime,
             "mulai" => $datetime2,
             "total" => $interval,
+            "detail_id" => $request->barang_id,
             "petugas" => $request->petugas,
 
         ]);

@@ -14,7 +14,8 @@
             @csrf
             @method('PUT')
             @include('admin.cmsIT.perbaikan.form')
-            <div>
+
+            <div class="mt-3 ml-3">
                 <input class="btn btn-success" type="submit" value="{{ trans('global.save') }}">
             </div>
         </form>

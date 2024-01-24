@@ -15,7 +15,7 @@ class BonKeluarTableSeeder extends Seeder
     public function run()
     {
     $result = BonKeluar::create([
-            "kode" => "01/BP.IT/I/24",
+            "kode" => "02/BP.IT/I/24",
             "tanggal" => "2024-01-02",
             "bagian_id" => 39,
             "Penerima" => "Irfan"
@@ -32,15 +32,10 @@ class BonKeluarTableSeeder extends Seeder
                 "barang_id" => 2,
                 "jumlah" => 1,
                 "satuan" => "Unit",
-            ],
-            [
-                "barang_id" => 3,
-                "jumlah" => 1,
-                "satuan" => "Unit",
-            ],
+            ]
         ]);
 
-        $result = DetailBon::whereIn('id',[1,2,3])->get();
+        $result = DetailBon::whereIn('id',[4,5])->get();
 
         foreach($result as $val) {
             $val->stock()->create([

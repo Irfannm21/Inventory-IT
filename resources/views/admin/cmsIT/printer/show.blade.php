@@ -166,7 +166,7 @@
 
                                 <td>
                                     @can('perbaikan_create')
-                                    <a class="btn btn-xs btn-info" href="{{ route("it.printers.edit", $value->id)  }}">
+                                    <a class="btn btn-xs btn-info" href="{{ route("it.perbaikans.edit", $value->id)  }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                     @endcan

@@ -33,7 +33,9 @@
             <select name="bp" id="bp" class="form-control">
                 <option value="">-- Pilih --</option>
             @foreach ($BonKeluar as $item)
-                <option value="{{$item->kode}}">{{$item->kode}}</option>
+                @if(isset($result))
+                <option value="{{$item->kode}}" {{$item->kode == (old('departemen') ?? ($item->id ?? '') ?? isset($result->detail_bon->bon->kode)) ? 'selected' : '' }}>{{$item->kode}}</option>
+                @endif
             @endforeach
             </select>
         </div>
@@ -41,6 +43,14 @@
             <label for="barang_id">Nama Barang</label>
             <select name="barang_id" id="barang_id" class="form-control">
                 <option value="">-- Pilih --</option>
+                @if(isset($result))
+                @php
+                    $val = App\Models\StokSparepart\BonKeluar::where("kode",$result->detail_bon->bon->kode)->first();
+                @endphp
+                @foreach ($val->detail_bons as $item)
+                    <option value="{{$item->barang->id}}"{{$item->id == (old('departemen') ?? ($result->detail_id ?? '') ?? isset($result->detail_id)) ? 'selected' : '' }}>{{$item->barang->nama}}</option>
+                @endforeach
+                @endif
             </select>
         </div>
     </div>
@@ -113,10 +123,10 @@
     @if ($errors->has('petugas'))
         <em class="invalid-feedback">
             {{ $errors->first('petugas') }}
+        </em>
     @endif
-    </em>
-
 </div>
+
 @section('scripts')
     <script>
         $(document).ready(function() {

@@ -4,30 +4,34 @@ namespace App\Http\Controllers\Admin;
 
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreNppRequest;
-use App\Http\Requests\UpdateNppRequest;
-use App\Models\StokSparepart\npp;
-use App\Models\StokSparepart\detail_npp;
-// use App\Models\StokSparepart\bpb;
-use App\Models\StokSparepart\Detail_bpb;
-// use App\Models\StokSparepart\perbaikan;
 use App\Models\hrd\departemen;
 use App\Models\hrd\bagian_dept;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\StokSparepart\npp;
+use App\Http\Controllers\Controller;
+// use App\Models\StokSparepart\bpb;
+use Illuminate\Support\Facades\Auth;
+// use App\Models\StokSparepart\perbaikan;
+use App\Http\Requests\StoreNppRequest;
+use App\Http\Requests\UpdateNppRequest;
+use App\Models\StokSparepart\Detail_bpb;
+use App\Models\StokSparepart\detail_npp;
 
 
 class NppController extends Controller
 {
     public function index()
     {
-            $results = npp::orderBy('tanggal','DESC')->get( );
+            $dept = departemen::where('nama',Auth::user()->departemen)->first();
+            $dept = bagian_dept::where('departemen_id',$dept->id)->pluck('id');
+            $results = npp::whereIn('bagian_id',$dept)->orderBy('tanggal','DESC')->get( );
         return view('admin.npp.index', compact('results'));
     }
 
     public function create()
     {
-        $dept = departemen::all()->pluck('nama','id');
+        // dd(Auth::User()->departemen);
+        $dept = departemen::where('nama',Auth::User()->departemen)->pluck('nama','id');
         $bagian = bagian_dept::all()->pluck('nama','id');
         return view('admin.npp.create',compact('dept','bagian'));
     }
@@ -35,12 +39,6 @@ class NppController extends Controller
     public function show(Request $request, npp $npp) {
         // dd($request->all());
         dd($npp);
-        $npp->update([
-            'kode' => $request->kode,
-            'tanggal' => $request->tanggal,
-            'bagian_id' => $request->bagian,
-        ]);
-        return redirect()->route('admin.npps.index');
     }
 
     public function store(StoreNppRequest $request)

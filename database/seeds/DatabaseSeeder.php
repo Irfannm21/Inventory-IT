@@ -14,14 +14,14 @@ class DatabaseSeeder extends Seeder
             RoleUserTableSeeder::class,
             DepartementTableSeeder::class,
             BagianTableSeeder::class,
-            NppTableSeeder::class,
-            DetailNppTableSeeder::class,
-            SupplierTableSeeder::class,
-            BpbTableSeeder::class,
+            // NppTableSeeder::class,
+            // DetailNppTableSeeder::class,
+            // SupplierTableSeeder::class,
+            // BpbTableSeeder::class,
             // BonKeluarTableSeeder::class,
-            PrinterTableSeeder::class,
-            KomputerTableSeeder::class,
-            DaftarBarangJaringanTableSeeder::class,
+            // PrinterTableSeeder::class,
+            // KomputerTableSeeder::class,
+            // DaftarBarangJaringanTableSeeder::class,
         ]);
     }
 }

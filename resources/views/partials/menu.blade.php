@@ -91,7 +91,7 @@
                 {{-- End Karyawan Management --}}
                 @endcan
 
-                {{-- @can('it_access') --}}
+                @can('it_access')
 
                 {{-- IT Management --}}
                 <li class="nav-item nav-dropdown">
@@ -158,9 +158,9 @@
                             </li>
                         </ul>
                     </li>
-                    {{-- IT Management --}}
-                    {{-- @endcan --}}
+                    @endcan
 
+                    {{-- IT Management --}}
                 @can('npp_access')
                 <li class="nav-item nav-dropdown">
                     <a class="nav-link  nav-dropdown-toggle">
@@ -280,6 +280,7 @@
         {{-- END BPB MANAGEMENT --}}
     @endcan
 
+    @can("bpb_access")
     <li class="nav-item nav-dropdown">
         <a class="nav-link  nav-dropdown-toggle">
             <i class="fas fa-list nav-icon">
@@ -314,7 +315,9 @@
             </li> --}}
     </ul>
 </li>
+@endcan
 
+@can('inventory_sp')
         <li class="nav-item nav-dropdown">
             <a class="nav-link  nav-dropdown-toggle">
                 <i class="fas fa-list-alt nav-icon">
@@ -349,8 +352,8 @@
                 </li>
         </ul>
     </li>
-
-
+@endcan
+@can('pembayarans')
             <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                     <i class="fas fa-wallet nav-icon">
