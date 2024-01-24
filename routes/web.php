@@ -48,9 +48,9 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::get('npps/proses','NppController@diProses')->name('npps.proses');
     Route::get('npps/print','NppController@Print')->name('npps.print');
     Route::get('npps/bagian','NppController@Bagian')->name('npps.bagian');
+    Route::get('npps/detail','NppController@Detail')->name('npps.detail');;
     Route::resource('npps','NppController');
 
-    Route::resource('details','DetailNppController');
     Route::get('bpbs/print',"BpbController@Print")->name('bpbs.print');
     Route::get('/bpbs/administrasi','BpbController@administrasi')->name('bpbs.administrasi');
     Route::get('/bpbs/elektrik','BpbController@elektrik')->name('bpbs.elektrik');

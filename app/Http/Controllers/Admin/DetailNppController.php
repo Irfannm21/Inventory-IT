@@ -15,6 +15,7 @@ class DetailNppController extends Controller
 
     public function index()
     {
+
         $results = detail_npp::orderBY('created_at',"DESC")->get();
         return view('admin.detail_npp.index', compact('results'));
     }

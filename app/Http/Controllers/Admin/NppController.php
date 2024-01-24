@@ -24,7 +24,7 @@ class NppController extends Controller
     {
             $dept = departemen::where('nama',Auth::user()->departemen)->first();
             $dept = bagian_dept::where('departemen_id',$dept->id)->pluck('id');
-            $results = npp::whereIn('bagian_id',$dept)->orderBy('tanggal','DESC')->get( );
+            $results = npp::whereIn('bagian_id',$dept)->orderBy('tanggal','DESC')->get();
         return view('admin.npp.index', compact('results'));
     }
 
@@ -115,12 +115,20 @@ class NppController extends Controller
     }
 
     public function Detail(){
-        $results = detail_npp::orderBY('nama',"DESC")->get();
+
+        $dept = departemen::where('nama',Auth::user()->departemen)->first();
+        $dept = bagian_dept::where('departemen_id',$dept->id)->pluck('id');
+        $results = npp::whereIn('bagian_id',$dept)->orderBy('tanggal','DESC')->pluck('id');
+        $results = detail_npp::WhereIn('npp_id',$results)->orderBY('nama',"DESC")->get();
+
         return view('admin.npp.detail-npp', compact('results'));
     }
 
     public function diProses(){
-        $results = detail_npp::with('detail_bpbs')->orderBY('created_at',"DESC")->get();
+        $dept = departemen::where('nama',Auth::user()->departemen)->first();
+        $dept = bagian_dept::where('departemen_id',$dept->id)->pluck('id');
+        $results = npp::whereIn('bagian_id',$dept)->orderBy('tanggal','DESC')->pluck('id');
+        $results = detail_npp::WhereIn('npp_id',$results)->orderBY('nama',"DESC")->get();
         return view('admin.npp.npp-diProses', compact('results'));
     }
 

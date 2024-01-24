@@ -19,9 +19,10 @@
                     Send Email
                 </a>
             </li> --}}
-            @can('user_access')
 
             {{-- User Management --}}
+            @can('user_access')
+
             <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                     <i class="fas fa-user nav-icon">
@@ -180,7 +181,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="{{ route("admin.details.index") }}" class="nav-link {{ request()->is('admin/details') || request()->is('admin/details/*') ? 'active' : '' }}">
+                            <a href="{{ route("admin.npps.detail") }}" class="nav-link {{ request()->is('admin/details') || request()->is('admin/details/*') ? 'active' : '' }}">
                                 <i class="fas fa-file nav-icon">
 
                                 </i>
@@ -380,7 +381,7 @@
                     </li>
             </ul>
         </li>
-
+@endcan
             {{-- <li class="nav-item nav-dropdown">
                 <a class="nav-link  nav-dropdown-toggle">
                     <i class="fas fa-list nav-icon">
