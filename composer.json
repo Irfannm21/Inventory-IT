@@ -19,6 +19,7 @@
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "mtownsend/laravel-make-trait": "^1.5",
+        "realrashid/sweet-alert": "^7.1",
         "yajra/laravel-datatables-oracle": "~9.0"
     },
     "require-dev": {

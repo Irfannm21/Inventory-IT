@@ -1,5 +1,8 @@
     <?php
 
+
+
+
 Route::redirect('/', '/login');
 
 Route::redirect('/home', '/admin');
@@ -30,7 +33,6 @@ Route::group(['prefix' => 'cms-it', 'as' => 'it.', 'namespace' => 'CmsIT', 'midd
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'middleware' => ['auth']], function () {
 
-    Route::view('/swal-display','swal-display');
 
     // User Management
     Route::get('/', 'HomeController@index')->name('home');

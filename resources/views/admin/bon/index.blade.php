@@ -14,7 +14,17 @@
     <div class="card-header">
         {{ trans('global.product.title_singular') }} {{ trans('global.list') }}
     </div>
+    @if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+    @endif
 
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
     <div class="card-body bg-black">
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover datatable">

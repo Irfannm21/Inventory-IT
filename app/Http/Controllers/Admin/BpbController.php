@@ -39,7 +39,7 @@ class BpbController extends Controller
 
     public function store(StoreBpbRequest $request){
 
-        // dd($request->all());
+        dd($request->all());
         if($request->supplierID) {
             $supplier = supplier::find($request->supplierID);
         } else {
@@ -219,7 +219,8 @@ class BpbController extends Controller
 
     public function Print(request $request)
     {
-        $result = bpb::with('detail_bpbs','supplier')->where("kode",$request->bpb)->get();
+        // dd($request->all());
+        $result = bpb::with('detail_bpbs','supplier')->where("kode",$request->bpb)->first();
         // dd($result);
         $pdf = PDF::loadView('admin.bpb.print',['result' => $result])->setPaper('a5'.'potrait');
         return $pdf->stream();

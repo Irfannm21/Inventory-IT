@@ -1,4 +1,4 @@
-{{-- {{ dd($errors, $errors->first('kode')) }} --}}
+    {{-- {{ dd($errors, $errors->first('kode')) }} --}}
 
 <div class="row">
     <div class="col">
@@ -323,7 +323,7 @@
             <div class="form-group {{ $errors->has('jumlah') ? 'has-error' : '' }}">
                 <label for="">Jumlah</label>
                 <input type="number" name="jumlah[]" class="form-control"
-                    value="{{ old('jumlah', isset($bpb) ? $bpb->jumlah : '') }}">
+                    value="{{ old('jumlah', isset($bpb) ? $bpb->jumlah : '') }}" required>
                 @if ($errors->has('jumlah'))
                     <em class="invalid-feedback">
                         {{ $errors->first('jumlah') }}
@@ -334,7 +334,7 @@
         <div class="col-sm-12 col-md-3">
             <div class="form-group{ $errors->has('satuan') ? 'has-error' : '' }}">
                 <label for="">Satuan</label>
-                <select name="satuan[]" id="satuan" class="form-control">
+                <select name="satuan[]" id="satuan" class="form-control" required>
                     @if (!isset($bpb))
                         <option value="" selected>-- Pilih --</option>
                     @endif
@@ -399,7 +399,7 @@
             <div class="form-group {{ $errors->has('jumlah') ? 'has-error' : '' }}">
                 <label for="">Jumlah</label>
                 <input type="number" name="jumlah[]" class="form-control"
-                    value="{{ old('jumlah', isset($bpb) ? $bpb->jumlah : '') }}">
+                    value="{{ old('jumlah', isset($bpb) ? $bpb->jumlah : '') }}" required>
                 @if ($errors->has('jumlah'))
                     <em class="invalid-feedback">
                         {{ $errors->first('jumlah') }}
@@ -410,7 +410,7 @@
         <div class="col-sm-12 col-md-3">
             <div class="form-group{ $errors->has('satuan') ? 'has-error' : '' }}">
                 <label for="">Satuan</label>
-                <select name="satuan[]" id="satuan" class="form-control">
+                <select name="satuan[]" id="satuan" class="form-control" required>
                     @if (!isset($bpb))
                         <option value="" selected>-- Pilih --</option>
                     @endif

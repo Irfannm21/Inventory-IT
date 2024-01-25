@@ -165,7 +165,7 @@
             <div class="col-sm-12 col-md-4">
                 <div class="form-group">
                     <label for=""> Nama</label>
-                    <input type="text" id="" class="form-control" name="nama[]">
+                    <input type="text" id="" class="form-control" name="nama[]" required>
                     @if ($errors->has('nama'))
                         <em class="invalid-feedback">
                             {{ $errors->first('nama') }}
@@ -187,7 +187,7 @@
             <div class="col col-md-1">
                 <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
                     <label for=""> Jumlah</label>
-                    <input type="number" id="" class="form-control" name="jumlah[]">
+                    <input type="number" id="" class="form-control" name="jumlah[]" required>
                     @if ($errors->has('jumlah'))
                         <em class="invalid-feedback">
                             {{ $errors->first('jumlah') }}
@@ -198,7 +198,7 @@
             <div class="col col-md-1">
                 <div class="form-group {{ $errors->has('satuan[]') ? 'has-error' : '' }}">
                     <label for="">Satuan</label>
-                    <select name="satuan[]" class="form-control" id="">
+                    <select name="satuan[]" class="form-control" id="" required>
                         <option value="" selected>-- Pilih --</option>
                         <option value="Pcs" {{"Pcs" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pcs</option>
                         <option value="Unit" {{"Unit" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Unit</option>
@@ -218,7 +218,7 @@
         <div class="col-sm-12 col-md-5">
             <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
                 <label for="">Keterangan</label>
-                <input type="text" id="" class="form-control" name="keterangan[]">
+                <input type="text" id="" class="form-control" name="keterangan[]" required>
                 @if ($errors->has('keterangan'))
                     <em class="invalid-feedback">
                         {{ $errors->first('keterangan') }}
@@ -239,7 +239,7 @@
                         <label for=""> Nama</label>
                         <input type="text" class="form-control" name="id[]" value="{{null}}" hidden>
 
-                        <input type="text" class="form-control" name="nama[]">
+                        <input type="text" class="form-control" name="nama[]" required>
                         @if ($errors->has('nama'))
                             <em class="invalid-feedback">
                                 {{ $errors->first('nama') }}
@@ -261,7 +261,7 @@
                 <div class="col col-md-1">
                     <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
                         <label for=""> Jumlah</label>
-                        <input type="number" id="" class="form-control" name="jumlah[]">
+                        <input type="number" id="" class="form-control" name="jumlah[]" required>
                         @if ($errors->has('jumlah'))
                             <em class="invalid-feedback">
                                 {{ $errors->first('jumlah') }}
@@ -272,7 +272,7 @@
                 <div class="col col-md-1">
                     <div class="form-group {{ $errors->has('satuan[]') ? 'has-error' : '' }}">
                         <label for="">Satuan</label>
-                        <select name="satuan[]" class="form-control" id="">
+                        <select name="satuan[]" class="form-control" id="" required>
                             <option value="" selected>-- Pilih --</option>
                             <option value="Pcs" {{"Pcs" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Pcs</option>
                             <option value="Unit" {{"Unit" == (old('satuan') ?? ($item->satuan ?? '') ?? isset($item->satuan)) ? 'selected' : '' }}>Unit</option>

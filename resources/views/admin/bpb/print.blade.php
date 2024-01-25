@@ -1,63 +1,109 @@
-<?php
-// dd($result->all());
-//   foreach ($result as $key => $value) {
-//     echo $value->supplier->nama;
-//   }
-//   die();
-?>
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cetak BPB</title>
-    <link href="{{ asset('/css/app.css')}} " rel="stylesheet">
-
+    <title>Print</title>
 </head>
-  <body>
-      <table>
-        @foreach ($result as $item)
-        <tr>
-            <td>
-                {{$item->supplier->nama}}
-            </td>
-            <td>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$item->kode}}
-            </td>
-        </tr>
-        <tr>
-          <td>
-            {{$item->supplier->kota}}
-          </td>
-          <td>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{$item->tanggal}}
-          </td>
-        </tr>
-        @endforeach
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-          <tr>
-            <td>
-             Nomor NPP : {{$item->npp->kode}}
-            </td>
-          </tr>
-          @foreach ($item->detail_bpbs as $item)
+
+<style>
+    .header {
+        margin-top: 25px;
+        margin-left: 85px;
+        margin-bottom: 50px;
+    }
+
+    .header > table > tr {
+        margin-block-end: 0em;
+    }
+
+    .val:nth-child(1) {
+        width: 350px !important;
+    }
+
+    .val:nth-child(2) {
+        padding-left: 10px;
+        width: 50px;
+    }
+
+    .val:nth-child(3) {
+        padding-left: 10px;
+        width: 50px;
+    }
+
+    .val:nth-child(4) {
+        padding-left: 20px;
+        width: 250px;
+    }
+    #footer{
+        position: absolute;
+        bottom: 180px;
+    }
+
+
+@page {size:21cm 21cm;}
+</style>
+<body>
+    <div class="header">
+        <table>
             <tr>
-              <td>
-                {{$loop->iteration .". ". $item->detail_npp->nama}}
-              </td>
-              <td>
-                {{$item->stock->jumlah . " " .$item->stock->satuan ?? "Kosong"}}
-              </td>
-              <td>
-                {{$item->detail_npp->keterangan}}
-              </td>
+                <td>
+                    <b>
+                        {{$result->supplier->nama}}
+                    </b>
+                </td>
+                <td>
+                    <b>
+                        {{$result->kode}}
+                    </b>
+                </td>
             </tr>
-          @endforeach
-    </table>
-    <script src="{{asset('/js/app.js')}}"></script>
-  </body>
+            <tr>
+                <td>
+                    {{$result->supplier->kota}}
+                </td>
+                <b>
+                    {{$result->tanggal}}
+                </b>
+            </tr>
+        </table>
+    </div>
+    <div id="content">
+       <b><span>NPP : {{$result->npp->kode}}</span></b>
+        <table>
+            @foreach ($result->detail_bpbs as $item)
+                <tr>
+                    <td>
+                        {{$loop->iteration}}.
+                    </td>
+                    <td>
+                        {{$item->detail_npp->nama}}
+                    </td>
+                    <td>
+                        {{$item->jumlah}}
+                    </td>
+                    <td>
+                        {{$item->stock->satuan}}
+                    </td>
+                    <td>
+                        {{$item->detail_npp->keterangan}}
+                    </td>
+
+                </tr>
+            @endforeach
+        </table>
+    </div>
+
+    <div id="footer">
+        <table>
+            <tr>
+
+            </tr>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
+    </script>
+</body>
 </html>
