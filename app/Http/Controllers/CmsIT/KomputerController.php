@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\CmsIT;
 
+use App\Models\it\komputer;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
+
 use App\Http\Requests\KomputerStoreUpdateRequest;
 use App\Http\Requests\MassDestroyKomputerRequest;
-use Illuminate\Http\Request;
-
-use App\Models\it\komputer;
 
 class KomputerController extends Controller
 {
@@ -32,6 +33,7 @@ class KomputerController extends Controller
     {
         // dd($request->all());
         $result = Komputer::create($request->all());
+        Alert::alert()->success('Berhasil',"Data Berhasil disimpan");
         return redirect()->route('it.komputers.index');
     }
 
@@ -45,12 +47,14 @@ class KomputerController extends Controller
     {
         abort_unless(\Gate::allows('komputer_edit'), 403);
         $komputer->update($request->all());
+        Alert::alert()->success('Berhasil',"Data Berhasil Diubah");
         return redirect()->route('it.komputers.index');
     }
 
     public function destroy(Komputer $komputer)
     {
         abort_unless(\Gate::allows('komputer_delete'), 403);
+        Alert::alert()->success('Berhasil',"Data Berhasil Dihapus");
         $komputer->delete();
         return back();
     }

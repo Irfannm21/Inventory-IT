@@ -2,21 +2,22 @@
 
 namespace App\Http\Controllers\CmsIT;
 
+use Carbon\Carbon;
+use App\Models\it\klien;
+use App\Models\it\printer;
+use Carbon\CarbonInterval;
+
+use App\Models\it\komputer;
+use App\Models\it\Perbaikan;
+use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
+use App\Models\it\TableBarangJaringan;
+use App\Models\StokSparepart\BonKeluar;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Requests\StorePerbaikanRequest;
 use App\Http\Requests\UpdatePerbaikanRequest;
 use App\Http\Requests\MassDestroyPerbaikanRequest;
-
-use Illuminate\Http\Request;
-use App\Models\it\Perbaikan;
-use App\Models\it\printer;
-use App\Models\it\komputer;
-use App\Models\it\klien;
-use App\Models\it\TableBarangJaringan;
-use App\Models\StokSparepart\BonKeluar;
-use Carbon\Carbon;
-use Carbon\CarbonInterval;
-use Barryvdh\DomPDF\Facade\Pdf;
 
 class PerbaikanController extends Controller
 {
@@ -81,6 +82,7 @@ class PerbaikanController extends Controller
         // dd($perbaikan);
         $result->perbaikans()->save($perbaikan);
 
+        Alert::alert()->success('Berhasil',"Data Berhasil disimpan");
         return redirect()->route('it.perbaikans.index');
     }
 
@@ -128,7 +130,7 @@ class PerbaikanController extends Controller
 
         ]);
 
-
+        Alert::alert()->success('Berhasil',"Data Berhasil Diubah");
         return redirect()->route('it.perbaikans.index');
     }
 

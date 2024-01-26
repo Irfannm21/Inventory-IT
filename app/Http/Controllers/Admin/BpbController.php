@@ -2,23 +2,25 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreBpbRequest;
-use App\Http\Requests\UpdateBpbRequest;
-
+use Faker\Factory as Faker;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+
+use App\Models\StokSparepart\bpb;
 
 use App\Models\StokSparepart\npp;
-use App\Models\StokSparepart\detail_npp;
-use App\Models\StokSparepart\bpb;
-use App\Models\StokSparepart\Detail_bpb;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreBpbRequest;
 use App\Models\StokSparepart\supplier;
+use App\Http\Requests\UpdateBpbRequest;
+use App\Models\StokSparepart\Detail_bpb;
+use App\Models\StokSparepart\detail_npp;
+
+use RealRashid\SweetAlert\Facades\Alert;
+
 use App\Models\StokSparepart\DaftarBarang;
 use App\Models\StokSparepart\StockSparepart;
 
-use Barryvdh\DomPDF\Facade\Pdf;
-
-use Faker\Factory as Faker;
 class BpbController extends Controller
 {
     public function index()
@@ -39,7 +41,7 @@ class BpbController extends Controller
 
     public function store(StoreBpbRequest $request){
 
-        dd($request->all());
+        // dd($request->all());
         if($request->supplierID) {
             $supplier = supplier::find($request->supplierID);
         } else {
@@ -100,7 +102,7 @@ class BpbController extends Controller
                 ]);
             }
         }
-
+        Alert::alert()->success('Berhasil','Data Berhasil Disimpan');
         return redirect()->route("admin.bpbs.".strtolower($request->kelompok));
     }
 
@@ -201,7 +203,7 @@ class BpbController extends Controller
             $result->stock()->updateOrCreate(["id" => $result->stock->id],$stock );
         }
 
-
+        Alert::alert()->success('Berhasil','Data Berhasil Diubah');
         return redirect()->route("admin.bpbs.".strtolower($request->kelompok));
 
     }
@@ -210,6 +212,7 @@ class BpbController extends Controller
         $result = bpb::findOrFail($id);
         $result->detail_bpbs()->delete();
         $result->delete();
+        Alert::alert()->success('Berhasil','Data Berhasil Dihapus');
         return back();
     }
 

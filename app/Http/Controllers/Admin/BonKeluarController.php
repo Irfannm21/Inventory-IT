@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Http\Request;
+use App\Models\hrd\departemen;
+use App\Models\hrd\bagian_dept;
 use App\Http\Controllers\Controller;
 use App\Models\StokSparepart\BonKeluar;
 use App\Models\StokSparepart\DetailBon;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\StokSparepart\DaftarBarang;
-use App\Models\hrd\bagian_dept;
-use App\Models\hrd\departemen;
-use Illuminate\Http\Request;
 
 class BonKeluarController extends Controller
 {
@@ -60,7 +61,7 @@ class BonKeluarController extends Controller
                 'barang_id' => $request->barang[$i] ?? '',
                 'jumlah' => $request->jumlah[$i] ?? '',
                 'satuan' => $request->satuan[$i] ?? '',
-                'keterangan' => $request->keeterangan[$i] ?? '',
+                'keterangan' => $request->keterangan[$i] ?? '',
             ];
         }
 
@@ -74,7 +75,7 @@ class BonKeluarController extends Controller
                 "satuan"    => $item->satuan,
             ]);
         }
-
+        Alert::alert()->success('Berhasil','Data Berhasil Disimpan');
         return redirect()->route('admin.bons.index');
     }
 
@@ -152,6 +153,8 @@ class BonKeluarController extends Controller
             $d_bon = $result->detail_bons()->updateOrCreate(["id" => $id],$value);
             $d_bon->stock()->updateOrCreate(["id" => $d_bon->stock->id],$stok);
         }
+
+        Alert::alert()->success('Berhasil','Data Berhasil Diubah');
         return redirect()->route('admin.bons.index');
     }
 
@@ -161,9 +164,13 @@ class BonKeluarController extends Controller
      * @param  \App\BonKeluar  $BonKeluar
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BonKeluar $BonKeluar)
+    public function destroy(BonKeluar $BonKeluar,$id)
     {
-        //
+         $result = BonKeluar::findOrFail($id);
+        $result->detail_bons()->delete();
+        $result->delete();
+        Alert::alert()->success('Berhasil','Data Berhasil Dihapus');
+        return back();
     }
 
     public function detail()

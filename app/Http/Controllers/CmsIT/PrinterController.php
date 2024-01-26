@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\CmsIT;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\PrinterStoreUpdateRequest;
+use App\Models\it\printer;
+use App\Models\it\Perbaikan;
 use Illuminate\Http\Request;
 
 
-use App\Models\it\printer;
-use App\Models\it\Perbaikan;
+use App\Http\Controllers\Controller;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\Http\Requests\PrinterStoreUpdateRequest;
 
 class PrinterController extends Controller
 {
@@ -35,7 +36,8 @@ class PrinterController extends Controller
     // dd($request->all());
     // $record->save($request->all());
         printer::create($request->all());
-        return redirect()->route('it.printers.index')->with('success','Data Printer Berhasil ditambahkan.');
+        Alert::alert()->success('Berhasil',"Data Berhasil disimpan");
+        return redirect()->route('it.printers.index');
    }
 
    public function edit(printer $printer)
@@ -48,12 +50,14 @@ class PrinterController extends Controller
    public function update(Request $request, printer $printer)
    {
         abort_unless(\Gate::allows('product_edit'), 403);
+        Alert::alert()->success('Berhasil',"Data Berhasil Diubah");
         return $printer->handleStoreOrUpdate($request);
    }
 
    public function destroy(printer $printer)
    {
         abort_unless(\Gate::allows('printer_delete'), 403);
+        Alert::alert()->success('Berhasil',"Data Berhasil Dihapus");
         return $printer->handleDestroy();
    }
 

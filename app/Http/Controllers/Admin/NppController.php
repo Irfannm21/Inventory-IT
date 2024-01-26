@@ -73,7 +73,7 @@ class NppController extends Controller
     }
         $npp->details()->createMany($detail);
         $npp->load('details');
-        Alert::alert()->success('Selamat!','Input Data Berhasil');
+        Alert::alert()->success('Berhasil','Data berhasil disimpan');
 
         return redirect()->route('admin.npps.index');
     }
