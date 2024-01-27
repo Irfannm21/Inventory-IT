@@ -7,40 +7,48 @@
 </head>
 
 <style>
-    .header {
-        margin-top: 25px;
-        margin-left: 85px;
-        margin-bottom: 50px;
-    }
+body {
+    background-color: pink;
+    margin: 0px;
+}
+.header  {
+    background-color: red;
+    font-style: bold;
+    margin-bottom: 100px;
+    margin-left: 20px;
+}
 
-    .header > table > tr {
-        margin-block-end: 0em;
-    }
+.header td {
+    background-color: yellow;
+    width: 300px;
+    padding: 10px;
 
-    .val:nth-child(1) {
-        width: 350px !important;
-    }
+}
 
-    .val:nth-child(2) {
-        padding-left: 10px;
-        width: 50px;
-    }
+.content {
+    background-color: red;
+    margin-left: 0px
 
-    .val:nth-child(3) {
-        padding-left: 10px;
-        width: 50px;
-    }
+}
 
-    .val:nth-child(4) {
-        padding-left: 20px;
-        width: 250px;
-    }
-    #footer{
-        position: absolute;
-        bottom: 180px;
-    }
+.content td {
+    background-color: yellow;
+    width: 100px;
+}
 
+.content td:first-child {
+    width: 10px
+}
 
+.content td:nth-child(2) {
+    background-color: aqua;
+    width: 260px;
+}
+
+.content td:nth-child(3),td:nth-child(3) {
+    background-color: aqua;
+    width: 40px;
+}
 @page {size:21cm 21cm;}
 </style>
 <body>
@@ -48,27 +56,25 @@
         <table>
             <tr>
                 <td>
-                    <b>
-                        {{$result->supplier->nama}}
-                    </b>
+                    {{$result->supplier->nama}}
                 </td>
                 <td>
-                    <b>
-                        {{$result->kode}}
-                    </b>
+                    {{$result->supplier->kota}}
                 </td>
             </tr>
             <tr>
                 <td>
-                    {{$result->supplier->kota}}
+                    {{$result->kode}}
                 </td>
-                <b>
+                <td>
                     {{$result->tanggal}}
-                </b>
+                </td>
             </tr>
         </table>
     </div>
-    <div id="content">
+
+
+    <div class="content">
        <b><span>NPP : {{$result->npp->kode}}</span></b>
         <table>
             @foreach ($result->detail_bpbs as $item)
@@ -93,14 +99,16 @@
             @endforeach
         </table>
     </div>
-
+{{--
     <div id="footer">
         <table>
             <tr>
+                <td>
 
+                </td>
             </tr>
         </table>
-    </div>
+    </div> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous">
