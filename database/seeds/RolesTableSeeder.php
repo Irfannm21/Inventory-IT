@@ -27,7 +27,15 @@ class RolesTableSeeder extends Seeder
                 'created_at' => '2019-04-15 19:13:32',
                 'updated_at' => '2019-04-15 19:13:32',
                 'deleted_at' => null,
-            ]];
+            ],
+            [
+                'id'         => 4,
+                'title'      => 'Inventory Sparepart',
+                'created_at' => '2019-04-15 19:13:32',
+                'updated_at' => '2019-04-15 19:13:32',
+                'deleted_at' => null,
+            ]
+        ];
 
         Role::insert($roles);
     }

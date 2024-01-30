@@ -25,7 +25,7 @@
 
     .val:nth-child(3) {
         padding-left: 10px;
-        width: 50px;
+        width: 100px;
     }
 
     .val:nth-child(4) {
@@ -92,14 +92,74 @@
         <table>
             <tr>
                 <td style="width:140px">
-                    Yudi Hadiandi
+                    
                 </td>
                 <td style="width:140px">
-                    Rikrik Gumilar
+                    <?php 
+                    switch ($result->bagian->departemen->nama) {
+                        case 'Engineering':
+                            echo "Enjang H.R";
+                            break;
+                        case 'Marketing':
+                            echo "Alvons";
+                            break;
+                        case 'Accounting':
+                            echo "Lanawati";
+                            break;
+                        case 'Logistics':
+                            echo "Dani";
+                            break;
+                        case 'Umum dan Personalia':
+                            echo "Rikrik Gumilar";
+                            break;
+                        case 'Weaving':
+                            echo "Dewie M";
+                            break;
+                        case 'Spinning':
+                            echo "E.Fauzi F";
+                            break;
+                        case 'Dyeing Finishing':
+                            echo "Euis S";
+                            break;
+                        default:
+                            echo "";
+                            break;
+                    }
+                    ?>
                 </td>
 
                 <td style="width:140px">
-                    The Pek Kiong
+                    <?php 
+                    switch ($result->bagian->departemen->nama) {
+                        case 'Engineering':
+                            echo "The Pek Kiong";
+                            break;
+                        case 'Marketing':
+                            echo "Fitria W";
+                            break;
+                        case 'Accounting':
+                            echo "The Pek Kiong";
+                            break;
+                        case 'Logistics':
+                            echo "The Pek Kiong";
+                            break;
+                        case 'Umum dan Personalia':
+                            echo "The Pek Kiong";
+                            break;
+                        case 'Weaving':
+                            echo "Alvi TW";
+                            break;
+                        case 'Spinning':
+                            echo "The Pek Kiong";
+                            break;
+                        case 'Dyeing Finishing':
+                            echo "Alvi TW";
+                            break;
+                        default:
+                            echo "";
+                            break;
+                    }
+                    ?>
                 </td>
 
                 <td style="width:140px">

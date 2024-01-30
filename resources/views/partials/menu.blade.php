@@ -92,7 +92,7 @@
                 {{-- End Karyawan Management --}}
                 @endcan
 
-                @can('it_access')
+                @can('perbaikan_access')
 
                 {{-- IT Management --}}
                 <li class="nav-item nav-dropdown">
@@ -318,7 +318,7 @@
 </li>
 @endcan
 
-@can('inventory_sp')
+@can('bpb_access')
         <li class="nav-item nav-dropdown">
             <a class="nav-link  nav-dropdown-toggle">
                 <i class="fas fa-list-alt nav-icon">

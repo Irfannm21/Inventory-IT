@@ -16,6 +16,7 @@ class CreateBagianDeptsTable extends Migration
         Schema::create('bagian_depts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('nama');
+            $table->string('kabag')->nullable();
             $table->unsignedBigInteger('departemen_id')->constrained()->onDelete('cascade');
             $table->timestamps();
 

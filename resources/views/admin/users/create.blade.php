@@ -45,6 +45,30 @@
                     {{ trans('global.user.fields.password_helper') }}
                 </p>
             </div>
+
+            <div class="form-group {{ $errors->has('departemen') ? 'has-error' : '' }}">
+                <label for="roles">{{ trans('Departemen') }} </label>
+                <select name="departemen" id="departemen" class="form-control">
+                    <option value="" selected>-- Pilih --</option>
+                   <option value="Engineering"{{ old('departemen', isset($user) ? $user->departemen : '') }}>Engineering</option>
+                   <option value="Weaving"{{ old('departemen', isset($user) ? $user->departemen : '') }}>Weaving</option>
+                   <option value="Dyeing Finishing"{{ old('departemen', isset($user) ? $user->departemen : '') }}> Dyeing Finishing</option>
+                   <option value="Marketing"{{ old('departemen', isset($user) ? $user->departemen : '') }}>Marketing</option>
+                   <option value="Umum dan Personalia"{{ old('departemen', isset($user) ? $user->departemen : '') }}>Umum dan Personalia</option>
+                   <option value="Accounting"{{ old('departemen', isset($user) ? $user->departemen : '') }}>Accounting</option>
+                   <option value="Logistik"{{ old('departemen', isset($user) ? $user->departemen : '') }}>Logistik</option>
+                   
+                </select>
+                @if($errors->has('roles'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('roles') }}
+                    </em>
+                @endif
+                <p class="helper-block">
+                    {{ trans('global.user.fields.roles_helper') }}
+                </p>
+            </div>
+
             <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
                 <label for="roles">{{ trans('global.user.fields.roles') }}*
                     <span class="btn btn-info btn-xs select-all">Select all</span>
@@ -65,6 +89,7 @@
                     {{ trans('global.user.fields.roles_helper') }}
                 </p>
             </div>
+
             <div>
                 <input class="btn btn-success" type="submit" value="{{ trans('global.save') }}">
             </div>

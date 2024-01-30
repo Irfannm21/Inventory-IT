@@ -26,12 +26,12 @@ class DaftarBarangController extends Controller
     }
 
     public function create(){
-        return view('admin.daftar_barangn.create');
+        return view('admin.daftar_barang.create');
     }
 
     public function store(StoreBarangRequest $request){
         DaftarBarang::create($request->all());
-        return view('admin.inventori_sparepart.index');
+        return redirect()->route('admin.daftar_barangs.index');;
     }
 
     public function show(Request $request, DaftarBarang $barang){

@@ -31,7 +31,7 @@ class DepartementTableSeeder extends Seeder
              ],
              [
                 "id" => "5",
-                "nama" => "Umpers dan Personalia",
+                "nama" => "Umum dan Personalia",
              ],
              [
                 "id" => "6",

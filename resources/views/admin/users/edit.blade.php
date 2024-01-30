@@ -46,6 +46,31 @@
                     {{ trans('global.user.fields.password_helper') }}
                 </p>
             </div>
+
+            <div class="form-group {{ $errors->has('departemen') ? 'has-error' : '' }}">
+                <label for="roles">{{ trans('Departemen') }} </label>
+                <select name="departemen" id="departemen" class="form-control">
+                    <option value="" selected>-- Pilih --</option>
+                    <option value="Insan"{{"Insan" == (old('departemen') ?? ($user->departemen ?? '') ?? isset($user->departemen)) ? 'selected' : '' }}>Access All Departemen</option>
+                   <option value="Engineering"{{"Engineering" == (old('departemen') ?? ($user->departemen ?? '') ?? isset($user->departemen)) ? 'selected' : '' }}>Engineering</option>
+                   <option value="Weaving"{{"Weaving" == (old('departemen') ?? ($user->departemen ?? '') ?? isset($user->departemen)) ? 'selected' : '' }}>Weaving</option>
+                   <option value="Dyeing Finishing"{{"Dyeing Finishing" == (old('departemen') ?? ($user->departemen ?? '') ?? isset($user->departemen)) ? 'selected' : '' }}> Dyeing Finishing</option>
+                   <option value="Marketing"{{"Marketing" == (old('departemen') ?? ($user->departemen ?? '') ?? isset($user->departemen)) ? 'selected' : '' }}>Marketing</option>
+                   <option value="Umum dan Personalia" {{"Umum dan Personalia" == (old('    ') ?? ($user->departemen ?? '') ?? isset($user->departemen)) ? 'selected' : '' }}>Umum dan Personalia</option>
+                   <option value="Accounting"{{"Accounting" == (old('departemen') ?? ($user->departemen ?? '') ?? isset($user->departemen)) ? 'selected' : '' }}>Accounting</option>
+                   <option value="Logistik"{{"Logistik" == (old('departemen') ?? ($user->departemen ?? '') ?? isset($user->departemen)) ? 'selected' : '' }}>Logistik</option>
+                   
+                </select>
+                @if($errors->has('roles'))
+                    <em class="invalid-feedback">
+                        {{ $errors->first('roles') }}
+                    </em>
+                @endif
+                <p class="helper-block">
+                    {{ trans('global.user.fields.roles_helper') }}
+                </p>
+            </div>
+
             <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
                 <label for="roles">{{ trans('global.user.fields.roles') }}*
                     <span class="btn btn-info btn-xs select-all">Select all</span>

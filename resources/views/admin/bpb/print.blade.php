@@ -8,31 +8,31 @@
 
 <style>
 body {
-    background-color: pink;
+    /* background-color: pink; */
     margin: 0px;
 }
 .header  {
-    background-color: red;
+    /* background-color: red; */
     font-style: bold;
     margin-bottom: 100px;
     margin-left: 20px;
 }
 
 .header td {
-    background-color: yellow;
+    /* background-color: yellow; */
     width: 300px;
     padding: 10px;
 
 }
 
 .content {
-    background-color: red;
+    /* background-color: red; */
     margin-left: 0px
 
 }
 
 .content td {
-    background-color: yellow;
+    /* background-color: yellow; */
     width: 100px;
 }
 
@@ -41,12 +41,12 @@ body {
 }
 
 .content td:nth-child(2) {
-    background-color: aqua;
+    /* background-color: aqua; */
     width: 260px;
 }
 
 .content td:nth-child(3),td:nth-child(3) {
-    background-color: aqua;
+    /* background-color: aqua; */
     width: 40px;
 }
 @page {size:21cm 21cm;}

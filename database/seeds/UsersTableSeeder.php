@@ -74,6 +74,17 @@ class UsersTableSeeder extends Seeder
             'updated_at'     => '2019-04-15 19:13:32',
             'deleted_at'     => null,
         ],
+        [
+            'id'             => 7,
+            'name'           => 'Hendri',
+            'departemen'         => "Logistics",
+            'email'          => 'Logistics@insansandang.com',
+            'password'       => bcrypt("Insan2021"),
+            'remember_token' => null,
+            'created_at'     => '2019-04-15 19:13:32',
+            'updated_at'     => '2019-04-15 19:13:32',
+            'deleted_at'     => null,
+        ],
 
     ];
 

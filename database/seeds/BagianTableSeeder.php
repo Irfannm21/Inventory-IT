@@ -139,7 +139,7 @@ class BagianTableSeeder extends Seeder
     ]);
 
 
-    $per = departemen::where('nama','Umpers, Public & Human Resource')->first();
+    $per = departemen::where('nama','Umum dan Personalia')->first();
 
     $per->bagians()->createMany([
         [

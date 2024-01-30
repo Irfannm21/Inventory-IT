@@ -215,6 +215,12 @@ class PermissionsTableSeeder extends Seeder
             ],
             [
 
+                'title'      => 'bpb_delete',
+                'created_at' => '2019-04-15 19:14:42',
+                'updated_at' => '2019-04-15 19:14:42',
+            ],
+            [
+
                 'title'      => 'detail_bpb_access',
                 'created_at' => '2019-04-15 19:14:42',
                 'updated_at' => '2019-04-15 19:14:42',
