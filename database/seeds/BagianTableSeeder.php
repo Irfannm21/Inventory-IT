@@ -9,6 +9,43 @@ class BagianTableSeeder extends Seeder
 
     public function run()
     {
+        $eng = departemen::where('nama','Engineering')->first();
+
+        $eng->bagians()->createMany([
+            [
+                "nama" => "Proyek Engineering"
+            ],
+            [
+
+                "nama" => "Listrik DF"
+            ],
+            [
+
+                "nama" => "WWT-LAB"
+            ],
+            [
+
+                "nama" => "Administrasi"
+            ],
+            [
+
+                "nama" => "Utility"
+            ],
+
+            [
+
+                "nama" => "Listrik WV"
+            ],
+            [
+
+                "nama" => "Workshop"
+            ],
+            [
+
+                "nama" => "WT / WWT"
+            ]
+        ]);
+
         $logistik = departemen::where('nama','Logistics')->first();
 
         $logistik->bagians()->createMany([
@@ -36,31 +73,6 @@ class BagianTableSeeder extends Seeder
         ]
             );
 
-            $eng = departemen::where('nama','Engineering')->first();
-
-            $eng->bagians()->createMany([
-                [
-
-                    "nama" => "Administrasi"
-                ],
-                [
-
-                    "nama" => "Boiler"
-                ],
-
-                [
-
-                    "nama" => "Listrik"
-                ],
-                [
-
-                    "nama" => "Workshop"
-                ],
-                [
-
-                    "nama" => "WT / WWT"
-                ]
-            ]);
 
             $acc = departemen::where('nama','Accounting')->first();
 
