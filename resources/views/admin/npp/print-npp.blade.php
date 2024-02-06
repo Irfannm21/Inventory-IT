@@ -8,40 +8,73 @@
 </head>
 
 <style>
-    .header {
-        margin-top: 25px;
-        margin-left: 85px;
+    body {
+        font-size: 12px;
+    }
+    #header {
+        margin-top: 20px;
+        margin-left: 80px;
         margin-bottom: 50px;
     }
 
-    .val:nth-child(1) {
-        width: 350px !important;
+    #header table{
+       /* border : solid black; */
+       padding: 0px;
+       border-spacing: 10px;
     }
 
-    .val:nth-child(2) {
-        padding-left: 10px;
-        width: 50px;
+    #content{
+        margin-left: 5px;
+        /* background-color: red; */
     }
 
-    .val:nth-child(3) {
-        padding-left: 10px;
-        width: 100px;
+    #content table tr td {
+        vertical-align: top;
+        text-align: left;
     }
 
-    .val:nth-child(4) {
-        padding-left: 20px;
-        width: 250px;
-    }
-    #footer{
-        position: absolute;
-        bottom: 180px;
+    #content table tr td:nth-child(1) {
+        /* background-color: yellow; */
+        width: 310px;
+       
     }
 
+    #content table tr td:nth-child(2) {
+        /* background-color: pink; */
+        width: 60px;
+    }
 
-@page {size:21cm 21cm;}
+    #content table tr td:nth-child(3) {
+        /* background-color: pink; */
+        width: 60px;
+        text-align: center;
+    }
+
+    #content table tr td:nth-child(4) {
+        /* background-color: pink; */
+        padding-left: 50px;
+        width: 220px;
+    }
+
+    #footer {
+        position: relative;
+        /* border: solid black; */
+        top: 195px;
+        width: 700px
+    }
+
+    #footer table {
+        border-spacing: 20px;
+    }
+
+    #footer table tr td {
+        width: 120px;
+        /* border: solid red; */
+    }
+
 </style>
 <body>
-    <div class="header">
+    <div id="header">
         <table>
             <tr>
                 <td>
@@ -60,51 +93,73 @@
             </tr>
         </table>
     </div>
+
     <div id="content">
         <table>
             @foreach ($result->details as $item)
             <tr>
-                <td class="val">
+                <td>
                     {{ $loop->iteration }}. {{ $item->nama }}
                 </td>
-                <td class="val">
+                <td>
                     @php
-                        if($item->stok >= 0) {
-
-                        } else {
-                            echo $item->stok;
-                        }
+                     if($item->stok < 1) {
+                        echo "-";
+                     } else {
+                        echo $item->stok . " Unit";
+                     }
                     @endphp
                 </td>
-                <td class="val">
+                <td>
                     {{ $item->jumlah . ' ' . $item->satuan }}
                 </td>
-                <td class="val">
+                <td>
                     {{ $item->keterangan }}
                 </td>
             </tr>
         @endforeach
-
         </table>
     </div>
 
     <div id="footer">
         <table>
             <tr>
-                <td style="width:140px">
-                    
-                </td>
-                <td style="width:140px">
-                    <?php 
-                    switch ($result->bagian->departemen->nama) {
-                        case 'Engineering':
-                            echo "Enjang H.R";
+                <td>
+                    <?php
+                    switch ($result->bagian->nama) {
+                        case 'IT':
+                            echo "Yudi Hadiandi";
                             break;
+                            case 'Utility':
+                            echo "Teguh W";
+                            break;
+                            case 'IT':
+                            echo "Yudi Hadiandi";
+                            break;
+                            case 'IT':
+                            echo "Yudi Hadiandi";
+                            break;
+                            case 'IT':
+                            echo "Yudi Hadiandi";
+                            break;
+                            case 'IT':
+                            echo "Yudi Hadiandi";
+                            break;
+                            
+                        default:
+                            echo "";
+                            break;
+                    }
+                    // ?>
+                </td>
+                <td>
+                    <?php
+                    switch ($result->bagian->departemen->nama) {
                         case 'Marketing':
-                            echo "Alvons";
+                            echo "Alvons Gunawan";
                             break;
                         case 'Accounting':
-                            echo "Lanawati";
+                            echo "Rinawati Gunawan";
                             break;
                         case 'Logistics':
                             echo "Dani";
@@ -113,23 +168,23 @@
                             echo "Rikrik Gumilar";
                             break;
                         case 'Weaving':
-                            echo "Dewie M";
+                            echo "Dewie Murni";
                             break;
                         case 'Spinning':
-                            echo "E.Fauzi F";
+                            echo "E.Fauzi Fattah";
                             break;
                         case 'Dyeing Finishing':
-                            echo "Euis S";
+                            echo "Euis Sahidah";
                             break;
                         default:
                             echo "";
                             break;
                     }
-                    ?>
+                    // ?>
                 </td>
 
-                <td style="width:140px">
-                    <?php 
+                <td>
+                    <?php
                     switch ($result->bagian->departemen->nama) {
                         case 'Engineering':
                             echo "The Pek Kiong";
@@ -162,11 +217,11 @@
                     ?>
                 </td>
 
-                <td style="width:140px">
+                <td>
                     Hanning Yanwar
                 </td>
 
-                <td style="width:140px">
+                <td>
                     Dani
                 </td>
             </tr>
