@@ -57,9 +57,9 @@
     }
 
     #footer {
-        position: relative;
+        position: absolute;
         /* border: solid black; */
-        top: 195px;
+        top: 480px;
         width: 700px
     }
 
