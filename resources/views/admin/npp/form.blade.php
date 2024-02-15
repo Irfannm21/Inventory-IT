@@ -86,7 +86,7 @@
 <div class="card p-2" id="detailTBody">
     <div class="card-title">
         <div class="row">
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-lg-4">
                 <div class="form-group">
                     <label for=""> Nama</label>
                     <input type="text" id="" class="form-control" name="id[]" value="{{old('nama') ?? ($item->id ?? '') ?? isset($item->id)}}" hidden>
@@ -99,7 +99,7 @@
                     @endif
                 </div>
             </div>
-            <div class="col col-md-1">
+            <div class="col">
                 <div class="form-group {{ $errors->has('stok[]') ? 'has-error' : '' }}">
                     <label for="">Stok</label>
                     <input type="number" id="" class="form-control" name="stok[]" value="{{old('stok') ?? ($item->stok ?? '') ?? isset($item->stok)}}">
@@ -110,7 +110,7 @@
                     @endif
                 </div>
             </div>
-            <div class="col col-md-1">
+            <div class="col">
                 <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
                     <label for=""> Jumlah</label>
                     <input type="number" id="" class="form-control" name="jumlah[]"   value="{{old('jumlah') ?? ($item->jumlah ?? '') ?? isset($item->jumlah)}}">
@@ -121,7 +121,7 @@
                     @endif
                 </div>
             </div>
-            <div class="col col-md-1">
+            <div class="col">
                 <div class="form-group {{ $errors->has('satuan[]') ? 'has-error' : '' }}">
                     <label for="">Satuan</label>
                     <select name="satuan[]" class="form-control" id="">
@@ -141,7 +141,7 @@
                     @endif
             </div>
         </div>
-        <div class="col-sm-12 col-md-5">
+        <div class="col-sm-12 col-lg-4">
             <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
                 <label for="">Keterangan</label>
                 <input type="text" id="" class="form-control" name="keterangan[]" value="{{old('keterangan') ?? ($item->keterangan ?? '') ?? isset($item->keterangan)}}"    >
@@ -162,7 +162,7 @@
 <div class="card p-2" id="detailTBody">
     <div class="card-title">
         <div class="row">
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-lg-4">
                 <div class="form-group">
                     <label for=""> Nama</label>
                     <input type="text" id="" class="form-control" name="nama[]" required>
@@ -173,7 +173,7 @@
                     @endif
                 </div>
             </div>
-            <div class="col col-md-1">
+            <div class="col">
                 <div class="form-group {{ $errors->has('stok[]') ? 'has-error' : '' }}">
                     <label for="">Stok</label>
                     <input type="number" id="" class="form-control" name="stok[]">
@@ -184,7 +184,7 @@
                     @endif
                 </div>
             </div>
-            <div class="col col-md-1">
+            <div class="col">
                 <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
                     <label for=""> Jumlah</label>
                     <input type="number" id="" class="form-control" name="jumlah[]" required>
@@ -195,7 +195,7 @@
                     @endif
                 </div>
             </div>
-            <div class="col col-md-1">
+            <div class="col">
                 <div class="form-group {{ $errors->has('satuan[]') ? 'has-error' : '' }}">
                     <label for="">Satuan</label>
                     <select name="satuan[]" class="form-control" id="" required>
@@ -215,7 +215,7 @@
                     @endif
             </div>
         </div>
-        <div class="col-sm-12 col-md-5">
+        <div class="col-sm-12 col-lg-4">
             <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
                 <label for="">Keterangan</label>
                 <input type="text" id="" class="form-control" name="keterangan[]" required>
@@ -234,7 +234,7 @@
     <div class="card p-2" id="detailTBody">
         <div class="card-title">
             <div class="row">
-                <div class="col-sm-12 col-md-4">
+                <div class="col-sm-12 col-lg-4">
                     <div class="form-group">
                         <label for=""> Nama</label>
                         <input type="text" class="form-control" name="id[]" value="{{null}}" hidden>
@@ -247,7 +247,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="col col-md-1">
+                <div class="col">
                     <div class="form-group {{ $errors->has('stok[]') ? 'has-error' : '' }}">
                         <label for="">Stok</label>
                         <input type="number" id="" class="form-control" name="stok[]">
@@ -258,7 +258,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="col col-md-1">
+                <div class="col">
                     <div class="form-group {{ $errors->has('jumlah[]') ? 'has-error' : '' }}">
                         <label for=""> Jumlah</label>
                         <input type="number" id="" class="form-control" name="jumlah[]" required>
@@ -269,7 +269,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="col col-md-1">
+                <div class="col">
                     <div class="form-group {{ $errors->has('satuan[]') ? 'has-error' : '' }}">
                         <label for="">Satuan</label>
                         <select name="satuan[]" class="form-control" id="" required>
@@ -289,7 +289,7 @@
                         @endif
                 </div>
             </div>
-            <div class="col-sm-12 col-md-5">
+            <div class="col-sm-12 col-lg-4">
                 <div class="form-group {{ $errors->has('keterangan[]') ? 'has-error' : '' }}">
                     <label for="">Keterangan</label>
                     <input type="text" id="" class="form-control" name="keterangan[]">
@@ -300,7 +300,7 @@
                     @endif
                 </div>
             </div>
-            <div class="col-sm-12">
+            <div class="col-sm-12 col-lg-4">
                 <button class="btn btn-danger removeBtn">Hapus</button>
             </div>
         </div>

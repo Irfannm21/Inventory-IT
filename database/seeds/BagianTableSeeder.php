@@ -11,6 +11,7 @@ class BagianTableSeeder extends Seeder
     {
         $eng = departemen::where('nama','Engineering')->first();
 
+    
         $eng->bagians()->createMany([
             [
                 "nama" => "Proyek Engineering"
@@ -379,10 +380,6 @@ class BagianTableSeeder extends Seeder
         [
 
             "nama" => "Utility"
-        ],
-        [
-
-            "nama" => "MTC Utility"
         ],
         [
 
